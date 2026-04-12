@@ -2,9 +2,9 @@
 
 ## Course Overview
 
-This course is built around one substantial lab assignment: designing and implementing an autonomous building control system using [BuildSim](https://github.com/eislab-cps/D7065E/tree/main/buildingsim), a simulated building with a REST/WebSocket API. The lectures provide the theoretical foundation, and the lab is where you apply it.
+This course is built around one substantial lab assignment: designing and implementing an autonomous building control system using [BuildSim](https://github.com/eislab-cps/D7065E/tree/main/buildingsim), a simulated building with a REST/WebSocket API. The lectures provide the theoretical foundation, and the lab is where it is applied.
 
-The course follows a specification-first workflow. You design your system with precise models before writing code, derive tests from the specification, then implement using AI-assisted development tools. Your architecture document is due in week 2, it must be approved before you start coding, and it forms the basis for the oral examination.
+The course follows a specification-first workflow. The system is designed with precise models before writing code, tests are derived from the specification, and implementation uses AI-assisted development tools. The architecture document is due in week 2, must be approved before coding begins, and forms the basis for the oral examination.
 
 "Embedded intelligence at the edge" means that the intelligence lives on the same network as the building, making decisions in under a second, without depending on the cloud. The physical world does not wait for a round-trip to a remote server.
 
@@ -45,9 +45,9 @@ Traditional systems engineering relies on Word documents, informal diagrams, and
 
 Model-Based Systems Engineering (MBSE) replaces documents with models: structured, precise representations of the system that can be analyzed, simulated, and used to generate code and tests. A model is unambiguous. It either specifies something or it does not. For cyber-physical systems this matters especially, because the interactions between physical and digital components are complex, timing-dependent, and difficult to reason about informally. A sequence diagram showing a smoke sensor, a data pipeline, and a safety agent makes the design concrete in a way that a paragraph of prose cannot.
 
-The MBSE process follows a progression. You begin with **requirements analysis**, writing testable statements about what the system must do. Functional requirements describe what the system does ("detect fire conditions within 30 seconds"), non-functional requirements describe how well it does it ("survive a sensor process crash"), and regulatory requirements describe external constraints ("comply with [BBR](https://www.boverket.se/sv/lag--ratt/författningssamling/gallande/bbr---bfs-20116/) fire protection requirements").
+The MBSE process follows a progression. It begins with **requirements analysis**, writing testable statements about what the system must do. Functional requirements describe what the system does ("detect fire conditions within 30 seconds"), non-functional requirements describe how well it does it ("survive a sensor process crash"), and regulatory requirements describe external constraints ("comply with [BBR](https://www.boverket.se/sv/lag--ratt/författningssamling/gallande/bbr---bfs-20116/) fire protection requirements").
 
-From requirements, you perform **functional decomposition**: breaking a high-level requirement into the functions needed to satisfy it. "Detect fire" decomposes into collecting sensor readings, validating the data, applying a detection model, triggering an alert, commanding actuators, and notifying occupants. Each function maps to one or more software components. This decomposition drives your architecture.
+From requirements follows **functional decomposition**: breaking a high-level requirement into the functions needed to satisfy it. "Detect fire" decomposes into collecting sensor readings, validating the data, applying a detection model, triggering an alert, commanding actuators, and notifying occupants. Each function maps to one or more software components. This decomposition drives the architecture.
 
 **Architecture design** determines how components are organized and where they run. **Interface design** specifies exactly how components communicate: REST endpoint URLs, JSON schemas, MQTT topic names, message formats. This is where ambiguity is most expensive, because a wrong assumption about an interface wastes days of implementation time.
 
@@ -75,7 +75,7 @@ Visual examples of ArchiMate viewpoints can be found in the [ArchiMate specifica
 
 ### Common Viewpoints
 
-Each viewpoint answers a different question about your system:
+Each viewpoint answers a different question about the system:
 
 | Viewpoint | Question it answers | What it shows |
 |-----------|-------------------|---------------|
@@ -87,9 +87,9 @@ Each viewpoint answers a different question about your system:
 
 Each viewpoint catches design flaws that others miss. A functional diagram might look correct, but the deployment view reveals that two components require a network connection that does not exist. A data flow might seem clean, but the behavioral view reveals a timing issue. The business view might expose a compliance requirement that no component addresses.
 
-For this course, your architecture document must contain at least five viewpoints:
+For this course, the architecture document must contain at least five viewpoints:
 
-1. **Context**, showing who and what interacts with your system (C4 Level 1)
+1. **Context**, showing who and what interacts with the system (C4 Level 1)
 2. **Functional**, showing what components exist and how they connect (C4 Level 2)
 3. **Information**, showing how sensor data flows from measurement to decision (data flow diagram)
 4. **Behavioral**, showing how components interact for a key scenario (sequence diagram)
@@ -99,13 +99,13 @@ For further reading on viewpoints, see Rozanski & Woods, [Software Systems Archi
 
 ## Modeling Notations
 
-There are many notations available for creating architecture models, ranging from informal sketches to formal specification languages. The choice depends on how much precision your project needs.
+There are many notations available for creating architecture models, ranging from informal sketches to formal specification languages. The choice depends on how much precision the project needs.
 
 ### UML and SysML
 
 **UML** ([uml.org](https://www.uml.org/)) is the standard for modeling software systems, defining 14 diagram types. **SysML** ([sysml.org](https://sysml.org/)) extends UML for systems engineering with diagrams for requirements traceability, physical constraints, and hardware/software integration. These are industry standards in aerospace, defence, and automotive, used with tools like [Cameo Systems Modeler](https://www.3ds.com/products/catia/no-magic/cameo-systems-modeler) and [Papyrus](https://eclipse.dev/papyrus/).
 
-For this course, SysML is overkill. The tooling is heavy, the learning curve is steep, and the formalism adds more overhead than value for a two-person team working for eight weeks. You should know it exists and understand when it is appropriate, but you will not use it here.
+For this course, SysML is overkill. The tooling is heavy, the learning curve is steep, and the formalism adds more overhead than value for a two-person team working for eight weeks. It is worth knowing that it exists and when it is appropriate, but it will not be used here.
 
 ### The C4 Model
 
@@ -113,12 +113,12 @@ The **C4 Model** ([c4model.com](https://c4model.com/)) was created by [Simon Bro
 
 | Level | What it shows |
 |-------|--------------|
-| **Level 1, Context** | Your system as a single box, surrounded by users and external systems |
+| **Level 1, Context** | The system as a single box, surrounded by users and external systems |
 | **Level 2, Containers** | The deployable units inside (Docker containers, databases, processes) |
 | **Level 3, Components** | Internal structure of a single container |
 | **Level 4, Code** | Class-level detail (rarely needed) |
 
-C4 is technology-agnostic and focuses on structure and relationships. For this course, you need Levels 1 and 2. Level 3 is useful for complex containers like your AI agent.
+C4 is technology-agnostic and focuses on structure and relationships. For this course, Levels 1 and 2 are required. Level 3 is useful for complex containers such as an AI agent.
 
 **C4 resources:**
 - [c4model.com](https://c4model.com/), the official site with examples and FAQ
@@ -138,7 +138,7 @@ C4 is technology-agnostic and focuses on structure and relationships. For this c
 
 ### Recommended Tools
 
-[Mermaid](https://mermaid.js.org/) is the recommended diagramming tool for this course. Diagrams are written as text in Markdown files, versioned with git, and render automatically on GitHub. The [Mermaid live editor](https://mermaid.live/) lets you preview diagrams interactively.
+[Mermaid](https://mermaid.js.org/) is the recommended diagramming tool for this course. Diagrams are written as text in Markdown files, versioned with git, and render automatically on GitHub. The [Mermaid live editor](https://mermaid.live/) allows interactive previewing before committing.
 
 Other useful tools include [draw.io](https://app.diagrams.net/) for more complex visual layouts and [Excalidraw](https://excalidraw.com/) for informal hand-drawn style diagrams during brainstorming.
 
@@ -148,7 +148,7 @@ The following examples show how each viewpoint applies to building control scena
 
 ### Context View (C4 Level 1)
 
-The context diagram shows your entire system as a single box, surrounded by the people and systems it interacts with.
+The context diagram shows the entire system as a single box, surrounded by the people and systems it interacts with.
 
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
@@ -169,7 +169,7 @@ graph TB
 
 ### Functional View (C4 Level 2), Fire Detection
 
-The container diagram shows every deployable unit. Each box becomes a Docker container or process in your `docker-compose.yml`.
+The container diagram shows every deployable unit. Each box becomes a Docker container or process in the `docker-compose.yml`.
 
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
@@ -230,7 +230,7 @@ graph TB
 
 ### Component View (C4 Level 3), AI Agent Internals
 
-When a single container is complex enough to warrant its own diagram, you zoom in to show its internal structure.
+When a single container is complex enough to warrant its own diagram, a Level 3 view zooms into its internal structure.
 
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
@@ -281,7 +281,7 @@ sequenceDiagram
 
 ### Deployment View, Sensor Process Lifecycle
 
-A state machine diagram shows the states a component can be in and the events that cause transitions. This tells you exactly what error handling your code must implement.
+A state machine diagram shows the states a component can be in and the events that cause transitions. It specifies exactly what error handling the implementation must cover.
 
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
@@ -314,11 +314,11 @@ Each requirement ID traces to a test case. FR-01 maps to `test_fire_detection_la
 
 ## The Architecture Document
 
-Your architecture document is the contract between your design and your implementation. It is reviewed and approved before you write code.
+The architecture document serves as the contract between design and implementation. It is reviewed and approved before coding begins.
 
 It must contain the five viewpoints described above: context diagram, container diagram, requirements table, data flow diagram, sequence diagram, and deployment diagram.
 
-Beyond the diagrams, the design specification should include data models (JSON schemas for messages between components), API contracts (REST endpoints with request/response formats), state machines for your AI agent and critical components, and an ML model specification covering inputs, outputs, training data, and evaluation metrics.
+Beyond the diagrams, the design specification should include data models (JSON schemas for messages between components), API contracts (REST endpoints with request/response formats), state machines for the AI agent and critical components, and an ML model specification covering inputs, outputs, training data, and evaluation metrics.
 
 The test plan is written before implementation, not after. It links each requirement to one or more test cases, describes test scenarios with initial state, stimulus, expected response, and pass/fail criteria, and defines what a successful demonstration looks like.
 
