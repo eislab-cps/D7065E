@@ -6,16 +6,24 @@ Master's course at Luleå University of Technology, 7.5 ECTS.
 
 ## About the Course
 
-This course teaches how to design and build **autonomous intelligent systems** that sense, reason, and act in physical environments. The focus is on the intersection of edge computing, AI agents, and cyber-physical systems (CPS) — where software meets the real world.
+This course teaches how to design and build **autonomous intelligent systems** that sense, reason, and act in physical environments. The focus is on the intersection of edge computing, AI agents, and cyber-physical systems (CPS).
 
 You will learn to:
 - Design **CPS architectures** that connect sensors, AI, and actuators into autonomous control loops
-- Build **agentic AI systems** where AI agents observe sensor data, reason about building state, and take autonomous action through APIs
 - Apply **data engineering** to collect, store, and transform sensor data into ML-ready features using data lakes and SQL pipelines
+- Build **agentic AI systems** where AI agents observe sensor data, reason about building state, and take autonomous action through APIs
 - Use **modern AI tools** (Claude Code, Cursor, LangChain, MCP) to implement systems from specifications using test-driven generation
 - Evaluate **resilience and scalability** — what happens when components fail, sensors lie, or the AI is wrong
 
-The lab assignment centers on **autonomous building control**: you instrument a simulated building with sensors and actuators, build AI agents that make real-time decisions, and demonstrate the system working end-to-end — including when things go wrong.
+The lab assignment centers on **autonomous building control**: you instrument a simulated building with sensors and actuators, develop AI agents that make real-time decisions.
+
+## Specification-First Development
+
+Most developers write code first, then tests, then discover the design was wrong. With AI coding tools this gets worse — AI generates clean-looking code that satisfies the prompt, not the problem.
+
+This course uses **Model-Based Systems Engineering (MBSE)**: you design the system with precise models (component diagrams, sequence diagrams, data flows, requirements) before writing any code. These models become the input to AI coding tools. Tests are derived from the specification, not invented after the fact.
+
+The result: your architecture document is the prompt, your tests are the contract, and AI is the contractor. A clear specification produces working code. A vague one produces days of debugging.
 
 ## Contents
 
