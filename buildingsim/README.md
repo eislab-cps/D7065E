@@ -11,7 +11,7 @@ make run-edit # build and start with editing enabled
 make test     # run all tests with race detector
 ```
 
-Open http://localhost:9090 in a browser to view the 3D building.
+Open http://localhost:9090 in **Chrome** or Firefox to view the 3D building. Safari blocks WebSocket connections over plain HTTP, which prevents real-time updates.
 
 ## Features
 
