@@ -1,44 +1,32 @@
-# Lecture 2: AI-Driven Development & Test-Driven Generation
+# AI-Driven Development & Test-Driven Generation
 
-## Learning Objectives
+## The Specification-First Workflow
 
-After this lecture, students will be able to:
-- Use AI coding tools effectively to implement a system from a design specification
-- Apply test-driven development with AI-generated code
-- Write effective prompts that turn architecture documents into working code
-- Evaluate, verify, and debug AI-generated code
-- Use modern AI development tools (Claude Code, Cursor, Copilot, Aider)
+### Why the Old Workflow Breaks Down with AI
 
----
+The traditional software development workflow goes roughly: understand the problem, write code, write tests, discover the design was wrong, rewrite. Tests are treated as a verification afterthought, and the design often emerges from the code rather than driving it. This is painful enough for human developers, but it breaks down completely when AI is writing the code.
 
-## Topics
+AI coding tools are extraordinarily good at generating code that looks correct. They produce clean, idiomatic, well-formatted code that passes a superficial review. The problem is that they generate code to satisfy the prompt, not the problem. If the prompt is vague ("write a sensor process"), the AI makes assumptions, often reasonable ones, sometimes disastrously wrong ones. When the code fails, it is not clear whether the AI misunderstood the prompt, the prompt was ambiguous, or the design was wrong in the first place.
 
-### 1. The Specification-First Workflow (20 min)
+The solution is to flip the workflow: write the specification first, then write the tests, then generate the code. The specification is precise enough that the AI has no room for dangerous assumptions. The tests encode the expected behaviour so precisely that "correct" is a binary outcome. The AI becomes a contractor who must satisfy a clearly written contract, not an artist interpreting a vague brief.
 
-#### Why the Old Workflow Breaks Down with AI
+### The Architecture Document as Prompt
 
-The traditional software development workflow goes roughly: understand the problem → write code → write tests → discover the design was wrong → rewrite. Tests are treated as a verification afterthought, and the design often emerges from the code rather than driving it. This is painful enough for human developers, but it breaks down completely when AI is writing the code.
-
-AI coding tools are extraordinarily good at generating code that *looks* correct. They produce clean, idiomatic, well-formatted code that passes a superficial review. The problem is that they generate code to satisfy the *prompt*, not the *problem*. If your prompt is vague ("write a sensor process"), the AI makes assumptions — often reasonable ones, sometimes disastrously wrong ones. When the code fails, you do not know whether the AI misunderstood the prompt, the prompt was ambiguous, or the design was wrong in the first place.
-
-The solution is to flip the workflow: **write the specification first, then write the tests, then generate the code**. The specification is precise enough that the AI has no room for dangerous assumptions. The tests encode the expected behaviour so precisely that "correct" is a binary outcome. The AI becomes a contractor who must satisfy a clearly written contract, not an artist who interprets a vague brief.
-
-#### Your Architecture Document IS the Prompt
-
-The MBSE artifacts you produce in week 1 are not bureaucratic overhead — they are the inputs to your AI development process:
+The MBSE artifacts produced in week 1 are not bureaucratic overhead; they are the inputs to the AI development process:
 
 - **Requirements** → acceptance tests (each requirement becomes a test case)
 - **Component diagram** → project structure (each container becomes a directory with a Dockerfile)
-- **Sequence diagrams** → integration tests (the sequence diagram *is* the integration test scenario)
+- **Sequence diagrams** → integration tests (the sequence diagram is the integration test scenario)
 - **API contracts** → interface tests (the JSON schema is the assertion)
 - **Data models** → unit tests (test that every field is present, typed, and in range)
 - **State machines** → state transition tests (test every state and every transition)
 
-This means a well-written architecture document dramatically reduces the effort of implementation. An AI that has your architecture document, sequence diagrams, and API contracts as context can generate a working skeleton in minutes. An AI working from a vague description will generate something that looks plausible but fails on the first real test.
+A well-written architecture document dramatically reduces the effort of implementation. An AI that has the architecture document, sequence diagrams, and API contracts as context can generate a working skeleton in minutes. An AI working from a vague description will generate something that looks plausible but fails on the first real test.
 
-> **Key principle:** The specification is more important than ever when working with AI. AI amplifies the quality of your specification — a good spec becomes excellent code; a bad spec becomes confidently wrong code.
+> **Key principle:** The specification is more important than ever when working with AI. AI amplifies the quality of the specification: a good spec becomes excellent code; a bad spec becomes confidently wrong code.
 
 ```mermaid
+%%{init: {"theme": "neutral"}}%%
 flowchart LR
     SPEC[Architecture\nDocument] --> TESTS[Write Tests\nfrom spec]
     TESTS --> PROMPT[Craft AI\nPrompt]
@@ -52,25 +40,17 @@ flowchart LR
     REVIEW -->|approved| DONE[Working Component]
 ```
 
----
+## Test-Driven Generation
 
-### 2. Test-Driven Generation (30 min)
+### The Core Practice: Write Tests Before Code
 
-#### The Core Practice: Write Tests Before Code
+**Test-Driven Development (TDD)** predates AI coding tools by two decades ([Kent Beck introduced it in 2003](https://www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530)). Its core discipline is: write a failing test first, then write the minimum code to make it pass, then refactor. With AI-generated code, TDD becomes even more valuable: the tests are the specification that the AI must satisfy. The tests constitute the contract; the AI writes the implementation.
 
-Test-Driven Development (TDD) predates AI coding tools by two decades — [Kent Beck introduced it in 2003](https://www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530). Its core discipline is: write a failing test first, then write the minimum code to make it pass, then refactor. With AI-generated code, TDD becomes even more valuable: the tests are the specification that the AI must satisfy. You write the contract; the AI writes the implementation.
-
-The workflow is:
-1. Write a test that captures the required behaviour (it will fail — there is no code yet)
-2. Give the test to the AI as context: "implement the code that makes this test pass"
-3. AI generates the implementation
-4. Run the tests — they should pass
-5. If they do not, examine the failure and refine either the tests or the prompt
-6. Add more tests for edge cases; repeat
+The workflow is: write a test that captures the required behaviour (it will fail, there is no code yet), give the test to the AI as context ("implement the code that makes this test pass"), let the AI generate the implementation, run the tests (they should pass), and if they do not, examine the failure and refine either the tests or the prompt. More tests for edge cases are then added and the cycle repeats.
 
 This practice catches hallucinated APIs early (the test will fail with `AttributeError`), wrong logic early (the test will fail with assertion errors), and missing error handling (add a test for the error case).
 
-#### Test Types for CPS
+### Test Types for CPS
 
 **Unit tests** test a single function or class in isolation. For building control:
 
@@ -103,7 +83,7 @@ def test_sensor_process_stores_readings(buildsim_mock, db_connection):
     assert readings[0]["value"] == pytest.approx(0.82)
 ```
 
-**Behavioural tests** test the end-to-end response to a scenario. These are the most valuable tests for CPS — they verify the entire system against a requirement:
+**Behavioural tests** test the end-to-end response to a scenario. These are the most valuable tests for CPS, verifying the entire system against a requirement:
 
 ```python
 # Requirement R-FIRE-01: fire detected → sprinklers on within 30 seconds
@@ -129,11 +109,11 @@ def test_agent_always_produces_valid_actuator_command(smoke_level, temperature):
 
 [Hypothesis](https://hypothesis.readthedocs.io/en/latest/) is the standard Python library for property-based testing.
 
-#### Testing AI Agent Behaviour
+### Testing AI Agent Behaviour
 
-Testing an LLM-based agent is harder than testing a deterministic function, because the LLM response varies between calls. Three strategies:
+Testing an LLM-based agent is harder than testing a deterministic function, because the LLM response varies between calls. Three strategies are available.
 
-**Mock the LLM:** replace the LLM client with a mock that returns deterministic responses. Test that your agent correctly interprets the LLM output and takes the right action — without testing the LLM itself.
+**Mock the LLM:** replace the LLM client with a mock that returns deterministic responses. This tests that the agent correctly interprets the LLM output and takes the right action, without testing the LLM itself.
 
 ```python
 def test_agent_activates_sprinklers_on_fire_decision(mock_llm):
@@ -147,22 +127,20 @@ def test_agent_activates_sprinklers_on_fire_decision(mock_llm):
 
 **Scenario tests with evaluation:** define a set of scenarios (sensor states) and expected outputs (actuator commands or reasoning categories). Run the real LLM, and use a second LLM or a classifier to evaluate whether the response is acceptable. This is the approach used in [LLM evaluation frameworks](https://docs.confident-ai.com/).
 
----
+## AI Coding Tools
 
-### 3. AI Coding Tools (30 min)
-
-#### CLI-Based Tools (terminal-native, work with any editor)
+### CLI-Based Tools
 
 | Tool | Description | Link |
 |------|-------------|------|
-| **Claude Code** | Anthropic's CLI agent — reads your codebase, edits files, runs tests, uses tools | [claude.ai/code](https://claude.ai/code) |
-| **Aider** | Terminal pair programmer — edits files in your repo, git integration, supports many models | [aider.chat](https://aider.chat/) |
+| **Claude Code** | Anthropic's CLI agent — reads the codebase, edits files, runs tests, uses tools | [claude.ai/code](https://claude.ai/code) |
+| **Aider** | Terminal pair programmer — edits files in a repo, git integration, supports many models | [aider.chat](https://aider.chat/) |
 
-**Claude Code** is particularly powerful for this course because it can read your entire architecture document, understand the context of your project, and make targeted edits across multiple files while running your tests to verify the result. It operates in a conversation that maintains context across a session, so you can say "now add error handling to the sensor process" and it knows what the sensor process is.
+**Claude Code** is particularly powerful for this course because it can read an entire architecture document, understand the context of the project, and make targeted edits across multiple files while running tests to verify the result. It operates in a conversation that maintains context across a session.
 
 **Aider** integrates tightly with git, commits after each successful change, and supports a wide range of models (including local Ollama models). It is excellent for incremental changes to an existing codebase.
 
-#### IDE-Integrated Tools
+### IDE-Integrated Tools
 
 | Tool | Description | Link |
 |------|-------------|------|
@@ -170,33 +148,29 @@ def test_agent_activates_sprinklers_on_fire_decision(mock_llm):
 | **Cursor** | AI-first IDE with codebase-aware chat, edit, and generation; based on VS Code | [cursor.com](https://cursor.com/) |
 | **Windsurf** | AI IDE with "Cascade" agent that can plan and execute multi-file changes | [windsurf.com](https://windsurf.com/) |
 
-**Cursor** is the most popular AI IDE for professional software development in 2025. Its `@codebase` feature indexes your entire repository and lets you ask questions about the code ("how does the sensor process connect to the database?") and make changes with full codebase context. The [Cursor documentation](https://docs.cursor.com/) is the best starting point.
+**Cursor** is the most popular AI IDE for professional software development in 2025. Its `@codebase` feature indexes an entire repository and enables questions about the code as well as changes with full codebase context. The [Cursor documentation](https://docs.cursor.com/) is the best starting point.
 
-#### How to Use Them Effectively
+### How to Use Them Effectively
 
-**Start with context.** Before asking an AI to generate code, give it your architecture document, the relevant sequence diagrams, the API contract for the interface you are implementing, and any existing code it should follow the pattern of. An AI with good context produces dramatically better code than one working from a vague description.
+**Start with context.** Before asking an AI to generate code, provide the architecture document, the relevant sequence diagrams, the API contract for the interface being implemented, and any existing code that should serve as a pattern. An AI with good context produces dramatically better code than one working from a vague description.
 
-**Be specific.** Compare:
-- Vague: "write a sensor process"
-- Specific: "implement a Python process that: (1) connects to the BuildSim WebSocket at `ws://localhost:8080/stream`, (2) receives sensor reading messages in the format `{sensor_id, value, timestamp}`, (3) validates that `value` is within the physical range for the sensor type, (4) inserts each valid reading into a TimescaleDB table `readings(sensor_id, value, timestamp)` using asyncpg, (5) reconnects automatically on disconnect with exponential backoff. Use the asyncio library. Here is the database schema: ..."
+**Be specific.** Compare: "write a sensor process" (vague) versus "implement a Python process that: (1) connects to the BuildSim WebSocket at `ws://localhost:8080/stream`, (2) receives sensor reading messages in the format `{sensor_id, value, timestamp}`, (3) validates that `value` is within the physical range for the sensor type, (4) inserts each valid reading into a TimescaleDB table `readings(sensor_id, value, timestamp)` using asyncpg, (5) reconnects automatically on disconnect with exponential backoff. Use the asyncio library. Here is the database schema: ..." (specific).
 
-**Iterate.** AI rarely produces perfect code on the first attempt. Generate → review → run tests → identify gaps → refine the prompt. This cycle takes 3–5 iterations for a non-trivial component.
+**Iterate.** AI rarely produces perfect code on the first attempt. Generate, review, run tests, identify gaps, refine the prompt. This cycle takes 3–5 iterations for a non-trivial component.
 
-**Do not trust blindly.** AI-generated code must be read, understood, and tested. "The AI wrote it" is not a defence when it causes a system failure. You are responsible for every line of code in your repository.
+**Do not trust blindly.** AI-generated code must be read, understood, and tested. Every line of code in the repository is the responsibility of the developer, not the AI that generated it.
 
-**Use AI for boilerplate.** Dockerfiles, docker-compose configuration, `requirements.txt`, API client boilerplate, data model classes, logging setup, health check endpoints — these are exactly the kind of repetitive, structured code that AI generates reliably. Do not spend your time on boilerplate.
+**Use AI for boilerplate.** Dockerfiles, docker-compose configuration, `requirements.txt`, API client boilerplate, data model classes, logging setup, and health check endpoints are exactly the kind of repetitive, structured code that AI generates reliably.
 
-**Keep control of architecture.** You decide the structure. AI fills in the implementation. Never let the AI refactor your architecture — it does not have the context of why you made architectural decisions, and it will optimise for code cleanliness at the expense of your design intent.
+**Keep control of architecture.** The structure of the system is a design decision that belongs to the developer, not the AI. AI fills in the implementation. Allowing the AI to refactor architecture risks optimising for code cleanliness at the expense of deliberate design intent.
 
----
+## Prompting for Code Generation
 
-### 4. Prompting for Code Generation (20 min)
+### Prompt Engineering for Developers
 
-#### Prompt Engineering for Developers
+Prompt engineering for code generation is not about clever tricks; it is about being precise. The more precisely a requirement is specified, the better the result. The [Prompt Engineering Guide](https://www.promptingguide.ai/) covers the principles in detail.
 
-Prompt engineering for code generation is not about clever tricks — it is about being precise. The more precisely you specify what you want, the better the result. The [Prompt Engineering Guide](https://www.promptingguide.ai/) covers the principles in detail; here are the most relevant techniques for this course.
-
-**Specification as prompt.** Copy the relevant section of your architecture document directly into the prompt. The architecture document was written to be precise — it works as a prompt. Example:
+**Specification as prompt.** Copying the relevant section of the architecture document directly into the prompt works because that document was written to be precise. Example:
 
 ```
 Here is the architecture for the sensor ingestion component from my design document:
@@ -208,9 +182,9 @@ Follow this data model: [paste your data model].
 The BuildSim API is documented here: [paste API docs excerpt].
 ```
 
-**Few-shot prompting.** Show one complete, working example and ask for a similar one. "Here is a working temperature sensor process [paste code]. Now implement an equivalent process for CO2 sensors. The CO2 sensor readings are in ppm (0–5000) and the alert threshold is 1000 ppm."
+**Few-shot prompting.** Showing one complete, working example and asking for a similar one: "Here is a working temperature sensor process [paste code]. Now implement an equivalent process for CO2 sensors. The CO2 sensor readings are in ppm (0–5000) and the alert threshold is 1000 ppm."
 
-**Test-first prompting.** Give the AI your test file and ask it to write the implementation. "Here are the pytest tests for the smoke classifier [paste tests]. Write the `SmokeClassifier` class that makes all tests pass. Do not modify the tests."
+**Test-first prompting.** Providing the test file and asking for the implementation: "Here are the pytest tests for the smoke classifier [paste tests]. Write the `SmokeClassifier` class that makes all tests pass. Do not modify the tests."
 
 **Constraint prompting.** Explicit constraints prevent common AI failure modes. Examples:
 - "Do not use any external libraries beyond what is listed in requirements.txt"
@@ -218,65 +192,43 @@ The BuildSim API is documented here: [paste API docs excerpt].
 - "All configuration values must come from environment variables, not hardcoded"
 - "Every function must have a docstring and type annotations"
 
-**Incremental generation.** For complex systems, generate one component at a time:
-1. Generate the data models (no dependencies)
-2. Generate the database client (depends on data models)
-3. Generate the sensor process (depends on database client and BuildSim API client)
-4. Generate the AI agent (depends on database client and tool definitions)
-5. Generate the actuator process (depends on tool definitions)
-6. Generate the docker-compose.yml (depends on all of the above)
+**Incremental generation.** For complex systems, generating one component at a time reduces errors: first the data models (no dependencies), then the database client (depends on data models), then the sensor process (depends on database client and BuildSim API client), then the AI agent (depends on database client and tool definitions), then the actuator process (depends on tool definitions), and finally the docker-compose.yml (depends on all of the above).
 
-**Review prompting.** After generating code, ask the AI to review it: "Review this code for: (1) security issues, (2) race conditions, (3) missing error handling, (4) places where configuration should be externalised, (5) places where logging would help debugging. Output a list of issues with suggested fixes."
+**Review prompting.** After generating code, asking the AI to review it with a structured prompt catches many issues: "Review this code for: (1) security issues, (2) race conditions, (3) missing error handling, (4) places where configuration should be externalised, (5) places where logging would help debugging. Output a list of issues with suggested fixes."
 
-#### What Makes a Good Prompt
+### What Makes a Good Prompt
 
-A good code generation prompt contains:
-- **What the component does** (one clear sentence)
-- **Input and output** (types, formats, example values)
-- **Dependencies** (which libraries, APIs, databases it interacts with)
-- **Constraints** (what it must NOT do or use)
-- **Context** (existing code it must integrate with)
-- **Tests** (the tests it must pass)
+A good code generation prompt contains: what the component does (one clear sentence), input and output (types, formats, example values), dependencies (which libraries, APIs, databases it interacts with), constraints (what it must not do or use), context (existing code it must integrate with), and tests (the tests it must pass).
 
----
+## Debugging and Verifying AI-Generated Code
 
-### 5. Debugging and Verifying AI-Generated Code (15 min)
+### Common Failure Modes
 
-#### Common Failure Modes
+AI-generated code fails in predictable ways. Knowing the patterns allows faster identification of issues.
 
-AI-generated code fails in predictable ways. Knowing the patterns lets you catch issues faster:
+**Hallucinated APIs.** The AI calls a function or method that does not exist, or uses a real function with the wrong signature. Running the code immediately catches this: a hallucinated API fails on import or first call.
 
-**Hallucinated APIs.** The AI calls a function or method that does not exist, or uses a real function with the wrong signature. Always check: does this import exist? Does this method exist on this class? The fix is to run the code immediately — a hallucinated API fails on import or first call.
+**Plausible but wrong logic.** The code looks correct and passes superficial review but fails on edge cases, such as a sensor averaging function that divides by zero when the list is empty, or a timestamp parser that fails on timestamps with microseconds. Tests covering edge cases (empty inputs, boundary values, malformed data) catch these.
 
-**Plausible but wrong logic.** The code *looks* correct and passes superficial review, but fails on edge cases. Example: a sensor averaging function that divides by zero when the list is empty, or a timestamp parser that fails on timestamps with microseconds. The fix is tests that cover edge cases — empty inputs, boundary values, malformed data.
+**Missing error handling.** AI tends to write happy-path code. What happens when the database is unavailable? When the BuildSim WebSocket disconnects? When a sensor reading is missing a required field? Explicit requirements in the prompt address this: "add error handling for: database connection failure, WebSocket disconnect, malformed input. Log errors with context. Use exponential backoff for retries."
 
-**Missing error handling.** AI tends to write happy-path code. What happens when the database is unavailable? When the BuildSim WebSocket disconnects? When a sensor reading is missing a required field? The fix is explicit requirements: "add error handling for: database connection failure, WebSocket disconnect, malformed input. Log errors with context. Use exponential backoff for retries."
+**Hardcoded values.** AI frequently hardcodes URLs, thresholds, and credentials that should be configuration. Searching generated code for string literals and numbers and moving them to environment variables or a configuration file is a necessary step.
 
-**Hardcoded values.** AI frequently hardcodes URLs, thresholds, and credentials that should be configuration. Search generated code for string literals and numbers. Move them to environment variables or a configuration file.
+**Security issues.** SQL injection via string formatting, secrets stored in code, no input validation on incoming data. Explicit constraints in the prompt and a security-focused review prompt after generation address these.
 
-**Security issues.** SQL injection via string formatting, secrets stored in code, no input validation on incoming data. The fix is explicit constraints in the prompt and a security-focused review prompt after generation.
+### Verification Strategy
 
-#### Verification Strategy
+The verification sequence is: run the tests (written before generating the code), read the code (understanding every line before accepting responsibility for it), fault injection (killing a process, sending malformed data, simulating a network outage, and observing system behaviour), checking against the specification (verifying the code matches the sequence diagrams and handles every state in the state machine), and review prompting (asking the AI to find its own bugs with a structured review prompt).
 
-1. **Run the tests** (you wrote them before generating the code)
-2. **Read the code** — you are responsible for every line; understand what it does
-3. **Fault injection** — kill a process, send malformed data, simulate a network outage; observe how the system behaves
-4. **Check against the specification** — does the code match the sequence diagrams? Does it handle every state in the state machine?
-5. **Review prompt** — ask the AI to find its own bugs with a structured review prompt
+### The Human's Role in AI-Driven Development
 
-#### The Human's Role in AI-Driven Development
+AI handles boilerplate, data model generation, API client generation, test fixture generation, Dockerfile generation, and repetitive patterns. The developer handles architectural decisions, security review, integration testing, debugging subtle logic errors, deciding what the system should do, and taking responsibility for the result.
 
-AI handles: boilerplate, data model generation, API client generation, test fixture generation, Dockerfile generation, repetitive patterns.
+The division is roughly: AI writes the code; the developer specifies, reviews, tests, and owns it.
 
-You handle: architectural decisions, security review, integration testing, debugging subtle logic errors, deciding what the system should do, and taking responsibility for the result.
+## Containerisation and CI with AI
 
-The division is roughly: AI writes the code; you specify, review, test, and own it.
-
----
-
-### 6. Containerisation & CI with AI (15 min)
-
-#### Letting AI Handle DevOps Boilerplate
+### Letting AI Handle DevOps Boilerplate
 
 Docker configuration, CI pipeline setup, and deployment configuration are exactly the kind of structured, repetitive work that AI generates reliably. A good prompt:
 
@@ -296,28 +248,11 @@ Include: restart policies, health check dependencies, a shared network, and envi
 
 AI-generated CI pipelines (GitHub Actions) are particularly useful for this course. A prompt like "generate a GitHub Actions workflow that: runs pytest on push, builds Docker images, and fails if any test fails" produces a working `.github/workflows/ci.yml` in seconds.
 
-#### What You Must Decide
+### What Must Be Decided by the Developer
 
-AI does not know your system's operational requirements. You must decide:
-- Which containers are stateful (need persistent volumes) vs. stateless
-- How containers communicate (shared network, which ports to expose)
-- What the restart policy should be (always restart safety components; maybe not the dashboard)
-- What secrets need to be injected (database passwords, API keys) and how
-- Which services are dependencies of which (the AI agent should not start before the database is ready)
+AI does not know the operational requirements of a specific system. The decisions that remain with the developer include: which containers are stateful (needing persistent volumes) versus stateless, how containers communicate (shared network, which ports to expose), what the restart policy should be (always restart safety components; not necessarily the dashboard), what secrets need to be injected (database passwords, API keys) and how, and which services depend on which (the AI agent should not start before the database is ready).
 
-Document these decisions in your architecture document — the `docker-compose.yml` is the executable form of your container diagram, and they should be consistent.
-
----
-
-## Lab Connection
-
-- Choose your AI coding tool and familiarise yourself with it before implementation begins
-- Write tests for your sensor process, data pipeline, and AI agent *before* generating any implementation code
-- Use the specification-first workflow: architecture document → tests → AI generation → verification
-- Document in your report: which components were AI-generated, which were hand-written, what issues you encountered, and how you resolved them
-- Reflect on the AI-driven development experience in your evaluation: what worked, what failed, what you would do differently
-
----
+These decisions belong in the architecture document. The `docker-compose.yml` is the executable form of the container diagram, and they should remain consistent with each other.
 
 ## Recommended Reading
 
