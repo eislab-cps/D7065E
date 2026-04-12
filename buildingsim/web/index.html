@@ -774,7 +774,7 @@ function renderOccupancy(occupancy) {
 
     // Person icon (single or group)
     if (personCount > 0) {
-      const iconType = personCount === 1 ? 'person' : 'group';
+      const iconType = personCount === 1 ? 'man' : 'group';
       const p = loadEquipmentIcon(iconType, null, true).then(canvas => {
         const sprite = createEquipmentSprite(wx + xOff, wy, zBase, 3, canvas);
         occupancyGroup.add(sprite);

@@ -85,5 +85,5 @@ open http://localhost:9090/api/icons/alien.svg
 ### Special (Occupancy & Fallback)
 | | | | | |
 |:---:|:---:|:---:|:---:|:---:|
-| ![person](../../data/equipment/icons/person.svg) | ![woman](../../data/equipment/icons/woman.svg) | ![group](../../data/equipment/icons/group.svg) | ![alien](../../data/equipment/icons/alien.svg) | ![generic](../../data/equipment/icons/generic.svg) |
-| `person` | `woman` | `group` | `alien` | `generic` |
+| ![man](../../data/equipment/icons/man.svg) | ![woman](../../data/equipment/icons/woman.svg) | ![group](../../data/equipment/icons/group.svg) | ![alien](../../data/equipment/icons/alien.svg) | ![generic](../../data/equipment/icons/generic.svg) |
+| `man` | `woman` | `group` | `alien` | `generic` |
