@@ -14,7 +14,7 @@ A cyber-physical system (CPS) is one where computation and physical processes ar
 
 These two layers form a continuous feedback loop. Sensors measure the physical world, software reasons about what the measurements mean, actuators change the physical environment in response, and sensors measure the result. This loop must be fast enough for safety-critical decisions, reliable enough to work when components fail, and correct enough that a wrong decision does not cause harm.
 
-<div style="max-width:500px">
+<div style="max-width:400px">
 
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
@@ -153,7 +153,7 @@ The following examples show how each viewpoint applies to building control scena
 
 The context diagram shows your entire system as a single box, surrounded by the people and systems it interacts with.
 
-<div style="max-width:500px">
+<div style="max-width:400px">
 
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
@@ -177,7 +177,7 @@ graph TB
 
 The container diagram shows every deployable unit. Each box becomes a Docker container or process in your `docker-compose.yml`.
 
-<div style="max-width:500px">
+<div style="max-width:400px">
 
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
@@ -211,7 +211,7 @@ graph TB
 
 A different use case leads to a different architecture. This system uses MQTT pub/sub instead of direct REST calls, because the HVAC controller needs to react to multiple sensor types simultaneously and pub/sub decouples the sensors from the controller.
 
-<div style="max-width:500px">
+<div style="max-width:400px">
 
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
@@ -244,7 +244,7 @@ graph TB
 
 When a single container is complex enough to warrant its own diagram, you zoom in to show its internal structure.
 
-<div style="max-width:500px">
+<div style="max-width:400px">
 
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
@@ -268,7 +268,7 @@ graph TB
 
 A sequence diagram shows how components interact over time for one specific scenario.
 
-<div style="max-width:600px">
+<div style="max-width:400px">
 
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
@@ -301,7 +301,7 @@ sequenceDiagram
 
 A state machine diagram shows the states a component can be in and the events that cause transitions. This tells you exactly what error handling your code must implement.
 
-<div style="max-width:500px">
+<div style="max-width:400px">
 
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
