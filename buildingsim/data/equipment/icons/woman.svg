@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="womBlouse" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3a4a55"/>
+      <stop offset="100%" stop-color="#1e2830"/>
+    </linearGradient>
+    <linearGradient id="womSkirt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2024"/>
+      <stop offset="100%" stop-color="#1a1420"/>
+    </linearGradient>
+    <linearGradient id="womSkin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c89070"/>
+      <stop offset="100%" stop-color="#a07050"/>
+    </linearGradient>
+    <linearGradient id="womHair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1010"/>
+      <stop offset="100%" stop-color="#2a1818"/>
+    </linearGradient>
+    <linearGradient id="womLeg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c89070"/>
+      <stop offset="100%" stop-color="#a07050"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Shadow under feet -->
+  <ellipse cx="64" cy="124" rx="26" ry="4" fill="#1a2030" opacity="0.4"/>
+
+  <!-- Hair (long, falling behind shoulders) - drawn first so body overlaps front -->
+  <!-- Back hair flowing down -->
+  <path d="M42 20 Q32 30 30 50 Q28 70 32 90 Q36 92 38 88 Q36 70 38 52 Q40 34 48 24Z" fill="url(#womHair)"/>
+  <path d="M86 20 Q96 30 98 50 Q100 70 96 90 Q92 92 90 88 Q92 70 90 52 Q88 34 80 24Z" fill="url(#womHair)"/>
+  <!-- Hair highlight on back locks -->
+  <path d="M34 40 Q32 56 34 72" fill="none" stroke="#3a2828" stroke-width="1.5" opacity="0.5"/>
+  <path d="M94 40 Q96 56 94 72" fill="none" stroke="#3a2828" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Legs (bare, skin tone - below skirt) -->
+  <rect x="46" y="94" width="13" height="30" rx="5" fill="url(#womLeg)"/>
+  <rect x="69" y="94" width="13" height="30" rx="5" fill="url(#womLeg)"/>
+  <!-- Leg highlight -->
+  <rect x="47" y="94" width="5" height="30" rx="2.5" fill="#c89070" opacity="0.15"/>
+  <rect x="70" y="94" width="5" height="30" rx="2.5" fill="#c89070" opacity="0.15"/>
+
+  <!-- Shoes (small heeled) -->
+  <ellipse cx="52" cy="122" rx="10" ry="4" fill="#1a1820"/>
+  <ellipse cx="76" cy="122" rx="10" ry="4" fill="#1a1820"/>
+  <!-- Heel detail -->
+  <rect x="58" y="119" width="3" height="6" rx="1" fill="#0e1015"/>
+  <rect x="82" y="119" width="3" height="6" rx="1" fill="#0e1015"/>
+  <ellipse cx="50" cy="121" rx="7" ry="2.5" fill="#2a2830" opacity="0.5"/>
+  <ellipse cx="74" cy="121" rx="7" ry="2.5" fill="#2a2830" opacity="0.5"/>
+
+  <!-- Skirt (A-line, flared) -->
+  <path d="M42 70 Q36 80 34 96 Q34 100 52 100 Q64 102 76 100 Q94 100 94 96 Q92 80 86 70Z" fill="url(#womSkirt)"/>
+  <path d="M42 70 Q36 80 34 96 Q34 100 52 100 Q64 102 76 100 Q94 100 94 96 Q92 80 86 70Z" fill="none" stroke="#445566" stroke-width="0.6" opacity="0.3"/>
+  <!-- Skirt fold lines -->
+  <path d="M52 72 Q48 82 46 96" fill="none" stroke="#88aacc" stroke-width="0.5" opacity="0.1"/>
+  <path d="M64 72 Q64 84 64 98" fill="none" stroke="#88aacc" stroke-width="0.5" opacity="0.1"/>
+  <path d="M76 72 Q80 82 82 96" fill="none" stroke="#88aacc" stroke-width="0.5" opacity="0.1"/>
+  <!-- Skirt waistband -->
+  <rect x="42" y="68" width="44" height="6" rx="3" fill="#2a3040"/>
+  <rect x="42" y="68" width="44" height="6" rx="3" fill="none" stroke="#445566" stroke-width="0.6" opacity="0.4"/>
+
+  <!-- Body (blouse) - slightly narrower/curvier than person.svg -->
+  <path d="M42 46 Q38 48 38 54 L38 70 L90 70 L90 54 Q90 48 86 46 Q78 42 64 42 Q50 42 42 46Z" fill="url(#womBlouse)"/>
+  <path d="M42 46 Q38 48 38 54 L38 70 L90 70 L90 54 Q90 48 86 46 Q78 42 64 42 Q50 42 42 46Z" fill="none" stroke="#445566" stroke-width="0.8" opacity="0.35"/>
+  <!-- Blouse neckline V -->
+  <path d="M64 44 L58 54 L64 58 L70 54 Z" fill="#2a3845" opacity="0.45"/>
+  <!-- Blouse button row -->
+  <circle cx="64" cy="60" r="1.5" fill="#1a2030"/>
+  <circle cx="64" cy="66" r="1.5" fill="#1a2030"/>
+  <!-- Blouse shine -->
+  <rect x="40" y="46" width="12" height="22" rx="6" fill="#88aacc" opacity="0.06"/>
+  <!-- Collar detail -->
+  <path d="M56 46 Q60 50 64 48 Q68 50 72 46" fill="none" stroke="#445566" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- Arms (slimmer than person.svg) -->
+  <rect x="22" y="48" width="16" height="36" rx="7" fill="url(#womBlouse)"/>
+  <rect x="90" y="48" width="16" height="36" rx="7" fill="url(#womBlouse)"/>
+  <!-- Arm shine -->
+  <rect x="24" y="50" width="5" height="32" rx="2.5" fill="#88aacc" opacity="0.07"/>
+  <rect x="92" y="50" width="5" height="32" rx="2.5" fill="#88aacc" opacity="0.07"/>
+  <!-- Hands -->
+  <ellipse cx="30" cy="84" rx="7" ry="6" fill="url(#womSkin)"/>
+  <ellipse cx="98" cy="84" rx="7" ry="6" fill="url(#womSkin)"/>
+
+  <!-- Neck -->
+  <rect x="57" y="34" width="14" height="14" rx="5" fill="url(#womSkin)"/>
+
+  <!-- Head -->
+  <ellipse cx="64" cy="24" rx="20" ry="22" fill="url(#womSkin)"/>
+  <ellipse cx="64" cy="24" rx="20" ry="22" fill="none" stroke="#a07050" stroke-width="0.5" opacity="0.3"/>
+  <!-- Face highlight -->
+  <ellipse cx="58" cy="18" rx="8" ry="7" fill="#ffffff" opacity="0.09"/>
+
+  <!-- Ears -->
+  <ellipse cx="44" cy="24" rx="4.5" ry="6.5" fill="url(#womSkin)"/>
+  <ellipse cx="84" cy="24" rx="4.5" ry="6.5" fill="url(#womSkin)"/>
+  <!-- Earring detail -->
+  <circle cx="44" cy="28" r="2" fill="#88aacc" opacity="0.7"/>
+  <circle cx="84" cy="28" r="2" fill="#88aacc" opacity="0.7"/>
+
+  <!-- Front hair (over forehead and sides) -->
+  <path d="M44 10 Q54 4 64 4 Q74 4 84 10 Q84 6 64 2 Q44 6 44 10Z" fill="url(#womHair)"/>
+  <!-- Side hair framing face -->
+  <path d="M44 10 Q40 16 42 26 Q44 18 46 14Z" fill="url(#womHair)"/>
+  <path d="M84 10 Q88 16 86 26 Q84 18 82 14Z" fill="url(#womHair)"/>
+  <!-- Hair part / strand detail -->
+  <path d="M62 4 Q60 8 58 14" fill="none" stroke="#2a2020" stroke-width="1" opacity="0.4"/>
+  <path d="M66 4 Q68 8 70 14" fill="none" stroke="#2a2020" stroke-width="1" opacity="0.4"/>
+
+  <!-- Eyes (slightly wider/longer lashes than person.svg) -->
+  <ellipse cx="56" cy="22" rx="3.5" ry="3" fill="#2a1810"/>
+  <ellipse cx="72" cy="22" rx="3.5" ry="3" fill="#2a1810"/>
+  <circle cx="55" cy="21" r="1" fill="#ffffff" opacity="0.5"/>
+  <circle cx="71" cy="21" r="1" fill="#ffffff" opacity="0.5"/>
+  <!-- Eyelashes (upper) -->
+  <path d="M52 19 Q56 17 60 19" fill="none" stroke="#1a1010" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M68 19 Q72 17 76 19" fill="none" stroke="#1a1010" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Eyebrow (arched, feminine) -->
+  <path d="M52 17 Q56 14 60 16" fill="none" stroke="#2a1810" stroke-width="1.1" stroke-linecap="round" opacity="0.8"/>
+  <path d="M68 16 Q72 14 76 17" fill="none" stroke="#2a1810" stroke-width="1.1" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- Nose -->
+  <path d="M62 26 Q64 30 66 26" fill="none" stroke="#a07050" stroke-width="0.9" opacity="0.55"/>
+
+  <!-- Lips (slightly fuller) -->
+  <path d="M58 32 Q61 34 64 33 Q67 34 70 32" fill="#a06060" opacity="0.55"/>
+  <path d="M58 32 Q64 36 70 32" fill="none" stroke="#8a4040" stroke-width="1.2" opacity="0.6" stroke-linecap="round"/>
+</svg>

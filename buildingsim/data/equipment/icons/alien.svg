@@ -1,75 +1,248 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
   <defs>
-    <linearGradient id="alienSkull" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1e2828"/>
-      <stop offset="50%" stop-color="#0e1818"/>
-      <stop offset="100%" stop-color="#060e0e"/>
+    <linearGradient id="xSkull" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#2a2830"/>
+      <stop offset="40%" stop-color="#1a1820"/>
+      <stop offset="100%" stop-color="#0c0a10"/>
     </linearGradient>
-    <linearGradient id="alienShine" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#4a8080" stop-opacity="0.4"/>
-      <stop offset="100%" stop-color="#4a8080" stop-opacity="0"/>
+    <linearGradient id="xSkullSide" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0c0a10"/>
+      <stop offset="30%" stop-color="#1e1c24"/>
+      <stop offset="100%" stop-color="#0c0a10"/>
     </linearGradient>
-    <linearGradient id="alienSaliva" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#88ccaa" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#44aa66" stop-opacity="0.2"/>
+    <linearGradient id="xNeck" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1820"/>
+      <stop offset="100%" stop-color="#0a0810"/>
     </linearGradient>
+    <linearGradient id="xTeeth" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#556677"/>
+      <stop offset="100%" stop-color="#2a3440"/>
+    </linearGradient>
+    <linearGradient id="xInnerJaw" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#445566"/>
+      <stop offset="100%" stop-color="#1a2830"/>
+    </linearGradient>
+    <linearGradient id="xSaliva" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#88ccaa" stop-opacity="0.7"/>
+      <stop offset="60%" stop-color="#55aa77" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#33996655" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="xHighlight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#445566" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#445566" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#445566" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="xMaw" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1020"/>
+      <stop offset="100%" stop-color="#060408"/>
+    </linearGradient>
+    <filter id="xGlow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
   </defs>
-  <!-- Elongated biomechanical skull - profile/frontal view -->
-  <!-- Cranial dome (massively elongated) -->
-  <path d="M64 4 Q82 4 92 16 Q104 28 102 46 Q100 62 92 72 Q84 82 76 84 Q70 90 64 90 Q58 90 52 84 Q44 82 36 72 Q28 62 26 46 Q24 28 36 16 Q46 4 64 4Z" fill="url(#alienSkull)"/>
-  <!-- Ridged dome texture lines -->
-  <path d="M64 6 Q80 8 90 20" fill="none" stroke="#2a4040" stroke-width="1" opacity="0.7"/>
-  <path d="M64 6 Q48 8 38 20" fill="none" stroke="#2a4040" stroke-width="1" opacity="0.7"/>
-  <path d="M64 10 Q82 14 94 30" fill="none" stroke="#1a3030" stroke-width="0.8" opacity="0.6"/>
-  <path d="M64 10 Q46 14 34 30" fill="none" stroke="#1a3030" stroke-width="0.8" opacity="0.6"/>
-  <path d="M64 18 Q84 22 98 40" fill="none" stroke="#1a3030" stroke-width="0.7" opacity="0.5"/>
-  <path d="M64 18 Q44 22 30 40" fill="none" stroke="#1a3030" stroke-width="0.7" opacity="0.5"/>
-  <!-- Skull shine (biomechanical sheen) -->
-  <path d="M42 12 Q54 8 62 10" fill="none" stroke="#4a8080" stroke-width="3" opacity="0.3" stroke-linecap="round"/>
-  <path d="M40 22 Q50 16 58 18" fill="none" stroke="#4a8080" stroke-width="2" opacity="0.2" stroke-linecap="round"/>
-  <!-- Inner jaw / secondary mouth (biomech detail) -->
-  <path d="M52 78 Q56 82 64 84 Q72 82 76 78 Q72 92 64 94 Q56 92 52 78Z" fill="#0e1818"/>
-  <path d="M54 80 Q64 86 74 80" fill="none" stroke="#2a5040" stroke-width="1" opacity="0.6"/>
-  <!-- Inner pharyngeal jaw (inner teeth protruding) -->
-  <path d="M58 82 L60 90 L62 82" fill="none" stroke="#3a7060" stroke-width="1.5" opacity="0.7" stroke-linejoin="round"/>
-  <path d="M63 82 L65 92 L67 82" fill="none" stroke="#3a7060" stroke-width="1.5" opacity="0.7" stroke-linejoin="round"/>
-  <!-- Outer teeth (main mouth area) -->
-  <path d="M46 74 Q50 80 48 88 L42 104 L46 100 L50 108 L54 98 L58 106 L60 96 L64 104 L68 96 L70 106 L74 98 L78 108 L82 100 L86 104 L80 88 Q78 80 82 74" fill="#0a1414" stroke="#2a5040" stroke-width="0.8"/>
-  <!-- Individual teeth highlights -->
-  <path d="M48 88 L44 104" stroke="#3a7060" stroke-width="1" opacity="0.5"/>
-  <path d="M54 96 L52 108" stroke="#3a7060" stroke-width="1" opacity="0.5"/>
-  <path d="M62 98 L62 106" stroke="#3a7060" stroke-width="1" opacity="0.5"/>
-  <path d="M72 96 L74 108" stroke="#3a7060" stroke-width="1" opacity="0.5"/>
-  <path d="M80 88 L82 102" stroke="#3a7060" stroke-width="1" opacity="0.5"/>
-  <!-- Saliva drips -->
-  <path d="M50 108 Q50 116 52 122" stroke="url(#alienSaliva)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <path d="M64 110 Q64 118 63 124" stroke="url(#alienSaliva)" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <path d="M78 108 Q79 116 78 122" stroke="url(#alienSaliva)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <circle cx="52" cy="122" r="2" fill="#44aa66" opacity="0.4"/>
-  <circle cx="63" cy="124" r="2.5" fill="#44aa66" opacity="0.4"/>
-  <circle cx="78" cy="122" r="2" fill="#44aa66" opacity="0.4"/>
-  <!-- Eye socket (no eyes - just dark pits) -->
-  <ellipse cx="50" cy="52" rx="10" ry="7" fill="#060e0e"/>
-  <ellipse cx="78" cy="52" rx="10" ry="7" fill="#060e0e"/>
-  <!-- Eye socket rim glow (bioluminescent) -->
-  <ellipse cx="50" cy="52" rx="10" ry="7" fill="none" stroke="#2a6050" stroke-width="1" opacity="0.5"/>
-  <ellipse cx="78" cy="52" rx="10" ry="7" fill="none" stroke="#2a6050" stroke-width="1" opacity="0.5"/>
-  <!-- Dorsal tubes (pipes on back of skull) -->
-  <path d="M34 30 Q24 24 18 30 Q14 36 18 44" fill="none" stroke="#1a3030" stroke-width="4" stroke-linecap="round"/>
-  <path d="M36 42 Q24 38 20 46 Q16 52 20 58" fill="none" stroke="#1a3030" stroke-width="3.5" stroke-linecap="round"/>
-  <path d="M38 52 Q26 50 22 58 Q18 66 22 72" fill="none" stroke="#1a3030" stroke-width="3" stroke-linecap="round"/>
-  <path d="M94 30 Q104 24 110 30 Q114 36 110 44" fill="none" stroke="#1a3030" stroke-width="4" stroke-linecap="round"/>
-  <path d="M92 42 Q104 38 108 46 Q112 52 108 58" fill="none" stroke="#1a3030" stroke-width="3.5" stroke-linecap="round"/>
-  <!-- Tube end caps -->
-  <circle cx="18" cy="44" r="3" fill="#2a4040"/>
-  <circle cx="20" cy="58" r="2.5" fill="#2a4040"/>
-  <circle cx="22" cy="72" r="2" fill="#2a4040"/>
-  <circle cx="110" cy="44" r="3" fill="#2a4040"/>
-  <circle cx="108" cy="58" r="2.5" fill="#2a4040"/>
-  <!-- Neck (if visible) -->
-  <path d="M52 88 Q52 96 50 106" fill="none" stroke="#1a2828" stroke-width="6" stroke-linecap="round"/>
-  <path d="M76 88 Q76 96 78 106" fill="none" stroke="#1a2828" stroke-width="6" stroke-linecap="round"/>
-  <!-- Carapace surface detail -->
-  <path d="M40 34 Q50 30 60 32" fill="none" stroke="#2a5040" stroke-width="0.5" opacity="0.4"/>
-  <path d="M68 32 Q78 30 88 34" fill="none" stroke="#2a5040" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- ═══ DORSAL TUBES — left side ═══ -->
+  <!-- Tube 1 (topmost) -->
+  <path d="M38 8 Q22 6 14 14 Q8 22 10 32" fill="none" stroke="#1a1820" stroke-width="5.5" stroke-linecap="round"/>
+  <path d="M38 8 Q22 6 14 14 Q8 22 10 32" fill="none" stroke="#2a2830" stroke-width="3" stroke-linecap="round"/>
+  <path d="M38 8 Q22 6 14 14 Q8 22 10 32" fill="none" stroke="#445566" stroke-width="1" opacity="0.25" stroke-linecap="round"/>
+  <circle cx="10" cy="32" r="4" fill="#1a1820" stroke="#2a2830" stroke-width="1"/>
+  <circle cx="10" cy="32" r="2" fill="#0c0a10"/>
+  <!-- Tube 2 -->
+  <path d="M36 22 Q20 20 12 30 Q6 40 8 52" fill="none" stroke="#1a1820" stroke-width="5" stroke-linecap="round"/>
+  <path d="M36 22 Q20 20 12 30 Q6 40 8 52" fill="none" stroke="#2a2830" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M36 22 Q20 20 12 30 Q6 40 8 52" fill="none" stroke="#445566" stroke-width="0.8" opacity="0.2" stroke-linecap="round"/>
+  <circle cx="8" cy="52" r="3.5" fill="#1a1820" stroke="#2a2830" stroke-width="1"/>
+  <circle cx="8" cy="52" r="1.8" fill="#0c0a10"/>
+  <!-- Tube 3 -->
+  <path d="M36 38 Q20 38 14 48 Q8 58 10 70" fill="none" stroke="#1a1820" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M36 38 Q20 38 14 48 Q8 58 10 70" fill="none" stroke="#2a2830" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="10" cy="70" r="3" fill="#1a1820" stroke="#2a2830" stroke-width="1"/>
+  <circle cx="10" cy="70" r="1.5" fill="#0c0a10"/>
+  <!-- Tube 4 (lowest) -->
+  <path d="M38 54 Q24 56 18 66 Q12 76 14 88" fill="none" stroke="#1a1820" stroke-width="4" stroke-linecap="round"/>
+  <path d="M38 54 Q24 56 18 66 Q12 76 14 88" fill="none" stroke="#252330" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="14" cy="88" r="2.5" fill="#1a1820" stroke="#2a2830" stroke-width="0.8"/>
+
+  <!-- ═══ DORSAL TUBES — right side (mirrored) ═══ -->
+  <!-- Tube 1 -->
+  <path d="M90 8 Q106 6 114 14 Q120 22 118 32" fill="none" stroke="#1a1820" stroke-width="5.5" stroke-linecap="round"/>
+  <path d="M90 8 Q106 6 114 14 Q120 22 118 32" fill="none" stroke="#2a2830" stroke-width="3" stroke-linecap="round"/>
+  <path d="M90 8 Q106 6 114 14 Q120 22 118 32" fill="none" stroke="#445566" stroke-width="1" opacity="0.25" stroke-linecap="round"/>
+  <circle cx="118" cy="32" r="4" fill="#1a1820" stroke="#2a2830" stroke-width="1"/>
+  <circle cx="118" cy="32" r="2" fill="#0c0a10"/>
+  <!-- Tube 2 -->
+  <path d="M92 22 Q108 20 116 30 Q122 40 120 52" fill="none" stroke="#1a1820" stroke-width="5" stroke-linecap="round"/>
+  <path d="M92 22 Q108 20 116 30 Q122 40 120 52" fill="none" stroke="#2a2830" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="120" cy="52" r="3.5" fill="#1a1820" stroke="#2a2830" stroke-width="1"/>
+  <circle cx="120" cy="52" r="1.8" fill="#0c0a10"/>
+  <!-- Tube 3 -->
+  <path d="M92 38 Q108 38 114 48 Q120 58 118 70" fill="none" stroke="#1a1820" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M92 38 Q108 38 114 48 Q120 58 118 70" fill="none" stroke="#2a2830" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="118" cy="70" r="3" fill="#1a1820" stroke="#2a2830" stroke-width="1"/>
+  <circle cx="118" cy="70" r="1.5" fill="#0c0a10"/>
+  <!-- Tube 4 -->
+  <path d="M90 54 Q104 56 110 66 Q116 76 114 88" fill="none" stroke="#1a1820" stroke-width="4" stroke-linecap="round"/>
+  <path d="M90 54 Q104 56 110 66 Q116 76 114 88" fill="none" stroke="#252330" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="114" cy="88" r="2.5" fill="#1a1820" stroke="#2a2830" stroke-width="0.8"/>
+
+  <!-- ═══ NECK / THROAT — segmented, biomechanical ═══ -->
+  <!-- Main neck mass -->
+  <path d="M44 90 Q44 100 42 110 Q40 118 40 124 L88 124 Q88 118 86 110 Q84 100 84 90Z" fill="url(#xNeck)"/>
+  <!-- Neck segmentation rings -->
+  <path d="M42 96 Q64 98 86 96" fill="none" stroke="#2a2830" stroke-width="2.5" opacity="0.8"/>
+  <path d="M42 96 Q64 98 86 96" fill="none" stroke="#445566" stroke-width="0.6" opacity="0.2"/>
+  <path d="M41 104 Q64 106 87 104" fill="none" stroke="#2a2830" stroke-width="2.2" opacity="0.7"/>
+  <path d="M41 104 Q64 106 87 104" fill="none" stroke="#445566" stroke-width="0.6" opacity="0.2"/>
+  <path d="M41 112 Q64 114 87 112" fill="none" stroke="#2a2830" stroke-width="2" opacity="0.6"/>
+  <path d="M40 120 Q64 122 88 120" fill="none" stroke="#2a2830" stroke-width="1.8" opacity="0.5"/>
+  <!-- Neck center ridge -->
+  <path d="M64 90 L64 124" fill="none" stroke="#1e1c24" stroke-width="2" opacity="0.5"/>
+  <path d="M64 90 L64 124" fill="none" stroke="#445566" stroke-width="0.5" opacity="0.15"/>
+  <!-- Neck highlight -->
+  <path d="M50 92 Q50 108 50 120" fill="none" stroke="#445566" stroke-width="4" opacity="0.06" stroke-linecap="round"/>
+
+  <!-- ═══ MAIN SKULL — elongated xenomorph cranium ═══ -->
+  <!-- Skull shadow/base form -->
+  <path d="M64 2 Q86 2 98 16 Q112 32 112 52 Q112 70 104 80 Q96 90 84 92 Q74 94 64 94 Q54 94 44 92 Q32 90 24 80 Q16 70 16 52 Q16 32 30 16 Q42 2 64 2Z" fill="#0c0a10"/>
+  <!-- Main skull fill -->
+  <path d="M64 4 Q84 4 96 18 Q108 32 108 52 Q108 68 100 78 Q92 88 80 90 Q72 92 64 92 Q56 92 48 90 Q36 88 28 78 Q20 68 20 52 Q20 32 32 18 Q44 4 64 4Z" fill="url(#xSkull)"/>
+  <!-- Skull outer edge subtle highlight -->
+  <path d="M64 4 Q84 4 96 18 Q108 32 108 52 Q108 68 100 78 Q92 88 80 90 Q72 92 64 92 Q56 92 48 90 Q36 88 28 78 Q20 68 20 52 Q20 32 32 18 Q44 4 64 4Z" fill="none" stroke="#2a2830" stroke-width="1.2" opacity="0.6"/>
+
+  <!-- ═══ SKULL RIDGE LINES — biomechanical texture ═══ -->
+  <!-- Central ridge (raised spine of dome) -->
+  <path d="M64 4 Q66 24 66 50 Q66 70 64 90" fill="none" stroke="#2a2830" stroke-width="2.5" opacity="0.9"/>
+  <path d="M64 4 Q65 24 65 50 Q65 70 64 90" fill="none" stroke="#445566" stroke-width="0.8" opacity="0.3"/>
+  <!-- Left lateral ribs -->
+  <path d="M62 6 Q48 10 38 22 Q28 34 24 50" fill="none" stroke="#252330" stroke-width="1.5" opacity="0.7"/>
+  <path d="M62 6 Q48 10 38 22 Q28 34 24 50" fill="none" stroke="#445566" stroke-width="0.5" opacity="0.2"/>
+  <path d="M62 14 Q50 18 40 28 Q30 40 26 56" fill="none" stroke="#252330" stroke-width="1.3" opacity="0.65"/>
+  <path d="M62 22 Q50 28 42 38 Q32 50 28 64" fill="none" stroke="#252330" stroke-width="1.2" opacity="0.6"/>
+  <path d="M60 32 Q50 40 44 52 Q36 64 34 76" fill="none" stroke="#1e1c24" stroke-width="1.1" opacity="0.55"/>
+  <path d="M56 44 Q48 54 44 66 Q40 76 40 84" fill="none" stroke="#1e1c24" stroke-width="1" opacity="0.5"/>
+  <!-- Right lateral ribs (mirrored) -->
+  <path d="M66 6 Q80 10 90 22 Q100 34 104 50" fill="none" stroke="#252330" stroke-width="1.5" opacity="0.7"/>
+  <path d="M66 6 Q80 10 90 22 Q100 34 104 50" fill="none" stroke="#445566" stroke-width="0.5" opacity="0.2"/>
+  <path d="M66 14 Q78 18 88 28 Q98 40 102 56" fill="none" stroke="#252330" stroke-width="1.3" opacity="0.65"/>
+  <path d="M66 22 Q78 28 86 38 Q96 50 100 64" fill="none" stroke="#252330" stroke-width="1.2" opacity="0.6"/>
+  <path d="M68 32 Q78 40 84 52 Q92 64 94 76" fill="none" stroke="#1e1c24" stroke-width="1.1" opacity="0.55"/>
+  <path d="M72 44 Q80 54 84 66 Q88 76 88 84" fill="none" stroke="#1e1c24" stroke-width="1" opacity="0.5"/>
+  <!-- Subtle cross-ribs (transverse structure) -->
+  <path d="M36 38 Q64 36 92 38" fill="none" stroke="#1e1c24" stroke-width="0.8" opacity="0.4"/>
+  <path d="M28 52 Q64 50 100 52" fill="none" stroke="#1e1c24" stroke-width="0.7" opacity="0.35"/>
+  <path d="M28 64 Q64 62 100 64" fill="none" stroke="#1e1c24" stroke-width="0.7" opacity="0.3"/>
+
+  <!-- ═══ SKULL SHINE — biomechanical wet sheen ═══ -->
+  <!-- Primary highlight band across upper dome -->
+  <path d="M36 14 Q52 8 68 10" fill="none" stroke="#445566" stroke-width="5" opacity="0.2" stroke-linecap="round"/>
+  <path d="M36 14 Q52 8 68 10" fill="none" stroke="#88aacc" stroke-width="2" opacity="0.15" stroke-linecap="round"/>
+  <!-- Secondary sheen -->
+  <path d="M30 28 Q44 20 58 22" fill="none" stroke="#445566" stroke-width="3" opacity="0.15" stroke-linecap="round"/>
+  <!-- Left-side chitin gleam -->
+  <path d="M22 46 Q24 38 28 30" fill="none" stroke="#445566" stroke-width="2" opacity="0.2" stroke-linecap="round"/>
+  <path d="M22 56 Q24 48 26 42" fill="none" stroke="#445566" stroke-width="1.5" opacity="0.15" stroke-linecap="round"/>
+
+  <!-- ═══ EYE SOCKETS — smooth, sunken, eyeless ═══ -->
+  <!-- Left socket -->
+  <ellipse cx="46" cy="56" rx="12" ry="8" fill="#080610"/>
+  <ellipse cx="46" cy="56" rx="12" ry="8" fill="none" stroke="#1a1820" stroke-width="1.5" opacity="0.8"/>
+  <ellipse cx="46" cy="56" rx="12" ry="8" fill="none" stroke="#445566" stroke-width="0.6" opacity="0.2"/>
+  <!-- Socket depth shadow -->
+  <ellipse cx="46" cy="57" rx="9" ry="6" fill="#040308"/>
+  <!-- Right socket -->
+  <ellipse cx="82" cy="56" rx="12" ry="8" fill="#080610"/>
+  <ellipse cx="82" cy="56" rx="12" ry="8" fill="none" stroke="#1a1820" stroke-width="1.5" opacity="0.8"/>
+  <ellipse cx="82" cy="56" rx="12" ry="8" fill="none" stroke="#445566" stroke-width="0.6" opacity="0.2"/>
+  <ellipse cx="82" cy="57" rx="9" ry="6" fill="#040308"/>
+  <!-- Subtle socket ridge highlight -->
+  <path d="M36 52 Q46 48 58 52" fill="none" stroke="#2a2830" stroke-width="1" opacity="0.5"/>
+  <path d="M70 52 Q82 48 94 52" fill="none" stroke="#2a2830" stroke-width="1" opacity="0.5"/>
+
+  <!-- ═══ CHEEKBONE STRUCTURE ═══ -->
+  <path d="M24 66 Q30 62 36 66 Q32 70 26 72Z" fill="#141218" opacity="0.6"/>
+  <path d="M104 66 Q98 62 92 66 Q96 70 102 72Z" fill="#141218" opacity="0.6"/>
+  <!-- Cheekbone highlight -->
+  <path d="M26 66 Q30 63 34 66" fill="none" stroke="#445566" stroke-width="1" opacity="0.2"/>
+  <path d="M102 66 Q98 63 94 66" fill="none" stroke="#445566" stroke-width="1" opacity="0.2"/>
+
+  <!-- ═══ OUTER JAW / MAW STRUCTURE ═══ -->
+  <!-- Upper jaw plate -->
+  <path d="M36 78 Q40 74 50 72 Q64 70 78 72 Q88 74 92 78 Q96 84 94 90 Q80 88 64 88 Q48 88 34 90 Q32 84 36 78Z" fill="url(#xMaw)"/>
+  <path d="M36 78 Q40 74 50 72 Q64 70 78 72 Q88 74 92 78" fill="none" stroke="#2a2830" stroke-width="1" opacity="0.6"/>
+  <!-- Upper teeth row -->
+  <path d="M38 82 L34 94 L39 90 L42 98 L46 90 L50 100 L54 90 L58 102 L62 90 L64 104 L66 90 L70 102 L74 90 L78 100 L82 90 L86 98 L89 90 L94 94 L90 82" fill="url(#xMaw)" stroke="#2a3440" stroke-width="0.8"/>
+  <!-- Individual upper tooth highlights (metallic) -->
+  <path d="M35 84 L33 94" stroke="url(#xTeeth)" stroke-width="1.2" opacity="0.6"/>
+  <path d="M40 88 L38 98" stroke="url(#xTeeth)" stroke-width="1.2" opacity="0.6"/>
+  <path d="M47 90 L46 100" stroke="url(#xTeeth)" stroke-width="1.2" opacity="0.55"/>
+  <path d="M54 90 L53 102" stroke="url(#xTeeth)" stroke-width="1.2" opacity="0.55"/>
+  <path d="M62 90 L62 104" stroke="url(#xTeeth)" stroke-width="1.3" opacity="0.6"/>
+  <path d="M70 90 L70 102" stroke="url(#xTeeth)" stroke-width="1.2" opacity="0.55"/>
+  <path d="M77 90 L77 100" stroke="url(#xTeeth)" stroke-width="1.2" opacity="0.55"/>
+  <path d="M84 88 L85 98" stroke="url(#xTeeth)" stroke-width="1.2" opacity="0.55"/>
+  <path d="M91 84 L93 94" stroke="url(#xTeeth)" stroke-width="1.2" opacity="0.6"/>
+  <!-- Lower jaw -->
+  <path d="M36 92 Q48 90 64 90 Q80 90 92 92 Q96 98 92 106 Q78 110 64 110 Q50 110 36 106 Q32 98 36 92Z" fill="#0e0c14"/>
+  <path d="M36 92 Q48 90 64 90 Q80 90 92 92 Q96 98 92 106 Q78 110 64 110 Q50 110 36 106 Q32 98 36 92Z" fill="none" stroke="#1a1820" stroke-width="0.8" opacity="0.7"/>
+  <!-- Lower teeth row -->
+  <path d="M38 94 L36 106 L40 100 L44 108 L48 100 L52 108 L56 100 L60 108 L64 100 L68 108 L72 100 L76 108 L80 100 L84 108 L88 100 L92 106 L90 94" fill="#0e0c14" stroke="#2a3440" stroke-width="0.7"/>
+  <!-- Lower tooth highlights -->
+  <path d="M38 96 L37 106" stroke="url(#xTeeth)" stroke-width="1.1" opacity="0.5"/>
+  <path d="M44 100 L43 108" stroke="url(#xTeeth)" stroke-width="1.1" opacity="0.5"/>
+  <path d="M51 100 L50 108" stroke="url(#xTeeth)" stroke-width="1.1" opacity="0.5"/>
+  <path d="M58 100 L58 108" stroke="url(#xTeeth)" stroke-width="1.1" opacity="0.5"/>
+  <path d="M64 100 L64 108" stroke="url(#xTeeth)" stroke-width="1.2" opacity="0.55"/>
+  <path d="M70 100 L70 108" stroke="url(#xTeeth)" stroke-width="1.1" opacity="0.5"/>
+  <path d="M77 100 L77 108" stroke="url(#xTeeth)" stroke-width="1.1" opacity="0.5"/>
+  <path d="M84 100 L85 108" stroke="url(#xTeeth)" stroke-width="1.1" opacity="0.5"/>
+  <path d="M90 96 L91 106" stroke="url(#xTeeth)" stroke-width="1.1" opacity="0.5"/>
+
+  <!-- ═══ INNER PHARYNGEAL JAW — protruding from mouth ═══ -->
+  <!-- Inner jaw stalk/shaft -->
+  <path d="M56 98 Q60 102 64 100 Q68 102 72 98 Q72 108 70 116 Q68 122 64 124 Q60 122 58 116 Q56 108 56 98Z" fill="#0a0814" stroke="#1a2830" stroke-width="0.8"/>
+  <!-- Inner jaw tube highlight -->
+  <path d="M60 100 Q62 106 62 114" fill="none" stroke="#445566" stroke-width="1.2" opacity="0.3"/>
+  <!-- Inner jaw tip teeth -->
+  <path d="M58 116 L56 126 L60 120 L63 128 L66 120 L70 126 L68 116" fill="#1a2830" stroke="url(#xInnerJaw)" stroke-width="0.7"/>
+  <!-- Inner jaw teeth highlights -->
+  <path d="M57 118 L55 126" stroke="#445566" stroke-width="0.8" opacity="0.5"/>
+  <path d="M61 120 L60 128" stroke="#445566" stroke-width="0.9" opacity="0.55"/>
+  <path d="M64 120 L64 128" stroke="#445566" stroke-width="0.9" opacity="0.6"/>
+  <path d="M67 120 L68 128" stroke="#445566" stroke-width="0.9" opacity="0.55"/>
+  <path d="M71 118 L73 126" stroke="#445566" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- ═══ SALIVA STRANDS ═══ -->
+  <!-- Strand 1 - from left teeth -->
+  <path d="M42 100 Q40 110 38 118 Q37 122 38 126" stroke="url(#xSaliva)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M42 100 Q43 112 42 120" stroke="url(#xSaliva)" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <circle cx="38" cy="126" r="2.2" fill="#44aa66" opacity="0.35"/>
+  <!-- Strand 2 - from center-left -->
+  <path d="M52 106 Q52 114 50 122 Q49 126 50 128" stroke="url(#xSaliva)" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <circle cx="50" cy="128" r="2.5" fill="#44aa66" opacity="0.4"/>
+  <!-- Strand 3 - center (thickest) -->
+  <path d="M64 108 Q63 116 64 122 Q64 125 64 128" stroke="url(#xSaliva)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M66 110 Q67 118 66 124" stroke="url(#xSaliva)" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <circle cx="64" cy="128" r="3" fill="#44aa66" opacity="0.45"/>
+  <!-- Strand 4 - center-right -->
+  <path d="M76 106 Q76 114 78 122 Q79 126 78 128" stroke="url(#xSaliva)" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <circle cx="78" cy="128" r="2.5" fill="#44aa66" opacity="0.4"/>
+  <!-- Strand 5 - right -->
+  <path d="M86 100 Q88 110 90 118 Q91 122 90 126" stroke="url(#xSaliva)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <circle cx="90" cy="126" r="2.2" fill="#44aa66" opacity="0.35"/>
+  <!-- Inner jaw saliva - dripping from tip -->
+  <path d="M62 122 Q61 125 62 128" stroke="url(#xSaliva)" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M66 122 Q67 125 66 128" stroke="url(#xSaliva)" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- ═══ SURFACE DETAIL — carapace texture overlay ═══ -->
+  <!-- Subtle biomech surface patterning -->
+  <path d="M46 28 Q56 24 66 26" fill="none" stroke="#2a2830" stroke-width="0.6" opacity="0.35"/>
+  <path d="M62 26 Q72 24 82 28" fill="none" stroke="#2a2830" stroke-width="0.6" opacity="0.35"/>
+  <path d="M38 42 Q50 38 62 40" fill="none" stroke="#2a2830" stroke-width="0.5" opacity="0.3"/>
+  <path d="M66 40 Q78 38 90 42" fill="none" stroke="#2a2830" stroke-width="0.5" opacity="0.3"/>
+  <!-- Subsurface vein-like detail -->
+  <path d="M42 46 Q46 40 50 46" fill="none" stroke="#1a2428" stroke-width="0.8" opacity="0.4"/>
+  <path d="M78 46 Q82 40 86 46" fill="none" stroke="#1a2428" stroke-width="0.8" opacity="0.4"/>
+  <path d="M56 34 Q60 28 64 34" fill="none" stroke="#1a2428" stroke-width="0.7" opacity="0.35"/>
 </svg>

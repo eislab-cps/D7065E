@@ -83,7 +83,7 @@ open http://localhost:9090/api/icons/alien.svg
 | `compressor` | `coffee_machine` | `printer` | `projector` |
 
 ### Special (Occupancy & Fallback)
-| | | | |
-|:---:|:---:|:---:|:---:|
-| ![person](../../data/equipment/icons/person.svg) | ![group](../../data/equipment/icons/group.svg) | ![alien](../../data/equipment/icons/alien.svg) | ![generic](../../data/equipment/icons/generic.svg) |
-| `person` | `group` | `alien` | `generic` |
+| | | | | |
+|:---:|:---:|:---:|:---:|:---:|
+| ![person](../../data/equipment/icons/person.svg) | ![woman](../../data/equipment/icons/woman.svg) | ![group](../../data/equipment/icons/group.svg) | ![alien](../../data/equipment/icons/alien.svg) | ![generic](../../data/equipment/icons/generic.svg) |
+| `person` | `woman` | `group` | `alien` | `generic` |

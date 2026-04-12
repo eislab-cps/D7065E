@@ -21,7 +21,7 @@ Open http://localhost:9090 in a browser to view the 3D building.
 | REST API | Full CRUD for equipment, sensors, and actuators |
 | Session Control | Programmatic control of the viewer (viewport, highlights, occupancy, routes, coverage zones) via REST + WebSocket |
 | Navigation Graph | Walkable corridor graph with Dijkstra shortest path routing, single and cross-floor |
-| Equipment Icons | 49 detailed SVG icons for all equipment types, loaded dynamically |
+| Equipment Icons | 50 detailed SVG icons for all equipment types, loaded dynamically |
 | Occupancy | Person, group, and alien (xenomorph) icons rendered in rooms via session API |
 | MCP Server | Model Context Protocol server for AI-controlled building manipulation |
 
