@@ -560,10 +560,7 @@ function handleSessionMessage(msg) {
       else fetchAndApplyCoverage();
       break;
     case 'occupancy':
-      if (msg.version > localOccupancyVersion) {
-        localOccupancyVersion = msg.version;
-        fetchAndApplyOccupancy();
-      }
+      fetchAndApplyOccupancy();
       break;
     case 'equipment':
       if (msg.version > localEquipmentVersion) {
@@ -1897,6 +1894,14 @@ function buildEquipmentForLevel(level) {
   for (const eq of levelEquip) {
     if (!byRoom[eq.room]) byRoom[eq.room] = [];
     byRoom[eq.room].push(eq);
+  }
+
+  // Also add rooms that have occupancy but no equipment
+  const globalOccAll = window._globalOccupancy || {};
+  for (const room of data.rooms) {
+    if (globalOccAll[room.id] && !byRoom[room.name]) {
+      byRoom[room.name] = []; // empty equipment list, occupants will be added below
+    }
   }
 
   for (const [roomName, roomEquips] of Object.entries(byRoom)) {
