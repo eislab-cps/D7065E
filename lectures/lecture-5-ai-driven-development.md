@@ -42,13 +42,15 @@ flowchart LR
 
 ## Test-Driven Generation
 
-### The Core Practice: Write Tests Before Code
+Test-driven generation combines classical Test-Driven Development with AI code generation. The idea is simple but powerful: instead of writing both the tests and the implementation, the developer writes only the tests and lets the AI generate the code that passes them. The tests become the specification, the contract that the AI must satisfy. If the AI produces code that looks correct but fails a test, the bug is caught immediately. If the tests pass, the code is correct by definition, regardless of whether a human would have written it differently.
 
-**Test-Driven Development (TDD)** predates AI coding tools by two decades ([Kent Beck introduced it in 2003](https://www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530)). Its core discipline is: write a failing test first, then write the minimum code to make it pass, then refactor. With AI-generated code, TDD becomes even more valuable: the tests are the specification that the AI must satisfy. The tests constitute the contract; the AI writes the implementation.
+This matters especially for AI-generated code because AI tools are good at producing plausible-looking code that may contain subtle errors. Without tests, these errors can go undetected until production. With tests written first, every error is caught at generation time.
 
-The workflow is: write a test that captures the required behaviour (it will fail, there is no code yet), give the test to the AI as context ("implement the code that makes this test pass"), let the AI generate the implementation, run the tests (they should pass), and if they do not, examine the failure and refine either the tests or the prompt. More tests for edge cases are then added and the cycle repeats.
+### The Practice
 
-This practice catches hallucinated APIs early (the test will fail with `AttributeError`), wrong logic early (the test will fail with assertion errors), and missing error handling (add a test for the error case).
+[Test-Driven Development](https://www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530) was introduced by Kent Beck in 2003. The core discipline is: write a failing test, write the minimum code to make it pass, then refactor. With AI code generation, this workflow becomes: write a failing test, give the test to the AI as context ("implement code that makes this test pass"), run the tests, and if they fail, refine the prompt or tests and regenerate.
+
+This catches hallucinated APIs early (the test fails with an import error), wrong logic early (assertion errors), and missing error handling (write a test for the failure case and the AI is forced to handle it). The key insight is that writing a good test is often easier than writing good code, and AI is better at generating code from a clear specification (the test) than from a vague description.
 
 ### Test Types for CPS
 
@@ -147,8 +149,14 @@ def test_agent_activates_sprinklers_on_fire_decision(mock_llm):
 | **GitHub Copilot** | Inline code completion and chat in VS Code/JetBrains | [github.com/features/copilot](https://github.com/features/copilot) |
 | **Cursor** | AI-first IDE with codebase-aware chat, edit, and generation; based on VS Code | [cursor.com](https://cursor.com/) |
 | **Windsurf** | AI IDE with "Cascade" agent that can plan and execute multi-file changes | [windsurf.com](https://windsurf.com/) |
-| **Google Gemini Code Assist** | AI coding assistant integrated with Google Cloud and IDEs | [cloud.google.com/gemini/docs/codeassist](https://cloud.google.com/gemini/docs/codeassist/overview) |
-| **OpenAI Codex / ChatGPT** | Code generation via chat or API, supports function calling | [platform.openai.com](https://platform.openai.com/) |
+| **Google Gemini Code Assist** | AI coding assistant, IDE plugin for VS Code/JetBrains, integrated with Google Cloud | [cloud.google.com/gemini](https://cloud.google.com/gemini/docs/codeassist/overview) |
+
+### Chat and API-Based Tools
+
+| Tool | Description | Link |
+|------|-------------|------|
+| **ChatGPT / OpenAI Codex** | Code generation via chat interface or API, supports function calling and code interpreter | [platform.openai.com](https://platform.openai.com/) |
+| **Google Gemini** | Multimodal AI with code generation, available via web chat and API | [gemini.google.com](https://gemini.google.com/) |
 
 **Cursor** is the most popular AI IDE for professional software development in 2025. Its `@codebase` feature indexes an entire repository and enables questions about the code as well as changes with full codebase context. The [Cursor documentation](https://docs.cursor.com/) is the best starting point.
 
