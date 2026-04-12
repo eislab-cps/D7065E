@@ -1,9 +1,8 @@
 #!/bin/bash
-# Add an alien (xenomorph) to room A109
+# Add an alien to room A109 (alongside man and woman)
 # Usage: ./add_alien_A109.sh [host:port]
 
-DIR="$(cd "$(dirname "$0")" && pwd)"
-source "$DIR/../session/find_session.sh" "$@"
+BASE=${1:-localhost:9090}
 
 echo "=== Adding alien to A109 ==="
 curl -s -X PUT http://$BASE/api/occupancy -H 'Content-Type: application/json' -d '{
