@@ -1,0 +1,242 @@
+[
+  {
+    "id": "comp-1",
+    "type": "compressor",
+    "name": "Kompressor A1",
+    "level": "level0",
+    "room": "1542",
+    "status": "running",
+    "details": { "model": "Atlas Copco GA30", "power_kw": 30, "pressure_bar": 7.5 },
+    "inspection": { "last_inspected": "2026-02-15", "interval_days": 90, "inspector": "E. Lindgren", "notes": "Belt tension adjusted" }
+  },
+  {
+    "id": "comp-2",
+    "type": "compressor",
+    "name": "Kompressor A2",
+    "level": "level0",
+    "room": "1556",
+    "status": "running",
+    "details": { "model": "Atlas Copco GA22", "power_kw": 22, "pressure_bar": 8.0 },
+    "inspection": { "last_inspected": "2026-01-10", "interval_days": 90, "inspector": "E. Lindgren", "notes": "All OK" }
+  },
+  {
+    "id": "comp-3",
+    "type": "compressor",
+    "name": "Kompressor B1",
+    "level": "level1",
+    "room": "2546",
+    "status": "warning",
+    "details": { "model": "Atlas Copco GA30", "power_kw": 30, "pressure_bar": 7.0 },
+    "inspection": { "last_inspected": "2025-11-20", "interval_days": 90, "inspector": "K. Svensson", "notes": "Vibration detected, monitor closely" }
+  },
+  {
+    "id": "comp-4",
+    "type": "compressor",
+    "name": "Kompressor B2",
+    "level": "level1",
+    "room": "2554",
+    "status": "stopped",
+    "details": { "model": "Kaeser CSD 75", "power_kw": 75, "pressure_bar": 10.0 },
+    "inspection": { "last_inspected": "2025-12-05", "interval_days": 90, "inspector": "K. Svensson", "notes": "Bearing replacement scheduled" }
+  },
+  {
+    "id": "comp-5",
+    "type": "compressor",
+    "name": "Kompressor C1",
+    "level": "level2",
+    "room": "3424",
+    "status": "running",
+    "details": { "model": "Atlas Copco GA15", "power_kw": 15, "pressure_bar": 7.5 },
+    "inspection": { "last_inspected": "2026-03-28", "interval_days": 90, "inspector": "E. Lindgren", "notes": "Filter replaced" }
+  },
+  {
+    "id": "comp-6",
+    "type": "compressor",
+    "name": "Kompressor C2",
+    "level": "level2",
+    "room": "3430",
+    "status": "running",
+    "details": { "model": "Kaeser CSD 45", "power_kw": 45, "pressure_bar": 8.5 },
+    "inspection": { "last_inspected": "2026-04-01", "interval_days": 90, "inspector": "K. Svensson", "notes": "Oil level topped up" }
+  },
+  {
+    "id": "coffee-1",
+    "type": "coffee_machine",
+    "name": "Kaffe A103",
+    "level": "level0",
+    "room": "A103",
+    "status": "running",
+    "details": { "model": "WMF 1500S", "capacity_cups_h": 180, "milk_system": true },
+    "inspection": { "last_inspected": "2025-10-12", "interval_days": 60, "inspector": "M. Johansson", "notes": "Descaled, milk frother cleaned" }
+  },
+  {
+    "id": "coffee-2",
+    "type": "coffee_machine",
+    "name": "Kaffe 1570",
+    "level": "level0",
+    "room": "1570",
+    "status": "warning",
+    "details": { "model": "Jura GIGA X8", "capacity_cups_h": 120, "milk_system": true },
+    "inspection": { "last_inspected": "2025-11-03", "interval_days": 60, "inspector": "M. Johansson", "notes": "Grinder wearing, replacement ordered" }
+  },
+  {
+    "id": "coffee-3",
+    "type": "coffee_machine",
+    "name": "Kaffe A205",
+    "level": "level1",
+    "room": "A205",
+    "status": "running",
+    "details": { "model": "WMF 1500S", "capacity_cups_h": 180, "milk_system": true },
+    "inspection": { "last_inspected": "2026-03-20", "interval_days": 60, "inspector": "M. Johansson", "notes": "All OK, beans refilled" }
+  },
+  {
+    "id": "coffee-4",
+    "type": "coffee_machine",
+    "name": "Kaffe 2541",
+    "level": "level1",
+    "room": "2541",
+    "status": "running",
+    "details": { "model": "Franke A600", "capacity_cups_h": 150, "milk_system": false },
+    "inspection": { "last_inspected": "2026-03-15", "interval_days": 60, "inspector": "L. Eriksson", "notes": "Descaled, brew unit serviced" }
+  },
+  {
+    "id": "coffee-5",
+    "type": "coffee_machine",
+    "name": "Kaffe A305",
+    "level": "level2",
+    "room": "A305",
+    "status": "stopped",
+    "details": { "model": "Jura GIGA X8", "capacity_cups_h": 120, "milk_system": true },
+    "inspection": { "last_inspected": "2025-12-18", "interval_days": 60, "inspector": "L. Eriksson", "notes": "Pump failure, awaiting parts" }
+  },
+  {
+    "id": "coffee-6",
+    "type": "coffee_machine",
+    "name": "Kaffe 3421",
+    "level": "level2",
+    "room": "3421",
+    "status": "running",
+    "details": { "model": "WMF 5000S", "capacity_cups_h": 250, "milk_system": true },
+    "inspection": { "last_inspected": "2026-04-05", "interval_days": 60, "inspector": "M. Johansson", "notes": "Deep clean performed" }
+  },
+  {
+    "id": "ac-1",
+    "type": "air_conditioning",
+    "name": "AC A1123",
+    "level": "level0",
+    "room": "A1123",
+    "status": "running",
+    "details": { "model": "Daikin FXAQ80A", "cooling_kw": 8.0, "area_m2": 120, "heating": true, "refrigerant": "R32" },
+    "inspection": { "last_inspected": "2026-03-10", "interval_days": 180, "inspector": "P. Bergström", "notes": "Filters cleaned, refrigerant level OK" }
+  },
+  {
+    "id": "ac-2",
+    "type": "air_conditioning",
+    "name": "AC A1120",
+    "level": "level0",
+    "room": "A1120",
+    "status": "running",
+    "details": { "model": "Mitsubishi MSZ-AP71VG", "cooling_kw": 7.1, "area_m2": 95, "heating": true, "refrigerant": "R32" },
+    "inspection": { "last_inspected": "2026-02-20", "interval_days": 180, "inspector": "P. Bergström", "notes": "All OK, condensate drain clear" }
+  },
+  {
+    "id": "ac-3",
+    "type": "air_conditioning",
+    "name": "AC A117-0",
+    "level": "level0",
+    "room": "A117",
+    "status": "warning",
+    "details": { "model": "Daikin FXAQ50A", "cooling_kw": 5.0, "area_m2": 70, "heating": true, "refrigerant": "R32" },
+    "inspection": { "last_inspected": "2025-12-15", "interval_days": 180, "inspector": "P. Bergström", "notes": "Unusual noise from fan motor, monitor" }
+  },
+  {
+    "id": "ac-4",
+    "type": "air_conditioning",
+    "name": "AC A109",
+    "level": "level0",
+    "room": "A109",
+    "status": "running",
+    "details": { "model": "Mitsubishi MSZ-AP50VG", "cooling_kw": 5.0, "area_m2": 65, "heating": true, "refrigerant": "R32" },
+    "inspection": { "last_inspected": "2026-03-25", "interval_days": 180, "inspector": "A. Nilsson", "notes": "Filters replaced" }
+  },
+  {
+    "id": "ac-5",
+    "type": "air_conditioning",
+    "name": "AC A117-1",
+    "level": "level1",
+    "room": "A117",
+    "status": "running",
+    "details": { "model": "Daikin FXAQ125A", "cooling_kw": 12.5, "area_m2": 140, "heating": true, "refrigerant": "R32" },
+    "inspection": { "last_inspected": "2026-01-18", "interval_days": 180, "inspector": "P. Bergström", "notes": "Compressor and coils inspected, all good" }
+  },
+  {
+    "id": "ac-6",
+    "type": "air_conditioning",
+    "name": "AC A2003",
+    "level": "level1",
+    "room": "A2003",
+    "status": "stopped",
+    "details": { "model": "Daikin FXAQ100A", "cooling_kw": 10.0, "area_m2": 110, "heating": true, "refrigerant": "R32" },
+    "inspection": { "last_inspected": "2025-11-05", "interval_days": 180, "inspector": "A. Nilsson", "notes": "Refrigerant leak detected, unit shut down for repair" }
+  },
+  {
+    "id": "ac-7",
+    "type": "air_conditioning",
+    "name": "AC A2018",
+    "level": "level1",
+    "room": "A2018",
+    "status": "running",
+    "details": { "model": "Mitsubishi MSZ-AP71VG", "cooling_kw": 7.1, "area_m2": 80, "heating": true, "refrigerant": "R32" },
+    "inspection": { "last_inspected": "2026-04-02", "interval_days": 180, "inspector": "P. Bergström", "notes": "Seasonal check, switched to cooling mode" }
+  },
+  {
+    "id": "ac-8",
+    "type": "air_conditioning",
+    "name": "AC A2009",
+    "level": "level1",
+    "room": "A2009",
+    "status": "warning",
+    "details": { "model": "Daikin FXAQ63A", "cooling_kw": 6.3, "area_m2": 65, "heating": false, "refrigerant": "R410A" },
+    "inspection": { "last_inspected": "2025-10-22", "interval_days": 180, "inspector": "A. Nilsson", "notes": "Filter clogged, airflow reduced. Overdue for service" }
+  },
+  {
+    "id": "ac-9",
+    "type": "air_conditioning",
+    "name": "AC A3101A",
+    "level": "level2",
+    "room": "A3101A",
+    "status": "running",
+    "details": { "model": "Daikin FXAQ80A", "cooling_kw": 8.0, "area_m2": 75, "heating": true, "refrigerant": "R32" },
+    "inspection": { "last_inspected": "2026-03-15", "interval_days": 180, "inspector": "P. Bergström", "notes": "All OK" }
+  },
+  {
+    "id": "ac-10",
+    "type": "air_conditioning",
+    "name": "AC A3011",
+    "level": "level2",
+    "room": "A3011",
+    "status": "running",
+    "details": { "model": "Mitsubishi MSZ-AP71VG", "cooling_kw": 7.1, "area_m2": 70, "heating": true, "refrigerant": "R32" },
+    "inspection": { "last_inspected": "2026-02-28", "interval_days": 180, "inspector": "A. Nilsson", "notes": "Condensate pump replaced, running well" }
+  },
+  {
+    "id": "ac-11",
+    "type": "air_conditioning",
+    "name": "AC A3019",
+    "level": "level2",
+    "room": "A3019",
+    "status": "warning",
+    "details": { "model": "Daikin FXAQ63A", "cooling_kw": 6.3, "area_m2": 65, "heating": true, "refrigerant": "R32" },
+    "inspection": { "last_inspected": "2025-12-01", "interval_days": 180, "inspector": "P. Bergström", "notes": "Thermostat sensor drift detected, recalibration needed" }
+  },
+  {
+    "id": "ac-12",
+    "type": "air_conditioning",
+    "name": "AC A3024",
+    "level": "level2",
+    "room": "A3024",
+    "status": "running",
+    "details": { "model": "Daikin FXAQ50A", "cooling_kw": 5.0, "area_m2": 60, "heating": false, "refrigerant": "R410A" },
+    "inspection": { "last_inspected": "2026-04-08", "interval_days": 180, "inspector": "A. Nilsson", "notes": "Recently installed, commissioning complete" }
+  }
+]

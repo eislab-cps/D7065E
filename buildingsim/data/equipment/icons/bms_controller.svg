@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bmsBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a3a45"/>
+      <stop offset="100%" stop-color="#1a2530"/>
+    </linearGradient>
+    <linearGradient id="bmsPCB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a2820"/>
+      <stop offset="100%" stop-color="#0f1a14"/>
+    </linearGradient>
+  </defs>
+  <!-- DIN rail clip bottom -->
+  <rect x="16" y="114" width="96" height="10" rx="2" fill="#1a2030"/>
+  <rect x="16" y="114" width="20" height="10" rx="2" fill="#2a3040"/>
+  <rect x="92" y="114" width="20" height="10" rx="2" fill="#2a3040"/>
+  <!-- Main PLC housing -->
+  <rect x="16" y="10" width="96" height="106" rx="6" fill="url(#bmsBody)"/>
+  <rect x="16" y="10" width="96" height="106" rx="6" fill="none" stroke="#445566" stroke-width="1.2" opacity="0.5"/>
+  <!-- Top LED row status -->
+  <rect x="20" y="14" width="88" height="12" rx="4" fill="#1a2030"/>
+  <!-- LED status indicators (6 leds) -->
+  <circle cx="30" cy="20" r="3.5" fill="#1a0808"/><circle cx="30" cy="20" r="2.2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="42" cy="20" r="3.5" fill="#1a0808"/><circle cx="42" cy="20" r="2.2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="54" cy="20" r="3.5" fill="#1a0808"/><circle cx="54" cy="20" r="2.2" fill="#ffffff" opacity="0.5"/>
+  <circle cx="66" cy="20" r="3.5" fill="#1a0808"/><circle cx="66" cy="20" r="2.2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="78" cy="20" r="3.5" fill="#1a0808"/><circle cx="78" cy="20" r="2.2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="90" cy="20" r="3.5" fill="#1a0808"/><circle cx="90" cy="20" r="2.2" fill="#ffffff" opacity="0.3"/>
+  <!-- PCB area (visible) -->
+  <rect x="20" y="30" width="88" height="50" rx="4" fill="url(#bmsPCB)"/>
+  <rect x="20" y="30" width="88" height="50" rx="4" fill="none" stroke="#2a4030" stroke-width="0.7"/>
+  <!-- PCB traces -->
+  <line x1="26" y1="36" x2="60" y2="36" stroke="#2a5030" stroke-width="0.8"/>
+  <line x1="60" y1="36" x2="60" y2="66" stroke="#2a5030" stroke-width="0.8"/>
+  <line x1="26" y1="50" x2="50" y2="50" stroke="#2a5030" stroke-width="0.8"/>
+  <line x1="70" y1="40" x2="100" y2="40" stroke="#2a5030" stroke-width="0.8"/>
+  <line x1="80" y1="40" x2="80" y2="70" stroke="#2a5030" stroke-width="0.8"/>
+  <!-- Main CPU chip -->
+  <rect x="32" y="38" width="22" height="18" rx="2" fill="#1a2820"/>
+  <rect x="32" y="38" width="22" height="18" rx="2" fill="none" stroke="#3a5040" stroke-width="0.8"/>
+  <!-- CPU pins -->
+  <line x1="32" y1="42" x2="28" y2="42" stroke="#3a5040" stroke-width="0.8"/>
+  <line x1="32" y1="46" x2="28" y2="46" stroke="#3a5040" stroke-width="0.8"/>
+  <line x1="32" y1="50" x2="28" y2="50" stroke="#3a5040" stroke-width="0.8"/>
+  <line x1="54" y1="42" x2="58" y2="42" stroke="#3a5040" stroke-width="0.8"/>
+  <line x1="54" y1="46" x2="58" y2="46" stroke="#3a5040" stroke-width="0.8"/>
+  <line x1="54" y1="50" x2="58" y2="50" stroke="#3a5040" stroke-width="0.8"/>
+  <!-- Small memory chip -->
+  <rect x="68" y="44" width="14" height="10" rx="1" fill="#1a2820" stroke="#3a5040" stroke-width="0.5"/>
+  <!-- DIP switches -->
+  <rect x="26" y="62" width="28" height="10" rx="2" fill="#1a2030"/>
+  <rect x="28" y="64" width="4" height="6" rx="1" fill="#334455"/>
+  <rect x="34" y="64" width="4" height="6" rx="1" fill="#334455"/>
+  <rect x="40" y="64" width="4" height="6" rx="1" fill="#334455"/>
+  <rect x="46" y="64" width="4" height="6" rx="1" fill="#334455"/>
+  <rect x="28" y="66" width="4" height="2" rx="0.5" fill="#2a5030"/>
+  <rect x="40" y="66" width="4" height="2" rx="0.5" fill="#2a5030"/>
+  <!-- Terminal blocks (bottom) -->
+  <rect x="20" y="84" width="88" height="24" rx="3" fill="#1a2030"/>
+  <rect x="20" y="84" width="88" height="24" rx="3" fill="none" stroke="#334455" stroke-width="0.7"/>
+  <!-- Terminal screws row 1 -->
+  <rect x="22" y="86" width="8" height="8" rx="1" fill="#2a3845"/><circle cx="26" cy="90" r="2" fill="#334455"/><circle cx="26" cy="90" r="1" fill="#667788"/>
+  <rect x="32" y="86" width="8" height="8" rx="1" fill="#2a3845"/><circle cx="36" cy="90" r="2" fill="#334455"/>
+  <rect x="42" y="86" width="8" height="8" rx="1" fill="#2a3845"/><circle cx="46" cy="90" r="2" fill="#334455"/>
+  <rect x="52" y="86" width="8" height="8" rx="1" fill="#2a3845"/><circle cx="56" cy="90" r="2" fill="#334455"/>
+  <rect x="62" y="86" width="8" height="8" rx="1" fill="#2a3845"/><circle cx="66" cy="90" r="2" fill="#334455"/>
+  <rect x="72" y="86" width="8" height="8" rx="1" fill="#2a3845"/><circle cx="76" cy="90" r="2" fill="#334455"/>
+  <rect x="82" y="86" width="8" height="8" rx="1" fill="#2a3845"/><circle cx="86" cy="90" r="2" fill="#334455"/>
+  <rect x="92" y="86" width="8" height="8" rx="1" fill="#2a3845"/><circle cx="96" cy="90" r="2" fill="#334455"/>
+  <!-- Ports row (bottom right) -->
+  <rect x="70" y="60" width="12" height="8" rx="1" fill="#1a2030" stroke="#334455" stroke-width="0.6"/>
+  <rect x="84" y="60" width="12" height="8" rx="1" fill="#1a2030" stroke="#334455" stroke-width="0.6"/>
+  <rect x="98" y="60" width="8" height="8" rx="1" fill="#1a2030" stroke="#334455" stroke-width="0.6"/>
+</svg>

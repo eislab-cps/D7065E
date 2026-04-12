@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="escBody" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3a4a55"/>
+      <stop offset="100%" stop-color="#1e2830"/>
+    </linearGradient>
+    <linearGradient id="escStep" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#445566"/>
+      <stop offset="100%" stop-color="#2a3a45"/>
+    </linearGradient>
+  </defs>
+  <!-- Escalator side frame (left) -->
+  <path d="M6 122 L6 88 L98 8 L122 8 L122 20 L16 20 L16 122Z" fill="url(#escBody)" opacity="0.9"/>
+  <path d="M6 122 L6 88 L98 8 L122 8 L122 20 L16 20 L16 122Z" fill="none" stroke="#445566" stroke-width="1.2" opacity="0.5"/>
+  <!-- Handrail (top edge diagonal) -->
+  <path d="M8 90 L100 10" stroke="#99aabb" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+  <path d="M18 90 L110 10" stroke="#99aabb" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+  <!-- Steps (diagonal stair pattern) -->
+  <!-- Step 1 (bottom) -->
+  <rect x="8" y="106" width="28" height="10" rx="1" fill="url(#escStep)"/>
+  <rect x="8" y="106" width="28" height="3" rx="1" fill="#88aacc" opacity="0.2"/>
+  <rect x="36" y="96" width="4" height="10" rx="1" fill="#2a3a45"/>
+  <!-- Step 2 -->
+  <rect x="30" y="88" width="28" height="10" rx="1" fill="url(#escStep)"/>
+  <rect x="30" y="88" width="28" height="3" rx="1" fill="#88aacc" opacity="0.2"/>
+  <rect x="58" y="78" width="4" height="10" rx="1" fill="#2a3a45"/>
+  <!-- Step 3 -->
+  <rect x="52" y="70" width="28" height="10" rx="1" fill="url(#escStep)"/>
+  <rect x="52" y="70" width="28" height="3" rx="1" fill="#88aacc" opacity="0.2"/>
+  <rect x="80" y="60" width="4" height="10" rx="1" fill="#2a3a45"/>
+  <!-- Step 4 -->
+  <rect x="74" y="52" width="28" height="10" rx="1" fill="url(#escStep)"/>
+  <rect x="74" y="52" width="28" height="3" rx="1" fill="#88aacc" opacity="0.2"/>
+  <rect x="102" y="42" width="4" height="10" rx="1" fill="#2a3a45"/>
+  <!-- Step 5 (top) -->
+  <rect x="96" y="34" width="22" height="10" rx="1" fill="url(#escStep)"/>
+  <rect x="96" y="34" width="22" height="3" rx="1" fill="#88aacc" opacity="0.2"/>
+  <!-- Step grooves/tread lines on each step -->
+  <line x1="10" y1="109" x2="34" y2="109" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="10" y1="112" x2="34" y2="112" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="32" y1="91" x2="56" y2="91" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="32" y1="94" x2="56" y2="94" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="54" y1="73" x2="78" y2="73" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="54" y1="76" x2="78" y2="76" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="76" y1="55" x2="100" y2="55" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="76" y1="58" x2="100" y2="58" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <!-- Motor housing (bottom) -->
+  <rect x="6" y="108" width="14" height="14" rx="3" fill="#2a3040"/>
+  <rect x="6" y="108" width="14" height="14" rx="3" fill="none" stroke="#334455" stroke-width="0.7"/>
+  <!-- Comb plate bottom -->
+  <rect x="6" y="118" width="28" height="4" rx="1" fill="#2a3845"/>
+  <line x1="8" y1="118" x2="8" y2="122" stroke="#1a2030" stroke-width="1.2"/>
+  <line x1="12" y1="118" x2="12" y2="122" stroke="#1a2030" stroke-width="1.2"/>
+  <line x1="16" y1="118" x2="16" y2="122" stroke="#1a2030" stroke-width="1.2"/>
+  <line x1="20" y1="118" x2="20" y2="122" stroke="#1a2030" stroke-width="1.2"/>
+  <line x1="24" y1="118" x2="24" y2="122" stroke="#1a2030" stroke-width="1.2"/>
+  <line x1="28" y1="118" x2="28" y2="122" stroke="#1a2030" stroke-width="1.2"/>
+  <!-- Comb plate top -->
+  <rect x="96" y="34" width="24" height="4" rx="1" fill="#2a3845"/>
+  <!-- Status light -->
+  <circle cx="114" cy="14" r="4" fill="#1a2030"/>
+  <circle cx="114" cy="14" r="2.5" fill="#ffffff" opacity="0.7"/>
+</svg>

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="grpJacketBack" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2a3040"/>
+      <stop offset="100%" stop-color="#151820"/>
+    </linearGradient>
+    <linearGradient id="grpJacketFront" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3a4a55"/>
+      <stop offset="100%" stop-color="#1e2830"/>
+    </linearGradient>
+    <linearGradient id="grpSkin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c89070"/>
+      <stop offset="100%" stop-color="#a07050"/>
+    </linearGradient>
+    <linearGradient id="grpSkin2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b07858"/>
+      <stop offset="100%" stop-color="#8a5838"/>
+    </linearGradient>
+  </defs>
+  <!-- BACK LEFT PERSON (faded) -->
+  <!-- Legs back-left -->
+  <rect x="6" y="82" width="12" height="40" rx="5" fill="url(#grpJacketBack)" opacity="0.5"/>
+  <rect x="20" y="82" width="12" height="40" rx="5" fill="url(#grpJacketBack)" opacity="0.5"/>
+  <!-- Body back-left -->
+  <rect x="2" y="44" width="38" height="42" rx="8" fill="url(#grpJacketBack)" opacity="0.5"/>
+  <!-- Arms back-left -->
+  <rect x="-6" y="44" width="12" height="34" rx="5" fill="url(#grpJacketBack)" opacity="0.4"/>
+  <rect x="36" y="44" width="12" height="34" rx="5" fill="url(#grpJacketBack)" opacity="0.4"/>
+  <!-- Head back-left -->
+  <ellipse cx="21" cy="28" rx="16" ry="18" fill="url(#grpSkin2)" opacity="0.5"/>
+  <!-- Hair back-left -->
+  <path d="M6 18 Q21 10 36 18 Q36 12 21 8 Q6 12 6 18Z" fill="#1a1010" opacity="0.5"/>
+
+  <!-- BACK RIGHT PERSON (faded) -->
+  <!-- Legs back-right -->
+  <rect x="96" y="82" width="12" height="40" rx="5" fill="url(#grpJacketBack)" opacity="0.5"/>
+  <rect x="110" y="82" width="12" height="40" rx="5" fill="url(#grpJacketBack)" opacity="0.5"/>
+  <!-- Body back-right -->
+  <rect x="90" y="44" width="38" height="42" rx="8" fill="url(#grpJacketBack)" opacity="0.5"/>
+  <!-- Arms back-right -->
+  <rect x="82" y="44" width="12" height="34" rx="5" fill="url(#grpJacketBack)" opacity="0.4"/>
+  <rect x="124" y="44" width="12" height="34" rx="5" fill="url(#grpJacketBack)" opacity="0.4"/>
+  <!-- Head back-right -->
+  <ellipse cx="109" cy="28" rx="16" ry="18" fill="url(#grpSkin2)" opacity="0.5"/>
+  <!-- Hair back-right -->
+  <path d="M94 18 Q109 10 124 18 Q124 12 109 8 Q94 12 94 18Z" fill="#1a1010" opacity="0.5"/>
+
+  <!-- FRONT CENTER PERSON (detailed) -->
+  <!-- Shadow -->
+  <ellipse cx="64" cy="124" rx="22" ry="4" fill="#1a2030" opacity="0.4"/>
+  <!-- Legs front -->
+  <rect x="48" y="84" width="14" height="38" rx="6" fill="#1a2030"/>
+  <rect x="66" y="84" width="14" height="38" rx="6" fill="#1a2030"/>
+  <rect x="50" y="84" width="5" height="38" rx="3" fill="#88aacc" opacity="0.08"/>
+  <rect x="68" y="84" width="5" height="38" rx="3" fill="#88aacc" opacity="0.08"/>
+  <!-- Shoes -->
+  <ellipse cx="55" cy="120" rx="10" ry="5" fill="#1a1820"/>
+  <ellipse cx="73" cy="120" rx="10" ry="5" fill="#1a1820"/>
+  <!-- Body front -->
+  <rect x="40" y="46" width="48" height="42" rx="9" fill="url(#grpJacketFront)"/>
+  <rect x="40" y="46" width="48" height="42" rx="9" fill="none" stroke="#445566" stroke-width="0.7" opacity="0.4"/>
+  <!-- Jacket detail -->
+  <path d="M64 48 L57 57 L64 61Z" fill="#2a3845" opacity="0.5"/>
+  <path d="M64 48 L71 57 L64 61Z" fill="#2a3845" opacity="0.5"/>
+  <circle cx="64" cy="64" r="1.8" fill="#1a2030"/>
+  <circle cx="64" cy="71" r="1.8" fill="#1a2030"/>
+  <rect x="42" y="48" width="12" height="38" rx="6" fill="#88aacc" opacity="0.06"/>
+  <!-- Arms front -->
+  <rect x="22" y="48" width="18" height="38" rx="7" fill="url(#grpJacketFront)"/>
+  <rect x="88" y="48" width="18" height="38" rx="7" fill="url(#grpJacketFront)"/>
+  <!-- Hands -->
+  <ellipse cx="31" cy="86" rx="7" ry="6" fill="url(#grpSkin)"/>
+  <ellipse cx="97" cy="86" rx="7" ry="6" fill="url(#grpSkin)"/>
+  <!-- Neck -->
+  <rect x="57" y="34" width="14" height="14" rx="5" fill="url(#grpSkin)"/>
+  <!-- Head front -->
+  <ellipse cx="64" cy="24" rx="18" ry="20" fill="url(#grpSkin)"/>
+  <!-- Face details -->
+  <ellipse cx="57" cy="22" rx="3" ry="2.5" fill="#2a1810"/>
+  <ellipse cx="71" cy="22" rx="3" ry="2.5" fill="#2a1810"/>
+  <circle cx="56" cy="21" r="0.8" fill="#ffffff" opacity="0.5"/>
+  <circle cx="70" cy="21" r="0.8" fill="#ffffff" opacity="0.5"/>
+  <path d="M60 30 Q64 34 68 30" fill="none" stroke="#8a5040" stroke-width="1" opacity="0.7" stroke-linecap="round"/>
+  <!-- Hair front -->
+  <path d="M46 12 Q64 4 82 12 Q82 6 64 2 Q46 6 46 12Z" fill="#1a1010"/>
+</svg>

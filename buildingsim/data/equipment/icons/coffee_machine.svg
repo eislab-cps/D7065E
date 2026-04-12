@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="cmBody" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3a4a55"/>
+      <stop offset="100%" stop-color="#1e2830"/>
+    </linearGradient>
+    <linearGradient id="cmShine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#88aacc" stop-opacity="0.4"/>
+      <stop offset="50%" stop-color="#88aacc" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#88aacc" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="cmScreen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3040"/>
+      <stop offset="100%" stop-color="#0a1820"/>
+    </linearGradient>
+  </defs>
+  <!-- Main body -->
+  <rect x="22" y="12" width="70" height="90" rx="8" fill="url(#cmBody)"/>
+  <rect x="22" y="12" width="70" height="90" rx="8" fill="url(#cmShine)"/>
+  <!-- Body chrome border -->
+  <rect x="22" y="12" width="70" height="90" rx="8" fill="none" stroke="#99aabb" stroke-width="1" opacity="0.4"/>
+  <!-- Panel line -->
+  <rect x="22" y="12" width="70" height="6" rx="4" fill="#445566" opacity="0.7"/>
+  <!-- Bean hopper (trapezoid) -->
+  <path d="M36 14 L78 14 L72 34 L42 34Z" fill="#2a3a45"/>
+  <path d="M36 14 L78 14 L72 34 L42 34Z" fill="none" stroke="#667788" stroke-width="0.8"/>
+  <!-- Hopper shine -->
+  <path d="M38 15 L62 15 L58 30 L44 30Z" fill="#88aacc" opacity="0.08"/>
+  <!-- Bean dots in hopper -->
+  <ellipse cx="51" cy="22" rx="4" ry="3" fill="#1a1214" opacity="0.8"/>
+  <ellipse cx="63" cy="24" rx="4" ry="3" fill="#1a1214" opacity="0.8"/>
+  <ellipse cx="55" cy="29" rx="4" ry="3" fill="#1a1214" opacity="0.8"/>
+  <line x1="51" y1="22" x2="51" y2="25" stroke="#3a2020" stroke-width="0.8"/>
+  <line x1="63" y1="24" x2="63" y2="27" stroke="#3a2020" stroke-width="0.8"/>
+  <!-- Display screen -->
+  <rect x="30" y="38" width="54" height="22" rx="3" fill="url(#cmScreen)"/>
+  <rect x="30" y="38" width="54" height="22" rx="3" fill="none" stroke="#445566" stroke-width="1"/>
+  <!-- Screen content lines -->
+  <rect x="34" y="42" width="24" height="2" rx="1" fill="#88aacc" opacity="0.6"/>
+  <rect x="34" y="47" width="18" height="2" rx="1" fill="#88aacc" opacity="0.4"/>
+  <rect x="34" y="52" width="28" height="2" rx="1" fill="#ffffff" opacity="0.5"/>
+  <!-- Temperature display -->
+  <text x="68" y="55" font-size="9" fill="#88aacc" opacity="0.8" font-family="monospace">92°</text>
+  <!-- Nozzle group -->
+  <rect x="44" y="62" width="26" height="8" rx="2" fill="#334455"/>
+  <rect x="44" y="62" width="26" height="3" rx="1" fill="#445566"/>
+  <!-- Two spouts -->
+  <rect x="50" y="70" width="5" height="10" rx="2" fill="#2a3845"/>
+  <rect x="59" y="70" width="5" height="10" rx="2" fill="#2a3845"/>
+  <circle cx="52" cy="80" r="2.5" fill="#1a2030" stroke="#445566" stroke-width="0.8"/>
+  <circle cx="61" cy="80" r="2.5" fill="#1a2030" stroke="#445566" stroke-width="0.8"/>
+  <!-- Drip tray -->
+  <rect x="28" y="84" width="58" height="12" rx="3" fill="#2a3040"/>
+  <rect x="28" y="84" width="58" height="5" rx="2" fill="#334455" opacity="0.7"/>
+  <!-- Drip grate lines -->
+  <line x1="34" y1="87" x2="34" y2="94" stroke="#445566" stroke-width="0.8"/>
+  <line x1="40" y1="87" x2="40" y2="94" stroke="#445566" stroke-width="0.8"/>
+  <line x1="46" y1="87" x2="46" y2="94" stroke="#445566" stroke-width="0.8"/>
+  <line x1="52" y1="87" x2="52" y2="94" stroke="#445566" stroke-width="0.8"/>
+  <line x1="58" y1="87" x2="58" y2="94" stroke="#445566" stroke-width="0.8"/>
+  <line x1="64" y1="87" x2="64" y2="94" stroke="#445566" stroke-width="0.8"/>
+  <line x1="70" y1="87" x2="70" y2="94" stroke="#445566" stroke-width="0.8"/>
+  <line x1="76" y1="87" x2="76" y2="94" stroke="#445566" stroke-width="0.8"/>
+  <!-- Coffee cup below -->
+  <path d="M48 96 L52 112 L68 112 L72 96Z" fill="#2a2428"/>
+  <path d="M48 96 L72 96" stroke="#3a3440" stroke-width="1.5"/>
+  <!-- Cup handle -->
+  <path d="M72 100 Q80 100 80 106 Q80 112 72 112" fill="none" stroke="#2a2428" stroke-width="2.5"/>
+  <!-- Steam wisps -->
+  <path d="M52 94 Q54 90 52 86 Q50 82 52 78" fill="none" stroke="#88aacc" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
+  <path d="M60 94 Q62 89 60 85 Q58 81 60 77" fill="none" stroke="#88aacc" stroke-width="1" opacity="0.25" stroke-linecap="round"/>
+  <path d="M68 94 Q70 90 68 86 Q66 82 68 78" fill="none" stroke="#88aacc" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
+  <!-- Chrome accent strip -->
+  <rect x="22" y="98" width="70" height="3" rx="1" fill="#99aabb" opacity="0.25"/>
+  <!-- Status LED -->
+  <circle cx="84" cy="65" r="3" fill="#1a2030"/>
+  <circle cx="84" cy="65" r="2" fill="#ffffff" opacity="0.8"/>
+</svg>

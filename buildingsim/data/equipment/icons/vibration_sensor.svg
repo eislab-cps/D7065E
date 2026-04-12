@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="vsCylinder" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4a6070"/>
+      <stop offset="50%" stop-color="#88aacc" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#2a3845"/>
+    </linearGradient>
+    <linearGradient id="vsTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a6070"/>
+      <stop offset="100%" stop-color="#2a3a45"/>
+    </linearGradient>
+  </defs>
+  <!-- Mounting stud (threaded, at bottom) -->
+  <rect x="58" y="96" width="12" height="26" rx="2" fill="#2a3845"/>
+  <!-- Thread lines on stud -->
+  <line x1="58" y1="100" x2="70" y2="100" stroke="#1a2030" stroke-width="1"/>
+  <line x1="58" y1="104" x2="70" y2="104" stroke="#1a2030" stroke-width="1"/>
+  <line x1="58" y1="108" x2="70" y2="108" stroke="#1a2030" stroke-width="1"/>
+  <line x1="58" y1="112" x2="70" y2="112" stroke="#1a2030" stroke-width="1"/>
+  <line x1="58" y1="116" x2="70" y2="116" stroke="#1a2030" stroke-width="1"/>
+  <!-- Hex nut -->
+  <polygon points="64,114 72,118 72,126 64,130 56,126 56,118" fill="#2a3845"/>
+  <polygon points="64,115 71,119 71,125 64,129 57,125 57,119" fill="#334455"/>
+  <!-- Base flange / mounting pad -->
+  <ellipse cx="64" cy="96" rx="28" ry="8" fill="#2a3845"/>
+  <ellipse cx="64" cy="96" rx="28" ry="8" fill="none" stroke="#445566" stroke-width="1"/>
+  <ellipse cx="64" cy="96" rx="20" ry="5.5" fill="#334455"/>
+  <!-- Main cylinder housing -->
+  <rect x="40" y="28" width="48" height="70" rx="12" fill="url(#vsCylinder)"/>
+  <rect x="40" y="28" width="48" height="70" rx="12" fill="none" stroke="#667788" stroke-width="1.2" opacity="0.5"/>
+  <!-- Cylinder shine stripe -->
+  <rect x="42" y="30" width="16" height="66" rx="8" fill="#88aacc" opacity="0.1"/>
+  <!-- Machined grooves on cylinder -->
+  <rect x="40" y="42" width="48" height="3" rx="1" fill="#1a2030" opacity="0.5"/>
+  <rect x="40" y="50" width="48" height="3" rx="1" fill="#1a2030" opacity="0.5"/>
+  <rect x="40" y="70" width="48" height="3" rx="1" fill="#1a2030" opacity="0.5"/>
+  <rect x="40" y="78" width="48" height="3" rx="1" fill="#1a2030" opacity="0.5"/>
+  <!-- Top cap -->
+  <ellipse cx="64" cy="28" rx="24" ry="10" fill="url(#vsTop)"/>
+  <ellipse cx="64" cy="28" rx="24" ry="10" fill="none" stroke="#667788" stroke-width="1" opacity="0.5"/>
+  <ellipse cx="64" cy="27" rx="16" ry="6" fill="#4a6070" opacity="0.5"/>
+  <!-- Cable connector at top -->
+  <rect x="56" y="14" width="16" height="16" rx="4" fill="#2a3040"/>
+  <rect x="56" y="14" width="16" height="8" rx="4" fill="#334455" opacity="0.6"/>
+  <!-- Connector pins -->
+  <circle cx="61" cy="20" r="2" fill="#1a2030"/><circle cx="61" cy="20" r="1.2" fill="#88aacc" opacity="0.5"/>
+  <circle cx="67" cy="20" r="2" fill="#1a2030"/><circle cx="67" cy="20" r="1.2" fill="#88aacc" opacity="0.5"/>
+  <!-- Cable from top -->
+  <path d="M64 14 Q64 6 54 4" fill="none" stroke="#1a2030" stroke-width="4" stroke-linecap="round"/>
+  <path d="M64 14 Q64 6 54 4" fill="none" stroke="#334455" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Vibration wave lines (side indicators) -->
+  <path d="M28 55 Q24 60 28 65 Q32 70 28 75" fill="none" stroke="#88aacc" stroke-width="1.2" opacity="0.3" stroke-linecap="round"/>
+  <path d="M20 52 Q14 60 20 68 Q24 74 20 80" fill="none" stroke="#88aacc" stroke-width="1" opacity="0.2" stroke-linecap="round"/>
+  <path d="M100 55 Q104 60 100 65 Q96 70 100 75" fill="none" stroke="#88aacc" stroke-width="1.2" opacity="0.3" stroke-linecap="round"/>
+  <path d="M108 52 Q114 60 108 68 Q104 74 108 80" fill="none" stroke="#88aacc" stroke-width="1" opacity="0.2" stroke-linecap="round"/>
+  <!-- Status area on cylinder -->
+  <rect x="48" y="54" width="32" height="14" rx="3" fill="#1a2030" opacity="0.7"/>
+  <rect x="50" y="56" width="20" height="3" rx="1" fill="#88aacc" opacity="0.4"/>
+  <rect x="50" y="62" width="14" height="2" rx="1" fill="#88aacc" opacity="0.3"/>
+</svg>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="spPipe" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4a6070"/>
+      <stop offset="50%" stop-color="#88aacc" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#2a3845"/>
+    </linearGradient>
+  </defs>
+  <!-- Ceiling pipe -->
+  <rect x="58" y="4" width="12" height="24" rx="3" fill="url(#spPipe)"/>
+  <rect x="58" y="4" width="5" height="24" rx="2" fill="#88aacc" opacity="0.2"/>
+  <!-- Escutcheon ring (ceiling plate) -->
+  <ellipse cx="64" cy="28" rx="30" ry="8" fill="#2a3a45"/>
+  <ellipse cx="64" cy="28" rx="30" ry="8" fill="none" stroke="#667788" stroke-width="1"/>
+  <ellipse cx="64" cy="28" rx="22" ry="5.5" fill="#334455"/>
+  <ellipse cx="64" cy="28" rx="14" ry="3" fill="#3a4a55"/>
+  <!-- Frame arms (K-frame) -->
+  <rect x="62" y="28" width="4" height="18" rx="1" fill="#3a5060"/>
+  <!-- Horizontal frame arms -->
+  <rect x="36" y="44" width="56" height="5" rx="2" fill="#2a3845"/>
+  <rect x="36" y="44" width="56" height="2" rx="1" fill="#88aacc" opacity="0.2"/>
+  <rect x="36" y="44" width="56" height="5" rx="2" fill="none" stroke="#445566" stroke-width="0.8"/>
+  <!-- Frame diagonal arms -->
+  <line x1="64" y1="46" x2="42" y2="56" stroke="#3a5060" stroke-width="3" stroke-linecap="round"/>
+  <line x1="64" y1="46" x2="86" y2="56" stroke="#3a5060" stroke-width="3" stroke-linecap="round"/>
+  <!-- Glass bulb -->
+  <ellipse cx="64" cy="46" rx="7" ry="10" fill="#cc6610" opacity="0.7"/>
+  <ellipse cx="64" cy="46" rx="5" ry="8" fill="#ee8820" opacity="0.5"/>
+  <ellipse cx="64" cy="46" rx="3" ry="5" fill="#ffaa40" opacity="0.6"/>
+  <!-- Deflector plate -->
+  <ellipse cx="64" cy="62" rx="28" ry="6" fill="#2a3845"/>
+  <ellipse cx="64" cy="62" rx="28" ry="6" fill="none" stroke="#445566" stroke-width="0.8"/>
+  <ellipse cx="64" cy="62" rx="20" ry="4" fill="#334455"/>
+  <!-- Deflector serrations -->
+  <line x1="40" y1="62" x2="40" y2="68" stroke="#2a3845" stroke-width="2"/>
+  <line x1="46" y1="62" x2="46" y2="68" stroke="#2a3845" stroke-width="2"/>
+  <line x1="52" y1="62" x2="52" y2="68" stroke="#2a3845" stroke-width="2"/>
+  <line x1="58" y1="62" x2="58" y2="68" stroke="#2a3845" stroke-width="2"/>
+  <line x1="64" y1="62" x2="64" y2="68" stroke="#2a3845" stroke-width="2"/>
+  <line x1="70" y1="62" x2="70" y2="68" stroke="#2a3845" stroke-width="2"/>
+  <line x1="76" y1="62" x2="76" y2="68" stroke="#2a3845" stroke-width="2"/>
+  <line x1="82" y1="62" x2="82" y2="68" stroke="#2a3845" stroke-width="2"/>
+  <line x1="88" y1="62" x2="88" y2="68" stroke="#2a3845" stroke-width="2"/>
+  <!-- Spray lines (water pattern arcs) -->
+  <path d="M36 66 Q20 80 16 96" fill="none" stroke="#88aacc" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
+  <path d="M44 70 Q36 86 32 104" fill="none" stroke="#88aacc" stroke-width="1" opacity="0.35" stroke-linecap="round"/>
+  <path d="M54 72 Q50 88 48 108" fill="none" stroke="#88aacc" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
+  <path d="M64 72 Q64 88 64 108" fill="none" stroke="#88aacc" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
+  <path d="M74 72 Q78 88 80 108" fill="none" stroke="#88aacc" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
+  <path d="M84 70 Q92 86 96 104" fill="none" stroke="#88aacc" stroke-width="1" opacity="0.35" stroke-linecap="round"/>
+  <path d="M92 66 Q108 80 112 96" fill="none" stroke="#88aacc" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
+  <!-- Water droplets -->
+  <circle cx="18" cy="98" r="2" fill="#88aacc" opacity="0.4"/>
+  <circle cx="32" cy="108" r="2" fill="#88aacc" opacity="0.35"/>
+  <circle cx="64" cy="110" r="2" fill="#88aacc" opacity="0.35"/>
+  <circle cx="96" cy="108" r="2" fill="#88aacc" opacity="0.35"/>
+  <circle cx="110" cy="98" r="2" fill="#88aacc" opacity="0.4"/>
+</svg>

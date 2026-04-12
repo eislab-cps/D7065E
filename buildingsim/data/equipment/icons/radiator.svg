@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="radFin" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4a6070"/>
+      <stop offset="50%" stop-color="#3a4a55"/>
+      <stop offset="100%" stop-color="#2a3845"/>
+    </linearGradient>
+    <linearGradient id="radShine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#88aacc" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#88aacc" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="radPipe" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#445566"/>
+      <stop offset="100%" stop-color="#2a3040"/>
+    </linearGradient>
+  </defs>
+  <!-- Wall brackets -->
+  <rect x="18" y="24" width="10" height="8" rx="2" fill="#1e2830"/>
+  <circle cx="23" cy="28" r="2" fill="#2a3845"/><circle cx="23" cy="28" r="1" fill="#88aacc" opacity="0.5"/>
+  <rect x="96" y="24" width="10" height="8" rx="2" fill="#1e2830"/>
+  <circle cx="101" cy="28" r="2" fill="#2a3845"/><circle cx="101" cy="28" r="1" fill="#88aacc" opacity="0.5"/>
+  <rect x="18" y="92" width="10" height="8" rx="2" fill="#1e2830"/>
+  <circle cx="23" cy="96" r="2" fill="#2a3845"/><circle cx="23" cy="96" r="1" fill="#88aacc" opacity="0.5"/>
+  <rect x="96" y="92" width="10" height="8" rx="2" fill="#1e2830"/>
+  <circle cx="101" cy="96" r="2" fill="#2a3845"/><circle cx="101" cy="96" r="1" fill="#88aacc" opacity="0.5"/>
+  <!-- Top collector pipe -->
+  <rect x="20" y="30" width="84" height="10" rx="5" fill="url(#radPipe)"/>
+  <rect x="20" y="30" width="84" height="4" rx="2" fill="#88aacc" opacity="0.15"/>
+  <rect x="20" y="30" width="84" height="10" rx="5" fill="none" stroke="#667788" stroke-width="0.8" opacity="0.5"/>
+  <!-- Bottom collector pipe -->
+  <rect x="20" y="88" width="84" height="10" rx="5" fill="url(#radPipe)"/>
+  <rect x="20" y="88" width="84" height="4" rx="2" fill="#88aacc" opacity="0.1"/>
+  <rect x="20" y="88" width="84" height="10" rx="5" fill="none" stroke="#667788" stroke-width="0.8" opacity="0.5"/>
+  <!-- Radiator sections/fins (10 sections) -->
+  <rect x="22" y="38" width="8" height="52" rx="2" fill="url(#radFin)"/>
+  <rect x="22" y="38" width="4" height="52" rx="2" fill="url(#radShine)"/>
+  <rect x="32" y="38" width="8" height="52" rx="2" fill="url(#radFin)"/>
+  <rect x="32" y="38" width="4" height="52" rx="2" fill="url(#radShine)"/>
+  <rect x="42" y="38" width="8" height="52" rx="2" fill="url(#radFin)"/>
+  <rect x="42" y="38" width="4" height="52" rx="2" fill="url(#radShine)"/>
+  <rect x="52" y="38" width="8" height="52" rx="2" fill="url(#radFin)"/>
+  <rect x="52" y="38" width="4" height="52" rx="2" fill="url(#radShine)"/>
+  <rect x="62" y="38" width="8" height="52" rx="2" fill="url(#radFin)"/>
+  <rect x="62" y="38" width="4" height="52" rx="2" fill="url(#radShine)"/>
+  <rect x="72" y="38" width="8" height="52" rx="2" fill="url(#radFin)"/>
+  <rect x="72" y="38" width="4" height="52" rx="2" fill="url(#radShine)"/>
+  <rect x="82" y="38" width="8" height="52" rx="2" fill="url(#radFin)"/>
+  <rect x="82" y="38" width="4" height="52" rx="2" fill="url(#radShine)"/>
+  <rect x="92" y="38" width="8" height="52" rx="2" fill="url(#radFin)"/>
+  <rect x="92" y="38" width="4" height="52" rx="2" fill="url(#radShine)"/>
+  <!-- Section dividers (gaps) -->
+  <rect x="30" y="38" width="2" height="52" fill="#1a2030" opacity="0.6"/>
+  <rect x="40" y="38" width="2" height="52" fill="#1a2030" opacity="0.6"/>
+  <rect x="50" y="38" width="2" height="52" fill="#1a2030" opacity="0.6"/>
+  <rect x="60" y="38" width="2" height="52" fill="#1a2030" opacity="0.6"/>
+  <rect x="70" y="38" width="2" height="52" fill="#1a2030" opacity="0.6"/>
+  <rect x="80" y="38" width="2" height="52" fill="#1a2030" opacity="0.6"/>
+  <rect x="90" y="38" width="2" height="52" fill="#1a2030" opacity="0.6"/>
+  <!-- Thermostatic valve (left) -->
+  <rect x="10" y="32" width="12" height="8" rx="3" fill="#2a3845"/>
+  <circle cx="16" cy="36" r="4" fill="#1a2030" stroke="#334455" stroke-width="1"/>
+  <circle cx="16" cy="36" r="2.5" fill="#2a3845"/>
+  <!-- Heat waves -->
+  <path d="M30 22 Q33 18 30 14" fill="none" stroke="#cc6622" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
+  <path d="M50 22 Q53 18 50 14" fill="none" stroke="#cc6622" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
+  <path d="M70 22 Q73 18 70 14" fill="none" stroke="#cc6622" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
+  <path d="M90 22 Q93 18 90 14" fill="none" stroke="#cc6622" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
+  <!-- Inlet/outlet connections -->
+  <rect x="20" y="37" width="6" height="4" fill="#667788" opacity="0.6"/>
+  <rect x="98" y="37" width="6" height="4" fill="#667788" opacity="0.6"/>
+</svg>

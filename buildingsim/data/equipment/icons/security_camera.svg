@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="scBody" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3a4a55"/>
+      <stop offset="100%" stop-color="#1e2830"/>
+    </linearGradient>
+    <radialGradient id="scLens" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#334455"/>
+      <stop offset="60%" stop-color="#1a2030"/>
+      <stop offset="100%" stop-color="#0a1020"/>
+    </radialGradient>
+  </defs>
+  <!-- Wall mount plate -->
+  <rect x="44" y="6" width="40" height="20" rx="4" fill="#1e2830"/>
+  <rect x="44" y="6" width="40" height="8" rx="3" fill="#2a3040" opacity="0.7"/>
+  <circle cx="54" cy="14" r="4" fill="#1a2030"/><circle cx="54" cy="14" r="2.8" fill="#334455"/><circle cx="54" cy="14" r="1.2" fill="#88aacc" opacity="0.5"/>
+  <circle cx="74" cy="14" r="4" fill="#1a2030"/><circle cx="74" cy="14" r="2.8" fill="#334455"/><circle cx="74" cy="14" r="1.2" fill="#88aacc" opacity="0.5"/>
+  <!-- Arm bracket -->
+  <rect x="58" y="24" width="12" height="22" rx="3" fill="#2a3845"/>
+  <rect x="59" y="25" width="5" height="22" rx="2" fill="#88aacc" opacity="0.1"/>
+  <!-- PTZ dome joint -->
+  <ellipse cx="64" cy="46" rx="14" ry="8" fill="#334455"/>
+  <ellipse cx="64" cy="46" rx="14" ry="8" fill="none" stroke="#445566" stroke-width="0.8"/>
+  <!-- Camera main body -->
+  <rect x="18" y="46" width="66" height="36" rx="8" fill="url(#scBody)"/>
+  <rect x="18" y="46" width="66" height="36" rx="8" fill="none" stroke="#667788" stroke-width="1" opacity="0.5"/>
+  <!-- Body shine -->
+  <rect x="20" y="48" width="22" height="32" rx="5" fill="#88aacc" opacity="0.06"/>
+  <!-- Lens barrel -->
+  <circle cx="42" cy="64" r="20" fill="#1a2030" stroke="#334455" stroke-width="1.5"/>
+  <circle cx="42" cy="64" r="17" fill="#1a2030"/>
+  <circle cx="42" cy="64" r="14" fill="#1a1e28"/>
+  <!-- Lens focus ring -->
+  <circle cx="42" cy="64" r="14" fill="none" stroke="#2a3845" stroke-width="2"/>
+  <!-- Lens glass -->
+  <circle cx="42" cy="64" r="10" fill="url(#scLens)"/>
+  <circle cx="42" cy="64" r="10" fill="none" stroke="#2a3845" stroke-width="0.5"/>
+  <!-- Lens reflection -->
+  <circle cx="38" cy="60" r="3" fill="#88aacc" opacity="0.2"/>
+  <circle cx="37" cy="59" r="1.5" fill="#ffffff" opacity="0.15"/>
+  <!-- IR LED ring (around lens) -->
+  <circle cx="42" cy="44" r="3" fill="#1a2030"/><circle cx="42" cy="44" r="2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="54" cy="50" r="3" fill="#1a2030"/><circle cx="54" cy="50" r="2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="58" cy="64" r="3" fill="#1a2030"/><circle cx="58" cy="64" r="2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="54" cy="78" r="3" fill="#1a2030"/><circle cx="54" cy="78" r="2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="42" cy="84" r="3" fill="#1a2030"/><circle cx="42" cy="84" r="2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="30" cy="78" r="3" fill="#1a2030"/><circle cx="30" cy="78" r="2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="26" cy="64" r="3" fill="#1a2030"/><circle cx="26" cy="64" r="2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="30" cy="50" r="3" fill="#1a2030"/><circle cx="30" cy="50" r="2" fill="#ffffff" opacity="0.4"/>
+  <!-- Status LED on body -->
+  <circle cx="74" cy="54" r="4" fill="#1a2030"/>
+  <circle cx="74" cy="54" r="2.5" fill="#ffffff" opacity="0.8"/>
+  <!-- Cable entry -->
+  <rect x="82" y="60" width="10" height="8" rx="3" fill="#1a2030"/>
+  <path d="M92 64 Q106 64 110 56" fill="none" stroke="#1a2030" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M92 64 Q106 64 110 56" fill="none" stroke="#2a3845" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

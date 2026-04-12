@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="lfHousing" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a3a45"/>
+      <stop offset="100%" stop-color="#1a2530"/>
+    </linearGradient>
+    <linearGradient id="lfDiffuser" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6a8090" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#6a8090" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="lfGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Ceiling mount bracket -->
+  <rect x="44" y="6" width="40" height="10" rx="3" fill="#1a2030"/>
+  <rect x="44" y="6" width="40" height="5" rx="2" fill="#2a3040" opacity="0.7"/>
+  <!-- Mounting screws -->
+  <circle cx="52" cy="11" r="3" fill="#1a2030"/><circle cx="52" cy="11" r="2" fill="#334455"/><circle cx="52" cy="11" r="0.8" fill="#88aacc" opacity="0.5"/>
+  <circle cx="76" cy="11" r="3" fill="#1a2030"/><circle cx="76" cy="11" r="2" fill="#334455"/><circle cx="76" cy="11" r="0.8" fill="#88aacc" opacity="0.5"/>
+  <!-- Housing body -->
+  <rect x="16" y="14" width="96" height="40" rx="5" fill="url(#lfHousing)"/>
+  <rect x="16" y="14" width="96" height="40" rx="5" fill="none" stroke="#667788" stroke-width="1.2" opacity="0.5"/>
+  <!-- Housing top chrome -->
+  <rect x="16" y="14" width="96" height="5" rx="3" fill="#445566" opacity="0.5"/>
+  <!-- Mounting holes / knock-outs on housing -->
+  <circle cx="24" cy="20" r="3" fill="#1a2030"/>
+  <circle cx="104" cy="20" r="3" fill="#1a2030"/>
+  <!-- Diffuser lens panel -->
+  <rect x="20" y="34" width="88" height="18" rx="3" fill="url(#lfDiffuser)"/>
+  <rect x="20" y="34" width="88" height="18" rx="3" fill="none" stroke="#99aabb" stroke-width="0.8" opacity="0.6"/>
+  <!-- LED array dots visible through diffuser -->
+  <circle cx="32" cy="43" r="3" fill="#ffffff" opacity="0.8"/>
+  <circle cx="44" cy="43" r="3" fill="#ffffff" opacity="0.8"/>
+  <circle cx="56" cy="43" r="3" fill="#ffffff" opacity="0.9"/>
+  <circle cx="68" cy="43" r="3" fill="#ffffff" opacity="0.9"/>
+  <circle cx="80" cy="43" r="3" fill="#ffffff" opacity="0.8"/>
+  <circle cx="92" cy="43" r="3" fill="#ffffff" opacity="0.8"/>
+  <circle cx="36" cy="37" r="2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="50" cy="37" r="2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="64" cy="37" r="2" fill="#ffffff" opacity="0.7"/>
+  <circle cx="78" cy="37" r="2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="92" cy="37" r="2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="36" cy="50" r="2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="50" cy="50" r="2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="64" cy="50" r="2" fill="#ffffff" opacity="0.7"/>
+  <circle cx="78" cy="50" r="2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="92" cy="50" r="2" fill="#ffffff" opacity="0.6"/>
+  <!-- Glow effect below -->
+  <rect x="16" y="54" width="96" height="30" rx="5" fill="url(#lfGlow)"/>
+  <!-- Light beams (subtle) -->
+  <path d="M30 56 L16 80" stroke="#ffffff" stroke-width="1" opacity="0.08" stroke-linecap="round"/>
+  <path d="M64 56 L64 86" stroke="#ffffff" stroke-width="2" opacity="0.1" stroke-linecap="round"/>
+  <path d="M98 56 L112 80" stroke="#ffffff" stroke-width="1" opacity="0.08" stroke-linecap="round"/>
+  <path d="M48 56 L34 84" stroke="#ffffff" stroke-width="1" opacity="0.06"/>
+  <path d="M80 56 L94 84" stroke="#ffffff" stroke-width="1" opacity="0.06"/>
+  <!-- Status LED on housing -->
+  <circle cx="20" cy="24" r="3" fill="#1a2030"/>
+  <circle cx="20" cy="24" r="2" fill="#ffffff" opacity="0.7"/>
+  <!-- Trim detail -->
+  <rect x="16" y="52" width="96" height="3" rx="1" fill="#99aabb" opacity="0.2"/>
+</svg>

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="dpBox" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a3040"/>
+      <stop offset="100%" stop-color="#1a1e28"/>
+    </linearGradient>
+    <linearGradient id="dpDoor" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#334455"/>
+      <stop offset="100%" stop-color="#1e2a38"/>
+    </linearGradient>
+  </defs>
+  <!-- Panel box -->
+  <rect x="6" y="6" width="116" height="116" rx="6" fill="url(#dpBox)"/>
+  <rect x="6" y="6" width="116" height="116" rx="6" fill="none" stroke="#445566" stroke-width="1.5" opacity="0.6"/>
+  <!-- Door panel -->
+  <rect x="10" y="10" width="108" height="108" rx="4" fill="url(#dpDoor)"/>
+  <rect x="10" y="10" width="108" height="108" rx="4" fill="none" stroke="#334455" stroke-width="0.8" opacity="0.5"/>
+  <!-- Door hinge left -->
+  <rect x="10" y="10" width="4" height="108" rx="2" fill="#2a3845" opacity="0.5"/>
+  <!-- Top header - main breaker area -->
+  <rect x="14" y="14" width="100" height="18" rx="3" fill="#1a2030"/>
+  <rect x="14" y="14" width="100" height="18" rx="3" fill="none" stroke="#334455" stroke-width="0.7"/>
+  <!-- Main breaker switch (large) -->
+  <rect x="44" y="16" width="40" height="14" rx="3" fill="#2a3845"/>
+  <rect x="44" y="16" width="40" height="14" rx="3" fill="none" stroke="#445566" stroke-width="0.8"/>
+  <!-- Main breaker toggle -->
+  <rect x="58" y="18" width="12" height="10" rx="2" fill="#3a5060"/>
+  <rect x="58" y="18" width="12" height="5" rx="2" fill="#445566"/>
+  <rect x="62" y="19" width="4" height="3" rx="1" fill="#88aacc" opacity="0.5"/>
+  <!-- MAIN label -->
+  <rect x="16" y="20" width="24" height="4" rx="1" fill="#334455" opacity="0.5"/>
+  <!-- Bus bars (vertical lines center) -->
+  <line x1="62" y1="32" x2="62" y2="112" stroke="#cc8800" stroke-width="1.5" opacity="0.5"/>
+  <line x1="66" y1="32" x2="66" y2="112" stroke="#cc8800" stroke-width="1.5" opacity="0.5"/>
+  <!-- Breaker rows (left column) -->
+  <rect x="14" y="34" width="44" height="8" rx="2" fill="#1a2030"/>
+  <rect x="14" y="34" width="18" height="8" rx="2" fill="#2a3a45"/><rect x="16" y="36" width="14" height="4" rx="1" fill="#334455"/>
+  <rect x="34" y="36" width="8" height="4" rx="1" fill="#3a5060"/>
+  <rect x="14" y="44" width="44" height="8" rx="2" fill="#1a2030"/>
+  <rect x="14" y="44" width="18" height="8" rx="2" fill="#2a3a45"/><rect x="16" y="46" width="14" height="4" rx="1" fill="#334455"/>
+  <rect x="34" y="46" width="8" height="4" rx="1" fill="#3a5060"/>
+  <rect x="14" y="54" width="44" height="8" rx="2" fill="#1a2030"/>
+  <rect x="14" y="54" width="18" height="8" rx="2" fill="#2a3a45"/><rect x="16" y="56" width="14" height="4" rx="1" fill="#334455"/>
+  <rect x="34" y="56" width="8" height="4" rx="1" fill="#3a5060"/>
+  <rect x="14" y="64" width="44" height="8" rx="2" fill="#1a2030"/>
+  <rect x="14" y="64" width="18" height="8" rx="2" fill="#2a3a45"/><rect x="16" y="66" width="14" height="4" rx="1" fill="#334455"/>
+  <rect x="34" y="66" width="8" height="4" rx="1" fill="#3a5060"/>
+  <rect x="14" y="74" width="44" height="8" rx="2" fill="#1a2030"/>
+  <rect x="14" y="74" width="18" height="8" rx="2" fill="#2a3a45"/>
+  <rect x="34" y="76" width="8" height="4" rx="1" fill="#3a5060"/>
+  <rect x="14" y="84" width="44" height="8" rx="2" fill="#1a2030"/>
+  <rect x="14" y="84" width="18" height="8" rx="2" fill="#2a3a45"/>
+  <rect x="34" y="86" width="8" height="4" rx="1" fill="#3a5060"/>
+  <!-- Breaker rows (right column) -->
+  <rect x="70" y="34" width="44" height="8" rx="2" fill="#1a2030"/>
+  <rect x="70" y="34" width="18" height="8" rx="2" fill="#2a3a45"/><rect x="72" y="36" width="14" height="4" rx="1" fill="#334455"/>
+  <rect x="90" y="36" width="8" height="4" rx="1" fill="#3a5060"/>
+  <rect x="70" y="44" width="44" height="8" rx="2" fill="#1a2030"/>
+  <rect x="70" y="44" width="18" height="8" rx="2" fill="#2a3a45"/>
+  <rect x="90" y="46" width="8" height="4" rx="1" fill="#3a5060"/>
+  <rect x="70" y="54" width="44" height="8" rx="2" fill="#1a2030"/>
+  <rect x="70" y="54" width="18" height="8" rx="2" fill="#2a3a45"/>
+  <rect x="90" y="56" width="8" height="4" rx="1" fill="#3a5060"/>
+  <rect x="70" y="64" width="44" height="8" rx="2" fill="#1a2030"/>
+  <rect x="70" y="64" width="18" height="8" rx="2" fill="#2a3a45"/>
+  <rect x="90" y="66" width="8" height="4" rx="1" fill="#3a5060"/>
+  <rect x="70" y="74" width="44" height="8" rx="2" fill="#1a2030"/>
+  <rect x="70" y="74" width="18" height="8" rx="2" fill="#2a3a45"/>
+  <rect x="90" y="76" width="8" height="4" rx="1" fill="#3a5060"/>
+  <rect x="70" y="84" width="44" height="8" rx="2" fill="#1a2030"/>
+  <rect x="70" y="84" width="18" height="8" rx="2" fill="#2a3a45"/>
+  <rect x="90" y="86" width="8" height="4" rx="1" fill="#3a5060"/>
+  <!-- Ground bar area at bottom -->
+  <rect x="14" y="96" width="100" height="16" rx="3" fill="#1a2030"/>
+  <rect x="14" y="96" width="100" height="16" rx="3" fill="none" stroke="#334455" stroke-width="0.6"/>
+  <!-- Terminal screws on ground bar -->
+  <circle cx="24" cy="104" r="2.5" fill="#2a3845"/><circle cx="24" cy="104" r="1.5" fill="#667788"/>
+  <circle cx="34" cy="104" r="2.5" fill="#2a3845"/><circle cx="34" cy="104" r="1.5" fill="#667788"/>
+  <circle cx="44" cy="104" r="2.5" fill="#2a3845"/><circle cx="44" cy="104" r="1.5" fill="#667788"/>
+  <circle cx="54" cy="104" r="2.5" fill="#2a3845"/><circle cx="54" cy="104" r="1.5" fill="#667788"/>
+  <circle cx="64" cy="104" r="2.5" fill="#2a3845"/><circle cx="64" cy="104" r="1.5" fill="#667788"/>
+  <circle cx="74" cy="104" r="2.5" fill="#2a3845"/><circle cx="74" cy="104" r="1.5" fill="#667788"/>
+  <circle cx="84" cy="104" r="2.5" fill="#2a3845"/><circle cx="84" cy="104" r="1.5" fill="#667788"/>
+  <circle cx="94" cy="104" r="2.5" fill="#2a3845"/><circle cx="94" cy="104" r="1.5" fill="#667788"/>
+  <circle cx="104" cy="104" r="2.5" fill="#2a3845"/><circle cx="104" cy="104" r="1.5" fill="#667788"/>
+  <!-- Door handle -->
+  <rect x="107" y="58" width="6" height="12" rx="3" fill="#2a3845" stroke="#445566" stroke-width="0.8"/>
+</svg>

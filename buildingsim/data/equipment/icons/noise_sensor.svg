@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="nsPreamp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a4a55"/>
+      <stop offset="100%" stop-color="#1e2830"/>
+    </linearGradient>
+    <radialGradient id="nsCapsule" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#334455"/>
+      <stop offset="100%" stop-color="#1a2530"/>
+    </radialGradient>
+  </defs>
+  <!-- Preamp housing body -->
+  <rect x="30" y="68" width="68" height="52" rx="6" fill="url(#nsPreamp)"/>
+  <rect x="30" y="68" width="68" height="52" rx="6" fill="none" stroke="#445566" stroke-width="1.2" opacity="0.5"/>
+  <!-- Preamp top chrome line -->
+  <rect x="30" y="68" width="68" height="5" rx="3" fill="#445566" opacity="0.5"/>
+  <!-- Preamp body text/label -->
+  <rect x="36" y="78" width="56" height="20" rx="3" fill="#1a2030"/>
+  <rect x="36" y="78" width="56" height="20" rx="3" fill="none" stroke="#2a3845" stroke-width="0.7"/>
+  <!-- dB bar graph indicator -->
+  <rect x="38" y="80" width="6" height="16" rx="1" fill="#2a5020" opacity="0.9"/>
+  <rect x="46" y="82" width="6" height="14" rx="1" fill="#2a5020" opacity="0.9"/>
+  <rect x="54" y="84" width="6" height="12" rx="1" fill="#2a5020" opacity="0.9"/>
+  <rect x="62" y="86" width="6" height="10" rx="1" fill="#3a6020" opacity="0.8"/>
+  <rect x="70" y="88" width="6" height="8" rx="1" fill="#5a5020" opacity="0.7"/>
+  <rect x="78" y="90" width="6" height="6" rx="1" fill="#502020" opacity="0.5"/>
+  <!-- Connector at bottom -->
+  <rect x="50" y="94" width="28" height="16" rx="3" fill="#1a2030"/>
+  <circle cx="58" cy="102" r="3" fill="#2a3845"/><circle cx="58" cy="102" r="1.8" fill="#445566"/>
+  <circle cx="70" cy="102" r="3" fill="#2a3845"/><circle cx="70" cy="102" r="1.8" fill="#445566"/>
+  <!-- Mic capsule housing (upper cylinder) -->
+  <rect x="48" y="26" width="32" height="44" rx="10" fill="#2a3845"/>
+  <rect x="48" y="26" width="32" height="44" rx="10" fill="none" stroke="#445566" stroke-width="1"/>
+  <!-- Capsule shine -->
+  <rect x="50" y="28" width="10" height="40" rx="5" fill="#88aacc" opacity="0.1"/>
+  <!-- Protective grille mesh on capsule -->
+  <rect x="50" y="28" width="28" height="38" rx="8" fill="url(#nsCapsule)" opacity="0.6"/>
+  <!-- Grille lines -->
+  <line x1="50" y1="33" x2="78" y2="33" stroke="#1a2030" stroke-width="1" opacity="0.8"/>
+  <line x1="50" y1="38" x2="78" y2="38" stroke="#1a2030" stroke-width="1" opacity="0.8"/>
+  <line x1="50" y1="43" x2="78" y2="43" stroke="#1a2030" stroke-width="1" opacity="0.8"/>
+  <line x1="50" y1="48" x2="78" y2="48" stroke="#1a2030" stroke-width="1" opacity="0.8"/>
+  <line x1="50" y1="53" x2="78" y2="53" stroke="#1a2030" stroke-width="1" opacity="0.8"/>
+  <line x1="50" y1="58" x2="78" y2="58" stroke="#1a2030" stroke-width="1" opacity="0.8"/>
+  <line x1="56" y1="28" x2="56" y2="66" stroke="#1a2030" stroke-width="1" opacity="0.6"/>
+  <line x1="64" y1="28" x2="64" y2="66" stroke="#1a2030" stroke-width="1" opacity="0.6"/>
+  <line x1="72" y1="28" x2="72" y2="66" stroke="#1a2030" stroke-width="1" opacity="0.6"/>
+  <!-- Capsule top dome -->
+  <ellipse cx="64" cy="26" rx="16" ry="6" fill="#334455"/>
+  <ellipse cx="64" cy="26" rx="16" ry="6" fill="none" stroke="#445566" stroke-width="0.8"/>
+  <ellipse cx="64" cy="25" rx="10" ry="3" fill="#88aacc" opacity="0.15"/>
+  <!-- Status LED on preamp -->
+  <circle cx="38" cy="74" r="3.5" fill="#1a2030"/>
+  <circle cx="38" cy="74" r="2.5" fill="#ffffff" opacity="0.7"/>
+  <!-- Sound wave rings (above capsule) -->
+  <path d="M52 18 A12 8 0 0 1 76 18" fill="none" stroke="#88aacc" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
+  <path d="M46 12 A18 12 0 0 1 82 12" fill="none" stroke="#88aacc" stroke-width="1" opacity="0.2" stroke-linecap="round"/>
+  <path d="M40 6 A24 16 0 0 1 88 6" fill="none" stroke="#88aacc" stroke-width="0.8" opacity="0.15" stroke-linecap="round"/>
+</svg>

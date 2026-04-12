@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="aedCase" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2a3a45"/>
+      <stop offset="100%" stop-color="#1a2530"/>
+    </linearGradient>
+    <linearGradient id="aedGreen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a6030"/>
+      <stop offset="100%" stop-color="#1a4020"/>
+    </linearGradient>
+  </defs>
+  <!-- Case body -->
+  <rect x="10" y="14" width="108" height="100" rx="8" fill="url(#aedCase)"/>
+  <rect x="10" y="14" width="108" height="100" rx="8" fill="none" stroke="#3a5060" stroke-width="1.5" opacity="0.6"/>
+  <!-- Case shine -->
+  <rect x="12" y="16" width="30" height="96" rx="5" fill="#88aacc" opacity="0.05"/>
+  <!-- Green accent top stripe -->
+  <rect x="10" y="14" width="108" height="10" rx="5" fill="url(#aedGreen)"/>
+  <rect x="14" y="16" width="40" height="3" rx="1" fill="#ffffff" opacity="0.2"/>
+  <!-- Case latches (left side) -->
+  <rect x="12" y="44" width="8" height="12" rx="3" fill="#1a2830" stroke="#334455" stroke-width="0.8"/>
+  <rect x="13" y="46" width="6" height="8" rx="2" fill="#2a3845"/>
+  <rect x="12" y="72" width="8" height="12" rx="3" fill="#1a2830" stroke="#334455" stroke-width="0.8"/>
+  <rect x="13" y="74" width="6" height="8" rx="2" fill="#2a3845"/>
+  <!-- Handle (top center) -->
+  <rect x="46" y="16" width="36" height="8" rx="4" fill="#1a2030" stroke="#334455" stroke-width="1"/>
+  <rect x="50" y="18" width="28" height="4" rx="2" fill="#2a3845"/>
+  <!-- Heart + lightning symbol (main graphic) -->
+  <!-- Heart shape -->
+  <path d="M64 90 Q44 76 44 62 A12 12 0 0 1 64 56 A12 12 0 0 1 84 62 Q84 76 64 90Z" fill="#cc2020" opacity="0.8"/>
+  <path d="M64 88 Q46 75 46 62 A10 10 0 0 1 64 58 A10 10 0 0 1 82 62 Q82 75 64 88Z" fill="#ee3030" opacity="0.6"/>
+  <!-- Lightning bolt on heart -->
+  <path d="M68 60 L60 72 L65 72 L60 84 L72 68 L66 68Z" fill="#ffffff" opacity="0.9"/>
+  <!-- Status LED -->
+  <circle cx="104" cy="30" r="5" fill="#1a2030"/>
+  <circle cx="104" cy="30" r="3.5" fill="#ffffff" opacity="0.8"/>
+  <circle cx="104" cy="30" r="2" fill="#ffffff"/>
+  <!-- AED text area -->
+  <rect x="22" y="30" width="60" height="18" rx="3" fill="#0a1820"/>
+  <rect x="22" y="30" width="60" height="18" rx="3" fill="none" stroke="#334455" stroke-width="0.7"/>
+  <rect x="24" y="32" width="20" height="3" rx="1" fill="#88aacc" opacity="0.5"/>
+  <rect x="24" y="38" width="30" height="2" rx="1" fill="#88aacc" opacity="0.3"/>
+  <rect x="24" y="43" width="15" height="2" rx="1" fill="#ffffff" opacity="0.3"/>
+  <!-- Corner screws -->
+  <circle cx="18" cy="22" r="3" fill="#1a2030"/><circle cx="18" cy="22" r="2" fill="#334455"/><line x1="16" y1="22" x2="20" y2="22" stroke="#1a2030" stroke-width="0.8"/><line x1="18" y1="20" x2="18" y2="24" stroke="#1a2030" stroke-width="0.8"/>
+  <circle cx="110" cy="22" r="3" fill="#1a2030"/><circle cx="110" cy="22" r="2" fill="#334455"/>
+  <circle cx="18" cy="106" r="3" fill="#1a2030"/><circle cx="18" cy="106" r="2" fill="#334455"/>
+  <circle cx="110" cy="106" r="3" fill="#1a2030"/><circle cx="110" cy="106" r="2" fill="#334455"/>
+  <!-- Bottom cable entry -->
+  <rect x="50" y="110" width="28" height="6" rx="2" fill="#1a2030"/>
+</svg>

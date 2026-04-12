@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="co2Body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a3a45"/>
+      <stop offset="100%" stop-color="#1a2530"/>
+    </linearGradient>
+    <linearGradient id="co2Display" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1820"/>
+      <stop offset="100%" stop-color="#060f14"/>
+    </linearGradient>
+  </defs>
+  <!-- DIN rail clip (bottom) -->
+  <rect x="30" y="108" width="68" height="10" rx="2" fill="#1a2030"/>
+  <rect x="30" y="108" width="14" height="10" rx="2" fill="#2a3040"/>
+  <rect x="84" y="108" width="14" height="10" rx="2" fill="#2a3040"/>
+  <rect x="36" y="114" width="56" height="4" rx="1" fill="#1a1820" opacity="0.8"/>
+  <!-- Module body -->
+  <rect x="20" y="10" width="88" height="100" rx="6" fill="url(#co2Body)"/>
+  <rect x="20" y="10" width="88" height="100" rx="6" fill="none" stroke="#445566" stroke-width="1.2" opacity="0.5"/>
+  <!-- Top bar -->
+  <rect x="20" y="10" width="88" height="8" rx="4" fill="#334455" opacity="0.6"/>
+  <!-- CO2 label display -->
+  <rect x="26" y="22" width="76" height="30" rx="4" fill="url(#co2Display)"/>
+  <rect x="26" y="22" width="76" height="30" rx="4" fill="none" stroke="#334455" stroke-width="0.8"/>
+  <!-- CO2 text (large) -->
+  <text x="34" y="44" font-size="20" font-weight="bold" fill="#88aacc" opacity="0.9" font-family="monospace">CO2</text>
+  <text x="82" y="44" font-size="8" fill="#667788" font-family="monospace">ppm</text>
+  <!-- Concentration readout -->
+  <rect x="26" y="56" width="76" height="16" rx="3" fill="#0a1020"/>
+  <rect x="26" y="56" width="76" height="16" rx="3" fill="none" stroke="#2a3845" stroke-width="0.7"/>
+  <text x="30" y="68" font-size="11" fill="#ffffff" opacity="0.8" font-family="monospace">421 ppm</text>
+  <!-- Vent slots -->
+  <rect x="26" y="76" width="76" height="18" rx="3" fill="#1a2030"/>
+  <rect x="26" y="76" width="76" height="18" rx="3" fill="none" stroke="#2a3845" stroke-width="0.7"/>
+  <line x1="28" y1="80" x2="100" y2="80" stroke="#2a3845" stroke-width="1.2" opacity="0.8"/>
+  <line x1="28" y1="85" x2="100" y2="85" stroke="#2a3845" stroke-width="1.2" opacity="0.8"/>
+  <line x1="28" y1="90" x2="100" y2="90" stroke="#2a3845" stroke-width="1.2" opacity="0.8"/>
+  <!-- LED indicator -->
+  <circle cx="36" cy="100" r="4" fill="#1a2030"/>
+  <circle cx="36" cy="100" r="2.5" fill="#ffffff" opacity="0.8"/>
+  <!-- Status LED 2 -->
+  <circle cx="50" cy="100" r="4" fill="#1a2030"/>
+  <circle cx="50" cy="100" r="2.5" fill="#ffffff" opacity="0.4"/>
+  <!-- Mounting screw holes -->
+  <circle cx="28" cy="18" r="2.5" fill="#1a2030"/><circle cx="28" cy="18" r="1.5" fill="#334455"/>
+  <circle cx="100" cy="18" r="2.5" fill="#1a2030"/><circle cx="100" cy="18" r="1.5" fill="#334455"/>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="elBox" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a4a55"/>
+      <stop offset="100%" stop-color="#1e2a34"/>
+    </linearGradient>
+    <linearGradient id="elLens" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6a8090" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#6a8090" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+  <!-- Main housing box -->
+  <rect x="16" y="42" width="96" height="44" rx="6" fill="url(#elBox)"/>
+  <rect x="16" y="42" width="96" height="44" rx="6" fill="none" stroke="#667788" stroke-width="1.2" opacity="0.5"/>
+  <!-- Top edge chrome -->
+  <rect x="16" y="42" width="96" height="5" rx="3" fill="#445566" opacity="0.6"/>
+  <!-- Panel line across middle -->
+  <line x1="16" y1="64" x2="112" y2="64" stroke="#334455" stroke-width="0.8" opacity="0.5"/>
+  <!-- Left lamp head -->
+  <rect x="6" y="48" width="28" height="18" rx="5" fill="#2a3a45"/>
+  <rect x="6" y="48" width="28" height="18" rx="5" fill="none" stroke="#99aabb" stroke-width="0.8" opacity="0.5"/>
+  <!-- Left lens -->
+  <rect x="8" y="50" width="24" height="14" rx="3" fill="url(#elLens)"/>
+  <!-- LED array in left lens -->
+  <circle cx="13" cy="57" r="2" fill="#ffffff" opacity="0.9"/>
+  <circle cx="20" cy="57" r="2" fill="#ffffff" opacity="0.9"/>
+  <circle cx="27" cy="57" r="2" fill="#ffffff" opacity="0.9"/>
+  <!-- Left lamp beam (subtle) -->
+  <path d="M6 52 L2 46 M6 57 L2 57 M6 62 L2 68" stroke="#ffffff" stroke-width="1" opacity="0.15" stroke-linecap="round"/>
+  <!-- Right lamp head -->
+  <rect x="94" y="48" width="28" height="18" rx="5" fill="#2a3a45"/>
+  <rect x="94" y="48" width="28" height="18" rx="5" fill="none" stroke="#99aabb" stroke-width="0.8" opacity="0.5"/>
+  <!-- Right lens -->
+  <rect x="96" y="50" width="24" height="14" rx="3" fill="url(#elLens)"/>
+  <!-- LED array in right lens -->
+  <circle cx="101" cy="57" r="2" fill="#ffffff" opacity="0.9"/>
+  <circle cx="108" cy="57" r="2" fill="#ffffff" opacity="0.9"/>
+  <circle cx="115" cy="57" r="2" fill="#ffffff" opacity="0.9"/>
+  <!-- Right lamp beam (subtle) -->
+  <path d="M122 52 L126 46 M122 57 L126 57 M122 62 L126 68" stroke="#ffffff" stroke-width="1" opacity="0.15" stroke-linecap="round"/>
+  <!-- Battery status indicators -->
+  <rect x="44" y="50" width="40" height="12" rx="3" fill="#1a2030"/>
+  <rect x="44" y="50" width="40" height="12" rx="3" fill="none" stroke="#334455" stroke-width="0.7"/>
+  <!-- Battery bar segments -->
+  <rect x="46" y="52" width="6" height="8" rx="1" fill="#2a5a20" opacity="0.9"/>
+  <rect x="54" y="52" width="6" height="8" rx="1" fill="#2a5a20" opacity="0.9"/>
+  <rect x="62" y="52" width="6" height="8" rx="1" fill="#2a5a20" opacity="0.9"/>
+  <rect x="70" y="52" width="6" height="8" rx="1" fill="#2a5a20" opacity="0.7"/>
+  <rect x="78" y="52" width="4" height="8" rx="1" fill="#2a3a20" opacity="0.4"/>
+  <!-- Status LED -->
+  <circle cx="64" cy="72" r="4" fill="#1a2030"/>
+  <circle cx="64" cy="72" r="2.5" fill="#ffffff" opacity="0.8"/>
+  <!-- Cable entry point -->
+  <rect x="58" y="82" width="12" height="6" rx="2" fill="#1a2030"/>
+  <rect x="60" y="84" width="8" height="3" rx="1" fill="#334455" opacity="0.7"/>
+  <!-- Mounting screws -->
+  <circle cx="24" cy="44" r="2.5" fill="#1a2030"/><circle cx="24" cy="44" r="1.5" fill="#334455"/>
+  <circle cx="104" cy="44" r="2.5" fill="#1a2030"/><circle cx="104" cy="44" r="1.5" fill="#334455"/>
+  <!-- Wall mount bracket bottom -->
+  <rect x="36" y="84" width="56" height="6" rx="2" fill="#1a2030"/>
+  <circle cx="50" cy="87" r="2" fill="#2a3845"/><circle cx="78" cy="87" r="2" fill="#2a3845"/>
+</svg>

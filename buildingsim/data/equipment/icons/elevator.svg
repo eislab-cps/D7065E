@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="elvShaft" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e2a34"/>
+      <stop offset="100%" stop-color="#141820"/>
+    </linearGradient>
+    <linearGradient id="elvDoor" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3a4a55"/>
+      <stop offset="100%" stop-color="#2a3a45"/>
+    </linearGradient>
+    <linearGradient id="elvDoorR" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2a3a45"/>
+      <stop offset="100%" stop-color="#3a4a55"/>
+    </linearGradient>
+  </defs>
+  <!-- Elevator shaft frame -->
+  <rect x="8" y="8" width="112" height="120" rx="4" fill="url(#elvShaft)"/>
+  <rect x="8" y="8" width="112" height="120" rx="4" fill="none" stroke="#334455" stroke-width="1.5" opacity="0.5"/>
+  <!-- Shaft side rails -->
+  <rect x="8" y="8" width="8" height="120" rx="2" fill="#1a2030"/>
+  <rect x="112" y="8" width="8" height="120" rx="2" fill="#1a2030"/>
+  <!-- Floor indicator display (above doors) -->
+  <rect x="16" y="10" width="96" height="22" rx="3" fill="#0a1020"/>
+  <rect x="16" y="10" width="96" height="22" rx="3" fill="none" stroke="#334455" stroke-width="0.7"/>
+  <!-- Floor number display -->
+  <text x="50" y="26" font-size="14" font-weight="bold" fill="#88aacc" opacity="0.9" font-family="monospace">03</text>
+  <!-- Triangle up/down indicators -->
+  <polygon points="84,14 90,14 87,11" fill="#88aacc" opacity="0.7"/>
+  <polygon points="84,25 90,25 87,28" fill="#88aacc" opacity="0.3"/>
+  <!-- Door frame -->
+  <rect x="16" y="34" width="96" height="92" rx="2" fill="#1a2030"/>
+  <rect x="16" y="34" width="96" height="92" rx="2" fill="none" stroke="#334455" stroke-width="0.8"/>
+  <!-- Left door panel -->
+  <rect x="18" y="36" width="46" height="88" rx="2" fill="url(#elvDoor)"/>
+  <rect x="18" y="36" width="46" height="88" rx="2" fill="none" stroke="#445566" stroke-width="0.7" opacity="0.5"/>
+  <!-- Left door shine -->
+  <rect x="20" y="38" width="14" height="84" rx="2" fill="#88aacc" opacity="0.07"/>
+  <!-- Left door panel line details -->
+  <line x1="30" y1="36" x2="30" y2="124" stroke="#334455" stroke-width="0.6" opacity="0.6"/>
+  <line x1="40" y1="36" x2="40" y2="124" stroke="#334455" stroke-width="0.6" opacity="0.5"/>
+  <line x1="55" y1="36" x2="55" y2="124" stroke="#334455" stroke-width="0.6" opacity="0.4"/>
+  <!-- Left door safety sensor LED -->
+  <circle cx="62" cy="80" r="3" fill="#1a2030"/>
+  <circle cx="62" cy="80" r="2" fill="#ffffff" opacity="0.6"/>
+  <!-- Right door panel -->
+  <rect x="64" y="36" width="46" height="88" rx="2" fill="url(#elvDoorR)"/>
+  <rect x="64" y="36" width="46" height="88" rx="2" fill="none" stroke="#445566" stroke-width="0.7" opacity="0.5"/>
+  <!-- Right door shine -->
+  <rect x="96" y="38" width="12" height="84" rx="2" fill="#88aacc" opacity="0.07"/>
+  <!-- Right door panel lines -->
+  <line x1="75" y1="36" x2="75" y2="124" stroke="#334455" stroke-width="0.6" opacity="0.4"/>
+  <line x1="86" y1="36" x2="86" y2="124" stroke="#334455" stroke-width="0.6" opacity="0.5"/>
+  <line x1="98" y1="36" x2="98" y2="124" stroke="#334455" stroke-width="0.6" opacity="0.6"/>
+  <!-- Door gap (center) -->
+  <line x1="64" y1="36" x2="64" y2="124" stroke="#0a1020" stroke-width="2"/>
+  <!-- Right door sensor LED -->
+  <circle cx="66" cy="80" r="3" fill="#1a2030"/>
+  <circle cx="66" cy="80" r="2" fill="#ffffff" opacity="0.6"/>
+  <!-- Call button panel (right side) -->
+  <rect x="108" y="60" width="12" height="46" rx="3" fill="#1a2030"/>
+  <rect x="108" y="60" width="12" height="46" rx="3" fill="none" stroke="#334455" stroke-width="0.7"/>
+  <!-- Up button -->
+  <circle cx="114" cy="72" r="5" fill="#2a3845" stroke="#445566" stroke-width="0.8"/>
+  <polygon points="114,68 118,74 110,74" fill="#88aacc" opacity="0.6"/>
+  <!-- Down button -->
+  <circle cx="114" cy="88" r="5" fill="#2a3845" stroke="#445566" stroke-width="0.8"/>
+  <polygon points="110,85 118,85 114,91" fill="#88aacc" opacity="0.3"/>
+  <!-- Door track grooves -->
+  <line x1="16" y1="36" x2="112" y2="36" stroke="#88aacc" stroke-width="0.5" opacity="0.3"/>
+  <line x1="16" y1="124" x2="112" y2="124" stroke="#88aacc" stroke-width="0.5" opacity="0.3"/>
+</svg>

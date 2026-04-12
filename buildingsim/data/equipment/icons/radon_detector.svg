@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="rdBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a3040"/>
+      <stop offset="100%" stop-color="#1a1e28"/>
+    </linearGradient>
+    <linearGradient id="rdScreen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1820"/>
+      <stop offset="100%" stop-color="#060f14"/>
+    </linearGradient>
+  </defs>
+  <!-- Desktop monitor body -->
+  <rect x="12" y="14" width="104" height="80" rx="8" fill="url(#rdBody)"/>
+  <rect x="12" y="14" width="104" height="80" rx="8" fill="none" stroke="#334455" stroke-width="1.2" opacity="0.5"/>
+  <!-- Top bar chrome -->
+  <rect x="12" y="14" width="104" height="8" rx="5" fill="#2a3845" opacity="0.7"/>
+  <!-- Main display area -->
+  <rect x="18" y="26" width="92" height="52" rx="4" fill="url(#rdScreen)"/>
+  <rect x="18" y="26" width="92" height="52" rx="4" fill="none" stroke="#1a2840" stroke-width="0.8"/>
+  <!-- "Rn" large label -->
+  <text x="22" y="56" font-size="28" font-weight="bold" fill="#88aacc" opacity="0.9" font-family="monospace">Rn</text>
+  <!-- Radon value -->
+  <text x="68" y="50" font-size="14" fill="#ffffff" opacity="0.8" font-family="monospace">24</text>
+  <text x="68" y="62" font-size="7" fill="#667788" font-family="monospace">Bq/m³</text>
+  <!-- Radiation trefoil symbol (small, right) -->
+  <!-- Trefoil background circle -->
+  <circle cx="94" cy="38" r="12" fill="#2a1818" stroke="#554422" stroke-width="0.8"/>
+  <!-- Three blades of trefoil -->
+  <path d="M94 38 L88 28 A6 6 0 0 1 100 28Z" fill="#cc8800" opacity="0.7"/>
+  <path d="M94 38 L83 44 A6 6 0 0 1 88 32Z" fill="#cc8800" opacity="0.7" transform="rotate(120 94 38)"/>
+  <path d="M94 38 L83 44 A6 6 0 0 1 88 32Z" fill="#cc8800" opacity="0.7" transform="rotate(240 94 38)"/>
+  <circle cx="94" cy="38" r="3" fill="#2a1818"/>
+  <!-- Status bars at bottom of display -->
+  <rect x="22" y="68" width="70" height="6" rx="2" fill="#1a2030"/>
+  <rect x="22" y="68" width="40" height="6" rx="2" fill="#2a5030" opacity="0.8"/>
+  <rect x="22" y="68" width="70" height="6" rx="2" fill="none" stroke="#334455" stroke-width="0.5"/>
+  <!-- LED indicators on housing -->
+  <circle cx="24" cy="22" r="3" fill="#1a2030"/>
+  <circle cx="24" cy="22" r="2" fill="#ffffff" opacity="0.7"/>
+  <circle cx="32" cy="22" r="3" fill="#1a2030"/>
+  <circle cx="32" cy="22" r="2" fill="#ffffff" opacity="0.4"/>
+  <!-- Fan intake holes (right side) -->
+  <rect x="100" y="28" width="10" height="48" rx="3" fill="#1a2030"/>
+  <line x1="102" y1="32" x2="108" y2="32" stroke="#2a3040" stroke-width="1.2"/>
+  <line x1="102" y1="37" x2="108" y2="37" stroke="#2a3040" stroke-width="1.2"/>
+  <line x1="102" y1="42" x2="108" y2="42" stroke="#2a3040" stroke-width="1.2"/>
+  <line x1="102" y1="47" x2="108" y2="47" stroke="#2a3040" stroke-width="1.2"/>
+  <line x1="102" y1="52" x2="108" y2="52" stroke="#2a3040" stroke-width="1.2"/>
+  <line x1="102" y1="57" x2="108" y2="57" stroke="#2a3040" stroke-width="1.2"/>
+  <line x1="102" y1="62" x2="108" y2="62" stroke="#2a3040" stroke-width="1.2"/>
+  <line x1="102" y1="67" x2="108" y2="67" stroke="#2a3040" stroke-width="1.2"/>
+  <line x1="102" y1="72" x2="108" y2="72" stroke="#2a3040" stroke-width="1.2"/>
+  <!-- Base / stand -->
+  <rect x="44" y="92" width="40" height="10" rx="3" fill="#1a2030"/>
+  <rect x="36" y="100" width="56" height="8" rx="3" fill="#1e2530"/>
+  <rect x="36" y="100" width="56" height="3" rx="2" fill="#2a3040" opacity="0.6"/>
+  <!-- Buttons at bottom of housing -->
+  <rect x="20" y="84" width="10" height="6" rx="2" fill="#2a3845"/>
+  <rect x="32" y="84" width="10" height="6" rx="2" fill="#2a3845"/>
+  <rect x="44" y="84" width="10" height="6" rx="2" fill="#2a3845"/>
+</svg>

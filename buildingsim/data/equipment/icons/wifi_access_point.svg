@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <radialGradient id="wapDome" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#445566"/>
+      <stop offset="100%" stop-color="#1a2530"/>
+    </radialGradient>
+    <radialGradient id="wapLED" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#88aacc" stop-opacity="0.3"/>
+    </radialGradient>
+  </defs>
+  <!-- Ceiling mount plate -->
+  <ellipse cx="64" cy="28" rx="50" ry="12" fill="#1e2830"/>
+  <ellipse cx="64" cy="28" rx="50" ry="12" fill="none" stroke="#334455" stroke-width="1"/>
+  <!-- Mount screw pattern -->
+  <circle cx="38" cy="28" r="4" fill="#1a2030"/><circle cx="38" cy="28" r="2.5" fill="#334455"/>
+  <circle cx="90" cy="28" r="4" fill="#1a2030"/><circle cx="90" cy="28" r="2.5" fill="#334455"/>
+  <circle cx="64" cy="20" r="4" fill="#1a2030"/><circle cx="64" cy="20" r="2.5" fill="#334455"/>
+  <!-- AP body (disc/puck shape) -->
+  <ellipse cx="64" cy="72" rx="52" ry="38" fill="url(#wapDome)"/>
+  <ellipse cx="64" cy="72" rx="52" ry="38" fill="none" stroke="#667788" stroke-width="1.5" opacity="0.5"/>
+  <!-- Connecting stem -->
+  <rect x="58" y="26" width="12" height="18" rx="3" fill="#2a3845"/>
+  <!-- Body highlight (top sheen) -->
+  <ellipse cx="52" cy="58" rx="28" ry="14" fill="#88aacc" opacity="0.08"/>
+  <!-- Radome concentric rings (design detail) -->
+  <ellipse cx="64" cy="72" rx="42" ry="30" fill="none" stroke="#334455" stroke-width="0.8" opacity="0.6"/>
+  <ellipse cx="64" cy="72" rx="32" ry="22" fill="none" stroke="#334455" stroke-width="0.8" opacity="0.5"/>
+  <ellipse cx="64" cy="72" rx="22" ry="15" fill="none" stroke="#334455" stroke-width="0.8" opacity="0.4"/>
+  <!-- LED ring (center) -->
+  <ellipse cx="64" cy="72" rx="12" ry="8" fill="#1a2030"/>
+  <circle cx="54" cy="72" r="3" fill="url(#wapLED)"/>
+  <circle cx="60" cy="70" r="3" fill="url(#wapLED)" opacity="0.8"/>
+  <circle cx="67" cy="70" r="3" fill="url(#wapLED)" opacity="0.7"/>
+  <circle cx="73" cy="72" r="3" fill="url(#wapLED)" opacity="0.6"/>
+  <circle cx="68" cy="75" r="3" fill="url(#wapLED)" opacity="0.5"/>
+  <circle cx="61" cy="75" r="3" fill="url(#wapLED)" opacity="0.6"/>
+  <!-- Signal arc waves (above, subtle) -->
+  <path d="M46 40 Q64 28 82 40" fill="none" stroke="#88aacc" stroke-width="1.5" opacity="0.35" stroke-linecap="round"/>
+  <path d="M36 34 Q64 18 92 34" fill="none" stroke="#88aacc" stroke-width="1.2" opacity="0.25" stroke-linecap="round"/>
+  <path d="M26 28 Q64 8 102 28" fill="none" stroke="#88aacc" stroke-width="1" opacity="0.15" stroke-linecap="round"/>
+  <!-- Vent slots on AP side -->
+  <line x1="14" y1="68" x2="20" y2="68" stroke="#1a2030" stroke-width="2" opacity="0.8"/>
+  <line x1="14" y1="73" x2="20" y2="73" stroke="#1a2030" stroke-width="2" opacity="0.8"/>
+  <line x1="108" y1="68" x2="114" y2="68" stroke="#1a2030" stroke-width="2" opacity="0.8"/>
+  <line x1="108" y1="73" x2="114" y2="73" stroke="#1a2030" stroke-width="2" opacity="0.8"/>
+</svg>

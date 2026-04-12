@@ -1,0 +1,322 @@
+[
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "A1105",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "A2001",
+    "to_id": 0,
+    "connector": "TRAPPA A",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level1",
+    "from_name": "A2001",
+    "from_id": 0,
+    "to_level": "abuilding/level2",
+    "to_name": "A3003",
+    "to_id": 0,
+    "connector": "TRAPPA A",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "A1015",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "A2012",
+    "to_id": 0,
+    "connector": "TRAPPA B",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level1",
+    "from_name": "A2012",
+    "from_id": 0,
+    "to_level": "abuilding/level2",
+    "to_name": "A3006B",
+    "to_id": 0,
+    "connector": "TRAPPA B",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "A1000C",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "A2024",
+    "to_id": 0,
+    "connector": "TRAPPA C",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level1",
+    "from_name": "A2024",
+    "from_id": 0,
+    "to_level": "abuilding/level2",
+    "to_name": "A3015",
+    "to_id": 0,
+    "connector": "TRAPPA C",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level1",
+    "from_name": "A2036",
+    "from_id": 0,
+    "to_level": "abuilding/level2",
+    "to_name": "A302",
+    "to_id": 0,
+    "connector": "TRAPPA D",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "A1405",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "A2416",
+    "to_id": 0,
+    "connector": "TRAPPA E",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level1",
+    "from_name": "A2416",
+    "from_id": 0,
+    "to_level": "abuilding/level2",
+    "to_name": "A3416",
+    "to_id": 0,
+    "connector": "TRAPPA E",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "A1306",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "A2318",
+    "to_id": 0,
+    "connector": "TRAPPA F",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level1",
+    "from_name": "A2318",
+    "from_id": 0,
+    "to_level": "abuilding/level2",
+    "to_name": "A3318",
+    "to_id": 0,
+    "connector": "TRAPPA F",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "A1206",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "A2220",
+    "to_id": 0,
+    "connector": "TRAPPA G",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level1",
+    "from_name": "A2220",
+    "from_id": 0,
+    "to_level": "abuilding/level2",
+    "to_name": "A3220",
+    "to_id": 0,
+    "connector": "TRAPPA G",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "A1118",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "A2118",
+    "to_id": 0,
+    "connector": "TRAPPA H",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level1",
+    "from_name": "A2118",
+    "from_id": 0,
+    "to_level": "abuilding/level2",
+    "to_name": "A3118",
+    "to_id": 0,
+    "connector": "TRAPPA H",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "A1125",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "A2114",
+    "to_id": 0,
+    "connector": "TRAPPA I",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "A119",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "A219",
+    "to_id": 0,
+    "connector": "A119/A219",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "A183",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "A283",
+    "to_id": 0,
+    "connector": "A183/A283",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "A303",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "A403",
+    "to_id": 0,
+    "connector": "A303/A403/A503",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level1",
+    "from_name": "A403",
+    "from_id": 0,
+    "to_level": "abuilding/level2",
+    "to_name": "A503",
+    "to_id": 0,
+    "connector": "A303/A403/A503",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "1575",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "2604",
+    "to_id": 0,
+    "connector": "1575/2604",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "1568",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "2580",
+    "to_id": 0,
+    "connector": "1568/2580/3454",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level1",
+    "from_name": "2580",
+    "from_id": 0,
+    "to_level": "abuilding/level2",
+    "to_name": "3454",
+    "to_id": 0,
+    "connector": "1568/2580/3454",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "1541",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "2541",
+    "to_id": 0,
+    "connector": "1541/2541/3421",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level1",
+    "from_name": "2541",
+    "from_id": 0,
+    "to_level": "abuilding/level2",
+    "to_name": "3421",
+    "to_id": 0,
+    "connector": "1541/2541/3421",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "A104",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "A204a",
+    "to_id": 0,
+    "connector": "A104/A204",
+    "type": "stair"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "A1017",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "A2024",
+    "to_id": 0,
+    "connector": "HISS 12",
+    "type": "elevator"
+  },
+  {
+    "from_level": "abuilding/level1",
+    "from_name": "A2024",
+    "from_id": 0,
+    "to_level": "abuilding/level2",
+    "to_name": "A3016D",
+    "to_id": 0,
+    "connector": "HISS 12",
+    "type": "elevator"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "A1104",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "A2001D",
+    "to_id": 0,
+    "connector": "HISS 13",
+    "type": "elevator"
+  },
+  {
+    "from_level": "abuilding/level1",
+    "from_name": "A2001D",
+    "from_id": 0,
+    "to_level": "abuilding/level2",
+    "to_name": "A3102",
+    "to_id": 0,
+    "connector": "HISS 13",
+    "type": "elevator"
+  },
+  {
+    "from_level": "abuilding/level0",
+    "from_name": "A1500C",
+    "from_id": 0,
+    "to_level": "abuilding/level1",
+    "to_name": "A2521",
+    "to_id": 0,
+    "connector": "HISS 14",
+    "type": "elevator"
+  },
+  {
+    "from_level": "abuilding/level1",
+    "from_name": "A2521",
+    "from_id": 0,
+    "to_level": "abuilding/level2",
+    "to_name": "A3560",
+    "to_id": 0,
+    "connector": "HISS 14",
+    "type": "elevator"
+  }
+]

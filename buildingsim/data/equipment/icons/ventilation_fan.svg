@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="vfFlange" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#445566"/>
+      <stop offset="100%" stop-color="#1e2a34"/>
+    </linearGradient>
+    <radialGradient id="vfCenter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#445566"/>
+      <stop offset="100%" stop-color="#1a2530"/>
+    </radialGradient>
+  </defs>
+  <!-- Mounting flange (square) -->
+  <rect x="8" y="8" width="112" height="112" rx="12" fill="url(#vfFlange)"/>
+  <rect x="8" y="8" width="112" height="112" rx="12" fill="none" stroke="#667788" stroke-width="1.5" opacity="0.5"/>
+  <!-- Mounting bolt holes -->
+  <circle cx="22" cy="22" r="5" fill="#1a2030"/><circle cx="22" cy="22" r="3.5" fill="#2a3845"/><circle cx="22" cy="22" r="1.5" fill="#88aacc" opacity="0.5"/>
+  <circle cx="106" cy="22" r="5" fill="#1a2030"/><circle cx="106" cy="22" r="3.5" fill="#2a3845"/><circle cx="106" cy="22" r="1.5" fill="#88aacc" opacity="0.5"/>
+  <circle cx="22" cy="106" r="5" fill="#1a2030"/><circle cx="22" cy="106" r="3.5" fill="#2a3845"/><circle cx="22" cy="106" r="1.5" fill="#88aacc" opacity="0.5"/>
+  <circle cx="106" cy="106" r="5" fill="#1a2030"/><circle cx="106" cy="106" r="3.5" fill="#2a3845"/><circle cx="106" cy="106" r="1.5" fill="#88aacc" opacity="0.5"/>
+  <!-- Circular duct opening -->
+  <circle cx="64" cy="64" r="52" fill="#1a2530"/>
+  <circle cx="64" cy="64" r="52" fill="none" stroke="#334455" stroke-width="1.5"/>
+  <!-- Protective grille rings -->
+  <circle cx="64" cy="64" r="46" fill="none" stroke="#2a3845" stroke-width="1"/>
+  <circle cx="64" cy="64" r="38" fill="none" stroke="#2a3845" stroke-width="1"/>
+  <circle cx="64" cy="64" r="30" fill="none" stroke="#2a3845" stroke-width="1"/>
+  <!-- Grille spokes -->
+  <line x1="64" y1="18" x2="64" y2="110" stroke="#2a3845" stroke-width="1"/>
+  <line x1="18" y1="64" x2="110" y2="64" stroke="#2a3845" stroke-width="1"/>
+  <line x1="29" y1="29" x2="99" y2="99" stroke="#2a3845" stroke-width="1"/>
+  <line x1="99" y1="29" x2="29" y2="99" stroke="#2a3845" stroke-width="1"/>
+  <!-- Fan blades (6 blades) -->
+  <path d="M64 64 Q76 46 68 38 Q56 42 64 64Z" fill="#3a5060" opacity="0.9"/>
+  <path d="M64 64 Q82 66 86 56 Q78 46 64 64Z" fill="#3a5060" opacity="0.9"/>
+  <path d="M64 64 Q80 78 90 74 Q88 62 64 64Z" fill="#3a5060" opacity="0.9"/>
+  <path d="M64 64 Q64 84 72 90 Q80 82 64 64Z" fill="#3a5060" opacity="0.9"/>
+  <path d="M64 64 Q44 78 42 90 Q54 92 64 64Z" fill="#3a5060" opacity="0.9"/>
+  <path d="M64 64 Q44 52 38 58 Q40 70 64 64Z" fill="#3a5060" opacity="0.9"/>
+  <!-- Motor hub -->
+  <circle cx="64" cy="64" r="14" fill="url(#vfCenter)"/>
+  <circle cx="64" cy="64" r="14" fill="none" stroke="#445566" stroke-width="1.5"/>
+  <circle cx="64" cy="64" r="9" fill="#2a3845"/>
+  <circle cx="64" cy="64" r="5" fill="#334455"/>
+  <circle cx="64" cy="64" r="2.5" fill="#88aacc" opacity="0.6"/>
+  <!-- Blade highlights -->
+  <path d="M64 64 Q76 46 68 38" fill="none" stroke="#88aacc" stroke-width="0.5" opacity="0.3"/>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="nswBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a3a45"/>
+      <stop offset="100%" stop-color="#1a2530"/>
+    </linearGradient>
+  </defs>
+  <!-- Rack ears left/right -->
+  <rect x="4" y="22" width="14" height="84" rx="3" fill="#1a2030"/>
+  <circle cx="11" cy="32" r="4" fill="#1a2030"/><circle cx="11" cy="32" r="3" fill="#334455"/><circle cx="11" cy="32" r="1.2" fill="#88aacc" opacity="0.5"/>
+  <circle cx="11" cy="64" r="4" fill="#1a2030"/><circle cx="11" cy="64" r="3" fill="#334455"/><circle cx="11" cy="64" r="1.2" fill="#88aacc" opacity="0.5"/>
+  <circle cx="11" cy="96" r="4" fill="#1a2030"/><circle cx="11" cy="96" r="3" fill="#334455"/><circle cx="11" cy="96" r="1.2" fill="#88aacc" opacity="0.5"/>
+  <rect x="110" y="22" width="14" height="84" rx="3" fill="#1a2030"/>
+  <circle cx="117" cy="32" r="4" fill="#1a2030"/><circle cx="117" cy="32" r="3" fill="#334455"/><circle cx="117" cy="32" r="1.2" fill="#88aacc" opacity="0.5"/>
+  <circle cx="117" cy="64" r="4" fill="#1a2030"/><circle cx="117" cy="64" r="3" fill="#334455"/><circle cx="117" cy="64" r="1.2" fill="#88aacc" opacity="0.5"/>
+  <circle cx="117" cy="96" r="4" fill="#1a2030"/><circle cx="117" cy="96" r="3" fill="#334455"/><circle cx="117" cy="96" r="1.2" fill="#88aacc" opacity="0.5"/>
+  <!-- Main chassis -->
+  <rect x="18" y="22" width="92" height="84" rx="4" fill="url(#nswBody)"/>
+  <rect x="18" y="22" width="92" height="84" rx="4" fill="none" stroke="#334455" stroke-width="1" opacity="0.5"/>
+  <!-- Top chrome strip -->
+  <rect x="18" y="22" width="92" height="6" rx="3" fill="#334455" opacity="0.6"/>
+  <!-- RJ45 port rows (2 rows of 8) -->
+  <!-- Row 1 ports -->
+  <rect x="22" y="32" width="12" height="10" rx="2" fill="#1a2030"/><rect x="22" y="32" width="12" height="10" rx="2" fill="none" stroke="#334455" stroke-width="0.5"/>
+  <rect x="36" y="32" width="12" height="10" rx="2" fill="#1a2030"/><rect x="36" y="32" width="12" height="10" rx="2" fill="none" stroke="#334455" stroke-width="0.5"/>
+  <rect x="50" y="32" width="12" height="10" rx="2" fill="#1a2030"/><rect x="50" y="32" width="12" height="10" rx="2" fill="none" stroke="#334455" stroke-width="0.5"/>
+  <rect x="64" y="32" width="12" height="10" rx="2" fill="#1a2030"/><rect x="64" y="32" width="12" height="10" rx="2" fill="none" stroke="#334455" stroke-width="0.5"/>
+  <rect x="78" y="32" width="12" height="10" rx="2" fill="#1a2030"/><rect x="78" y="32" width="12" height="10" rx="2" fill="none" stroke="#334455" stroke-width="0.5"/>
+  <rect x="92" y="32" width="12" height="10" rx="2" fill="#1a2030"/><rect x="92" y="32" width="12" height="10" rx="2" fill="none" stroke="#334455" stroke-width="0.5"/>
+  <!-- Row 1 link LEDs (pair per port) -->
+  <circle cx="26" cy="44" r="2" fill="#1a2030"/><circle cx="26" cy="44" r="1.2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="30" cy="44" r="2" fill="#1a2030"/><circle cx="30" cy="44" r="1.2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="40" cy="44" r="2" fill="#1a2030"/><circle cx="40" cy="44" r="1.2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="44" cy="44" r="2" fill="#1a2030"/><circle cx="44" cy="44" r="1.2" fill="#ffffff" opacity="0.3"/>
+  <circle cx="54" cy="44" r="2" fill="#1a2030"/><circle cx="54" cy="44" r="1.2" fill="#ffffff" opacity="0.7"/>
+  <circle cx="58" cy="44" r="2" fill="#1a2030"/><circle cx="58" cy="44" r="1.2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="68" cy="44" r="2" fill="#1a2030"/><circle cx="68" cy="44" r="1.2" fill="#ffffff" opacity="0.5"/>
+  <circle cx="72" cy="44" r="2" fill="#1a2030"/><circle cx="72" cy="44" r="1.2" fill="#ffffff" opacity="0.3"/>
+  <circle cx="82" cy="44" r="2" fill="#1a2030"/><circle cx="82" cy="44" r="1.2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="86" cy="44" r="2" fill="#1a2030"/><circle cx="86" cy="44" r="1.2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="96" cy="44" r="2" fill="#1a2030"/><circle cx="96" cy="44" r="1.2" fill="#ffffff" opacity="0.3"/>
+  <circle cx="100" cy="44" r="2" fill="#1a2030"/><circle cx="100" cy="44" r="1.2" fill="#ffffff" opacity="0.3"/>
+  <!-- Row 2 ports -->
+  <rect x="22" y="50" width="12" height="10" rx="2" fill="#1a2030"/><rect x="22" y="50" width="12" height="10" rx="2" fill="none" stroke="#334455" stroke-width="0.5"/>
+  <rect x="36" y="50" width="12" height="10" rx="2" fill="#1a2030"/><rect x="36" y="50" width="12" height="10" rx="2" fill="none" stroke="#334455" stroke-width="0.5"/>
+  <rect x="50" y="50" width="12" height="10" rx="2" fill="#1a2030"/><rect x="50" y="50" width="12" height="10" rx="2" fill="none" stroke="#334455" stroke-width="0.5"/>
+  <rect x="64" y="50" width="12" height="10" rx="2" fill="#1a2030"/><rect x="64" y="50" width="12" height="10" rx="2" fill="none" stroke="#334455" stroke-width="0.5"/>
+  <rect x="78" y="50" width="12" height="10" rx="2" fill="#1a2030"/><rect x="78" y="50" width="12" height="10" rx="2" fill="none" stroke="#334455" stroke-width="0.5"/>
+  <rect x="92" y="50" width="12" height="10" rx="2" fill="#1a2030"/><rect x="92" y="50" width="12" height="10" rx="2" fill="none" stroke="#334455" stroke-width="0.5"/>
+  <!-- Row 2 link LEDs -->
+  <circle cx="26" cy="62" r="2" fill="#1a2030"/><circle cx="26" cy="62" r="1.2" fill="#ffffff" opacity="0.3"/>
+  <circle cx="40" cy="62" r="2" fill="#1a2030"/><circle cx="40" cy="62" r="1.2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="54" cy="62" r="2" fill="#1a2030"/><circle cx="54" cy="62" r="1.2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="68" cy="62" r="2" fill="#1a2030"/><circle cx="68" cy="62" r="1.2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="82" cy="62" r="2" fill="#1a2030"/><circle cx="82" cy="62" r="1.2" fill="#ffffff" opacity="0.3"/>
+  <circle cx="96" cy="62" r="2" fill="#1a2030"/><circle cx="96" cy="62" r="1.2" fill="#ffffff" opacity="0.5"/>
+  <!-- Console port (smaller, right) -->
+  <rect x="22" y="70" width="8" height="6" rx="1" fill="#1a2030" stroke="#334455" stroke-width="0.5"/>
+  <!-- SFP uplink ports -->
+  <rect x="86" y="68" width="10" height="8" rx="1" fill="#1a2030" stroke="#334455" stroke-width="0.5"/>
+  <rect x="98" y="68" width="10" height="8" rx="1" fill="#1a2030" stroke="#334455" stroke-width="0.5"/>
+  <!-- Vent slots -->
+  <rect x="22" y="80" width="84" height="14" rx="3" fill="#1a2030"/>
+  <line x1="24" y1="84" x2="104" y2="84" stroke="#2a3845" stroke-width="1.2" opacity="0.8"/>
+  <line x1="24" y1="88" x2="104" y2="88" stroke="#2a3845" stroke-width="1.2" opacity="0.8"/>
+  <!-- Power LED -->
+  <circle cx="107" cy="82" r="3.5" fill="#1a2030"/>
+  <circle cx="107" cy="82" r="2" fill="#ffffff" opacity="0.8"/>
+  <!-- Bottom rubber feet -->
+  <rect x="24" y="98" width="10" height="5" rx="2" fill="#1a1e28"/>
+  <rect x="94" y="98" width="10" height="5" rx="2" fill="#1a1e28"/>
+</svg>

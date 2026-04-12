@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="iotBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a3a45"/>
+      <stop offset="100%" stop-color="#1a2530"/>
+    </linearGradient>
+  </defs>
+  <!-- DIN clip rail attachment -->
+  <rect x="30" y="106" width="68" height="14" rx="3" fill="#1a2030"/>
+  <rect x="30" y="106" width="16" height="14" rx="3" fill="#2a3040"/>
+  <rect x="82" y="106" width="16" height="14" rx="3" fill="#2a3040"/>
+  <!-- Small box body -->
+  <rect x="20" y="16" width="88" height="92" rx="7" fill="url(#iotBody)"/>
+  <rect x="20" y="16" width="88" height="92" rx="7" fill="none" stroke="#445566" stroke-width="1.2" opacity="0.5"/>
+  <!-- Top chrome strip -->
+  <rect x="20" y="16" width="88" height="7" rx="4" fill="#334455" opacity="0.6"/>
+  <!-- Antenna stubs (top) -->
+  <rect x="42" y="6" width="5" height="12" rx="2" fill="#2a3845"/>
+  <rect x="42" y="4" width="5" height="4" rx="2" fill="#3a5060"/>
+  <rect x="56" y="4" width="5" height="16" rx="2" fill="#2a3845"/>
+  <rect x="56" y="2" width="5" height="4" rx="2" fill="#3a5060"/>
+  <rect x="70" y="6" width="5" height="12" rx="2" fill="#2a3845"/>
+  <rect x="70" y="4" width="5" height="4" rx="2" fill="#3a5060"/>
+  <!-- LED status strip -->
+  <rect x="24" y="26" width="80" height="12" rx="3" fill="#1a2030"/>
+  <circle cx="34" cy="32" r="3.5" fill="#1a2030"/><circle cx="34" cy="32" r="2.2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="44" cy="32" r="3.5" fill="#1a2030"/><circle cx="44" cy="32" r="2.2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="54" cy="32" r="3.5" fill="#1a2030"/><circle cx="54" cy="32" r="2.2" fill="#ffffff" opacity="0.5"/>
+  <circle cx="64" cy="32" r="3.5" fill="#1a2030"/><circle cx="64" cy="32" r="2.2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="74" cy="32" r="3.5" fill="#1a2030"/><circle cx="74" cy="32" r="2.2" fill="#ffffff" opacity="0.3"/>
+  <!-- Ethernet ports (RJ45 row) -->
+  <rect x="24" y="42" width="80" height="28" rx="3" fill="#1a2030"/>
+  <rect x="24" y="42" width="80" height="28" rx="3" fill="none" stroke="#334455" stroke-width="0.7"/>
+  <rect x="28" y="46" width="14" height="12" rx="2" fill="#1e2a34"/><rect x="28" y="46" width="14" height="12" rx="2" fill="none" stroke="#334455" stroke-width="0.5"/>
+  <rect x="44" y="46" width="14" height="12" rx="2" fill="#1e2a34"/><rect x="44" y="46" width="14" height="12" rx="2" fill="none" stroke="#334455" stroke-width="0.5"/>
+  <rect x="60" y="46" width="14" height="12" rx="2" fill="#1e2a34"/><rect x="60" y="46" width="14" height="12" rx="2" fill="none" stroke="#334455" stroke-width="0.5"/>
+  <rect x="76" y="46" width="14" height="12" rx="2" fill="#1e2a34"/>
+  <!-- Port LEDs -->
+  <circle cx="34" cy="61" r="2" fill="#ffffff" opacity="0.7"/>
+  <circle cx="50" cy="61" r="2" fill="#ffffff" opacity="0.5"/>
+  <circle cx="66" cy="61" r="2" fill="#ffffff" opacity="0.3"/>
+  <circle cx="82" cy="61" r="2" fill="#ffffff" opacity="0.3"/>
+  <!-- USB ports row -->
+  <rect x="24" y="74" width="50" height="18" rx="3" fill="#1a2030"/>
+  <rect x="24" y="74" width="50" height="18" rx="3" fill="none" stroke="#334455" stroke-width="0.7"/>
+  <rect x="28" y="78" width="12" height="10" rx="1" fill="#1e2a34" stroke="#334455" stroke-width="0.5"/>
+  <rect x="42" y="78" width="12" height="10" rx="1" fill="#1e2a34" stroke="#334455" stroke-width="0.5"/>
+  <rect x="58" y="78" width="12" height="10" rx="1" fill="#1e2a34" stroke="#334455" stroke-width="0.5"/>
+  <!-- Power connector -->
+  <rect x="80" y="74" width="22" height="18" rx="3" fill="#1a2030"/>
+  <circle cx="91" cy="83" r="6" fill="#1e2a34" stroke="#334455" stroke-width="0.8"/>
+  <circle cx="91" cy="83" r="3" fill="#1a2030"/>
+  <!-- Reset/config button -->
+  <circle cx="100" cy="34" r="5" fill="#1a2030" stroke="#334455" stroke-width="0.8"/>
+  <circle cx="100" cy="34" r="3" fill="#2a3845"/>
+  <!-- Mounting holes on side -->
+  <circle cx="24" cy="22" r="2.5" fill="#1a2030"/><circle cx="24" cy="22" r="1.5" fill="#334455"/>
+  <circle cx="104" cy="22" r="2.5" fill="#1a2030"/><circle cx="104" cy="22" r="1.5" fill="#334455"/>
+  <circle cx="24" cy="100" r="2.5" fill="#1a2030"/><circle cx="24" cy="100" r="1.5" fill="#334455"/>
+  <circle cx="104" cy="100" r="2.5" fill="#1a2030"/><circle cx="104" cy="100" r="1.5" fill="#334455"/>
+</svg>

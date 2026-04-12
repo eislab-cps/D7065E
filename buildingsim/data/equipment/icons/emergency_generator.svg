@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="egBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a4a35"/>
+      <stop offset="100%" stop-color="#1e2820"/>
+    </linearGradient>
+    <linearGradient id="egEngine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a4a55"/>
+      <stop offset="100%" stop-color="#1e2a34"/>
+    </linearGradient>
+  </defs>
+  <!-- Base skid frame -->
+  <rect x="6" y="96" width="116" height="10" rx="3" fill="#1a2020"/>
+  <rect x="6" y="96" width="116" height="4" rx="2" fill="#2a3030" opacity="0.7"/>
+  <!-- Frame rails -->
+  <rect x="6" y="86" width="10" height="22" rx="2" fill="#1a2020"/>
+  <rect x="112" y="86" width="10" height="22" rx="2" fill="#1a2020"/>
+  <!-- Engine block -->
+  <rect x="10" y="44" width="56" height="50" rx="5" fill="url(#egEngine)"/>
+  <rect x="10" y="44" width="56" height="50" rx="5" fill="none" stroke="#445566" stroke-width="1" opacity="0.5"/>
+  <!-- Engine fins/cooling -->
+  <rect x="12" y="50" width="52" height="2" rx="1" fill="#2a3845" opacity="0.7"/>
+  <rect x="12" y="56" width="52" height="2" rx="1" fill="#2a3845" opacity="0.7"/>
+  <rect x="12" y="62" width="52" height="2" rx="1" fill="#2a3845" opacity="0.7"/>
+  <!-- Cylinder heads -->
+  <rect x="14" y="44" width="10" height="10" rx="2" fill="#2a3845"/>
+  <rect x="28" y="44" width="10" height="10" rx="2" fill="#2a3845"/>
+  <rect x="42" y="44" width="10" height="10" rx="2" fill="#2a3845"/>
+  <circle cx="19" cy="49" r="3" fill="#1a2030"/>
+  <circle cx="33" cy="49" r="3" fill="#1a2030"/>
+  <circle cx="47" cy="49" r="3" fill="#1a2030"/>
+  <!-- Exhaust pipe -->
+  <rect x="54" y="28" width="8" height="20" rx="2" fill="#2a3040"/>
+  <rect x="50" y="24" width="16" height="6" rx="3" fill="#334455"/>
+  <!-- Exhaust smoke -->
+  <path d="M62 22 Q66 18 62 14 Q58 10 62 6" fill="none" stroke="#445566" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
+  <!-- Alternator (right section) -->
+  <rect x="70" y="54" width="40" height="36" rx="5" fill="#2a3040"/>
+  <rect x="70" y="54" width="40" height="36" rx="5" fill="none" stroke="#334455" stroke-width="1"/>
+  <!-- Alternator vents -->
+  <rect x="72" y="60" width="36" height="2" rx="1" fill="#1a2030" opacity="0.8"/>
+  <rect x="72" y="66" width="36" height="2" rx="1" fill="#1a2030" opacity="0.8"/>
+  <rect x="72" y="72" width="36" height="2" rx="1" fill="#1a2030" opacity="0.8"/>
+  <rect x="72" y="78" width="36" height="2" rx="1" fill="#1a2030" opacity="0.8"/>
+  <!-- Coupling between engine and alt -->
+  <rect x="64" y="60" width="8" height="24" rx="1" fill="#334455"/>
+  <rect x="64" y="66" width="8" height="6" rx="1" fill="#445566"/>
+  <!-- Control panel -->
+  <rect x="8" y="68" width="38" height="24" rx="3" fill="#1a2030"/>
+  <rect x="8" y="68" width="38" height="24" rx="3" fill="none" stroke="#334455" stroke-width="0.7"/>
+  <!-- Control panel display -->
+  <rect x="10" y="70" width="24" height="10" rx="2" fill="#0a1820"/>
+  <rect x="12" y="72" width="12" height="2" rx="1" fill="#88aacc" opacity="0.6"/>
+  <rect x="12" y="76" width="8" height="2" rx="1" fill="#88aacc" opacity="0.4"/>
+  <!-- Control buttons -->
+  <circle cx="40" cy="75" r="3" fill="#1a3020" stroke="#2a5030" stroke-width="0.8"/>
+  <circle cx="40" cy="83" r="3" fill="#3a1010" stroke="#551818" stroke-width="0.8"/>
+  <!-- Fuel tank (right) -->
+  <rect x="70" y="34" width="40" height="18" rx="4" fill="#2a3040"/>
+  <rect x="70" y="34" width="40" height="7" rx="3" fill="#334455" opacity="0.6"/>
+  <rect x="70" y="34" width="40" height="18" rx="4" fill="none" stroke="#334455" stroke-width="0.8"/>
+  <!-- Fuel gauge on tank -->
+  <rect x="90" y="36" width="16" height="8" rx="2" fill="#1a2030"/>
+  <rect x="92" y="38" width="10" height="4" rx="1" fill="#2a3845"/>
+  <rect x="92" y="38" width="6" height="4" rx="1" fill="#3a6030" opacity="0.8"/>
+  <!-- Radiator grille front -->
+  <rect x="10" y="30" width="36" height="16" rx="3" fill="#1a2030"/>
+  <rect x="10" y="30" width="36" height="16" rx="3" fill="none" stroke="#334455" stroke-width="0.7"/>
+  <line x1="12" y1="33" x2="44" y2="33" stroke="#2a3845" stroke-width="1.2"/>
+  <line x1="12" y1="37" x2="44" y2="37" stroke="#2a3845" stroke-width="1.2"/>
+  <line x1="12" y1="41" x2="44" y2="41" stroke="#2a3845" stroke-width="1.2"/>
+  <!-- Status LED on control panel -->
+  <circle cx="36" cy="90" r="3" fill="#ffffff" opacity="0.7"/>
+</svg>

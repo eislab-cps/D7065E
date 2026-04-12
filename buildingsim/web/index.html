@@ -1,0 +1,4241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BuildSim</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1a1a2e; overflow: hidden; font-family: 'Segoe UI', system-ui, sans-serif; }
+  #canvas { display: block; }
+  #info-panel {
+    position: absolute; top: 12px; left: 12px;
+    background: rgba(20,20,40,0.92); color: #e0e0e0;
+    padding: 14px 18px; border-radius: 8px; min-width: 220px; max-width: 260px;
+    font-size: 13px; line-height: 1.6;
+    border: 1px solid rgba(100,120,255,0.3); backdrop-filter: blur(8px);
+    max-height: 90vh; overflow-y: auto;
+    z-index: 20;
+  }
+  #info-panel h3 { color: #8ab4f8; margin-bottom: 6px; font-size: 15px; cursor: pointer; }
+  #info-panel-body { }
+  #info-panel.collapsed #info-panel-body { display: none; }
+  #info-panel.collapsed { min-width: auto; max-width: none; padding: 8px 14px; }
+  #info-panel h3::after { content: ' ▼'; font-size: 10px; opacity: 0.5; }
+  #info-panel.collapsed h3::after { content: ' ▶'; }
+  #controls {
+    position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+    background: rgba(20,20,40,0.92); color: #aaa;
+    padding: 10px 14px; border-radius: 8px; font-size: 12px;
+    border: 1px solid rgba(100,120,255,0.2);
+    display: flex; gap: 4px; align-items: center; flex-wrap: wrap; justify-content: center;
+  }
+  #controls label { margin-right: 14px; cursor: pointer; }
+  #controls input[type=checkbox] { margin-right: 4px; }
+  #legend {
+    position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+    background: rgba(20,20,40,0.92); color: #ccc;
+    padding: 8px 18px; border-radius: 8px; font-size: 12px;
+    border: 1px solid rgba(100,120,255,0.2);
+    display: flex; gap: 16px; z-index: 10; flex-wrap: wrap; justify-content: center;
+  }
+  @media (max-width: 768px) {
+    #info-panel { max-width: 180px; font-size: 11px; padding: 8px 12px; }
+    #info-panel h3 { font-size: 13px; }
+    #controls { font-size: 10px; padding: 6px 8px; gap: 2px; }
+    #controls label { margin-right: 6px; }
+    #legend { font-size: 10px; padding: 4px 10px; gap: 8px; display: none; }
+    #edit-tools { display: none !important; }
+  }
+  @media (max-width: 480px) {
+    #info-panel { max-width: 150px; font-size: 10px; top: 6px; left: 6px; padding: 6px 10px; }
+    #info-panel.collapsed { padding: 4px 10px; }
+    #controls { bottom: 6px; font-size: 9px; }
+  }
+  @media (max-height: 500px) and (orientation: landscape) {
+    #info-panel { max-width: 200px; max-height: 80vh; font-size: 11px; top: 6px; left: 6px; padding: 8px 12px; }
+    #info-panel h3 { font-size: 12px; margin-bottom: 3px; }
+    #controls { bottom: 4px; font-size: 10px; padding: 4px 8px; }
+    #legend { display: none; }
+  }
+  .legend-item { display: flex; align-items: center; margin: 3px 0; }
+  .legend-color { width: 14px; height: 14px; border-radius: 2px; margin-right: 8px; }
+  #edit-tools {
+    position: absolute; bottom: 12px; right: 12px;
+    background: rgba(20,20,40,0.92); color: #aaa;
+    padding: 10px 14px; border-radius: 8px; font-size: 12px;
+    border: 1px solid rgba(100,120,255,0.2);
+    display: flex; gap: 6px; flex-wrap: wrap; max-width: 360px;
+  }
+  #edit-tools button {
+    background: #2a3a5c; color: #ccc; border: 1px solid #4a6fa5;
+    padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;
+  }
+  #edit-tools button:hover { background: #3a5a8c; }
+  #edit-tools button.active { background: #4a8fd4; color: #fff; }
+  #edit-tools button:disabled { opacity: 0.4; cursor: default; }
+  #save-status { color: #5cb85c; font-size: 11px; margin-top: 4px; width: 100%; }
+  #floor-selector {
+    position: absolute; top: 150px; left: 12px;
+    background: rgba(20,20,40,0.92); color: #ccc;
+    padding: 10px 14px; border-radius: 8px; font-size: 12px;
+    border: 1px solid rgba(100,120,255,0.2);
+  }
+  #floor-selector button {
+    display: block; width: 100%; margin: 3px 0;
+    background: #2a3a5c; color: #ccc; border: 1px solid #4a6fa5;
+    padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 13px;
+  }
+  #floor-selector button:hover { background: #3a5a8c; }
+  #floor-selector button.active { background: #4a8fd4; color: #fff; }
+  #view-mode {
+    position: absolute; top: 80px; right: 12px;
+    background: rgba(20,20,40,0.92); color: #ccc;
+    padding: 8px 12px; border-radius: 8px; font-size: 12px;
+    border: 1px solid rgba(100,120,255,0.2);
+  }
+  #view-mode button {
+    background: #2a3a5c; color: #ccc; border: 1px solid #4a6fa5;
+    padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; margin: 2px;
+  }
+  #view-mode button:hover { background: #3a5a8c; }
+  #view-mode button.active { background: #4a8fd4; color: #fff; }
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+
+<div id="floor-selector" style="display:none"></div>
+
+<div id="info-panel">
+  <h3 onclick="document.getElementById('info-panel').classList.toggle('collapsed')">Smart Factory</h3>
+  <div id="info-panel-body">
+    <div style="margin-bottom:8px">
+      <select id="buildingSelect" style="width:100%;margin-bottom:4px;padding:4px;background:#1a1a2e;color:#ccc;border:1px solid #4a6fa5;border-radius:4px"></select>
+      <div style="display:flex;gap:4px;flex-wrap:wrap" id="floorButtonsInline"></div>
+    </div>
+    <div style="margin-bottom:4px"><input type="text" id="searchRoom" placeholder="Search room..." style="width:100%;padding:4px 8px;background:#1a1a2e;color:#e0e0e0;border:1px solid #4a6fa5;border-radius:4px;font-size:13px;"></div>
+    <div id="searchResults" style="max-height:100px;overflow-y:auto;font-size:11px;margin-bottom:3px"></div>
+    <button id="btnSearch" style="width:100%;padding:4px;background:#2a3a5c;color:#ccc;border:1px solid #4a6fa5;border-radius:4px;cursor:pointer;font-size:12px;margin-bottom:6px">Search</button>
+    <div style="margin-bottom:4px"><input type="text" id="searchEquipment" placeholder="Search equipment..." style="width:100%;padding:4px 8px;background:#1a1a2e;color:#e0e0e0;border:1px solid #00e676;border-radius:4px;font-size:13px;"></div>
+    <div id="eqSearchResults" style="max-height:120px;overflow-y:auto;font-size:11px;margin-bottom:3px"></div>
+    <button id="btnInspectionRoute" style="width:100%;padding:5px;background:#1a3a2a;color:#00e676;border:1px solid #00e676;border-radius:4px;cursor:pointer;font-size:12px;margin-bottom:6px;display:none">Plan Inspection Route</button>
+    <div id="inspectionInfo" style="font-size:11px;color:#aaa;margin-bottom:4px"></div>
+    <div style="margin-bottom:6px;display:flex;gap:4px">
+      <input type="text" id="routeFrom" placeholder="From room..." style="width:48%;padding:4px 8px;background:#1a1a2e;color:#e0e0e0;border:1px solid #ff6644;border-radius:4px;font-size:12px;">
+      <input type="text" id="routeTo" placeholder="To room..." style="width:48%;padding:4px 8px;background:#1a1a2e;color:#e0e0e0;border:1px solid #44ff66;border-radius:4px;font-size:12px;">
+    </div>
+    <button id="btnFindRoute" style="width:100%;padding:4px;background:#2a3a5c;color:#ccc;border:1px solid #4a6fa5;border-radius:4px;cursor:pointer;font-size:12px;margin-bottom:4px">Find Route</button>
+    <button id="btnClearRoute" style="width:100%;padding:4px;background:#2a3a5c;color:#ccc;border:1px solid #4a6fa5;border-radius:4px;cursor:pointer;font-size:12px;margin-bottom:6px;display:none">Clear Route</button>
+    <div id="routeInfo" style="font-size:11px;color:#aaa;margin-bottom:4px"></div>
+    <div id="info-content">Click a room to see details. Scroll to zoom, drag to pan.</div>
+    <button id="btnExportPDF2" style="width:100%;padding:5px;background:#2a3a5c;color:#ccc;border:1px solid #4a6fa5;border-radius:4px;cursor:pointer;font-size:12px;margin-top:8px">Export PDF</button>
+  </div>
+</div>
+
+<div id="controls">
+  <label><input type="checkbox" id="showWalls" checked> Walls</label>
+  <label><input type="checkbox" id="showDoors" checked> Doors</label>
+  <label><input type="checkbox" id="showRooms" checked> Rooms</label>
+  <label><input type="checkbox" id="showLabels"> Labels</label>
+  <label><input type="checkbox" id="showGraph"> Graph</label>
+  <label><input type="checkbox" id="showWalkable"> Walkable</label>
+  <label><input type="checkbox" id="showStairs" checked> Stairs</label>
+  <label><input type="checkbox" id="showElevators" checked> Elevators</label>
+  <label><input type="checkbox" id="showEquipment"> Equipment</label>
+</div>
+
+<div id="edit-tools" style="display:none">
+  <button id="btnUndo" disabled>Undo</button>
+  <button id="btnEditRoom">Edit Room</button>
+  <button id="btnRect" disabled>Make Rectangle</button>
+  <button id="btnDelete" disabled>Delete Room</button>
+  <button id="btnMerge" disabled>Merge Rooms</button>
+  <button id="btnSplitH" disabled>Split H</button>
+  <button id="btnSplitV" disabled>Split V</button>
+  <button id="btnSplitFree" disabled>Split Free</button>
+  <button id="btnRename" disabled>Rename</button>
+  <button id="btnToggleCorridor" disabled>Toggle Corridor</button>
+  <label style="color:#aaa"><input type="checkbox" id="snapRight" style="margin-right:3px" checked>Snap 90°</label>
+  <button id="btnWeldVerts" disabled>Weld Vertices</button>
+  <button id="btnSnapWalls" disabled>Snap to Walls</button>
+  <button id="btnNudgeU" disabled title="Extend/shrink top (shift=shrink)">↑</button>
+  <button id="btnNudgeD" disabled title="Extend/shrink bottom">↓</button>
+  <button id="btnNudgeL" disabled title="Extend/shrink left">←</button>
+  <button id="btnNudgeR" disabled title="Extend/shrink right">→</button>
+  <button id="btnNewRoom">New Room</button>
+  <button id="btnDrawWall">Draw Wall</button>
+  <button id="btnEraseWalls">Erase Walls</button>
+  <button id="btnSave">Save</button>
+  <div id="save-status"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+               "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const canvas = document.getElementById('canvas');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setClearColor(0x1a1a2e);
+
+const scene = new THREE.Scene();
+
+// Cameras
+const aspect = window.innerWidth / window.innerHeight;
+let frustumSize = 500;
+const camera2D = new THREE.OrthographicCamera(
+  -frustumSize*aspect/2, frustumSize*aspect/2, frustumSize/2, -frustumSize/2, 0.1, 1000);
+camera2D.position.set(0, 0, 100);
+camera2D.lookAt(0, 0, 0);
+
+const camera3D = new THREE.PerspectiveCamera(50, aspect, 1, 2000);
+camera3D.position.set(300, -300, 400);
+camera3D.up.set(0, 0, 1); // Z is up (like a real building)
+camera3D.lookAt(0, 0, 0);
+
+let activeCamera = camera3D;
+let is3DView = true;
+let orbitControls = new OrbitControls(camera3D, canvas);
+orbitControls.enabled = true;
+orbitControls.maxPolarAngle = Math.PI / 2; // can't go below ground
+orbitControls.minPolarAngle = 0.1;         // can't go directly overhead
+orbitControls.enableDamping = true;
+orbitControls.dampingFactor = 0.1;
+orbitControls.zoomSpeed = 8.0;
+
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+// Floor data
+// Building config from URL: ?building=abuilding
+const BUILDINGS = {
+  'abuilding': { name: 'A-Building (LTU)', levels: ['level0','level1','level2'], labels: ['Floor 0','Floor 1','Floor 2'] },
+};
+const urlParams = new URLSearchParams(window.location.search);
+const currentBuilding = urlParams.get('building') || 'abuilding';
+const BLDG = BUILDINGS[currentBuilding];
+const LEVELS = BLDG.levels.map(l => currentBuilding + '/' + l);
+const FLOOR_COLORS = [0x2a3a5c, 0x3a2a5c, 0x2a5c3a];
+const FLOOR_SPACING = 25; // vertical spacing in 3D view
+// Floor alignment: coordinates already aligned in the data (top-left corner anchoring)
+const FLOOR_ALIGN = {
+  0: { x: 0, y: 0 },
+  1: { x: 0, y: 0 },
+  2: { x: 0, y: 0 },
+};
+
+// Stairs and elevators (to be populated for plant)
+// Vertical connections (stairs and elevators)
+const STAIRS = [
+  { name: 'TRAPPA A', positions: [{l:0,x:306.5,y:32.2},{l:1,x:306.3,y:44.0},{l:2,x:306.4,y:44.0}] },
+  { name: 'TRAPPA B', positions: [{l:0,x:227.8,y:19.9},{l:1,x:228.2,y:18.5},{l:2,x:228.5,y:18.5}] },
+  { name: 'TRAPPA C', positions: [{l:0,x:127.1,y:20.1},{l:1,x:126.4,y:20.3},{l:2,x:126.5,y:20.3}] },
+  { name: 'TRAPPA D', positions: [{l:1,x:16.8,y:27.4},{l:2,x:17.3,y:27.6}] },
+  { name: 'TRAPPA E', positions: [{l:0,x:7.2,y:127.0},{l:1,x:9.9,y:126.9},{l:2,x:10.7,y:128.2}] },
+  { name: 'TRAPPA F', positions: [{l:0,x:111.0,y:126.8},{l:1,x:112.8,y:128.2},{l:2,x:113.1,y:128.2}] },
+  { name: 'TRAPPA G', positions: [{l:0,x:212.7,y:127.2},{l:1,x:214.7,y:128.0},{l:2,x:214.9,y:128.0}] },
+  { name: 'TRAPPA H', positions: [{l:0,x:314.9,y:126.8},{l:1,x:316.0,y:126.6},{l:2,x:314.2,y:126.0}] },
+  { name: 'TRAPPA I', positions: [{l:0,x:371.4,y:119.6},{l:1,x:370.6,y:118.2}] },
+  { name: 'A119/A219', positions: [{l:0,x:328.6,y:330.7},{l:1,x:319.9,y:322.2}] },
+  { name: 'A183/A283', positions: [{l:0,x:127.0,y:323.9},{l:1,x:126.4,y:324.4}] },
+  { name: 'A303/A403/A503', positions: [{l:0,x:192.8,y:282.4},{l:1,x:192.6,y:281.4},{l:2,x:192.2,y:281.5}] },
+  { name: '1575/2604', positions: [{l:0,x:102.4,y:330.5},{l:1,x:101.8,y:329.7}] },
+  { name: '1568/2580/3454', positions: [{l:0,x:11.3,y:333.0},{l:1,x:11.0,y:332.8},{l:2,x:11.1,y:332.9}] },
+  { name: '1541/2541/3421', positions: [{l:0,x:33.3,y:179.8},{l:1,x:30.6,y:178.1},{l:2,x:32.7,y:178.3}] },
+  { name: 'A104/A204', positions: [{l:0,x:325.6,y:226.2},{l:1,x:320.2,y:222.9}] },
+];
+const ELEVATORS = [
+  { name: 'HISS 12', positions: [{l:0,x:133.4,y:17.4},{l:1,x:133.0,y:16.4},{l:2,x:133.1,y:16.6}] },
+  { name: 'HISS 13', positions: [{l:0,x:318.0,y:38.1},{l:1,x:317.7,y:37.2},{l:2,x:317.8,y:37.2}] },
+  { name: 'HISS 14', positions: [{l:0,x:126.1,y:160.1},{l:1,x:125.8,y:159.2},{l:2,x:125.9,y:159.3}] },
+];
+let floorData = {};   // level -> json data
+let floorGroups = {};  // level -> { wallGroup, doorGroup, roomGroup, meshes[] }
+let currentLevel = 'level0';
+
+let selectedRoom = null, selectedMesh = null;
+let vertexHandles = [], vertexGroup = new THREE.Group();
+scene.add(vertexGroup);
+let dragVertex = null, editMode = 'select', isDirty = false;
+let eraseHoverIdx = -1, eraseHighlight = null;
+let mergeSource = null, mergeSourceMesh = null;
+let splitFreeMode = false, splitPoint1 = null, splitLine = null;
+let weldMode = false, weldFirstIdx = null;
+let newRoomMode = false, newRoomCorner1 = null, newRoomPreview = null;
+let drawWallMode = false, drawWallPoints = [], drawWallPreview = null;
+let undoStack = [];
+const MAX_UNDO = 50;
+
+let panOffset = new THREE.Vector2(0, 0);
+let isPanning = false, panStart = new THREE.Vector2();
+
+function pdfToWorld(x, y, pw, ph) { return [x - pw/2, -(y - ph/2)]; }
+function worldToPdf(wx, wy, pw, ph) { return [wx + pw/2, -(wy - ph/2)]; }
+
+function createLineSegments(lines, color, group, opacity, pw, ph) {
+  if (!lines || lines.length === 0) return;
+  const positions = new Float32Array(lines.length * 6);
+  let idx = 0;
+  for (const seg of lines) {
+    const [x1,y1] = pdfToWorld(seg[0][0], seg[0][1], pw, ph);
+    const [x2,y2] = pdfToWorld(seg[1][0], seg[1][1], pw, ph);
+    positions[idx++]=x1; positions[idx++]=y1; positions[idx++]=0;
+    positions[idx++]=x2; positions[idx++]=y2; positions[idx++]=0;
+  }
+  const geom = new THREE.BufferGeometry();
+  geom.setAttribute('position', new THREE.BufferAttribute(positions.slice(0,idx), 3));
+  group.add(new THREE.LineSegments(geom, new THREE.LineBasicMaterial({ color, transparent: true, opacity })));
+}
+
+function createRoomPolygons(rooms, group, meshes, color, pw, ph) {
+  for (const room of rooms) {
+    const pts = room.polygon;
+    if (pts.length < 3) continue;
+    const shape = new THREE.Shape();
+    const [sx,sy] = pdfToWorld(pts[0][0], pts[0][1], pw, ph);
+    shape.moveTo(sx, sy);
+    for (let i = 1; i < pts.length; i++) {
+      const [px,py] = pdfToWorld(pts[i][0], pts[i][1], pw, ph);
+      shape.lineTo(px, py);
+    }
+    shape.closePath();
+    const roomColor = room.type === 'corridor' ? 0x5c5c2a : color;
+    const mesh = new THREE.Mesh(new THREE.ShapeGeometry(shape),
+      new THREE.MeshBasicMaterial({ color: roomColor, transparent: true, opacity: 0.4, side: THREE.DoubleSide }));
+    mesh.userData = room;
+    mesh.position.z = 1;
+    group.add(mesh);
+    meshes.push(mesh);
+    // Outline
+    const op = pts.map(p => { const [ox,oy] = pdfToWorld(p[0],p[1],pw,ph); return new THREE.Vector3(ox,oy,2); });
+    op.push(op[0].clone());
+    const outline = new THREE.Line(new THREE.BufferGeometry().setFromPoints(op),
+      new THREE.LineBasicMaterial({ color: 0x4a6fa5, transparent: true, opacity: 0.6 }));
+    outline.userData = { roomOutline: true, roomId: room.id };
+    group.add(outline);
+  }
+}
+
+function createLabels(labels, group, pw, ph) {
+  if (!labels) return;
+  for (const label of labels) {
+    const [wx,wy] = pdfToWorld(label.x, label.y, pw, ph);
+    const lc = document.createElement('canvas');
+    lc.width = 128; lc.height = 32;
+    const ctx = lc.getContext('2d');
+    ctx.fillStyle = '#aaccff'; ctx.font = '14px monospace'; ctx.textAlign = 'center';
+    ctx.fillText(label.text, 64, 20);
+    const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(lc), transparent: true }));
+    sprite.position.set(wx, wy, 3);
+    sprite.scale.set(12, 3, 1);
+    group.add(sprite);
+  }
+}
+
+async function loadFloor(level) {
+  const levelID = level.split('/').pop();
+  const resp = await fetch(`/api/building/floors/${levelID}?t=${Date.now()}`);
+  const data = await resp.json();
+  floorData[level] = data;
+
+  const pw = data.page.width, ph = data.page.height;
+  const container = new THREE.Group();
+  const wallGroup = new THREE.Group();
+  const doorGroup = new THREE.Group();
+  const roomGroup = new THREE.Group();
+  const meshes = [];
+
+  const levelIdx = LEVELS.indexOf(level);
+
+  // Background image (raster floor plan)
+  if (data.background) {
+    const loader = new THREE.TextureLoader();
+    loader.load(data.background, (texture) => {
+      texture.minFilter = THREE.LinearFilter;
+      const bgGeom = new THREE.PlaneGeometry(pw, ph);
+      const bgMat = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide, transparent: true, opacity: 0.3 });
+      const bgMesh = new THREE.Mesh(bgGeom, bgMat);
+      bgMesh.position.set(0, 0, -0.5);
+      container.add(bgMesh);
+      render();
+    });
+  }
+
+  createLineSegments(data.walls || [], 0x888888, wallGroup, 0.6, pw, ph);
+  createLineSegments(data.red_lines || [], 0xe04040, doorGroup, 0.6, pw, ph);
+  createRoomPolygons(data.rooms, roomGroup, meshes, FLOOR_COLORS[levelIdx] || 0x2a3a5c, pw, ph);
+  const labelGroup = new THREE.Group();
+  labelGroup.visible = false;
+  createLabels(data.labels || [], labelGroup, pw, ph);
+
+  // Build graph layer
+  const graphGroup = new THREE.Group();
+  graphGroup.visible = false;
+  if (data.graph) {
+    const g = data.graph;
+    // Edges
+    for (const edge of g.edges) {
+      const nA = g.nodes.find(n => n.id === edge.from);
+      const nB = g.nodes.find(n => n.id === edge.to);
+      if (!nA || !nB) continue;
+      const [x1,y1] = pdfToWorld(nA.x, nA.y, pw, ph);
+      const [x2,y2] = pdfToWorld(nB.x, nB.y, pw, ph);
+      const geom = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(x1,y1,4), new THREE.Vector3(x2,y2,4)]);
+      graphGroup.add(new THREE.Line(geom, new THREE.LineBasicMaterial({color:0xff66ff, transparent:true, opacity:0.4})));
+    }
+    // Nodes
+    for (const node of g.nodes) {
+      const [wx,wy] = pdfToWorld(node.x, node.y, pw, ph);
+      const dot = new THREE.Mesh(new THREE.CircleGeometry(1, 8),
+        new THREE.MeshBasicMaterial({color:0xff66ff, side:THREE.DoubleSide}));
+      dot.position.set(wx, wy, 4.5);
+      graphGroup.add(dot);
+    }
+  }
+
+  // Build walkable graph layer
+  const walkableGroup = new THREE.Group();
+  walkableGroup.visible = false;
+  if (data.walkable_graph) {
+    const wg = data.walkable_graph;
+    const nodeMap = {};
+    for (const node of wg.nodes) nodeMap[node.id] = node;
+    // Edges
+    for (const edge of wg.edges) {
+      const [x1,y1] = edge.x1 !== undefined
+        ? pdfToWorld(edge.x1, edge.y1, pw, ph)
+        : pdfToWorld(nodeMap[edge.from]?.x||0, nodeMap[edge.from]?.y||0, pw, ph);
+      const [x2,y2] = edge.x2 !== undefined
+        ? pdfToWorld(edge.x2, edge.y2, pw, ph)
+        : pdfToWorld(nodeMap[edge.to]?.x||0, nodeMap[edge.to]?.y||0, pw, ph);
+      const geom = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(x1,y1,4), new THREE.Vector3(x2,y2,4)]);
+      walkableGroup.add(new THREE.Line(geom, new THREE.LineBasicMaterial({color:0x00ffaa, transparent:true, opacity:0.5})));
+    }
+    // Nodes
+    for (const node of wg.nodes) {
+      const [wx,wy] = pdfToWorld(node.x, node.y, pw, ph);
+      const color = node.type === 'corridor' ? 0x00ffaa : node.type === 'entry' ? 0xffaa00 : 0x4488ff;
+      const size = node.type === 'corridor' ? 0.8 : 0.6;
+      const dot = new THREE.Mesh(new THREE.CircleGeometry(size, 8),
+        new THREE.MeshBasicMaterial({color, side:THREE.DoubleSide}));
+      dot.position.set(wx, wy, 4.5);
+      walkableGroup.add(dot);
+    }
+  }
+
+  container.add(wallGroup, doorGroup, roomGroup, labelGroup, graphGroup, walkableGroup);
+  scene.add(container);
+
+  floorGroups[level] = { container, wallGroup, doorGroup, roomGroup, labelGroup, graphGroup, walkableGroup, meshes };
+  return data;
+}
+
+let crossFloorEdges = [];
+let equipment = [];
+let inspectionNotes = []; // loaded from inspection_notes.json
+let equipmentGroups = {}; // level -> THREE.Group
+let pathGroup = new THREE.Group();
+scene.add(pathGroup);
+let occupancyGroup = new THREE.Group();
+scene.add(occupancyGroup);
+let coverageGroup = new THREE.Group();
+scene.add(coverageGroup);
+
+async function init() {
+  await Promise.all(LEVELS.map(l => loadFloor(l)));
+  // Load cross-floor edges
+  try {
+    const ceResp = await fetch(`/api/building/cross-floor-edges?t=${Date.now()}`);
+    crossFloorEdges = await ceResp.json();
+  } catch(e) { console.log('No cross-floor edges'); }
+  // Load equipment
+  try {
+    const eqResp = await fetch(`/api/equipment?t=${Date.now()}`);
+    equipment = await eqResp.json();
+  } catch(e) { console.log('No equipment data'); }
+  // Load inspection notes
+  try {
+    // Inspection notes not yet implemented in API
+    inspectionNotes = [];
+  } catch(e) { inspectionNotes = []; }
+
+  const pw = floorData[LEVELS[0]].page.width, ph = floorData[LEVELS[0]].page.height;
+  frustumSize = Math.max(pw, ph) * 1.1;
+  updateCamera2D();
+  buildAllEquipment();
+  switchTo3D();
+  render();
+
+  // === Check edit mode ===
+  try {
+    const cfgResp = await fetch('/api/config');
+    const cfg = await cfgResp.json();
+    if (cfg.edit_mode) {
+      editModeEnabled = true;
+      if (editModeEnabled) document.getElementById('edit-tools').style.display = 'flex';
+    }
+  } catch(e) {}
+
+  // === Session & WebSocket ===
+  await initSession();
+}
+
+let editModeEnabled = false;
+let sessionId = null;
+let sessionWs = null;
+let sessionClosing = false;
+let localEquipmentVersion = 0;
+let localOccupancyVersion = 0;
+
+async function initSession() {
+  try {
+    const resp = await fetch('/api/sessions', { method: 'POST' });
+    const sess = await resp.json();
+    sessionId = sess.id;
+    sessionClosing = false;
+    console.log('Session created:', sessionId);
+    connectWebSocket();
+  } catch(e) {
+    console.log('Failed to create session:', e);
+  }
+}
+
+function connectWebSocket() {
+  if (!sessionId || sessionClosing) return;
+  const id = sessionId;
+  const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
+  sessionWs = new WebSocket(`${proto}//${location.host}/ws/${id}`);
+  let wasConnected = false;
+
+  sessionWs.onopen = () => {
+    wasConnected = true;
+    console.log('WebSocket connected to session:', id);
+  };
+  sessionWs.onclose = () => {
+    if (!sessionClosing && sessionId === id && wasConnected) {
+      console.log('WebSocket disconnected, reconnecting in 3s...');
+      setTimeout(connectWebSocket, 3000);
+    } else if (!wasConnected) {
+      console.log('WebSocket failed to connect (session may not exist)');
+    }
+  };
+  sessionWs.onerror = () => {}; // suppress console error, onclose handles it
+  sessionWs.onmessage = (event) => {
+    try {
+      const msg = JSON.parse(event.data);
+      handleSessionMessage(msg);
+    } catch(e) {
+      console.log('Bad WS message:', e);
+    }
+  };
+}
+
+function handleSessionMessage(msg) {
+  switch (msg.type) {
+    case 'viewport':
+      applyViewport(msg.data);
+      break;
+    case 'highlights':
+      applyHighlights(msg.data);
+      break;
+    case 'route':
+      applyRoute(msg.data);
+      break;
+    case 'coverage':
+      applyCoverage(msg.data);
+      break;
+    case 'occupancy':
+      if (msg.version > localOccupancyVersion) {
+        localOccupancyVersion = msg.version;
+        fetchAndApplyOccupancy();
+      }
+      break;
+    case 'equipment':
+      if (msg.version > localEquipmentVersion) {
+        localEquipmentVersion = msg.version;
+        fetchAndApplyEquipment();
+      }
+      break;
+  }
+}
+
+function applyViewport(vp) {
+  if (!vp) return;
+  const pw = floorData[LEVELS[0]]?.page?.width || 595;
+  const ph = floorData[LEVELS[0]]?.page?.height || 842;
+
+  // Find target room center if room name specified
+  let targetX = null, targetY = null, targetLevel = null;
+  if (vp.room) {
+    for (const l of LEVELS) {
+      const data = floorData[l];
+      if (!data) continue;
+      const room = data.rooms.find(r => r.name === vp.room);
+      if (room) {
+        const [wx, wy] = pdfToWorld(room.center[0], room.center[1], data.page.width, data.page.height);
+        targetX = wx;
+        targetY = wy;
+        targetLevel = l;
+        break;
+      }
+    }
+    if (targetX === null) { console.log('Room not found:', vp.room); return; }
+  }
+
+  if (vp.mode === '3d') {
+    if (!is3DView) switchTo3D();
+    if (targetX !== null) {
+      const levelIdx = LEVELS.indexOf(targetLevel);
+      const tz = levelIdx * FLOOR_SPACING;
+      const dist = 150 / (vp.zoom || 1);
+      const targetPos = new THREE.Vector3(targetX + dist, targetY - dist, tz + dist);
+      const targetLookAt = new THREE.Vector3(targetX, targetY, tz);
+      animateCamera3D(targetPos, targetLookAt, 1500);
+    }
+  } else {
+    const floor = vp.floor || (targetLevel ? targetLevel.split('/').pop() : 'level0');
+    const level = currentBuilding + '/' + floor;
+    if (is3DView || currentLevel !== level) switchToFloor(level);
+    const targetZoom = (vp.zoom && vp.zoom > 0) ? Math.max(pw, ph) * 1.1 / vp.zoom : frustumSize;
+    const targetPanX = targetX !== null ? targetX : panOffset.x;
+    const targetPanY = targetY !== null ? targetY : panOffset.y;
+    animateCamera2D(targetPanX, targetPanY, targetZoom, 1500);
+  }
+}
+
+let _animId = 0;
+function animateCamera3D(targetPos, targetLookAt, duration) {
+  const id = ++_animId;
+  const startPos = camera3D.position.clone();
+  const startTarget = orbitControls.target.clone();
+  const startTime = performance.now();
+
+  function tick(now) {
+    if (id !== _animId) return;
+    const t = Math.min((now - startTime) / duration, 1);
+    const ease = t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2; // easeInOutCubic
+
+    camera3D.position.lerpVectors(startPos, targetPos, ease);
+    orbitControls.target.lerpVectors(startTarget, targetLookAt, ease);
+    orbitControls.update();
+    render();
+
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function animateCamera2D(targetPanX, targetPanY, targetFrustum, duration) {
+  const id = ++_animId;
+  const startPanX = panOffset.x, startPanY = panOffset.y;
+  const startFrustum = frustumSize;
+  const startTime = performance.now();
+
+  function tick(now) {
+    if (id !== _animId) return;
+    const t = Math.min((now - startTime) / duration, 1);
+    const ease = t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2;
+
+    panOffset.x = startPanX + (targetPanX - startPanX) * ease;
+    panOffset.y = startPanY + (targetPanY - startPanY) * ease;
+    frustumSize = startFrustum + (targetFrustum - startFrustum) * ease;
+    updateCamera2D();
+    render();
+
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function applyHighlights(highlights) {
+  if (!highlights) return;
+  // Remove previous highlights
+  LEVELS.forEach(l => {
+    const fg = floorGroups[l];
+    if (!fg) return;
+    fg.meshes.forEach(m => {
+      if (m.userData.highlighted) {
+        m.material.color.setHex(m.userData.originalColor || 0x2a3a5c);
+        m.material.opacity = 0.6;
+        m.userData.highlighted = false;
+      }
+    });
+  });
+
+  // Apply new highlights
+  for (const h of highlights) {
+    LEVELS.forEach(l => {
+      const fg = floorGroups[l];
+      if (!fg) return;
+      const mesh = fg.meshes.find(m => m.userData.id === h.room_id);
+      if (mesh) {
+        if (!mesh.userData.originalColor) mesh.userData.originalColor = mesh.material.color.getHex();
+        mesh.material.color.setStyle(h.color);
+        mesh.material.opacity = h.opacity || 0.8;
+        mesh.userData.highlighted = true;
+      }
+    });
+  }
+  render();
+}
+
+function applyRoute(route) {
+  // Clear existing path
+  while (pathGroup.children.length > 0) {
+    const c = pathGroup.children[0];
+    pathGroup.remove(c);
+    if (c.geometry) c.geometry.dispose();
+    if (c.material) c.material.dispose();
+  }
+
+  if (!route || !route.path || route.path.length < 2) { render(); return; }
+
+  const pw = floorData[LEVELS[0]]?.page?.width || 595;
+  const ph = floorData[LEVELS[0]]?.page?.height || 842;
+  const points = route.path.map(n => {
+    const [wx, wy] = pdfToWorld(n.x, n.y, pw, ph);
+    return new THREE.Vector3(wx, wy, 8);
+  });
+
+  const geom = new THREE.BufferGeometry().setFromPoints(points);
+  const line = new THREE.Line(geom, new THREE.LineBasicMaterial({ color: 0x00ffff, linewidth: 2 }));
+  pathGroup.add(line);
+
+  // Route nodes
+  for (const pt of points) {
+    const dot = new THREE.Mesh(
+      new THREE.CircleGeometry(1.5, 12),
+      new THREE.MeshBasicMaterial({ color: 0x00ffff, side: THREE.DoubleSide }));
+    dot.position.copy(pt);
+    dot.position.z = 8.5;
+    pathGroup.add(dot);
+  }
+  render();
+}
+
+async function fetchAndApplyOccupancy() {
+  if (!sessionId) return;
+  try {
+    const resp = await fetch(`/api/sessions/${sessionId}`);
+    const sess = await resp.json();
+    renderOccupancy(sess.occupancy);
+  } catch(e) { console.log('Failed to fetch occupancy:', e); }
+}
+
+function renderOccupancy(occupancy) {
+  // Clear old occupancy sprites
+  while (occupancyGroup.children.length > 0) {
+    const c = occupancyGroup.children[0];
+    occupancyGroup.remove(c);
+    if (c.material && c.material.map) c.material.map.dispose();
+    if (c.material) c.material.dispose();
+  }
+
+  if (!occupancy) { render(); return; }
+
+  const iconPromises = [];
+
+  for (const [roomIdStr, occ] of Object.entries(occupancy)) {
+    const roomId = parseInt(roomIdStr);
+    const personCount = occ.persons ? occ.persons.length : 0;
+    const alienCount = occ.aliens ? occ.aliens.length : 0;
+    if (personCount === 0 && alienCount === 0) continue;
+
+    // Find room across all levels
+    let roomCenter = null, roomPw = 0, roomPh = 0, roomLevel = null;
+    for (const l of LEVELS) {
+      const data = floorData[l];
+      if (!data) continue;
+      const room = data.rooms.find(r => r.id === roomId);
+      if (room) {
+        roomPw = data.page.width;
+        roomPh = data.page.height;
+        roomCenter = room.center;
+        roomLevel = l;
+        break;
+      }
+    }
+    if (!roomCenter) continue;
+
+    const [wx, wy] = pdfToWorld(roomCenter[0], roomCenter[1], roomPw, roomPh);
+    const levelIdx = LEVELS.indexOf(roomLevel);
+    const zBase = is3DView ? levelIdx * FLOOR_SPACING + 9 : 9;
+    let xOff = 0;
+
+    // Person icon (single or group)
+    if (personCount > 0) {
+      const iconType = personCount === 1 ? 'person' : 'group';
+      const p = loadEquipmentIcon(iconType, null, true).then(canvas => {
+        const sprite = createEquipmentSprite(wx + xOff, wy, zBase, 3, canvas);
+        occupancyGroup.add(sprite);
+
+        // Person count label if > 1
+        if (personCount > 1) {
+          const lc = document.createElement('canvas');
+          lc.width = 64; lc.height = 32;
+          const ctx = lc.getContext('2d');
+          ctx.font = 'bold 22px monospace';
+          ctx.fillStyle = '#00ccff';
+          ctx.textAlign = 'center';
+          ctx.fillText('x' + personCount, 32, 22);
+          const label = new THREE.Sprite(new THREE.SpriteMaterial({
+            map: new THREE.CanvasTexture(lc), transparent: true }));
+          label.position.set(wx + xOff + 3, wy, zBase);
+          label.scale.set(4, 2, 1);
+          occupancyGroup.add(label);
+        }
+      });
+      iconPromises.push(p);
+      xOff += 5;
+    }
+
+    // Alien icon(s)
+    if (alienCount > 0) {
+      const p = loadEquipmentIcon('alien', null, true).then(canvas => {
+        const sprite = createEquipmentSprite(wx + xOff, wy, zBase, 3, canvas);
+        occupancyGroup.add(sprite);
+
+        if (alienCount > 1) {
+          const lc = document.createElement('canvas');
+          lc.width = 64; lc.height = 32;
+          const ctx = lc.getContext('2d');
+          ctx.font = 'bold 22px monospace';
+          ctx.fillStyle = '#ff2222';
+          ctx.textAlign = 'center';
+          ctx.fillText('x' + alienCount, 32, 22);
+          const label = new THREE.Sprite(new THREE.SpriteMaterial({
+            map: new THREE.CanvasTexture(lc), transparent: true }));
+          label.position.set(wx + xOff + 3, wy, zBase);
+          label.scale.set(4, 2, 1);
+          occupancyGroup.add(label);
+        }
+      });
+      iconPromises.push(p);
+    }
+  }
+
+  Promise.all(iconPromises).then(() => render());
+}
+
+function applyCoverage(zones) {
+  // Clear old coverage
+  while (coverageGroup.children.length > 0) {
+    const c = coverageGroup.children[0];
+    coverageGroup.remove(c);
+    if (c.geometry) c.geometry.dispose();
+    if (c.material) c.material.dispose();
+  }
+
+  if (!zones || zones.length === 0) { render(); return; }
+
+  const defaultData = floorData[LEVELS[0]];
+  if (!defaultData) return;
+  const pw = defaultData.page.width, ph = defaultData.page.height;
+
+  // Build clipping planes from building room bounds
+  const allRooms = [];
+  for (const l of LEVELS) {
+    const fd = floorData[l];
+    if (fd) allRooms.push(...fd.rooms);
+  }
+  const allPts = allRooms.flatMap(r => r.polygon);
+  const minX = Math.min(...allPts.map(p => p[0]));
+  const maxX = Math.max(...allPts.map(p => p[0]));
+  const minY = Math.min(...allPts.map(p => p[1]));
+  const maxY = Math.max(...allPts.map(p => p[1]));
+
+  const [wMinX, wMaxY] = pdfToWorld(minX, minY, pw, ph);
+  const [wMaxX, wMinY] = pdfToWorld(maxX, maxY, pw, ph);
+
+  const maxFloorZ = (LEVELS.length - 1) * FLOOR_SPACING + 10;
+  const clipPlanes = [
+    new THREE.Plane(new THREE.Vector3(1, 0, 0), -wMinX),    // left
+    new THREE.Plane(new THREE.Vector3(-1, 0, 0), wMaxX),    // right
+    new THREE.Plane(new THREE.Vector3(0, 1, 0), -wMinY),    // front
+    new THREE.Plane(new THREE.Vector3(0, -1, 0), wMaxY),    // back
+    new THREE.Plane(new THREE.Vector3(0, 0, 1), 0),         // below ground
+    new THREE.Plane(new THREE.Vector3(0, 0, -1), maxFloorZ), // above top floor
+  ];
+  renderer.localClippingEnabled = true;
+
+  for (const zone of zones) {
+    // Resolve room name to center if specified
+    let cx = zone.center[0], cy = zone.center[1];
+    let resolvedLevel = zone.level || '';
+    if (zone.room) {
+      let found = false;
+      for (const l of LEVELS) {
+        const fd = floorData[l];
+        if (!fd) continue;
+        const room = fd.rooms.find(r => r.name === zone.room);
+        if (room) {
+          cx = room.center[0]; cy = room.center[1];
+          if (!resolvedLevel) resolvedLevel = l.split('/').pop();
+          found = true;
+          break;
+        }
+      }
+      if (!found) continue;
+    }
+    const [wx, wy] = pdfToWorld(cx, cy, pw, ph);
+    const radius = zone.radius || 30;
+    const color = new THREE.Color(zone.color || '#00aaff');
+    const opacity = zone.opacity || 0.15;
+    const height = zone.height || 0;
+
+    // Determine which floors to render on
+    let floors = [];
+    if (zone.level && zone.level !== '') {
+      const li = LEVELS.findIndex(l => l.endsWith(zone.level));
+      if (li >= 0) floors.push(li);
+    } else {
+      // All floors
+      for (let i = 0; i < LEVELS.length; i++) floors.push(i);
+    }
+
+    if (is3DView) {
+      // 3D: render as translucent sphere, centered on the floor(s)
+      const minFloorZ = Math.min(...floors) * FLOOR_SPACING;
+      const maxFloorZ = Math.max(...floors) * FLOOR_SPACING;
+      const centerZ = (minFloorZ + maxFloorZ) / 2 + 5;
+      const scaleZ = height > 0 ? height / (radius * 2) : 0.5; // flatten vertically
+
+      const geom = new THREE.SphereGeometry(radius, 32, 24);
+      const mat = new THREE.MeshBasicMaterial({
+        color, transparent: true, opacity,
+        side: THREE.DoubleSide, depthWrite: false,
+        clippingPlanes: clipPlanes
+      });
+      const mesh = new THREE.Mesh(geom, mat);
+      mesh.position.set(wx, wy, centerZ);
+      mesh.scale.set(1, 1, scaleZ);
+      mesh.renderOrder = 500;
+      coverageGroup.add(mesh);
+
+      // Inner glow (smaller, brighter sphere)
+      const innerGeom = new THREE.SphereGeometry(radius * 0.5, 24, 16);
+      const innerMat = new THREE.MeshBasicMaterial({
+        color, transparent: true, opacity: opacity * 1.5,
+        side: THREE.DoubleSide, depthWrite: false,
+        clippingPlanes: clipPlanes
+      });
+      const inner = new THREE.Mesh(innerGeom, innerMat);
+      inner.position.set(wx, wy, centerZ);
+      inner.scale.set(1, 1, scaleZ);
+      inner.renderOrder = 501;
+      coverageGroup.add(inner);
+    } else {
+      // 2D: flat disc per floor
+      for (const fi of floors) {
+        const z = 2;
+        const geom = new THREE.CircleGeometry(radius, 48);
+        const mat = new THREE.MeshBasicMaterial({
+          color, transparent: true, opacity,
+          side: THREE.DoubleSide, depthWrite: false,
+          clippingPlanes: clipPlanes
+        });
+        const mesh = new THREE.Mesh(geom, mat);
+        mesh.position.set(wx, wy, z);
+        mesh.renderOrder = 500;
+        coverageGroup.add(mesh);
+
+        // Soft edge ring
+        const ringGeom = new THREE.RingGeometry(radius * 0.85, radius, 48);
+        const ringMat = new THREE.MeshBasicMaterial({
+          color, transparent: true, opacity: opacity * 0.4,
+          side: THREE.DoubleSide, depthWrite: false,
+          clippingPlanes: clipPlanes
+        });
+        const ring = new THREE.Mesh(ringGeom, ringMat);
+        ring.position.set(wx, wy, z + 0.1);
+        ring.renderOrder = 499;
+        coverageGroup.add(ring);
+      }
+    }
+  }
+
+  render();
+}
+
+async function fetchAndApplyEquipment() {
+  try {
+    const resp = await fetch(`/api/equipment?t=${Date.now()}`);
+    equipment = await resp.json();
+    buildAllEquipment();
+    render();
+  } catch(e) { console.log('Failed to fetch equipment:', e); }
+}
+
+// Clean up session on page unload
+window.addEventListener('beforeunload', () => {
+  sessionClosing = true;
+  if (sessionWs) sessionWs.close();
+  if (sessionId) {
+    fetch(`/api/sessions/${sessionId}`, { method: 'DELETE', keepalive: true });
+  }
+});
+
+function switchToFloor(level) {
+  deselectRoom(); updateInfo();
+  currentLevel = level;
+  is3DView = false;
+  activeCamera = camera2D;
+  orbitControls.enabled = false;
+
+  LEVELS.forEach(l => {
+    const fg = floorGroups[l];
+    if (!fg) return;
+    fg.container.visible = (l === level);
+    fg.container.position.set(0, 0, 0);
+  });
+  stairConnectors.visible = false;
+  elevatorConnectors.visible = false;
+  crossFloorGraphGroup.visible = false;
+
+  document.querySelectorAll('#floorButtonsInline button').forEach(b => { b.classList.remove('active'); b.style.background = '#2a3a5c'; b.style.color = '#ccc'; });
+  const floorIdx = LEVELS.indexOf(level);
+  const floorBtns = document.getElementById('floorButtonsInline').querySelectorAll('button');
+  if (floorBtns[floorIdx]) { floorBtns[floorIdx].classList.add('active'); floorBtns[floorIdx].style.background = '#4a8fd4'; floorBtns[floorIdx].style.color = '#fff'; }
+  if (editModeEnabled) document.getElementById('edit-tools').style.display = 'flex';
+
+  // If there's a last searched room on this floor, animate zoom-in to it
+  if (_lastSearchedRoom && _lastSearchedRoom.level === level) {
+    const sData = floorData[level];
+    if (sData) {
+      const sRoom = sData.rooms.find(r => r.name === _lastSearchedRoom.name);
+      if (sRoom) {
+        const pw = sData.page.width, ph = sData.page.height;
+        const [swx, swy] = pdfToWorld(sRoom.center[0], sRoom.center[1], pw, ph);
+
+        // Start zoomed out, animate to room
+        frustumSize = Math.max(pw, ph) * 1.1;
+        panOffset.set(0, 0);
+        updateCamera2D();
+
+        _eqFilterRoom = _lastSearchedRoom.name;
+        filterEquipment();
+
+        // Highlight the room
+        const fg = floorGroups[level];
+        if (fg) {
+          const mesh = fg.meshes.find(m => m.userData.name === _lastSearchedRoom.name);
+          if (mesh) {
+            mesh.userData._levelIdx = LEVELS.indexOf(level);
+            mesh.material.color.setHex(0x00ff88);
+            mesh.material.opacity = 0.7;
+            highlightedMesh = mesh;
+          }
+        }
+
+        // Animate zoom-in
+        animateCamera2D(swx, swy, 80, 1500);
+        return;
+      }
+    }
+  }
+
+  render();
+}
+
+let stairConnectors = new THREE.Group();
+let elevatorConnectors = new THREE.Group();
+scene.add(stairConnectors, elevatorConnectors);
+
+function createStairSymbol(x, y, z, size) {
+  // Stair: zigzag lines (like steps seen from above)
+  const group = new THREE.Group();
+  const steps = 4;
+  const pts = [];
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    pts.push(new THREE.Vector3(-size/2 + t*size, -size/2 + (i%2)*size, 0));
+    if (i < steps) pts.push(new THREE.Vector3(-size/2 + (i+1)/steps*size, -size/2 + (i%2)*size, 0));
+  }
+  const geom = new THREE.BufferGeometry().setFromPoints(pts);
+  group.add(new THREE.Line(geom, new THREE.LineBasicMaterial({ color: 0xffaa00, linewidth: 2 })));
+  // Border square
+  const border = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(-size/2,-size/2,0), new THREE.Vector3(size/2,-size/2,0),
+    new THREE.Vector3(size/2,size/2,0), new THREE.Vector3(-size/2,size/2,0),
+    new THREE.Vector3(-size/2,-size/2,0)]);
+  group.add(new THREE.Line(border, new THREE.LineBasicMaterial({ color: 0xffaa00 })));
+  group.position.set(x, y, z);
+  return group;
+}
+
+function createElevatorSymbol(x, y, z, size) {
+  // Elevator: square with up/down arrows
+  const group = new THREE.Group();
+  // Border square
+  const border = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(-size/2,-size/2,0), new THREE.Vector3(size/2,-size/2,0),
+    new THREE.Vector3(size/2,size/2,0), new THREE.Vector3(-size/2,size/2,0),
+    new THREE.Vector3(-size/2,-size/2,0)]);
+  group.add(new THREE.Line(border, new THREE.LineBasicMaterial({ color: 0x44ccff })));
+  // Up arrow
+  const up = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(-size*0.15, -size*0.1, 0), new THREE.Vector3(-size*0.15, size*0.3, 0),
+    new THREE.Vector3(-size*0.3, size*0.15, 0), new THREE.Vector3(-size*0.15, size*0.3, 0),
+    new THREE.Vector3(0, size*0.15, 0)]);
+  group.add(new THREE.Line(up, new THREE.LineBasicMaterial({ color: 0x44ccff })));
+  // Down arrow
+  const dn = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(size*0.15, size*0.1, 0), new THREE.Vector3(size*0.15, -size*0.3, 0),
+    new THREE.Vector3(0, -size*0.15, 0), new THREE.Vector3(size*0.15, -size*0.3, 0),
+    new THREE.Vector3(size*0.3, -size*0.15, 0)]);
+  group.add(new THREE.Line(dn, new THREE.LineBasicMaterial({ color: 0x44ccff })));
+  group.position.set(x, y, z);
+  return group;
+}
+
+function clearGroup(g) {
+  while (g.children.length > 0) {
+    const c = g.children[0]; g.remove(c);
+    if (c.traverse) c.traverse(o => { if(o.geometry) o.geometry.dispose(); if(o.material) o.material.dispose(); });
+  }
+}
+
+function buildVerticalConnectors() {
+  clearGroup(stairConnectors);
+  clearGroup(elevatorConnectors);
+
+  const pw = floorData[LEVELS[0]]?.page?.width || 595;
+  const ph = floorData[LEVELS[0]]?.page?.height || 842;
+  const symSize = 6;
+
+  // Stairs
+  for (const stair of STAIRS) {
+    const avgX = stair.positions.reduce((s,p) => s+p.x, 0) / stair.positions.length;
+    const avgY = stair.positions.reduce((s,p) => s+p.y, 0) / stair.positions.length;
+    const [wx, wy] = pdfToWorld(avgX, avgY, pw, ph);
+    const minL = Math.min(...stair.positions.map(p => p.l));
+    const maxL = Math.max(...stair.positions.map(p => p.l));
+    for (const pos of stair.positions) {
+      stairConnectors.add(createStairSymbol(wx, wy, pos.l * FLOOR_SPACING + 3, symSize));
+    }
+    stairConnectors.add(new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(wx,wy,minL*FLOOR_SPACING), new THREE.Vector3(wx,wy,maxL*FLOOR_SPACING)]),
+      new THREE.LineBasicMaterial({ color: 0xffaa00, transparent: true, opacity: 0.6 })));
+  }
+
+  // Elevators
+  for (const elev of ELEVATORS) {
+    const avgX = elev.positions.reduce((s,p) => s+p.x, 0) / elev.positions.length;
+    const avgY = elev.positions.reduce((s,p) => s+p.y, 0) / elev.positions.length;
+    const [wx, wy] = pdfToWorld(avgX, avgY, pw, ph);
+    const minL = Math.min(...elev.positions.map(p => p.l));
+    const maxL = Math.max(...elev.positions.map(p => p.l));
+    for (const pos of elev.positions) {
+      elevatorConnectors.add(createElevatorSymbol(wx, wy, pos.l * FLOOR_SPACING + 3, symSize));
+    }
+    elevatorConnectors.add(new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(wx,wy,minL*FLOOR_SPACING), new THREE.Vector3(wx,wy,maxL*FLOOR_SPACING)]),
+      new THREE.LineBasicMaterial({ color: 0x44ccff, transparent: true, opacity: 0.6 })));
+  }
+}
+
+let crossFloorGraphGroup = new THREE.Group();
+scene.add(crossFloorGraphGroup);
+
+function buildCrossFloorGraphEdges() {
+  clearGroup(crossFloorGraphGroup);
+  if (!crossFloorEdges.length) return;
+
+  for (const edge of crossFloorEdges) {
+    const fromLevel = edge.from_level;
+    const toLevel = edge.to_level;
+    const fromData = floorData[fromLevel];
+    const toData = floorData[toLevel];
+    if (!fromData || !toData) continue;
+
+    // Match by name since IDs change on save
+    const fromRoom = fromData.rooms.find(r => r.name === edge.from_name);
+    const toRoom = toData.rooms.find(r => r.name === edge.to_name);
+    if (!fromRoom || !toRoom) continue;
+
+    const fromIdx = LEVELS.indexOf(fromLevel);
+    const toIdx = LEVELS.indexOf(toLevel);
+    const pw = fromData.page.width, ph = fromData.page.height;
+
+    const [x1, y1] = pdfToWorld(fromRoom.center[0], fromRoom.center[1], pw, ph);
+    const [x2, y2] = pdfToWorld(toRoom.center[0], toRoom.center[1], toData.page.width, toData.page.height);
+
+    const pts = [
+      new THREE.Vector3(x1, y1, fromIdx * FLOOR_SPACING + 4),
+      new THREE.Vector3(x2, y2, toIdx * FLOOR_SPACING + 4),
+    ];
+    crossFloorGraphGroup.add(new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(pts),
+      new THREE.LineBasicMaterial({ color: 0xff66ff, transparent: true, opacity: 0.7 })));
+
+    for (const p of pts) {
+      const dot = new THREE.Mesh(new THREE.CircleGeometry(1.5, 8),
+        new THREE.MeshBasicMaterial({ color: 0xff66ff, side: THREE.DoubleSide }));
+      dot.position.copy(p);
+      crossFloorGraphGroup.add(dot);
+    }
+  }
+
+  crossFloorGraphGroup.visible = document.getElementById('showGraph').checked;
+}
+
+const STATUS_COLORS = { running: 0x00e676, warning: 0xffab00, stopped: 0xff1744 };
+const STATUS_DARK   = { running: 0x00994d, warning: 0xaa7200, stopped: 0xaa1030 };
+const STATUS_HEX    = { running: '#00e676', warning: '#ffab00', stopped: '#ff1744' };
+
+// === SVG Icon Loader ===
+const iconCache = {}; // type -> Promise<HTMLCanvasElement>
+const ICON_RES = 128; // icon texture resolution
+
+function loadEquipmentIcon(type, statusColor, noRecolor) {
+  const cacheKey = type + ':' + (noRecolor ? 'raw' : statusColor);
+  if (iconCache[cacheKey]) return iconCache[cacheKey];
+
+  const promise = fetch(`/api/icons/${type}.svg`)
+    .then(r => {
+      if (!r.ok) return fetch('/api/icons/generic.svg');
+      return r;
+    })
+    .then(r => r.text())
+    .then(svgText => {
+      const finalSvg = noRecolor ? svgText :
+        svgText.replace(/#ffffff/gi, statusColor).replace(/white/gi, statusColor);
+      const canvas = document.createElement('canvas');
+      canvas.width = ICON_RES;
+      canvas.height = ICON_RES;
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      return new Promise(resolve => {
+        img.onload = () => {
+          ctx.drawImage(img, 0, 0, ICON_RES, ICON_RES);
+          resolve(canvas);
+        };
+        img.onerror = () => resolve(canvas); // empty canvas fallback
+        img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(finalSvg)));
+      });
+    });
+
+  iconCache[cacheKey] = promise;
+  return promise;
+}
+
+function createEquipmentSprite(x, y, z, size, canvas) {
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.minFilter = THREE.LinearFilter;
+  const mat = new THREE.SpriteMaterial({ map: texture, transparent: true });
+  const sprite = new THREE.Sprite(mat);
+  sprite.position.set(x, y, z);
+  sprite.scale.set(size, size, 1);
+  return sprite;
+}
+
+// Keep old function signature for backward compat but it's no longer used
+function createCompressorSymbol(x, y, z, size, statusColor, status) {
+  const group = new THREE.Group();
+  const s = size;
+  const darkColor = STATUS_DARK[status] || 0x006633;
+  const metalColor = 0x556677;
+  const metalDark = 0x3a4a55;
+  const highlight = 0x88aacc;
+
+  // === Base plate ===
+  const baseMat = new THREE.MeshBasicMaterial({ color: metalDark, side: THREE.DoubleSide });
+  const base = new THREE.Mesh(new THREE.PlaneGeometry(s * 1.6, s * 0.9), baseMat);
+  base.position.set(0, 0, 0);
+  group.add(base);
+  // Base border
+  const baseBorder = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(-s*0.8, -s*0.45, 0.05), new THREE.Vector3(s*0.8, -s*0.45, 0.05),
+      new THREE.Vector3(s*0.8, s*0.45, 0.05), new THREE.Vector3(-s*0.8, s*0.45, 0.05),
+      new THREE.Vector3(-s*0.8, -s*0.45, 0.05)]),
+    new THREE.LineBasicMaterial({ color: highlight, transparent: true, opacity: 0.5 }));
+  group.add(baseBorder);
+
+  // === Main cylinder tank (horizontal) ===
+  const tankRadius = s * 0.32;
+  const tankLen = s * 0.9;
+  // Tank body - rounded rect approximation
+  const tankShape = new THREE.Shape();
+  tankShape.moveTo(-tankLen/2, -tankRadius);
+  tankShape.lineTo(tankLen/2, -tankRadius);
+  tankShape.quadraticCurveTo(tankLen/2 + tankRadius*0.5, -tankRadius, tankLen/2 + tankRadius*0.5, 0);
+  tankShape.quadraticCurveTo(tankLen/2 + tankRadius*0.5, tankRadius, tankLen/2, tankRadius);
+  tankShape.lineTo(-tankLen/2, tankRadius);
+  tankShape.quadraticCurveTo(-tankLen/2 - tankRadius*0.5, tankRadius, -tankLen/2 - tankRadius*0.5, 0);
+  tankShape.quadraticCurveTo(-tankLen/2 - tankRadius*0.5, -tankRadius, -tankLen/2, -tankRadius);
+  const tankMesh = new THREE.Mesh(new THREE.ShapeGeometry(tankShape),
+    new THREE.MeshBasicMaterial({ color: metalColor, transparent: true, opacity: 0.9, side: THREE.DoubleSide }));
+  tankMesh.position.set(0, s*0.05, 0.1);
+  group.add(tankMesh);
+  // Tank highlight stripe
+  const stripe = new THREE.Mesh(new THREE.PlaneGeometry(tankLen * 0.85, tankRadius * 0.2),
+    new THREE.MeshBasicMaterial({ color: highlight, transparent: true, opacity: 0.25, side: THREE.DoubleSide }));
+  stripe.position.set(0, s*0.05 + tankRadius*0.3, 0.15);
+  group.add(stripe);
+  // Tank outline
+  const tankOutlinePts = [];
+  for (let i = 0; i <= 48; i++) {
+    const t = i / 48;
+    const angle = t * Math.PI * 2;
+    // Ellipse for tank
+    tankOutlinePts.push(new THREE.Vector3(
+      Math.cos(angle) * (tankLen/2 + tankRadius*0.5),
+      s*0.05 + Math.sin(angle) * tankRadius, 0.2));
+  }
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(tankOutlinePts),
+    new THREE.LineBasicMaterial({ color: highlight, transparent: true, opacity: 0.6 })));
+
+  // === Motor housing (left side) ===
+  const motorR = s * 0.22;
+  const motorPts = [];
+  for (let i = 0; i <= 24; i++) {
+    const a = (i / 24) * Math.PI * 2;
+    motorPts.push(new THREE.Vector3(
+      -s*0.45 + Math.cos(a) * motorR,
+      s*0.05 + Math.sin(a) * motorR, 0.25));
+  }
+  const motorFill = new THREE.Mesh(new THREE.CircleGeometry(motorR, 24),
+    new THREE.MeshBasicMaterial({ color: metalDark, side: THREE.DoubleSide }));
+  motorFill.position.set(-s*0.45, s*0.05, 0.22);
+  group.add(motorFill);
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(motorPts),
+    new THREE.LineBasicMaterial({ color: highlight, transparent: true, opacity: 0.7 })));
+  // Motor fan lines
+  for (let i = 0; i < 6; i++) {
+    const a = (i / 6) * Math.PI * 2;
+    const fan = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(-s*0.45, s*0.05, 0.3),
+      new THREE.Vector3(-s*0.45 + Math.cos(a)*motorR*0.85, s*0.05 + Math.sin(a)*motorR*0.85, 0.3)]);
+    group.add(new THREE.Line(fan, new THREE.LineBasicMaterial({ color: highlight, transparent: true, opacity: 0.35 })));
+  }
+
+  // === Cooling fins (on top of tank) ===
+  for (let i = 0; i < 5; i++) {
+    const fx = -s*0.15 + i * s*0.12;
+    const fin = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(fx, s*0.05 + tankRadius*0.7, 0.2),
+      new THREE.Vector3(fx, s*0.05 + tankRadius + s*0.1, 0.2)]);
+    group.add(new THREE.Line(fin, new THREE.LineBasicMaterial({ color: highlight, transparent: true, opacity: 0.4 })));
+  }
+
+  // === Outlet pipe (right, going up) ===
+  const pipeW = s * 0.06;
+  const pipePts = [
+    new THREE.Vector3(s*0.55, s*0.05, 0.3),
+    new THREE.Vector3(s*0.72, s*0.05, 0.3),
+    new THREE.Vector3(s*0.72, s*0.35, 0.3)];
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pipePts),
+    new THREE.LineBasicMaterial({ color: 0x88bbdd })));
+  // Parallel pipe line
+  const pipePts2 = pipePts.map(p => new THREE.Vector3(p.x + pipeW, p.y, p.z));
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pipePts2),
+    new THREE.LineBasicMaterial({ color: 0x88bbdd })));
+  // Pressure arrow
+  const arrowPts = [
+    new THREE.Vector3(s*0.69, s*0.28, 0.35),
+    new THREE.Vector3(s*0.72 + pipeW/2, s*0.38, 0.35),
+    new THREE.Vector3(s*0.75 + pipeW, s*0.28, 0.35)];
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(arrowPts),
+    new THREE.LineBasicMaterial({ color: statusColor })));
+
+  // === Inlet pipe (left bottom) ===
+  const inPts = [
+    new THREE.Vector3(-s*0.72, -s*0.15, 0.3),
+    new THREE.Vector3(-s*0.55, -s*0.15, 0.3)];
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(inPts),
+    new THREE.LineBasicMaterial({ color: 0x6699aa })));
+  const inPts2 = inPts.map(p => new THREE.Vector3(p.x, p.y - pipeW, p.z));
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(inPts2),
+    new THREE.LineBasicMaterial({ color: 0x6699aa })));
+
+  // === Status LED indicator (glowing dot) ===
+  const ledGeo = new THREE.CircleGeometry(s * 0.06, 16);
+  const ledMat = new THREE.MeshBasicMaterial({ color: statusColor, side: THREE.DoubleSide });
+  const led = new THREE.Mesh(ledGeo, ledMat);
+  led.position.set(s*0.35, s*0.05 - tankRadius*0.5, 0.3);
+  group.add(led);
+  // LED glow
+  const glowGeo = new THREE.CircleGeometry(s * 0.12, 16);
+  const glowMat = new THREE.MeshBasicMaterial({ color: statusColor, transparent: true, opacity: 0.3, side: THREE.DoubleSide });
+  const glow = new THREE.Mesh(glowGeo, glowMat);
+  glow.position.set(s*0.35, s*0.05 - tankRadius*0.5, 0.28);
+  glow.userData.isLedGlow = true;
+  group.add(glow);
+
+  // === Pressure gauge (small circle, right side of tank) ===
+  const gaugeR = s * 0.08;
+  const gaugePts = [];
+  for (let i = 0; i <= 16; i++) {
+    const a = (i / 16) * Math.PI * 2;
+    gaugePts.push(new THREE.Vector3(s*0.3 + Math.cos(a)*gaugeR, s*0.05 + tankRadius*0.5 + Math.sin(a)*gaugeR, 0.3));
+  }
+  group.add(new THREE.Mesh(new THREE.CircleGeometry(gaugeR, 16),
+    new THREE.MeshBasicMaterial({ color: 0x222233, side: THREE.DoubleSide }))
+    .translateX(s*0.3).translateY(s*0.05 + tankRadius*0.5).translateZ(0.28));
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(gaugePts),
+    new THREE.LineBasicMaterial({ color: 0xaabbcc })));
+  // Gauge needle
+  const needleAngle = status === 'running' ? -0.3 : status === 'warning' ? 0.5 : 1.2;
+  const needle = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(s*0.3, s*0.05 + tankRadius*0.5, 0.35),
+    new THREE.Vector3(s*0.3 + Math.cos(needleAngle)*gaugeR*0.8, s*0.05 + tankRadius*0.5 + Math.sin(needleAngle)*gaugeR*0.8, 0.35)]);
+  group.add(new THREE.Line(needle, new THREE.LineBasicMaterial({ color: 0xff4444 })));
+
+  // === Status pulse ring (outer glow) ===
+  const pulseGeo = new THREE.RingGeometry(s * 0.85, s * 0.9, 32);
+  const pulseMat = new THREE.MeshBasicMaterial({ color: statusColor, transparent: true, opacity: 0.3, side: THREE.DoubleSide });
+  const pulse = new THREE.Mesh(pulseGeo, pulseMat);
+  pulse.position.z = 0.05;
+  pulse.userData.isPulse = true;
+  group.add(pulse);
+
+  // === Corner mounting bolts ===
+  for (const bx of [-s*0.7, s*0.7]) {
+    for (const by of [-s*0.38, s*0.38]) {
+      const bolt = new THREE.Mesh(new THREE.CircleGeometry(s*0.03, 8),
+        new THREE.MeshBasicMaterial({ color: 0x99aabb, side: THREE.DoubleSide }));
+      bolt.position.set(bx, by, 0.1);
+      group.add(bolt);
+    }
+  }
+
+  group.position.set(x, y, z);
+  return group;
+}
+
+function createCoffeeMachineSymbol(x, y, z, size, statusColor, status) {
+  const group = new THREE.Group();
+  const s = size;
+  const darkColor = STATUS_DARK[status] || 0x006633;
+  const bodyColor = 0x2a2024;
+  const chrome = 0x99aabb;
+  const chromeDark = 0x667788;
+  const accent = 0x8b5e3c; // warm coffee brown
+
+  // === Base / drip tray ===
+  const baseGeo = new THREE.PlaneGeometry(s * 1.2, s * 0.25);
+  const baseMat = new THREE.MeshBasicMaterial({ color: chromeDark, side: THREE.DoubleSide });
+  group.add(new THREE.Mesh(baseGeo, baseMat).translateY(-s*0.55).translateZ(0.05));
+  // Drip tray grate lines
+  for (let i = -2; i <= 2; i++) {
+    const grate = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(i * s * 0.12, -s*0.5, 0.1),
+      new THREE.Vector3(i * s * 0.12, -s*0.6, 0.1)]);
+    group.add(new THREE.Line(grate, new THREE.LineBasicMaterial({ color: chrome, transparent: true, opacity: 0.4 })));
+  }
+
+  // === Machine body (tall rectangle) ===
+  const bodyShape = new THREE.Shape();
+  const bw = s * 0.55, bh = s * 0.65;
+  const br = s * 0.06; // corner radius
+  bodyShape.moveTo(-bw + br, -bh);
+  bodyShape.lineTo(bw - br, -bh);
+  bodyShape.quadraticCurveTo(bw, -bh, bw, -bh + br);
+  bodyShape.lineTo(bw, bh - br);
+  bodyShape.quadraticCurveTo(bw, bh, bw - br, bh);
+  bodyShape.lineTo(-bw + br, bh);
+  bodyShape.quadraticCurveTo(-bw, bh, -bw, bh - br);
+  bodyShape.lineTo(-bw, -bh + br);
+  bodyShape.quadraticCurveTo(-bw, -bh, -bw + br, -bh);
+  const bodyMesh = new THREE.Mesh(new THREE.ShapeGeometry(bodyShape),
+    new THREE.MeshBasicMaterial({ color: bodyColor, transparent: true, opacity: 0.95, side: THREE.DoubleSide }));
+  bodyMesh.position.set(0, s*0.05, 0.08);
+  group.add(bodyMesh);
+  // Body outline
+  const bodyOutline = [];
+  for (let i = 0; i <= 40; i++) {
+    const t = i / 40;
+    const angle = t * Math.PI * 2;
+    bodyOutline.push(new THREE.Vector3(
+      Math.cos(angle) * bw * 1.02,
+      s*0.05 + Math.sin(angle) * bh * 1.02, 0.12));
+  }
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(bodyOutline),
+    new THREE.LineBasicMaterial({ color: chrome, transparent: true, opacity: 0.5 })));
+
+  // === Bean hopper (top) ===
+  const hopperShape = new THREE.Shape();
+  hopperShape.moveTo(-s*0.3, 0); hopperShape.lineTo(s*0.3, 0);
+  hopperShape.lineTo(s*0.2, s*0.3); hopperShape.lineTo(-s*0.2, s*0.3);
+  hopperShape.closePath();
+  const hopper = new THREE.Mesh(new THREE.ShapeGeometry(hopperShape),
+    new THREE.MeshBasicMaterial({ color: 0x3a2a1a, transparent: true, opacity: 0.85, side: THREE.DoubleSide }));
+  hopper.position.set(0, s*0.55, 0.15);
+  group.add(hopper);
+  // Hopper outline
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(-s*0.3, s*0.55, 0.2), new THREE.Vector3(s*0.3, s*0.55, 0.2),
+    new THREE.Vector3(s*0.2, s*0.85, 0.2), new THREE.Vector3(-s*0.2, s*0.85, 0.2),
+    new THREE.Vector3(-s*0.3, s*0.55, 0.2)]),
+    new THREE.LineBasicMaterial({ color: accent })));
+  // Coffee beans (small dots in hopper)
+  for (const bp of [[-0.05,0.68],[0.08,0.72],[0,0.62],[0.12,0.65],[-0.1,0.74]]) {
+    const bean = new THREE.Mesh(new THREE.CircleGeometry(s*0.025, 6),
+      new THREE.MeshBasicMaterial({ color: 0x5c3a1a, side: THREE.DoubleSide }));
+    bean.position.set(bp[0]*s, bp[1]*s, 0.22);
+    group.add(bean);
+  }
+
+  // === Display screen ===
+  const screen = new THREE.Mesh(new THREE.PlaneGeometry(s*0.6, s*0.2),
+    new THREE.MeshBasicMaterial({ color: 0x112233, side: THREE.DoubleSide }));
+  screen.position.set(0, s*0.3, 0.15);
+  group.add(screen);
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(-s*0.3, s*0.2, 0.18), new THREE.Vector3(s*0.3, s*0.2, 0.18),
+    new THREE.Vector3(s*0.3, s*0.4, 0.18), new THREE.Vector3(-s*0.3, s*0.4, 0.18),
+    new THREE.Vector3(-s*0.3, s*0.2, 0.18)]),
+    new THREE.LineBasicMaterial({ color: statusColor, transparent: true, opacity: 0.8 })));
+  // Screen status text (small colored bar)
+  const screenBar = new THREE.Mesh(new THREE.PlaneGeometry(s*0.45, s*0.04),
+    new THREE.MeshBasicMaterial({ color: statusColor, transparent: true, opacity: 0.7, side: THREE.DoubleSide }));
+  screenBar.position.set(0, s*0.3, 0.17);
+  screenBar.userData.isScreenBar = true;
+  group.add(screenBar);
+
+  // === Dispensing nozzle area ===
+  // Nozzle housing
+  const nozzle = new THREE.Mesh(new THREE.PlaneGeometry(s*0.25, s*0.12),
+    new THREE.MeshBasicMaterial({ color: chromeDark, side: THREE.DoubleSide }));
+  nozzle.position.set(0, s*0.05, 0.15);
+  group.add(nozzle);
+  // Two spouts
+  for (const nx of [-s*0.06, s*0.06]) {
+    const spout = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(nx, s*0.08, 0.2),
+      new THREE.Vector3(nx, -s*0.05, 0.2)]);
+    group.add(new THREE.Line(spout, new THREE.LineBasicMaterial({ color: chrome })));
+  }
+  // Coffee stream (animated via userData)
+  if (status === 'running') {
+    for (const nx of [-s*0.06, s*0.06]) {
+      const stream = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(nx, -s*0.05, 0.2),
+        new THREE.Vector3(nx, -s*0.25, 0.2)]);
+      const streamLine = new THREE.Line(stream, new THREE.LineBasicMaterial({
+        color: accent, transparent: true, opacity: 0.5 }));
+      streamLine.userData.isCoffeeStream = true;
+      group.add(streamLine);
+    }
+  }
+
+  // === Cup (below nozzle) ===
+  const cupShape = new THREE.Shape();
+  cupShape.moveTo(-s*0.12, 0); cupShape.lineTo(s*0.12, 0);
+  cupShape.lineTo(s*0.1, -s*0.18); cupShape.lineTo(-s*0.1, -s*0.18);
+  cupShape.closePath();
+  const cup = new THREE.Mesh(new THREE.ShapeGeometry(cupShape),
+    new THREE.MeshBasicMaterial({ color: 0xeeeeee, transparent: true, opacity: 0.75, side: THREE.DoubleSide }));
+  cup.position.set(0, -s*0.25, 0.12);
+  group.add(cup);
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(-s*0.12, -s*0.25, 0.18), new THREE.Vector3(s*0.12, -s*0.25, 0.18),
+    new THREE.Vector3(s*0.1, -s*0.43, 0.18), new THREE.Vector3(-s*0.1, -s*0.43, 0.18),
+    new THREE.Vector3(-s*0.12, -s*0.25, 0.18)]),
+    new THREE.LineBasicMaterial({ color: chrome, transparent: true, opacity: 0.7 })));
+  // Cup handle
+  const handlePts = [];
+  for (let i = 0; i <= 10; i++) {
+    const a = -Math.PI/2 + (i/10) * Math.PI;
+    handlePts.push(new THREE.Vector3(s*0.12 + Math.cos(a)*s*0.06, -s*0.32 + Math.sin(a)*s*0.07, 0.18));
+  }
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(handlePts),
+    new THREE.LineBasicMaterial({ color: chrome, transparent: true, opacity: 0.6 })));
+  // Coffee in cup
+  if (status === 'running') {
+    const coffeeFill = new THREE.Mesh(new THREE.PlaneGeometry(s*0.18, s*0.08),
+      new THREE.MeshBasicMaterial({ color: accent, transparent: true, opacity: 0.6, side: THREE.DoubleSide }));
+    coffeeFill.position.set(0, -s*0.3, 0.14);
+    group.add(coffeeFill);
+  }
+
+  // === Steam wisps (above cup, for running status) ===
+  if (status === 'running') {
+    for (const sx of [-s*0.04, s*0.04]) {
+      const steamPts = [
+        new THREE.Vector3(sx, -s*0.22, 0.25),
+        new THREE.Vector3(sx + s*0.02, -s*0.16, 0.25),
+        new THREE.Vector3(sx - s*0.02, -s*0.1, 0.25)];
+      const steamLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints(steamPts),
+        new THREE.LineBasicMaterial({ color: 0xcccccc, transparent: true, opacity: 0.3 }));
+      steamLine.userData.isSteam = true;
+      group.add(steamLine);
+    }
+  }
+
+  // === Side buttons (3 dots) ===
+  for (let i = 0; i < 3; i++) {
+    const btn = new THREE.Mesh(new THREE.CircleGeometry(s*0.025, 8),
+      new THREE.MeshBasicMaterial({ color: i === 0 ? statusColor : chrome, side: THREE.DoubleSide }));
+    btn.position.set(s*0.42, s*0.15 - i*s*0.1, 0.15);
+    group.add(btn);
+  }
+
+  // === Status LED ===
+  const led = new THREE.Mesh(new THREE.CircleGeometry(s*0.04, 12),
+    new THREE.MeshBasicMaterial({ color: statusColor, side: THREE.DoubleSide }));
+  led.position.set(-s*0.42, s*0.42, 0.15);
+  group.add(led);
+  const ledGlow = new THREE.Mesh(new THREE.CircleGeometry(s*0.09, 12),
+    new THREE.MeshBasicMaterial({ color: statusColor, transparent: true, opacity: 0.3, side: THREE.DoubleSide }));
+  ledGlow.position.set(-s*0.42, s*0.42, 0.13);
+  ledGlow.userData.isLedGlow = true;
+  group.add(ledGlow);
+
+  // === Pulse ring ===
+  const pulseGeo = new THREE.RingGeometry(s * 0.8, s * 0.85, 32);
+  const pulseMat = new THREE.MeshBasicMaterial({ color: statusColor, transparent: true, opacity: 0.3, side: THREE.DoubleSide });
+  const pulse = new THREE.Mesh(pulseGeo, pulseMat);
+  pulse.position.z = 0.03;
+  pulse.userData.isPulse = true;
+  group.add(pulse);
+
+  group.position.set(x, y, z);
+  return group;
+}
+
+function createAirConditioningSymbol(x, y, z, size, statusColor, status) {
+  const group = new THREE.Group();
+  const s = size;
+  const darkColor = STATUS_DARK[status] || 0x006633;
+  const bodyColor = 0xdde8f0;
+  const metalColor = 0xc8d8e8;
+  const metalDark = 0x4a5a6a;
+  const highlight = 0x88aacc;
+  const coolBlue = 0x44aadd;
+  const coolDark = 0x2288bb;
+
+  // === Wall mount bracket ===
+  const bracketMat = new THREE.MeshBasicMaterial({ color: metalDark, side: THREE.DoubleSide });
+  const bracketL = new THREE.Mesh(new THREE.PlaneGeometry(s * 0.08, s * 0.5), bracketMat);
+  bracketL.position.set(-s*0.65, s*0.15, -0.02);
+  group.add(bracketL);
+  const bracketR = new THREE.Mesh(new THREE.PlaneGeometry(s * 0.08, s * 0.5), bracketMat);
+  bracketR.position.set(s*0.65, s*0.15, -0.02);
+  group.add(bracketR);
+
+  // === Main body (sleek rounded rectangle - wall unit) ===
+  const bw = s * 0.75, bh = s * 0.35;
+  const bodyShape = new THREE.Shape();
+  const br = s * 0.08;
+  bodyShape.moveTo(-bw + br, -bh);
+  bodyShape.lineTo(bw - br, -bh);
+  bodyShape.quadraticCurveTo(bw, -bh, bw, -bh + br);
+  bodyShape.lineTo(bw, bh - br);
+  bodyShape.quadraticCurveTo(bw, bh, bw - br, bh);
+  bodyShape.lineTo(-bw + br, bh);
+  bodyShape.quadraticCurveTo(-bw, bh, -bw, bh - br);
+  bodyShape.lineTo(-bw, -bh + br);
+  bodyShape.quadraticCurveTo(-bw, -bh, -bw + br, -bh);
+  const bodyMesh = new THREE.Mesh(new THREE.ShapeGeometry(bodyShape),
+    new THREE.MeshBasicMaterial({ color: 0xdde8f0, transparent: true, opacity: 0.95, side: THREE.DoubleSide }));
+  bodyMesh.position.set(0, 0, 0.05);
+  group.add(bodyMesh);
+  // Body outline
+  const bodyOutlinePts = [];
+  const cornerPts = [[-bw+br,-bh],[ bw-br,-bh],[bw,-bh+br],[bw,bh-br],[bw-br,bh],[-bw+br,bh],[-bw,bh-br],[-bw,-bh+br]];
+  for (const p of cornerPts) bodyOutlinePts.push(new THREE.Vector3(p[0], p[1], 0.1));
+  bodyOutlinePts.push(bodyOutlinePts[0].clone());
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(bodyOutlinePts),
+    new THREE.LineBasicMaterial({ color: highlight, transparent: true, opacity: 0.7 })));
+
+  // === Top accent stripe (brand line) ===
+  const accentStripe = new THREE.Mesh(new THREE.PlaneGeometry(bw * 1.8, s * 0.04),
+    new THREE.MeshBasicMaterial({ color: coolBlue, transparent: true, opacity: 0.6, side: THREE.DoubleSide }));
+  accentStripe.position.set(0, bh - s*0.06, 0.12);
+  group.add(accentStripe);
+
+  // === Air outlet vanes (horizontal louvers) ===
+  const vaneCount = 5;
+  const vaneTop = -s*0.02, vaneBot = -bh + s*0.06;
+  for (let i = 0; i < vaneCount; i++) {
+    const vy = vaneBot + (vaneTop - vaneBot) * (i / (vaneCount - 1));
+    // Each vane is a slightly angled line
+    const vaneAngle = status === 'running' ? 0.15 * Math.sin(i * 0.5) : 0;
+    const vl = bw * 1.5;
+    const vaneLine = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(-vl/2, vy - vaneAngle * s * 0.02, 0.15),
+      new THREE.Vector3(0, vy + vaneAngle * s * 0.02, 0.15),
+      new THREE.Vector3(vl/2, vy - vaneAngle * s * 0.02, 0.15)]);
+    group.add(new THREE.Line(vaneLine, new THREE.LineBasicMaterial({
+      color: status === 'running' ? coolBlue : 0x8899aa, transparent: true, opacity: 0.5 })));
+  }
+
+  // === Air flow indicators (when running) ===
+  if (status === 'running') {
+    for (const fx of [-s*0.35, 0, s*0.35]) {
+      const flowPts = [];
+      for (let i = 0; i <= 8; i++) {
+        const t = i / 8;
+        flowPts.push(new THREE.Vector3(
+          fx + Math.sin(t * Math.PI * 2) * s * 0.04,
+          -bh - t * s * 0.35,
+          0.2));
+      }
+      const flowLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints(flowPts),
+        new THREE.LineBasicMaterial({ color: coolBlue, transparent: true, opacity: 0.3 }));
+      flowLine.userData.isAirFlow = true;
+      group.add(flowLine);
+    }
+    // Downward arrows
+    for (const fx of [-s*0.2, s*0.2]) {
+      const arrowPts = [
+        new THREE.Vector3(fx - s*0.05, -bh - s*0.12, 0.2),
+        new THREE.Vector3(fx, -bh - s*0.22, 0.2),
+        new THREE.Vector3(fx + s*0.05, -bh - s*0.12, 0.2)];
+      const arrow = new THREE.Line(new THREE.BufferGeometry().setFromPoints(arrowPts),
+        new THREE.LineBasicMaterial({ color: coolBlue, transparent: true, opacity: 0.4 }));
+      arrow.userData.isAirFlow = true;
+      group.add(arrow);
+    }
+  }
+
+  // === Display panel (right side) ===
+  const dispW = s * 0.25, dispH = s * 0.14;
+  const display = new THREE.Mesh(new THREE.PlaneGeometry(dispW, dispH),
+    new THREE.MeshBasicMaterial({ color: 0x112233, side: THREE.DoubleSide }));
+  display.position.set(s*0.42, bh - s*0.18, 0.12);
+  group.add(display);
+  // Display border
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(s*0.42-dispW/2, bh-s*0.18-dispH/2, 0.14),
+    new THREE.Vector3(s*0.42+dispW/2, bh-s*0.18-dispH/2, 0.14),
+    new THREE.Vector3(s*0.42+dispW/2, bh-s*0.18+dispH/2, 0.14),
+    new THREE.Vector3(s*0.42-dispW/2, bh-s*0.18+dispH/2, 0.14),
+    new THREE.Vector3(s*0.42-dispW/2, bh-s*0.18-dispH/2, 0.14)]),
+    new THREE.LineBasicMaterial({ color: statusColor, transparent: true, opacity: 0.7 })));
+  // Temperature readout bar
+  const tempBar = new THREE.Mesh(new THREE.PlaneGeometry(dispW * 0.7, dispH * 0.25),
+    new THREE.MeshBasicMaterial({ color: statusColor, transparent: true, opacity: 0.6, side: THREE.DoubleSide }));
+  tempBar.position.set(s*0.42, bh - s*0.18, 0.15);
+  tempBar.userData.isScreenBar = true;
+  group.add(tempBar);
+
+  // === Snowflake icon (center top - cooling indicator) ===
+  const sfx = -s*0.42, sfy = bh - s*0.18;
+  const sfR = s * 0.08;
+  // 6 arms of snowflake
+  for (let i = 0; i < 6; i++) {
+    const a = (i / 6) * Math.PI * 2;
+    const arm = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(sfx, sfy, 0.18),
+      new THREE.Vector3(sfx + Math.cos(a)*sfR, sfy + Math.sin(a)*sfR, 0.18)]);
+    group.add(new THREE.Line(arm, new THREE.LineBasicMaterial({
+      color: status === 'running' ? coolBlue : 0x667788 })));
+    // Small branches on each arm
+    const bx = sfx + Math.cos(a)*sfR*0.6, by = sfy + Math.sin(a)*sfR*0.6;
+    const ba1 = a + 0.6, ba2 = a - 0.6;
+    for (const ba of [ba1, ba2]) {
+      const branch = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(bx, by, 0.18),
+        new THREE.Vector3(bx + Math.cos(ba)*sfR*0.35, by + Math.sin(ba)*sfR*0.35, 0.18)]);
+      group.add(new THREE.Line(branch, new THREE.LineBasicMaterial({
+        color: status === 'running' ? coolBlue : 0x667788, transparent: true, opacity: 0.6 })));
+    }
+  }
+
+  // === Fan turbine (visible through grille, center of body) ===
+  const fanR = s * 0.18;
+  const fanFill = new THREE.Mesh(new THREE.CircleGeometry(fanR, 24),
+    new THREE.MeshBasicMaterial({ color: 0xccd8e4, transparent: true, opacity: 0.4, side: THREE.DoubleSide }));
+  fanFill.position.set(0, -s*0.04, 0.08);
+  group.add(fanFill);
+  // Fan blades (4 curved blades)
+  for (let i = 0; i < 4; i++) {
+    const a = (i / 4) * Math.PI * 2;
+    const bladePts = [];
+    for (let j = 0; j <= 8; j++) {
+      const t = j / 8;
+      const r = fanR * t;
+      const curve = a + t * 0.8; // blade curvature
+      bladePts.push(new THREE.Vector3(
+        Math.cos(curve) * r,
+        -s*0.04 + Math.sin(curve) * r,
+        0.12));
+    }
+    const blade = new THREE.Line(new THREE.BufferGeometry().setFromPoints(bladePts),
+      new THREE.LineBasicMaterial({ color: metalDark, transparent: true, opacity: 0.7 }));
+    blade.userData.isFanBlade = true;
+    group.add(blade);
+  }
+  // Fan center hub
+  const hub = new THREE.Mesh(new THREE.CircleGeometry(s*0.035, 12),
+    new THREE.MeshBasicMaterial({ color: metalDark, side: THREE.DoubleSide }));
+  hub.position.set(0, -s*0.04, 0.14);
+  group.add(hub);
+  // Fan outline ring
+  const fanRingPts = [];
+  for (let i = 0; i <= 32; i++) {
+    const a = (i / 32) * Math.PI * 2;
+    fanRingPts.push(new THREE.Vector3(Math.cos(a)*fanR, -s*0.04 + Math.sin(a)*fanR, 0.13));
+  }
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(fanRingPts),
+    new THREE.LineBasicMaterial({ color: highlight, transparent: true, opacity: 0.4 })));
+
+  // === Refrigerant pipes (left side, going to wall) ===
+  const pipeY1 = s*0.1, pipeY2 = -s*0.05;
+  // Supply pipe (thicker, cool)
+  const supplyPts = [
+    new THREE.Vector3(-bw, pipeY1, 0.1),
+    new THREE.Vector3(-bw - s*0.2, pipeY1, 0.1),
+    new THREE.Vector3(-bw - s*0.2, s*0.4, 0.1)];
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(supplyPts),
+    new THREE.LineBasicMaterial({ color: coolBlue })));
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(
+    supplyPts.map(p => new THREE.Vector3(p.x + s*0.04, p.y, p.z))),
+    new THREE.LineBasicMaterial({ color: coolBlue })));
+  // Return pipe (warm)
+  const returnPts = [
+    new THREE.Vector3(-bw, pipeY2, 0.1),
+    new THREE.Vector3(-bw - s*0.12, pipeY2, 0.1),
+    new THREE.Vector3(-bw - s*0.12, s*0.4, 0.1)];
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(returnPts),
+    new THREE.LineBasicMaterial({ color: 0xcc7744 })));
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(
+    returnPts.map(p => new THREE.Vector3(p.x + s*0.04, p.y, p.z))),
+    new THREE.LineBasicMaterial({ color: 0xcc7744 })));
+
+  // === Temperature gauge (small thermometer, right of display) ===
+  const thX = s*0.62, thY = bh - s*0.18;
+  // Thermometer bulb
+  const bulb = new THREE.Mesh(new THREE.CircleGeometry(s*0.035, 12),
+    new THREE.MeshBasicMaterial({ color: status === 'stopped' ? 0xcc4444 : coolBlue, side: THREE.DoubleSide }));
+  bulb.position.set(thX, thY - s*0.06, 0.15);
+  group.add(bulb);
+  // Thermometer tube
+  const tubeGeo = new THREE.PlaneGeometry(s*0.02, s*0.1);
+  const tubeMat = new THREE.MeshBasicMaterial({ color: 0xdddddd, side: THREE.DoubleSide });
+  group.add(new THREE.Mesh(tubeGeo, tubeMat).translateX(thX).translateY(thY + s*0.01).translateZ(0.15));
+  // Mercury level
+  const mercH = status === 'running' ? s*0.04 : status === 'warning' ? s*0.07 : s*0.09;
+  const merc = new THREE.Mesh(new THREE.PlaneGeometry(s*0.014, mercH),
+    new THREE.MeshBasicMaterial({ color: status === 'running' ? coolBlue : status === 'warning' ? 0xffaa00 : 0xcc4444, side: THREE.DoubleSide }));
+  merc.position.set(thX, thY - s*0.06 + mercH/2 + s*0.02, 0.16);
+  group.add(merc);
+
+  // === Status LED ===
+  const ledGeo = new THREE.CircleGeometry(s * 0.05, 16);
+  const ledMat = new THREE.MeshBasicMaterial({ color: statusColor, side: THREE.DoubleSide });
+  const led = new THREE.Mesh(ledGeo, ledMat);
+  led.position.set(s*0.2, bh - s*0.06, 0.15);
+  group.add(led);
+  // LED glow
+  const glowGeo = new THREE.CircleGeometry(s * 0.1, 16);
+  const glowMat = new THREE.MeshBasicMaterial({ color: statusColor, transparent: true, opacity: 0.3, side: THREE.DoubleSide });
+  const glow = new THREE.Mesh(glowGeo, glowMat);
+  glow.position.set(s*0.2, bh - s*0.06, 0.13);
+  glow.userData.isLedGlow = true;
+  group.add(glow);
+
+  // === Power/WiFi indicator dots ===
+  for (let i = 0; i < 3; i++) {
+    const dotSize = s * 0.02;
+    const dot = new THREE.Mesh(new THREE.CircleGeometry(dotSize, 6),
+      new THREE.MeshBasicMaterial({ color: i === 0 ? statusColor : highlight, side: THREE.DoubleSide }));
+    dot.position.set(s*0.08 + i*s*0.06, bh - s*0.06, 0.15);
+    group.add(dot);
+  }
+
+  // === Status pulse ring ===
+  const pulseGeo = new THREE.RingGeometry(s * 0.85, s * 0.9, 32);
+  const pulseMat = new THREE.MeshBasicMaterial({ color: statusColor, transparent: true, opacity: 0.3, side: THREE.DoubleSide });
+  const pulse = new THREE.Mesh(pulseGeo, pulseMat);
+  pulse.position.z = 0.02;
+  pulse.userData.isPulse = true;
+  group.add(pulse);
+
+  // === Corner mounting screws ===
+  for (const bx of [-bw + s*0.06, bw - s*0.06]) {
+    for (const by of [-bh + s*0.06, bh - s*0.06]) {
+      const screw = new THREE.Mesh(new THREE.CircleGeometry(s*0.025, 8),
+        new THREE.MeshBasicMaterial({ color: 0x99aabb, side: THREE.DoubleSide }));
+      screw.position.set(bx, by, 0.1);
+      group.add(screw);
+    }
+  }
+
+  group.position.set(x, y, z);
+  return group;
+}
+
+function buildEquipmentForLevel(level) {
+  const fg = floorGroups[level];
+  if (!fg) return;
+  const data = floorData[level];
+  if (!data) return;
+  const pw = data.page.width, ph = data.page.height;
+  const levelKey = level.split('/').pop();
+
+  if (equipmentGroups[level]) {
+    fg.container.remove(equipmentGroups[level]);
+    clearGroup(equipmentGroups[level]);
+  }
+  const eqGroup = new THREE.Group();
+  equipmentGroups[level] = eqGroup;
+
+  const levelEquip = equipment.filter(e => e.level === levelKey);
+  const iconPromises = [];
+
+  // Group equipment by room
+  const byRoom = {};
+  for (const eq of levelEquip) {
+    if (!byRoom[eq.room]) byRoom[eq.room] = [];
+    byRoom[eq.room].push(eq);
+  }
+
+  for (const [roomName, roomEquips] of Object.entries(byRoom)) {
+    const room = data.rooms.find(r => r.name === roomName);
+    if (!room) continue;
+    const [wx, wy] = pdfToWorld(room.center[0], room.center[1], pw, ph);
+
+    // === 2D collapsed icon: generic icon with count ===
+    const collapsedP = loadEquipmentIcon('generic', '#88aacc', true).then(canvas => {
+      const sprite = createEquipmentSprite(wx, wy, 6, 3, canvas);
+      sprite.userData.eqRoom = roomName;
+      sprite.userData.eqMode = 'collapsed';
+      sprite.visible = false;
+      eqGroup.add(sprite);
+
+      // Count badge
+      if (roomEquips.length > 1) {
+        const bc = document.createElement('canvas');
+        bc.width = 64; bc.height = 32;
+        const bctx = bc.getContext('2d');
+        bctx.font = 'bold 20px monospace'; bctx.fillStyle = '#ffffff'; bctx.textAlign = 'center';
+        bctx.fillText(roomEquips.length.toString(), 32, 22);
+        const badge = new THREE.Sprite(new THREE.SpriteMaterial({
+          map: new THREE.CanvasTexture(bc), transparent: true }));
+        badge.position.set(wx + 2, wy + 2, 7);
+        badge.scale.set(3, 1.5, 1);
+        badge.userData.eqRoom = roomName;
+        badge.userData.eqMode = 'collapsed';
+        badge.visible = false;
+        eqGroup.add(badge);
+      }
+    });
+    iconPromises.push(collapsedP);
+
+    // === 3D stacked icons + 2D expanded circle ===
+    for (let idx = 0; idx < roomEquips.length; idx++) {
+      const eq = roomEquips[idx];
+      const statusHex = STATUS_HEX[eq.status] || '#00e676';
+      const size = 3;
+
+      const p = loadEquipmentIcon(eq.type, statusHex).then(canvas => {
+        // 3D: stack on z-axis
+        const zOff = idx * size * 1.1;
+        const iconSprite = createEquipmentSprite(wx, wy, 6 + zOff, size, canvas);
+        iconSprite.userData.equipment = eq;
+        iconSprite.userData.eqRoom = roomName;
+        iconSprite.userData.eqMode = '3d';
+        iconSprite.visible = false;
+        eqGroup.add(iconSprite);
+
+        // 2D expanded: arrange in circle
+        const angle = (idx / roomEquips.length) * Math.PI * 2 - Math.PI / 2;
+        const radius = Math.max(5, roomEquips.length * 1.2);
+        const ex = wx + Math.cos(angle) * radius;
+        const ey = wy + Math.sin(angle) * radius;
+
+        const expandedSprite = createEquipmentSprite(ex, ey, 6, size, canvas);
+        expandedSprite.userData.equipment = eq;
+        expandedSprite.userData.eqRoom = roomName;
+        expandedSprite.userData.eqMode = 'expanded';
+        expandedSprite.visible = false;
+        eqGroup.add(expandedSprite);
+
+        // Label for expanded view
+        const lc = document.createElement('canvas');
+        lc.width = 256; lc.height = 32;
+        const ctx = lc.getContext('2d');
+        ctx.font = 'bold 14px monospace'; ctx.fillStyle = statusHex; ctx.textAlign = 'center';
+        ctx.fillText(eq.name, 128, 16);
+        const labelSprite = new THREE.Sprite(new THREE.SpriteMaterial({
+          map: new THREE.CanvasTexture(lc), transparent: true }));
+        labelSprite.position.set(ex, ey - size, 7);
+        labelSprite.scale.set(8, 1.2, 1);
+        labelSprite.userData.equipment = eq;
+        labelSprite.userData.eqRoom = roomName;
+        labelSprite.userData.eqMode = 'expanded';
+        labelSprite.visible = false;
+        eqGroup.add(labelSprite);
+
+        // 3D label
+        const lc3 = document.createElement('canvas');
+        lc3.width = 256; lc3.height = 32;
+        const ctx3 = lc3.getContext('2d');
+        ctx3.font = 'bold 14px monospace'; ctx3.fillStyle = statusHex; ctx3.textAlign = 'center';
+        ctx3.fillText(eq.name, 128, 16);
+        const label3d = new THREE.Sprite(new THREE.SpriteMaterial({
+          map: new THREE.CanvasTexture(lc3), transparent: true }));
+        label3d.position.set(wx, wy - size, 7 + zOff);
+        label3d.scale.set(8, 1.2, 1);
+        label3d.userData.equipment = eq;
+        label3d.userData.eqRoom = roomName;
+        label3d.userData.eqMode = '3d';
+        label3d.visible = false;
+        eqGroup.add(label3d);
+      });
+      iconPromises.push(p);
+    }
+  }
+
+  Promise.all(iconPromises).then(() => { filterEquipment(); render(); });
+  eqGroup.visible = true;
+  fg.container.add(eqGroup);
+}
+
+function buildAllEquipment() {
+  LEVELS.forEach(l => buildEquipmentForLevel(l));
+  filterEquipment();
+}
+
+let _eqFilterRoom = null;
+let _eqExpandedRoom = null; // room currently expanded in 2D
+let _lastSearchedRoom = null; // {name, level} of last searched room
+let _eqOverlayGroup = new THREE.Group();
+scene.add(_eqOverlayGroup);
+
+function expandEquipmentRoom(roomName, forceExpand) {
+  // Toggle: click same room again to collapse (unless forced)
+  if (!forceExpand && _eqExpandedRoom === roomName) {
+    _eqExpandedRoom = null;
+  } else {
+    _eqExpandedRoom = roomName;
+  }
+
+  // Clear overlay
+  while (_eqOverlayGroup.children.length > 0) {
+    const c = _eqOverlayGroup.children[0];
+    _eqOverlayGroup.remove(c);
+    if (c.geometry) c.geometry.dispose();
+    if (c.material) c.material.dispose();
+  }
+
+  // Draw overlay for expanded room
+  if (_eqExpandedRoom) {
+    // Find room center
+    for (const l of LEVELS) {
+      const data = floorData[l];
+      if (!data) continue;
+      const room = data.rooms.find(r => r.name === _eqExpandedRoom);
+      if (!room) continue;
+      const pw = data.page.width, ph = data.page.height;
+      const [wx, wy] = pdfToWorld(room.center[0], room.center[1], pw, ph);
+
+      const levelKey = l.split('/').pop();
+      const roomEquips = equipment.filter(e => e.room === _eqExpandedRoom && e.level === levelKey);
+      const radius = Math.max(5, roomEquips.length * 1.2);
+
+      // Outer ring
+      const ringGeom = new THREE.RingGeometry(radius - 0.3, radius + 0.3, 48);
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: 0x4a8fd4, transparent: true, opacity: 0.4,
+        side: THREE.DoubleSide, depthWrite: false
+      });
+      const ring = new THREE.Mesh(ringGeom, ringMat);
+      ring.position.set(wx, wy, 5);
+      _eqOverlayGroup.add(ring);
+
+      // Background disc
+      const discGeom = new THREE.CircleGeometry(radius + 1, 48);
+      const discMat = new THREE.MeshBasicMaterial({
+        color: 0x1a2a40, transparent: true, opacity: 0.6,
+        side: THREE.DoubleSide, depthWrite: false
+      });
+      const disc = new THREE.Mesh(discGeom, discMat);
+      disc.position.set(wx, wy, 4.5);
+      _eqOverlayGroup.add(disc);
+
+      // Lines from center to each equipment
+      for (let i = 0; i < roomEquips.length; i++) {
+        const angle = (i / roomEquips.length) * Math.PI * 2 - Math.PI / 2;
+        const ex = wx + Math.cos(angle) * radius;
+        const ey = wy + Math.sin(angle) * radius;
+        const lineGeom = new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(wx, wy, 5.5),
+          new THREE.Vector3(ex, ey, 5.5)
+        ]);
+        const line = new THREE.Line(lineGeom, new THREE.LineBasicMaterial({
+          color: 0x4a8fd4, transparent: true, opacity: 0.3
+        }));
+        _eqOverlayGroup.add(line);
+      }
+      break;
+    }
+  }
+
+  filterEquipment();
+}
+
+function filterEquipment(roomName) {
+  if (roomName !== undefined) _eqFilterRoom = roomName;
+  const showAll = document.getElementById('showEquipment').checked;
+  const activeRoom = _eqExpandedRoom || _eqFilterRoom || (selectedRoom ? selectedRoom.name : null);
+
+  LEVELS.forEach(l => {
+    const eg = equipmentGroups[l];
+    if (!eg) return;
+    eg.children.forEach(sprite => {
+      const mode = sprite.userData.eqMode;
+      const room = sprite.userData.eqRoom;
+
+      if (is3DView) {
+        if (mode === '3d') {
+          if (showAll) sprite.visible = true;
+          else if (activeRoom) sprite.visible = room === activeRoom;
+          else sprite.visible = false;
+        } else {
+          sprite.visible = false;
+        }
+      } else {
+        // 2D mode
+        if (_eqExpandedRoom && room === _eqExpandedRoom) {
+          sprite.visible = mode === 'expanded';
+        } else if (showAll) {
+          sprite.visible = mode === 'collapsed';
+        } else if (activeRoom && room === activeRoom) {
+          sprite.visible = mode === 'collapsed';
+        } else {
+          sprite.visible = false;
+        }
+      }
+    });
+  });
+  render();
+}
+
+function getEquipmentInRoom(roomName, levelKey) {
+  return equipment.filter(e => e.room === roomName && e.level === levelKey);
+}
+
+function switchTo3D() {
+  deselectRoom(); updateInfo();
+  is3DView = true;
+  activeCamera = camera3D;
+  orbitControls.enabled = true;
+  editMode = 'select';
+  document.getElementById('btnEditRoom').classList.remove('active');
+  document.getElementById('btnEraseWalls').classList.remove('active');
+
+  LEVELS.forEach((l, i) => {
+    const fg = floorGroups[l];
+    if (!fg) return;
+    fg.container.visible = true;
+    const align = FLOOR_ALIGN[i] || {x:0,y:0};
+    fg.container.position.set(align.x, align.y, i * FLOOR_SPACING);
+  });
+
+  buildVerticalConnectors();
+  buildCrossFloorGraphEdges();
+  stairConnectors.visible = document.getElementById('showStairs').checked;
+  elevatorConnectors.visible = document.getElementById('showElevators').checked;
+
+  document.querySelectorAll('#floorButtonsInline button').forEach(b => { b.classList.remove('active'); b.style.background = '#2a3a5c'; b.style.color = '#ccc'; });
+  const btn3d = document.getElementById('floorBtn3D');
+  if (btn3d) { btn3d.classList.add('active'); btn3d.style.background = '#4a8fd4'; btn3d.style.color = '#fff'; }
+  document.getElementById('edit-tools').style.display = 'none';
+  render();
+}
+
+function updateCamera2D() {
+  const a = window.innerWidth / window.innerHeight;
+  camera2D.left = -frustumSize*a/2 + panOffset.x;
+  camera2D.right = frustumSize*a/2 + panOffset.x;
+  camera2D.top = frustumSize/2 + panOffset.y;
+  camera2D.bottom = -frustumSize/2 + panOffset.y;
+  camera2D.updateProjectionMatrix();
+}
+
+function render() { renderer.render(scene, activeCamera); }
+let eqAnimTime = 0;
+function animate() {
+  requestAnimationFrame(animate);
+  eqAnimTime += 0.02;
+  // Animate equipment pulse rings
+  const pulseScale = 1.0 + 0.15 * Math.sin(eqAnimTime * 2);
+  const pulseOpacity = 0.25 + 0.2 * Math.sin(eqAnimTime * 2);
+  for (const level in equipmentGroups) {
+    const eg = equipmentGroups[level];
+    if (!eg || !eg.visible) continue;
+    eg.traverse(obj => {
+      if (obj.userData?.isPulse) {
+        obj.scale.set(pulseScale, pulseScale, 1);
+        obj.material.opacity = pulseOpacity;
+      }
+      if (obj.userData?.isLedGlow) {
+        obj.material.opacity = 0.2 + 0.35 * Math.abs(Math.sin(eqAnimTime * 3));
+      }
+      if (obj.userData?.isSteam) {
+        obj.material.opacity = 0.15 + 0.2 * Math.sin(eqAnimTime * 4 + obj.id);
+        obj.position.z = 0.25 + 0.03 * Math.sin(eqAnimTime * 2);
+      }
+      if (obj.userData?.isCoffeeStream) {
+        obj.material.opacity = 0.3 + 0.25 * Math.sin(eqAnimTime * 5);
+      }
+      if (obj.userData?.isScreenBar) {
+        obj.material.opacity = 0.5 + 0.3 * Math.sin(eqAnimTime * 1.5);
+      }
+      if (obj.userData?.isAirFlow) {
+        obj.material.opacity = 0.15 + 0.2 * Math.sin(eqAnimTime * 3 + obj.id * 0.5);
+        obj.position.y += Math.sin(eqAnimTime * 4) * 0.002;
+      }
+      if (obj.userData?.isFanBlade) {
+        obj.rotation.z = eqAnimTime * 2;
+      }
+    });
+  }
+  const needsRender = Object.values(equipmentGroups).some(g => g && g.visible);
+  if (is3DView) {
+    orbitControls.update();
+    // Make stair/elevator symbols face camera
+    stairConnectors.children.forEach(c => { if (c.isGroup) c.lookAt(camera3D.position); });
+    elevatorConnectors.children.forEach(c => { if (c.isGroup) c.lookAt(camera3D.position); });
+    render();
+  } else if (needsRender) {
+    render();
+  }
+}
+function getWorldPos(e) {
+  return new THREE.Vector3((e.clientX/window.innerWidth)*2-1, -(e.clientY/window.innerHeight)*2+1, 0).unproject(activeCamera);
+}
+function vertexSize() { return frustumSize * 0.005; }
+
+function makeHandle(wx, wy, color, sz) {
+  const h = new THREE.Mesh(new THREE.PlaneGeometry(sz*2, sz*2),
+    new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide, depthTest: false }));
+  h.position.set(wx, wy, 5);
+  h.renderOrder = 999;
+  return h;
+}
+
+function showVertexHandles() {
+  hideVertexHandles();
+  if (!selectedRoom) return;
+  const data = floorData[currentLevel];
+  const pw = data.page.width, ph = data.page.height, sz = vertexSize();
+  const seenPos = new Set();
+  selectedRoom.polygon.forEach((pt, idx) => {
+    const [wx,wy] = pdfToWorld(pt[0], pt[1], pw, ph);
+    const posKey = `${Math.round(pt[0]*10)},${Math.round(pt[1]*10)}`;
+    if (seenPos.has(posKey)) return; // skip duplicate position
+    seenPos.add(posKey);
+    const h = makeHandle(wx, wy, 0xff6644, sz);
+    h.userData = { vertexIndex: idx };
+    vertexGroup.add(h); vertexHandles.push(h);
+  });
+  for (let i = 0; i < selectedRoom.polygon.length; i++) {
+    const p1 = selectedRoom.polygon[i], p2 = selectedRoom.polygon[(i+1)%selectedRoom.polygon.length];
+    const [wx,wy] = pdfToWorld((p1[0]+p2[0])/2, (p1[1]+p2[1])/2, pw, ph);
+    const h = makeHandle(wx, wy, 0x44cc66, sz*0.6);
+    h.userData = { midpointAfter: i };
+    vertexGroup.add(h); vertexHandles.push(h);
+  }
+}
+
+function hideVertexHandles() {
+  vertexHandles.forEach(h => { h.geometry.dispose(); h.material.dispose(); vertexGroup.remove(h); });
+  vertexHandles = [];
+}
+
+function selectRoom(mesh) {
+  deselectRoom();
+  selectedMesh = mesh; selectedRoom = mesh.userData;
+  mesh.material.color.setHex(0x4a8fd4); mesh.material.opacity = 0.6;
+  document.getElementById('btnRect').disabled = false;
+  document.getElementById('btnDelete').disabled = false;
+  document.getElementById('btnMerge').disabled = false;
+  document.getElementById('btnSplitH').disabled = false;
+  document.getElementById('btnSplitV').disabled = false;
+  document.getElementById('btnSplitFree').disabled = false;
+  document.getElementById('btnRename').disabled = false;
+  document.getElementById('btnToggleCorridor').disabled = false;
+  document.getElementById('btnWeldVerts').disabled = false;
+  document.getElementById('btnSnapWalls').disabled = false;
+  document.getElementById('btnNudgeU').disabled = false;
+  document.getElementById('btnNudgeD').disabled = false;
+  document.getElementById('btnNudgeL').disabled = false;
+  document.getElementById('btnNudgeR').disabled = false;
+  showVertexHandles(); updateInfo();
+  filterEquipment();
+}
+
+function deselectRoom() {
+  if (selectedMesh) {
+    const levelIdx = LEVELS.indexOf(currentLevel);
+    selectedMesh.material.color.setHex(FLOOR_COLORS[levelIdx]);
+    selectedMesh.material.opacity = 0.4;
+  }
+  selectedMesh = null; selectedRoom = null; hideVertexHandles();
+  _eqFilterRoom = null;
+  _eqExpandedRoom = null;
+  while (_eqOverlayGroup.children.length > 0) { const c = _eqOverlayGroup.children[0]; _eqOverlayGroup.remove(c); if(c.geometry)c.geometry.dispose(); if(c.material)c.material.dispose(); }
+  filterEquipment();
+  document.getElementById('btnRect').disabled = true;
+  document.getElementById('btnDelete').disabled = true;
+  document.getElementById('btnMerge').disabled = true;
+  document.getElementById('btnSplitH').disabled = true;
+  document.getElementById('btnSplitV').disabled = true;
+  document.getElementById('btnSplitFree').disabled = true;
+  document.getElementById('btnRename').disabled = true;
+  document.getElementById('btnToggleCorridor').disabled = true;
+  document.getElementById('btnWeldVerts').disabled = true;
+  document.getElementById('btnSnapWalls').disabled = true;
+  document.getElementById('btnNudgeU').disabled = true;
+  document.getElementById('btnNudgeD').disabled = true;
+  document.getElementById('btnNudgeL').disabled = true;
+  document.getElementById('btnNudgeR').disabled = true;
+}
+
+function updateInfo() {
+  const el = document.getElementById('info-content');
+  if (selectedRoom) {
+    const typeLabel = selectedRoom.type === 'corridor' ? '<span style="color:#cccc44">[CORRIDOR]</span>' : '[ROOM]';
+    const levelKey = currentLevel.split('/').pop();
+    const roomEquip = getEquipmentInRoom(selectedRoom.name, levelKey);
+    let equipHtml = '';
+    if (roomEquip.length > 0) {
+      equipHtml = '<hr style="border-color:#333;margin:6px 0">';
+      for (const eq of roomEquip) {
+        const sc = eq.status === 'running' ? '#00e676' : eq.status === 'warning' ? '#ffab00' : '#ff1744';
+        equipHtml += `<div style="margin:4px 0;padding:4px;background:rgba(0,230,118,0.08);border-left:3px solid ${sc};padding-left:8px">`;
+        equipHtml += `<b style="color:${sc}">${eq.name}</b> <span style="color:${sc};font-size:10px">${eq.status.toUpperCase()}</span><br>`;
+        if (eq.details) {
+          if (eq.type === 'coffee_machine') {
+            equipHtml += `<span style="font-size:11px;color:#aaa">${eq.details.model || ''}<br>${eq.details.capacity_cups_h || '?'} cups/h${eq.details.milk_system ? ' | Milk' : ''}</span>`;
+          } else if (eq.type === 'air_conditioning') {
+            equipHtml += `<span style="font-size:11px;color:#aaa">${eq.details.model || ''}<br>${eq.details.cooling_kw || '?'}kW cooling / ${eq.details.area_m2 || '?'}m²${eq.details.heating ? ' | Heat pump' : ''}</span>`;
+          } else {
+            equipHtml += `<span style="font-size:11px;color:#aaa">${eq.details.model || ''}<br>${eq.details.power_kw || ''}kW / ${eq.details.pressure_bar || ''}bar</span>`;
+          }
+        }
+        if (eq.inspection) {
+          const lastDate = new Date(eq.inspection.last_inspected);
+          const nextDate = new Date(lastDate.getTime() + eq.inspection.interval_days * 86400000);
+          const now = new Date();
+          const daysUntil = Math.ceil((nextDate - now) / 86400000);
+          const overdue = daysUntil < 0;
+          const urgentColor = overdue ? '#ff1744' : daysUntil < 14 ? '#ffab00' : '#aaa';
+          equipHtml += `<div style="margin-top:3px;font-size:10px;color:${urgentColor}">`;
+          equipHtml += `Last: ${eq.inspection.last_inspected}`;
+          equipHtml += overdue ? ` <b>OVERDUE ${-daysUntil}d</b>` : ` (next in ${daysUntil}d)`;
+          equipHtml += `<br>By: ${eq.inspection.inspector}`;
+          if (eq.inspection.notes) equipHtml += `<br><i>${eq.inspection.notes}</i>`;
+          equipHtml += '</div>';
+        }
+        equipHtml += '</div>';
+        // Show inspection notes for this equipment
+        const eqNotes = inspectionNotes.filter(n => n.equipment_id === eq.id);
+        if (eqNotes.length > 0) {
+          equipHtml += '<div style="margin-top:4px;font-size:10px;color:#aaa;max-height:80px;overflow-y:auto">';
+          for (const note of eqNotes.slice(-5)) {
+            equipHtml += `<div style="border-left:2px solid #4a6fa5;padding-left:4px;margin:2px 0">`;
+            equipHtml += `<span style="color:#666">${note.date} ${note.author||''}</span><br>${note.text}</div>`;
+          }
+          equipHtml += '</div>';
+        }
+        equipHtml += `<button onclick="window._showNoteForm('${eq.id}')" style="margin-top:3px;padding:2px 6px;background:#2a3a5c;color:#8ab4f8;border:1px solid #4a6fa5;border-radius:3px;cursor:pointer;font-size:10px">+ Add Note</button>`;
+        equipHtml += '<div id="noteFormContainer"></div>';
+      }
+    }
+    el.innerHTML = `<b>${selectedRoom.name||'Room #'+selectedRoom.id}</b> ${typeLabel}<br>Vertices: ${selectedRoom.polygon.length}${equipHtml}<br>
+      <span style="color:#ff6644">Drag orange = move</span><br>
+      <span style="color:#44cc66">Click green = add vertex</span><br>
+      <span style="color:#aaa">Right-click orange = remove</span>`;
+  } else {
+    el.innerHTML = 'Click a room to see details. Scroll to zoom, drag to pan.';
+  }
+}
+
+function rebuildRoom() {
+  if (!selectedRoom || !selectedMesh) return;
+  const data = floorData[currentLevel];
+  const pw = data.page.width, ph = data.page.height, pts = selectedRoom.polygon;
+  const shape = new THREE.Shape();
+  const [sx,sy] = pdfToWorld(pts[0][0],pts[0][1],pw,ph); shape.moveTo(sx,sy);
+  for (let i=1;i<pts.length;i++){const[px,py]=pdfToWorld(pts[i][0],pts[i][1],pw,ph);shape.lineTo(px,py);}
+  shape.closePath();
+  selectedMesh.geometry.dispose(); selectedMesh.geometry = new THREE.ShapeGeometry(shape);
+  const fg = floorGroups[currentLevel];
+  fg.roomGroup.children.forEach(c => {
+    if (c.userData?.roomOutline && c.userData.roomId === selectedRoom.id) {
+      const op = pts.map(p => { const[ox,oy]=pdfToWorld(p[0],p[1],pw,ph); return new THREE.Vector3(ox,oy,2); });
+      op.push(op[0].clone()); c.geometry.dispose(); c.geometry = new THREE.BufferGeometry().setFromPoints(op);
+    }
+  });
+}
+
+// Undo
+function pushUndo() {
+  const data = floorData[currentLevel];
+  undoStack.push({ level: currentLevel,
+    rooms: JSON.parse(JSON.stringify(data.rooms)),
+    walls: JSON.parse(JSON.stringify(data.walls)) });
+  if (undoStack.length > MAX_UNDO) undoStack.shift();
+  document.getElementById('btnUndo').disabled = false;
+}
+function doUndo() {
+  if (undoStack.length === 0) return;
+  const snap = undoStack.pop();
+  if (snap.level !== currentLevel) switchToFloor(snap.level);
+  const data = floorData[currentLevel];
+  data.rooms = snap.rooms; data.walls = snap.walls;
+  // Rebuild
+  const fg = floorGroups[currentLevel];
+  fg.meshes.length = 0;
+  const toRm = [...fg.roomGroup.children]; toRm.forEach(c=>{fg.roomGroup.remove(c);if(c.geometry)c.geometry.dispose();if(c.material)c.material.dispose();});
+  const wRm = [...fg.wallGroup.children]; wRm.forEach(c=>{fg.wallGroup.remove(c);c.geometry.dispose();c.material.dispose();});
+  const pw = data.page.width, ph = data.page.height;
+  createLineSegments(data.walls, 0x888888, fg.wallGroup, 0.6, pw, ph);
+  createRoomPolygons(data.rooms, fg.roomGroup, fg.meshes, FLOOR_COLORS[LEVELS.indexOf(currentLevel)], pw, ph);
+  const lRm = [...fg.labelGroup.children]; lRm.forEach(c=>{fg.labelGroup.remove(c);if(c.geometry)c.geometry.dispose();if(c.material)c.material.dispose();});
+  createLabels(data.labels, fg.labelGroup, pw, ph);
+  deselectRoom(); updateInfo();
+  document.getElementById('btnUndo').disabled = undoStack.length === 0;
+  render();
+}
+
+// Wall erase
+function distPtSeg(px,py,x1,y1,x2,y2) {
+  const dx=x2-x1,dy=y2-y1,l2=dx*dx+dy*dy;
+  if(l2===0)return Math.hypot(px-x1,py-y1);
+  let t=((px-x1)*dx+(py-y1)*dy)/l2; t=Math.max(0,Math.min(1,t));
+  return Math.hypot(px-(x1+t*dx),py-(y1+t*dy));
+}
+function findNearestWall(wx,wy,maxDist) {
+  const data = floorData[currentLevel];
+  const pw=data.page.width,ph=data.page.height;
+  const[px,py]=worldToPdf(wx,wy,pw,ph);
+  let best=-1,bd=maxDist;
+  for(let i=0;i<data.walls.length;i++){
+    const s=data.walls[i];
+    const d=distPtSeg(px,py,s[0][0],s[0][1],s[1][0],s[1][1]);
+    if(d<bd){bd=d;best=i;}
+  }
+  return best;
+}
+function highlightWall(idx) {
+  if(eraseHighlight){scene.remove(eraseHighlight);eraseHighlight.geometry.dispose();eraseHighlight.material.dispose();eraseHighlight=null;}
+  if(idx<0){eraseHoverIdx=-1;return;}
+  eraseHoverIdx=idx;
+  const data=floorData[currentLevel]; const s=data.walls[idx];
+  const pw=data.page.width,ph=data.page.height;
+  const[x1,y1]=pdfToWorld(s[0][0],s[0][1],pw,ph);
+  const[x2,y2]=pdfToWorld(s[1][0],s[1][1],pw,ph);
+  eraseHighlight=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(x1,y1,6),new THREE.Vector3(x2,y2,6)]),
+    new THREE.LineBasicMaterial({color:0xff0000}));
+  scene.add(eraseHighlight);
+}
+function eraseWall(idx) {
+  const data=floorData[currentLevel];
+  if(idx<0||idx>=data.walls.length)return;
+  pushUndo();
+  data.walls.splice(idx,1);
+  const fg=floorGroups[currentLevel];
+  const wRm=[...fg.wallGroup.children];wRm.forEach(c=>{fg.wallGroup.remove(c);c.geometry.dispose();c.material.dispose();});
+  createLineSegments(data.walls,0x888888,fg.wallGroup,0.6,data.page.width,data.page.height);
+  highlightWall(-1); isDirty=true; render();
+}
+
+// Floor buttons
+// Building selector - reloads page with different building
+const sel = document.getElementById('buildingSelect');
+for (const [id, bld] of Object.entries(BUILDINGS)) {
+  const opt = document.createElement('option');
+  opt.value = id; opt.textContent = bld.name;
+  if (id === currentBuilding) opt.selected = true;
+  sel.appendChild(opt);
+}
+sel.addEventListener('change', (e) => {
+  window.location.href = '?building=' + e.target.value;
+});
+
+// Floor buttons
+const floorBtnContainer = document.getElementById('floorButtonsInline');
+BLDG.levels.forEach((l, i) => {
+  const btn = document.createElement('button');
+  btn.textContent = BLDG.labels[i];
+  btn.className = i === 0 ? '' : '';
+  btn.style.cssText = 'background:#2a3a5c;color:#ccc;border:1px solid #4a6fa5;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12px;';
+  btn.addEventListener('click', () => switchToFloor(currentBuilding + '/' + l));
+  floorBtnContainer.appendChild(btn);
+});
+// 3D view button
+const btn3D = document.createElement('button');
+btn3D.textContent = '3D View';
+btn3D.id = 'floorBtn3D';
+btn3D.className = 'active';
+btn3D.style.cssText = 'background:#4a8fd4;color:#fff;border:1px solid #4a6fa5;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12px;';
+btn3D.addEventListener('click', () => switchTo3D());
+floorBtnContainer.appendChild(btn3D);
+
+document.querySelector('#info-panel h3').textContent = BLDG.name;
+
+// Mouse events
+canvas.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+  if (is3DView || !selectedRoom || editMode !== 'editRoom') return;
+  mouse.x=(e.clientX/window.innerWidth)*2-1; mouse.y=-(e.clientY/window.innerHeight)*2+1;
+  raycaster.setFromCamera(mouse, activeCamera);
+  const vh=raycaster.intersectObjects(vertexHandles);
+  if(vh.length>0 && vh[0].object.userData.vertexIndex!==undefined) {
+    if(selectedRoom.polygon.length>3){pushUndo();selectedRoom.polygon.splice(vh[0].object.userData.vertexIndex,1);rebuildRoom();showVertexHandles();updateInfo();isDirty=true;render();}
+  }
+});
+
+canvas.addEventListener('mousedown', (e) => {
+  if (e.button !== 0) return;
+  if (is3DView) return; // orbit controls handle 3D
+  mouse.x=(e.clientX/window.innerWidth)*2-1; mouse.y=-(e.clientY/window.innerHeight)*2+1;
+
+  if (editMode==='eraseWalls') { if(eraseHoverIdx>=0) eraseWall(eraseHoverIdx); return; }
+
+  // Draw wall mode
+  if (drawWallMode) {
+    const wp = getWorldPos(e);
+    const data = floorData[currentLevel];
+    const [px,py] = worldToPdf(wp.x, wp.y, data.page.width, data.page.height);
+    const pt = [Math.round(px*10)/10, Math.round(py*10)/10];
+
+    if (drawWallPoints.length > 0) {
+      // Add wall segment from last point to this point
+      const prev = drawWallPoints[drawWallPoints.length-1];
+      // Snap to H/V if close
+      if (Math.abs(pt[0]-prev[0]) < Math.abs(pt[1]-prev[1])*0.3) pt[0] = prev[0]; // vertical
+      else if (Math.abs(pt[1]-prev[1]) < Math.abs(pt[0]-prev[0])*0.3) pt[1] = prev[1]; // horizontal
+
+      data.walls.push([prev, pt]);
+
+      // Rebuild wall display
+      const fg = floorGroups[currentLevel];
+      while(fg.wallGroup.children.length>0){const c=fg.wallGroup.children[0];fg.wallGroup.remove(c);c.geometry.dispose();c.material.dispose();}
+      createLineSegments(data.walls, 0x888888, fg.wallGroup, 0.6, data.page.width, data.page.height);
+      isDirty = true;
+    }
+
+    drawWallPoints.push(pt);
+
+    // Show dot at click point
+    if (drawWallPreview) { scene.remove(drawWallPreview); drawWallPreview.geometry.dispose(); drawWallPreview.material.dispose(); }
+    const dot = new THREE.Mesh(new THREE.CircleGeometry(0.8, 8), new THREE.MeshBasicMaterial({color:0x00ff00, side:THREE.DoubleSide, depthTest:false}));
+    dot.position.set(wp.x, wp.y, 6); dot.renderOrder = 999;
+    drawWallPreview = dot; scene.add(dot);
+
+    render();
+    return;
+  }
+
+  // New room mode
+  if (newRoomMode) {
+    const wp = getWorldPos(e);
+    const data = floorData[currentLevel];
+    const [px,py] = worldToPdf(wp.x, wp.y, data.page.width, data.page.height);
+    if (!newRoomCorner1) {
+      newRoomCorner1 = [px, py];
+      document.getElementById('btnNewRoom').textContent = 'Click 2nd corner...';
+      document.getElementById('info-content').innerHTML = '<b>New Room:</b> Click second corner';
+    } else {
+      // Create room from two corners
+      pushUndo();
+      const c1 = newRoomCorner1, c2 = [px, py];
+      const minX = Math.min(c1[0],c2[0]), maxX = Math.max(c1[0],c2[0]);
+      const minY = Math.min(c1[1],c2[1]), maxY = Math.max(c1[1],c2[1]);
+      const poly = [[minX,minY],[maxX,minY],[maxX,maxY],[minX,maxY]];
+
+      const fg = floorGroups[currentLevel];
+      const newId = data.rooms.length > 0 ? Math.max(...data.rooms.map(r=>r.id)) + 1 : 0;
+      const name = prompt('Room name:', 'New_' + newId) || 'New_' + newId;
+      const newRoom = {
+        id: newId, name: name,
+        type: 'room',
+        area: Math.round((maxX-minX)*(maxY-minY)),
+        center: [Math.round((minX+maxX)/2*100)/100, Math.round((minY+maxY)/2*100)/100],
+        polygon: poly,
+      };
+      data.rooms.push(newRoom);
+
+      const pw = data.page.width, ph = data.page.height;
+      const levelIdx = LEVELS.indexOf(currentLevel);
+      const shape = new THREE.Shape();
+      const [sx,sy] = pdfToWorld(poly[0][0],poly[0][1],pw,ph); shape.moveTo(sx,sy);
+      for (let i=1;i<poly.length;i++){const[ppx,ppy]=pdfToWorld(poly[i][0],poly[i][1],pw,ph);shape.lineTo(ppx,ppy);}
+      shape.closePath();
+      const mesh = new THREE.Mesh(new THREE.ShapeGeometry(shape),
+        new THREE.MeshBasicMaterial({color:FLOOR_COLORS[levelIdx],transparent:true,opacity:0.4,side:THREE.DoubleSide}));
+      mesh.userData = newRoom; mesh.position.z = 1;
+      fg.roomGroup.add(mesh); fg.meshes.push(mesh);
+      const op = poly.map(p=>{const[ox,oy]=pdfToWorld(p[0],p[1],pw,ph);return new THREE.Vector3(ox,oy,2);});
+      op.push(op[0].clone());
+      const outline = new THREE.Line(new THREE.BufferGeometry().setFromPoints(op),
+        new THREE.LineBasicMaterial({color:0x4a6fa5,transparent:true,opacity:0.6}));
+      outline.userData = {roomOutline:true, roomId:newId};
+      fg.roomGroup.add(outline);
+
+      // Clean up
+      if (newRoomPreview) { scene.remove(newRoomPreview); newRoomPreview.geometry.dispose(); newRoomPreview.material.dispose(); newRoomPreview = null; }
+      newRoomMode = false; newRoomCorner1 = null;
+      document.getElementById('btnNewRoom').classList.remove('active');
+      document.getElementById('btnNewRoom').textContent = 'New Room';
+      canvas.style.cursor = 'default';
+      selectRoom(mesh);
+      editMode = 'editRoom';
+      document.getElementById('btnEditRoom').classList.add('active');
+      isDirty = true;
+    }
+    render();
+    return;
+  }
+
+  // Freeform split: capture two click points
+  if (splitFreeMode && selectedRoom) {
+    const wp = getWorldPos(e);
+    const data = floorData[currentLevel];
+    const [px,py] = worldToPdf(wp.x, wp.y, data.page.width, data.page.height);
+
+    if (!splitPoint1) {
+      splitPoint1 = [px, py];
+      document.getElementById('btnSplitFree').textContent = 'Click 2nd point...';
+      document.getElementById('info-content').innerHTML = '<b>Split:</b> Click second point on room edge';
+      // Show first point marker
+      if (splitLine) { scene.remove(splitLine); splitLine.geometry.dispose(); splitLine.material.dispose(); }
+      const dot = new THREE.Mesh(new THREE.CircleGeometry(1, 8), new THREE.MeshBasicMaterial({color:0xff0000,side:THREE.DoubleSide}));
+      dot.position.set(wp.x, wp.y, 6);
+      splitLine = dot;
+      scene.add(splitLine);
+      render();
+    } else {
+      // Second point - do the split
+      const p2 = [px, py];
+      if (splitLine) { scene.remove(splitLine); splitLine.geometry.dispose(); splitLine.material.dispose(); splitLine = null; }
+      doFreeformSplit(splitPoint1, p2);
+      splitFreeMode = false; splitPoint1 = null;
+      document.getElementById('btnSplitFree').classList.remove('active');
+      document.getElementById('btnSplitFree').textContent = 'Split Free';
+    }
+    return;
+  }
+
+  if (editMode==='editRoom') {
+    if (selectedRoom) {
+      raycaster.setFromCamera(mouse, activeCamera);
+      const vh=raycaster.intersectObjects(vertexHandles);
+      if(vh.length>0){
+        const hit=vh[0].object;
+
+        // Weld mode: click two vertices to merge them
+        if(weldMode && hit.userData.vertexIndex!==undefined){
+          if(weldFirstIdx===null){
+            weldFirstIdx=hit.userData.vertexIndex;
+            hit.material.color.setHex(0xff0000);
+            document.getElementById('btnWeldVerts').textContent='Click 2nd vertex...';
+            document.getElementById('info-content').innerHTML='<b>Weld:</b> Click second vertex to merge';
+            render();
+          } else {
+            const a=weldFirstIdx, b=hit.userData.vertexIndex;
+            if(a!==b){
+              pushUndo();
+              // Weld: move B to A's position, keep both vertices
+              // This creates a concave polygon (pinch at A's position)
+              // B's neighbors now route through A, forming L/U shapes
+              const pA=selectedRoom.polygon[a];
+              selectedRoom.polygon[b]=[pA[0],pA[1]];
+              rebuildRoom();showVertexHandles();updateInfo();isDirty=true;
+            }
+            weldMode=false; weldFirstIdx=null;
+            document.getElementById('btnWeldVerts').classList.remove('active');
+            document.getElementById('btnWeldVerts').textContent='Weld Vertices';
+            render();
+          }
+          return;
+        }
+
+        if(hit.userData.midpointAfter!==undefined){
+          pushUndo();
+          const i=hit.userData.midpointAfter,p1=selectedRoom.polygon[i],p2=selectedRoom.polygon[(i+1)%selectedRoom.polygon.length];
+          selectedRoom.polygon.splice(i+1,0,[Math.round((p1[0]+p2[0])/2*100)/100,Math.round((p1[1]+p2[1])/2*100)/100]);
+          rebuildRoom();showVertexHandles();updateInfo();isDirty=true;render();
+          const nh=vertexHandles.filter(h=>h.userData.vertexIndex===i+1);
+          if(nh.length>0){dragVertex=nh[0];canvas.style.cursor='crosshair';}
+          return;
+        }
+        pushUndo(); dragVertex=hit; canvas.style.cursor='crosshair'; return;
+      }
+    }
+    raycaster.setFromCamera(mouse, activeCamera);
+    const fg = floorGroups[currentLevel];
+    const rh=raycaster.intersectObjects(fg.meshes);
+    if(rh.length>0){
+      if(mergeSource){executeMerge(rh[0].object);return;}
+      selectRoom(rh[0].object);render();return;
+    }
+    if(mergeSource){cancelMerge();render();return;}
+    if(selectedRoom){deselectRoom();updateInfo();render();return;}
+  } else {
+    raycaster.setFromCamera(mouse, activeCamera);
+
+    // Check for equipment icon click (2D collapsed icons)
+    if (!is3DView) {
+      const eg = equipmentGroups[currentLevel];
+      if (eg) {
+        const eqSprites = eg.children.filter(s => s.visible && s.userData.eqMode === 'collapsed' && s.isSprite);
+        const eqHits = raycaster.intersectObjects(eqSprites);
+        if (eqHits.length > 0) {
+          expandEquipmentRoom(eqHits[0].object.userData.eqRoom);
+          return;
+        }
+      }
+      // Click outside expanded room -> collapse
+      if (_eqExpandedRoom) {
+        expandEquipmentRoom(_eqExpandedRoom); // toggle off
+        return;
+      }
+    }
+
+    // Click room to show info
+    const fg = floorGroups[currentLevel];
+    if (fg) {
+      const rh = raycaster.intersectObjects(fg.meshes);
+      if (rh.length > 0) {
+        const room = rh[0].object.userData;
+        document.getElementById('info-content').innerHTML = `<b>${room.name||'Room #'+room.id}</b><br>Area: ${Math.round(room.area)} sq units<br>Vertices: ${room.polygon.length}`;
+        return;
+      }
+    }
+  }
+
+  isPanning=true; panStart.set(e.clientX,e.clientY); canvas.style.cursor='grabbing';
+});
+
+canvas.addEventListener('mousemove', (e) => {
+  if (is3DView) return;
+  if(dragVertex){
+    const wp=getWorldPos(e);
+    const data=floorData[currentLevel],pw=data.page.width,ph=data.page.height;
+    let[px,py]=worldToPdf(wp.x,wp.y,pw,ph);
+    const idx=dragVertex.userData.vertexIndex;
+    const poly=selectedRoom.polygon;
+    const snap=document.getElementById('snapRight').checked;
+
+    if(snap && poly.length===4){
+      // Rectangle drag: moving corner 0 also moves corners 1 and 3
+      // Vertices go: 0(TL) 1(TR) 2(BR) 3(BL) or similar order
+      // Adjacent vertices share one coordinate with the dragged vertex
+      const prevIdx=(idx-1+4)%4, nextIdx=(idx+1)%4, oppIdx=(idx+2)%4;
+      // prev shares one axis, next shares the other
+      // Figure out which: compare prev to opposite
+      if(Math.abs(poly[prevIdx][0]-poly[oppIdx][0]) < Math.abs(poly[prevIdx][1]-poly[oppIdx][1])){
+        // prev and opp share X -> prev-to-idx edge is horizontal -> prev gets new Y
+        poly[prevIdx][1]=py;
+        poly[nextIdx][0]=px;
+      } else {
+        // prev and opp share Y -> prev-to-idx edge is vertical -> prev gets new X
+        poly[prevIdx][0]=px;
+        poly[nextIdx][1]=py;
+      }
+    }
+
+    px=Math.round(px*100)/100; py=Math.round(py*100)/100;
+    poly[idx]=[px,py];
+    const[snappedWx,snappedWy]=pdfToWorld(px,py,pw,ph);
+    dragVertex.position.set(snappedWx,snappedWy,5);
+    // Update other vertex handle positions if snap moved them
+    if(snap && poly.length===4){
+      vertexHandles.forEach(h => {
+        if(h.userData.vertexIndex!==undefined && h.userData.vertexIndex!==idx){
+          const p=poly[h.userData.vertexIndex];
+          const[wx,wy]=pdfToWorld(p[0],p[1],pw,ph);
+          h.position.set(wx,wy,5);
+        }
+      });
+    }
+    rebuildRoom();isDirty=true;render();return;
+  }
+  if(isPanning){
+    const dx=(e.clientX-panStart.x)/window.innerWidth*frustumSize*(window.innerWidth/window.innerHeight);
+    const dy=-(e.clientY-panStart.y)/window.innerHeight*frustumSize;
+    panOffset.x-=dx;panOffset.y-=dy;panStart.set(e.clientX,e.clientY);updateCamera2D();render();return;
+  }
+  mouse.x=(e.clientX/window.innerWidth)*2-1;mouse.y=-(e.clientY/window.innerHeight)*2+1;
+  raycaster.setFromCamera(mouse,activeCamera);
+
+  // Draw wall preview line
+  if(drawWallMode && drawWallPoints.length > 0){
+    const wp = getWorldPos(e);
+    const data = floorData[currentLevel];
+    const pw=data.page.width, ph=data.page.height;
+    const [px,py] = worldToPdf(wp.x, wp.y, pw, ph);
+    const prev = drawWallPoints[drawWallPoints.length-1];
+    let snapX = px, snapY = py;
+    if (Math.abs(snapX-prev[0]) < Math.abs(snapY-prev[1])*0.3) snapX = prev[0];
+    else if (Math.abs(snapY-prev[1]) < Math.abs(snapX-prev[0])*0.3) snapY = prev[1];
+    const [wx1,wy1] = pdfToWorld(prev[0], prev[1], pw, ph);
+    const [wx2,wy2] = pdfToWorld(snapX, snapY, pw, ph);
+    if(drawWallPreview) { scene.remove(drawWallPreview); drawWallPreview.geometry.dispose(); drawWallPreview.material.dispose(); }
+    const geom = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(wx1,wy1,6), new THREE.Vector3(wx2,wy2,6)]);
+    drawWallPreview = new THREE.Line(geom, new THREE.LineBasicMaterial({color:0x00ff00, depthTest:false}));
+    drawWallPreview.renderOrder = 999;
+    scene.add(drawWallPreview);
+    canvas.style.cursor = 'crosshair';
+    render(); return;
+  }
+  if(newRoomMode && newRoomCorner1){
+    const wp=getWorldPos(e);
+    const data=floorData[currentLevel],pw=data.page.width,ph=data.page.height;
+    const[px,py]=worldToPdf(wp.x,wp.y,pw,ph);
+    const c=newRoomCorner1;
+    const[x1,y1]=pdfToWorld(Math.min(c[0],px),Math.min(c[1],py),pw,ph);
+    const[x2,y2]=pdfToWorld(Math.max(c[0],px),Math.max(c[1],py),pw,ph);
+    if(newRoomPreview){scene.remove(newRoomPreview);newRoomPreview.geometry.dispose();newRoomPreview.material.dispose();}
+    newRoomPreview=new THREE.Line(new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(x1,y1,6),new THREE.Vector3(x2,y1,6),new THREE.Vector3(x2,y2,6),
+      new THREE.Vector3(x1,y2,6),new THREE.Vector3(x1,y1,6)]),
+      new THREE.LineBasicMaterial({color:0x00ff00}));
+    scene.add(newRoomPreview);render();return;
+  }
+  if(editMode==='eraseWalls'){
+    const wp=getWorldPos(e);const md=frustumSize*0.005;
+    highlightWall(findNearestWall(wp.x,wp.y,md));
+    canvas.style.cursor=eraseHoverIdx>=0?'crosshair':'default';render();return;
+  }
+  if(selectedRoom){canvas.style.cursor=raycaster.intersectObjects(vertexHandles).length>0?'crosshair':'default';return;}
+  const fg=floorGroups[currentLevel];
+  if(fg){
+    const hits=raycaster.intersectObjects(fg.meshes);
+    canvas.style.cursor=hits.length>0?'pointer':'default';
+    if(hits.length>0){
+      const r=hits[0].object.userData;
+      document.getElementById('info-content').innerHTML=`<b>${r.name||'#'+r.id}</b>`;
+    }
+  }
+});
+
+canvas.addEventListener('mouseup', () => {
+  if(dragVertex){dragVertex=null;showVertexHandles();updateInfo();render();return;}
+  isPanning=false;canvas.style.cursor='default';
+});
+
+canvas.addEventListener('wheel', (e) => {
+  if(is3DView)return;
+  e.preventDefault();
+  frustumSize*=e.deltaY>0?1.1:0.9;
+  const maxZoom = Math.max(floorData[LEVELS[0]]?.page?.width||400, floorData[LEVELS[0]]?.page?.height||400) * 1.5;
+  frustumSize=Math.max(10,Math.min(maxZoom,frustumSize));
+  updateCamera2D();if(selectedRoom)showVertexHandles();render();
+}, {passive:false});
+
+// Touch pinch-to-zoom for mobile
+let touchDist = 0;
+canvas.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 2) {
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    touchDist = Math.sqrt(dx*dx + dy*dy);
+  }
+}, {passive: true});
+canvas.addEventListener('touchmove', (e) => {
+  if (is3DView) return;
+  if (e.touches.length === 2) {
+    e.preventDefault();
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    const newDist = Math.sqrt(dx*dx + dy*dy);
+    if (touchDist > 0) {
+      frustumSize *= touchDist / newDist;
+      const maxZoom = Math.max(floorData[LEVELS[0]]?.page?.width||400, floorData[LEVELS[0]]?.page?.height||400) * 1.5;
+      frustumSize = Math.max(10, Math.min(maxZoom, frustumSize));
+      updateCamera2D(); render();
+    }
+    touchDist = newDist;
+  }
+}, {passive: false});
+
+// Layer toggles
+document.getElementById('showWalls').addEventListener('change', (e) => {
+  LEVELS.forEach(l=>{if(floorGroups[l])floorGroups[l].wallGroup.visible=e.target.checked;}); render();
+});
+document.getElementById('showDoors').addEventListener('change', (e) => {
+  LEVELS.forEach(l=>{if(floorGroups[l])floorGroups[l].doorGroup.visible=e.target.checked;}); render();
+});
+document.getElementById('showRooms').addEventListener('change', (e) => {
+  LEVELS.forEach(l=>{if(floorGroups[l])floorGroups[l].roomGroup.visible=e.target.checked;}); vertexGroup.visible=e.target.checked; render();
+});
+document.getElementById('showLabels').addEventListener('change', (e) => {
+  LEVELS.forEach(l=>{if(floorGroups[l])floorGroups[l].labelGroup.visible=e.target.checked;}); render();
+});
+document.getElementById('showGraph').addEventListener('change', (e) => {
+  LEVELS.forEach(l=>{if(floorGroups[l])floorGroups[l].graphGroup.visible=e.target.checked;});
+  crossFloorGraphGroup.visible = e.target.checked && is3DView;
+  render();
+});
+document.getElementById('showWalkable').addEventListener('change', (e) => {
+  LEVELS.forEach(l=>{if(floorGroups[l] && floorGroups[l].walkableGroup) floorGroups[l].walkableGroup.visible=e.target.checked;});
+  render();
+});
+document.getElementById('showStairs').addEventListener('change', (e) => {
+  stairConnectors.visible = e.target.checked && is3DView; render();
+});
+document.getElementById('showElevators').addEventListener('change', (e) => {
+  elevatorConnectors.visible = e.target.checked && is3DView; render();
+});
+document.getElementById('showEquipment').addEventListener('change', () => filterEquipment());
+
+// Edit buttons
+document.getElementById('btnUndo').addEventListener('click', ()=>{doUndo();});
+document.getElementById('btnRect').addEventListener('click', () => {
+  if(!selectedRoom)return; pushUndo();
+  const pts=selectedRoom.polygon,xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]);
+  selectedRoom.polygon=[[Math.min(...xs),Math.min(...ys)],[Math.max(...xs),Math.min(...ys)],[Math.max(...xs),Math.max(...ys)],[Math.min(...xs),Math.max(...ys)]];
+  rebuildRoom();showVertexHandles();updateInfo();isDirty=true;render();
+});
+document.getElementById('btnDelete').addEventListener('click', () => {
+  if(!selectedRoom)return; pushUndo();
+  const data=floorData[currentLevel]; const fg=floorGroups[currentLevel];
+  const idx=data.rooms.findIndex(r=>r.id===selectedRoom.id);
+  if(idx>=0)data.rooms.splice(idx,1);
+  const mi=fg.meshes.indexOf(selectedMesh);if(mi>=0)fg.meshes.splice(mi,1);
+  fg.roomGroup.remove(selectedMesh);selectedMesh.geometry.dispose();selectedMesh.material.dispose();
+  fg.roomGroup.children.filter(c=>c.userData?.roomOutline&&c.userData.roomId===selectedRoom.id)
+    .forEach(c=>{fg.roomGroup.remove(c);c.geometry.dispose();c.material.dispose();});
+  deselectRoom();updateInfo();isDirty=true;render();
+});
+function cancelMerge() {
+  if (mergeSourceMesh) {
+    const li = LEVELS.indexOf(currentLevel);
+    mergeSourceMesh.material.color.setHex(FLOOR_COLORS[li]);
+    mergeSourceMesh.material.opacity = 0.4;
+  }
+  mergeSource = null; mergeSourceMesh = null;
+  document.getElementById('btnMerge').classList.remove('active');
+  document.getElementById('btnMerge').textContent = 'Merge Rooms';
+}
+
+function executeMerge(targetMesh) {
+  const targetRoom = targetMesh.userData;
+  if (targetRoom.id === mergeSource.id) { cancelMerge(); return; }
+  pushUndo();
+  const allPts = [...mergeSource.polygon, ...targetRoom.polygon];
+  const xs = allPts.map(p=>p[0]), ys = allPts.map(p=>p[1]);
+  targetRoom.polygon = [
+    [Math.min(...xs),Math.min(...ys)],[Math.max(...xs),Math.min(...ys)],
+    [Math.max(...xs),Math.max(...ys)],[Math.min(...xs),Math.max(...ys)]];
+  targetRoom.name = mergeSource.name + '+' + targetRoom.name;
+  targetRoom.center = [(Math.min(...xs)+Math.max(...xs))/2,(Math.min(...ys)+Math.max(...ys))/2];
+  selectedMesh = targetMesh; selectedRoom = targetRoom;
+  rebuildRoom();
+  // Delete source
+  const data = floorData[currentLevel], fg = floorGroups[currentLevel];
+  const idx = data.rooms.findIndex(r=>r.id===mergeSource.id);
+  if(idx>=0) data.rooms.splice(idx,1);
+  const mi = fg.meshes.indexOf(mergeSourceMesh); if(mi>=0) fg.meshes.splice(mi,1);
+  fg.roomGroup.remove(mergeSourceMesh); mergeSourceMesh.geometry.dispose(); mergeSourceMesh.material.dispose();
+  fg.roomGroup.children.filter(c=>c.userData?.roomOutline&&c.userData.roomId===mergeSource.id)
+    .forEach(c=>{fg.roomGroup.remove(c);c.geometry.dispose();c.material.dispose();});
+  cancelMerge();
+  selectRoom(targetMesh);
+  isDirty = true; render();
+}
+
+document.getElementById('btnMerge').addEventListener('click', () => {
+  if (mergeSource) { cancelMerge(); render(); return; } // click again to cancel
+  if (!selectedRoom) return;
+  mergeSource = selectedRoom;
+  mergeSourceMesh = selectedMesh;
+  selectedMesh.material.color.setHex(0xff6644); selectedMesh.material.opacity = 0.6;
+  hideVertexHandles();
+  document.getElementById('btnMerge').classList.add('active');
+  document.getElementById('btnMerge').textContent = 'Click 2nd...';
+  document.getElementById('info-content').innerHTML = '<b>Merge:</b> Click second room to merge with <b>'+mergeSource.name+'</b>';
+});
+function splitRoom(direction) {
+  if (!selectedRoom) return;
+  pushUndo();
+  const pts = selectedRoom.polygon;
+  const xs = pts.map(p=>p[0]), ys = pts.map(p=>p[1]);
+  const minX=Math.min(...xs), maxX=Math.max(...xs), minY=Math.min(...ys), maxY=Math.max(...ys);
+  const midX = (minX+maxX)/2, midY = (minY+maxY)/2;
+
+  let poly1, poly2;
+  if (direction === 'h') {
+    // Split horizontally at midY
+    poly1 = [[minX,minY],[maxX,minY],[maxX,midY],[minX,midY]];
+    poly2 = [[minX,midY],[maxX,midY],[maxX,maxY],[minX,maxY]];
+  } else {
+    // Split vertically at midX
+    poly1 = [[minX,minY],[midX,minY],[midX,maxY],[minX,maxY]];
+    poly2 = [[midX,minY],[maxX,minY],[maxX,maxY],[midX,maxY]];
+  }
+
+  // Update current room to first half
+  selectedRoom.polygon = poly1;
+  selectedRoom.center = [poly1.reduce((s,p)=>s+p[0],0)/4, poly1.reduce((s,p)=>s+p[1],0)/4];
+  rebuildRoom();
+
+  // Create second room
+  const data = floorData[currentLevel];
+  const fg = floorGroups[currentLevel];
+  const newId = Math.max(...data.rooms.map(r=>r.id)) + 1;
+  const newRoom = {
+    id: newId,
+    name: selectedRoom.name + '_B',
+    area: selectedRoom.area / 2,
+    center: [poly2.reduce((s,p)=>s+p[0],0)/4, poly2.reduce((s,p)=>s+p[1],0)/4],
+    polygon: poly2,
+  };
+  selectedRoom.name = selectedRoom.name.replace(/_B$/, '') + '_A';
+  data.rooms.push(newRoom);
+
+  // Create mesh for new room
+  const pw = data.page.width, ph = data.page.height;
+  const levelIdx = LEVELS.indexOf(currentLevel);
+  const shape = new THREE.Shape();
+  const [sx,sy] = pdfToWorld(poly2[0][0],poly2[0][1],pw,ph); shape.moveTo(sx,sy);
+  for (let i=1;i<poly2.length;i++){const[px,py]=pdfToWorld(poly2[i][0],poly2[i][1],pw,ph);shape.lineTo(px,py);}
+  shape.closePath();
+  const mesh = new THREE.Mesh(new THREE.ShapeGeometry(shape),
+    new THREE.MeshBasicMaterial({color:FLOOR_COLORS[levelIdx],transparent:true,opacity:0.4,side:THREE.DoubleSide}));
+  mesh.userData = newRoom; mesh.position.z = 1;
+  fg.roomGroup.add(mesh); fg.meshes.push(mesh);
+  // Outline
+  const op = poly2.map(p=>{const[ox,oy]=pdfToWorld(p[0],p[1],pw,ph);return new THREE.Vector3(ox,oy,2);});
+  op.push(op[0].clone());
+  const outline = new THREE.Line(new THREE.BufferGeometry().setFromPoints(op),
+    new THREE.LineBasicMaterial({color:0x4a6fa5,transparent:true,opacity:0.6}));
+  outline.userData = {roomOutline:true, roomId:newId};
+  fg.roomGroup.add(outline);
+
+  showVertexHandles(); updateInfo(); isDirty=true; render();
+}
+
+document.getElementById('btnSplitH').addEventListener('click', () => splitRoom('h'));
+document.getElementById('btnSplitV').addEventListener('click', () => splitRoom('v'));
+
+function findEdgeIntersection(px, py, polygon) {
+  // Find which edge of the polygon is closest to point (px,py) and return the intersection info
+  let bestDist = Infinity, bestEdge = -1, bestT = 0;
+  for (let i = 0; i < polygon.length; i++) {
+    const j = (i+1) % polygon.length;
+    const ax=polygon[i][0], ay=polygon[i][1], bx=polygon[j][0], by=polygon[j][1];
+    const dx=bx-ax, dy=by-ay, len2=dx*dx+dy*dy;
+    if (len2 < 0.001) continue;
+    let t = ((px-ax)*dx + (py-ay)*dy) / len2;
+    t = Math.max(0, Math.min(1, t));
+    const cx = ax+t*dx, cy = ay+t*dy;
+    const dist = Math.hypot(px-cx, py-cy);
+    if (dist < bestDist) { bestDist = dist; bestEdge = i; bestT = t; }
+  }
+  return { edge: bestEdge, t: bestT, dist: bestDist };
+}
+
+function doFreeformSplit(p1pdf, p2pdf) {
+  if (!selectedRoom) return;
+  const poly = selectedRoom.polygon;
+
+  // Find which edges p1 and p2 are on
+  const hit1 = findEdgeIntersection(p1pdf[0], p1pdf[1], poly);
+  const hit2 = findEdgeIntersection(p2pdf[0], p2pdf[1], poly);
+
+  if (hit1.edge === hit2.edge) return; // both on same edge, can't split
+
+  // Insert split points on their edges and create two polygons
+  const e1 = hit1.edge, t1 = hit1.t;
+  const e2 = hit2.edge, t2 = hit2.t;
+  const sp1 = [
+    Math.round((poly[e1][0] + t1*(poly[(e1+1)%poly.length][0]-poly[e1][0]))*100)/100,
+    Math.round((poly[e1][1] + t1*(poly[(e1+1)%poly.length][1]-poly[e1][1]))*100)/100,
+  ];
+  const sp2 = [
+    Math.round((poly[e2][0] + t2*(poly[(e2+1)%poly.length][0]-poly[e2][0]))*100)/100,
+    Math.round((poly[e2][1] + t2*(poly[(e2+1)%poly.length][1]-poly[e2][1]))*100)/100,
+  ];
+
+  // Build two polygons by walking around the boundary
+  // Poly A: sp1 -> edges e1+1..e2 -> sp2 -> back to sp1
+  // Poly B: sp2 -> edges e2+1..e1 -> sp1 -> back to sp2
+  const n = poly.length;
+  const polyA = [sp1];
+  for (let k = (e1+1)%n; k !== (e2+1)%n; k = (k+1)%n) {
+    polyA.push([...poly[k]]);
+  }
+  polyA.push(sp2);
+
+  const polyB = [sp2];
+  for (let k = (e2+1)%n; k !== (e1+1)%n; k = (k+1)%n) {
+    polyB.push([...poly[k]]);
+  }
+  polyB.push(sp1);
+
+  if (polyA.length < 3 || polyB.length < 3) return;
+
+  pushUndo();
+
+  // Update selected room to polyA
+  selectedRoom.polygon = polyA;
+  selectedRoom.center = [polyA.reduce((s,p)=>s+p[0],0)/polyA.length, polyA.reduce((s,p)=>s+p[1],0)/polyA.length];
+  selectedRoom.name = selectedRoom.name.replace(/_[AB]$/, '') + '_A';
+  rebuildRoom();
+
+  // Create new room for polyB
+  const data = floorData[currentLevel];
+  const fg = floorGroups[currentLevel];
+  const newId = Math.max(...data.rooms.map(r=>r.id)) + 1;
+  const newRoom = {
+    id: newId,
+    name: selectedRoom.name.replace(/_A$/, '_B'),
+    area: Math.round(selectedRoom.area / 2),
+    center: [polyB.reduce((s,p)=>s+p[0],0)/polyB.length, polyB.reduce((s,p)=>s+p[1],0)/polyB.length],
+    polygon: polyB,
+  };
+  data.rooms.push(newRoom);
+
+  const pw = data.page.width, ph = data.page.height;
+  const levelIdx = LEVELS.indexOf(currentLevel);
+  const shape = new THREE.Shape();
+  const [sx,sy] = pdfToWorld(polyB[0][0],polyB[0][1],pw,ph); shape.moveTo(sx,sy);
+  for (let i=1;i<polyB.length;i++){const[px,py]=pdfToWorld(polyB[i][0],polyB[i][1],pw,ph);shape.lineTo(px,py);}
+  shape.closePath();
+  const mesh = new THREE.Mesh(new THREE.ShapeGeometry(shape),
+    new THREE.MeshBasicMaterial({color:FLOOR_COLORS[levelIdx],transparent:true,opacity:0.4,side:THREE.DoubleSide}));
+  mesh.userData = newRoom; mesh.position.z = 1;
+  fg.roomGroup.add(mesh); fg.meshes.push(mesh);
+  const op = polyB.map(p=>{const[ox,oy]=pdfToWorld(p[0],p[1],pw,ph);return new THREE.Vector3(ox,oy,2);});
+  op.push(op[0].clone());
+  const outline = new THREE.Line(new THREE.BufferGeometry().setFromPoints(op),
+    new THREE.LineBasicMaterial({color:0x4a6fa5,transparent:true,opacity:0.6}));
+  outline.userData = {roomOutline:true, roomId:newId};
+  fg.roomGroup.add(outline);
+
+  showVertexHandles(); updateInfo(); isDirty=true; render();
+}
+
+document.getElementById('btnSplitFree').addEventListener('click', () => {
+  if (!selectedRoom) return;
+  if (splitFreeMode) {
+    // Cancel
+    splitFreeMode = false; splitPoint1 = null;
+    if (splitLine) { scene.remove(splitLine); splitLine.geometry.dispose(); splitLine.material.dispose(); splitLine = null; }
+    document.getElementById('btnSplitFree').classList.remove('active');
+    document.getElementById('btnSplitFree').textContent = 'Split Free';
+    updateInfo();
+  } else {
+    splitFreeMode = true; splitPoint1 = null;
+    document.getElementById('btnSplitFree').classList.add('active');
+    document.getElementById('btnSplitFree').textContent = 'Click 1st point...';
+    document.getElementById('info-content').innerHTML = '<b>Split:</b> Click first point on room edge';
+  }
+  render();
+});
+document.getElementById('btnNewRoom').addEventListener('click', () => {
+  if (newRoomMode) {
+    // Cancel
+    newRoomMode = false; newRoomCorner1 = null;
+    if (newRoomPreview) { scene.remove(newRoomPreview); newRoomPreview.geometry.dispose(); newRoomPreview.material.dispose(); newRoomPreview = null; }
+    document.getElementById('btnNewRoom').classList.remove('active');
+    document.getElementById('btnNewRoom').textContent = 'New Room';
+    updateInfo();
+  } else {
+    newRoomMode = true; newRoomCorner1 = null;
+    deselectRoom(); cancelMerge();
+    editMode = 'select';
+    document.getElementById('btnEditRoom').classList.remove('active');
+    document.getElementById('btnEraseWalls').classList.remove('active');
+    document.getElementById('btnNewRoom').classList.add('active');
+    document.getElementById('btnNewRoom').textContent = 'Click 1st corner...';
+    document.getElementById('info-content').innerHTML = '<b>New Room:</b> Click first corner';
+    canvas.style.cursor = 'crosshair';
+  }
+  render();
+});
+document.getElementById('btnWeldVerts').addEventListener('click', () => {
+  if (!selectedRoom) return;
+  if (weldMode) {
+    weldMode = false; weldFirstIdx = null;
+    document.getElementById('btnWeldVerts').classList.remove('active');
+    document.getElementById('btnWeldVerts').textContent = 'Weld Vertices';
+    updateInfo();
+  } else {
+    weldMode = true; weldFirstIdx = null;
+    document.getElementById('btnWeldVerts').classList.add('active');
+    document.getElementById('btnWeldVerts').textContent = 'Click 1st vertex...';
+    document.getElementById('info-content').innerHTML = '<b>Weld:</b> Click first vertex (orange)';
+  }
+});
+
+function nudgeRoom(dir, shrink) {
+  if (!selectedRoom) return;
+  pushUndo();
+  const step = shrink ? -0.2 : 0.2; // 0.2 PDF units per click (~10cm)
+  const poly = selectedRoom.polygon;
+  const xs = poly.map(p=>p[0]), ys = poly.map(p=>p[1]);
+  const minX=Math.min(...xs), maxX=Math.max(...xs), minY=Math.min(...ys), maxY=Math.max(...ys);
+
+  // Move vertices on the target edge
+  // Note: PDF Y is inverted (top=small, bottom=large)
+  for (let i = 0; i < poly.length; i++) {
+    switch(dir) {
+      case 'up':    if (Math.abs(poly[i][1]-minY)<0.5) poly[i][1] -= step; break;
+      case 'down':  if (Math.abs(poly[i][1]-maxY)<0.5) poly[i][1] += step; break;
+      case 'left':  if (Math.abs(poly[i][0]-minX)<0.5) poly[i][0] -= step; break;
+      case 'right': if (Math.abs(poly[i][0]-maxX)<0.5) poly[i][0] += step; break;
+    }
+  }
+  rebuildRoom(); showVertexHandles(); isDirty=true; render();
+}
+
+document.getElementById('btnNudgeU').addEventListener('click', (e) => nudgeRoom('up', e.shiftKey));
+document.getElementById('btnNudgeD').addEventListener('click', (e) => nudgeRoom('down', e.shiftKey));
+document.getElementById('btnNudgeL').addEventListener('click', (e) => nudgeRoom('left', e.shiftKey));
+document.getElementById('btnNudgeR').addEventListener('click', (e) => nudgeRoom('right', e.shiftKey));
+
+document.getElementById('btnSnapWalls').addEventListener('click', () => {
+  if (!selectedRoom) return;
+  pushUndo();
+  const data = floorData[currentLevel];
+  const walls = data.walls;
+  const MAX_SNAP = 8.0;
+  const SNAP_OFFSET = 0.3;
+  const poly = selectedRoom.polygon;
+
+  if (poly.length !== 4) {
+    // Non-rectangle: skip for now
+    document.getElementById('save-status').textContent = 'Snap works on rectangles only';
+    setTimeout(()=>{document.getElementById('save-status').textContent='';},2000);
+    return;
+  }
+
+  // Get bounding box of current room
+  const xs = poly.map(p=>p[0]), ys = poly.map(p=>p[1]);
+  let top = Math.min(...ys), bottom = Math.max(...ys);
+  let left = Math.min(...xs), right = Math.max(...xs);
+  const cx = (left+right)/2, cy = (top+bottom)/2;
+
+  // For each edge, find the nearest parallel wall
+  // Top edge (horizontal, y=top): find nearest horizontal wall above center
+  // Bottom edge: nearest horizontal wall below center
+  // Left edge (vertical, x=left): nearest vertical wall left of center
+  // Right edge: nearest vertical wall right of center
+
+  function findNearestWall(edgeVal, isHorizontal, searchDir) {
+    // searchDir: -1 = look for wall with smaller value (above/left), +1 = larger (below/right)
+    let best = null, bestDist = MAX_SNAP;
+    for (const seg of walls) {
+      const sx1=seg[0][0], sy1=seg[0][1], sx2=seg[1][0], sy2=seg[1][1];
+      const dx=sx2-sx1, dy=sy2-sy1;
+      const len = Math.hypot(dx, dy);
+      if (len < 2) continue; // skip tiny segments
+
+      if (isHorizontal) {
+        // Looking for horizontal walls (small dy relative to dx)
+        if (Math.abs(dy) > Math.abs(dx) * 0.3) continue; // not horizontal enough
+        const wallY = (sy1+sy2)/2;
+        // Must overlap with room in X range
+        const wMinX = Math.min(sx1,sx2), wMaxX = Math.max(sx1,sx2);
+        if (wMaxX < left+2 || wMinX > right-2) continue; // no X overlap
+        // Must be in correct direction from edge
+        const dist = (wallY - edgeVal) * searchDir;
+        if (dist >= 0 && dist < bestDist) {
+          bestDist = dist;
+          best = wallY;
+        }
+      } else {
+        // Looking for vertical walls
+        if (Math.abs(dx) > Math.abs(dy) * 0.3) continue;
+        const wallX = (sx1+sx2)/2;
+        const wMinY = Math.min(sy1,sy2), wMaxY = Math.max(sy1,sy2);
+        if (wMaxY < top+2 || wMinY > bottom-2) continue;
+        const dist = (wallX - edgeVal) * searchDir;
+        if (dist >= 0 && dist < bestDist) {
+          bestDist = dist;
+          best = wallX;
+        }
+      }
+    }
+    return best;
+  }
+
+  // Snap each edge
+  const newTop = findNearestWall(top, true, -1);     // wall above top edge
+  const newBottom = findNearestWall(bottom, true, 1); // wall below bottom edge
+  const newLeft = findNearestWall(left, false, -1);   // wall left of left edge
+  const newRight = findNearestWall(right, false, 1);  // wall right of right edge
+
+  // Also check walls between edge and center (closer walls)
+  const newTopIn = findNearestWall(cy, true, -1);     // nearest horiz wall above center
+  const newBottomIn = findNearestWall(cy, true, 1);
+  const newLeftIn = findNearestWall(cx, false, -1);
+  const newRightIn = findNearestWall(cx, false, 1);
+
+  // Use the wall closest to the current edge position
+  if (newTop !== null) top = newTop + SNAP_OFFSET;
+  else if (newTopIn !== null) top = newTopIn + SNAP_OFFSET;
+  if (newBottom !== null) bottom = newBottom - SNAP_OFFSET;
+  else if (newBottomIn !== null) bottom = newBottomIn - SNAP_OFFSET;
+  if (newLeft !== null) left = newLeft + SNAP_OFFSET;
+  else if (newLeftIn !== null) left = newLeftIn + SNAP_OFFSET;
+  if (newRight !== null) right = newRight - SNAP_OFFSET;
+  else if (newRightIn !== null) right = newRightIn - SNAP_OFFSET;
+
+  // Rebuild rectangle
+  selectedRoom.polygon = [
+    [Math.round(left*100)/100, Math.round(top*100)/100],
+    [Math.round(right*100)/100, Math.round(top*100)/100],
+    [Math.round(right*100)/100, Math.round(bottom*100)/100],
+    [Math.round(left*100)/100, Math.round(bottom*100)/100],
+  ];
+  selectedRoom.center = [Math.round((left+right)/2*100)/100, Math.round((top+bottom)/2*100)/100];
+
+  rebuildRoom(); showVertexHandles(); updateInfo(); isDirty = true; render();
+});
+document.getElementById('btnToggleCorridor').addEventListener('click', () => {
+  if (!selectedRoom) return;
+  pushUndo();
+  selectedRoom.type = selectedRoom.type === 'corridor' ? 'room' : 'corridor';
+  // Change color to indicate type
+  const levelIdx = LEVELS.indexOf(currentLevel);
+  selectedMesh.material.color.setHex(selectedRoom.type === 'corridor' ? 0x5c5c2a : FLOOR_COLORS[levelIdx]);
+  updateInfo(); isDirty = true; render();
+});
+document.getElementById('btnRename').addEventListener('click', () => {
+  if (!selectedRoom) return;
+  const newName = prompt('Room name:', selectedRoom.name || '');
+  if (newName !== null) {
+    pushUndo();
+    selectedRoom.name = newName;
+    updateInfo(); isDirty = true;
+  }
+});
+document.getElementById('btnEditRoom').addEventListener('click', () => {
+  if(editMode==='editRoom'){editMode='select';document.getElementById('btnEditRoom').classList.remove('active');deselectRoom();updateInfo();}
+  else{editMode='editRoom';document.getElementById('btnEditRoom').classList.add('active');document.getElementById('btnEraseWalls').classList.remove('active');highlightWall(-1);}
+  render();
+});
+document.getElementById('btnDrawWall').addEventListener('click', () => {
+  if (drawWallMode) {
+    // Finish drawing
+    drawWallMode = false;
+    drawWallPoints = [];
+    if (drawWallPreview) { scene.remove(drawWallPreview); drawWallPreview.geometry.dispose(); drawWallPreview.material.dispose(); drawWallPreview = null; }
+    document.getElementById('btnDrawWall').classList.remove('active');
+    document.getElementById('btnDrawWall').textContent = 'Draw Wall';
+    canvas.style.cursor = 'default';
+    document.getElementById('info-content').innerHTML = 'Click a room to see details.';
+  } else {
+    drawWallMode = true;
+    drawWallPoints = [];
+    editMode = 'select';
+    deselectRoom();
+    document.getElementById('btnEditRoom').classList.remove('active');
+    document.getElementById('btnEraseWalls').classList.remove('active');
+    document.getElementById('btnDrawWall').classList.add('active');
+    document.getElementById('btnDrawWall').textContent = 'Stop Drawing';
+    canvas.style.cursor = 'crosshair';
+    document.getElementById('info-content').innerHTML = '<b>Draw Wall:</b> Click points to trace walls. Auto-snaps to H/V. Click button to stop.';
+  }
+  render();
+});
+document.getElementById('btnEraseWalls').addEventListener('click', () => {
+  if(editMode==='eraseWalls'){editMode='select';document.getElementById('btnEraseWalls').classList.remove('active');highlightWall(-1);canvas.style.cursor='default';}
+  else{editMode='eraseWalls';document.getElementById('btnEraseWalls').classList.add('active');document.getElementById('btnEditRoom').classList.remove('active');if(selectedRoom){deselectRoom();updateInfo();}canvas.style.cursor='crosshair';}
+  render();
+});
+document.getElementById('btnSave').addEventListener('click', async () => {
+  const st=document.getElementById('save-status');st.textContent='Saving...';
+  try{
+    // Re-index room IDs and update outline references before saving
+    const data = floorData[currentLevel];
+    data.rooms.sort((a,b) => (a.name||'').localeCompare(b.name||''));
+    const fg = floorGroups[currentLevel];
+    data.rooms.forEach((r,i) => {
+      const oldId = r.id;
+      r.id = i;
+      // Update outline references
+      if (fg) fg.roomGroup.children.forEach(c => {
+        if (c.userData?.roomOutline && c.userData.roomId === oldId) c.userData.roomId = i;
+      });
+    });
+    // Ensure all rooms have type field
+    data.rooms.forEach(r => { if (!r.type) r.type = 'room'; });
+    console.log('Saving', data.rooms.length, 'rooms to', currentLevel);
+    st.textContent = 'Saving ' + data.rooms.length + ' rooms...';
+    const body=JSON.stringify(data);
+    console.log('Body size:', body.length, 'bytes');
+    const r=await fetch(`/save/${currentLevel}`,{method:'POST',headers:{'Content-Type':'application/json'},body});
+    if(r.ok){st.textContent='Saved '+currentLevel+'!';st.style.color='#5cb85c';isDirty=false;}
+    else{st.textContent='Failed!';st.style.color='#e04040';}
+  }catch(e){st.textContent='Error: '+e.message;st.style.color='#e04040';}
+  setTimeout(()=>{st.textContent='';},3000);
+});
+
+function exportPDF() {
+  const st = document.getElementById('save-status');
+  st.textContent = 'Generating PDF...'; st.style.color = '#8ab4f8';
+
+  // Render at higher resolution
+  const scale = 2;
+  const origW = renderer.domElement.width, origH = renderer.domElement.height;
+  renderer.setSize(window.innerWidth * scale, window.innerHeight * scale, false);
+  renderer.domElement.style.width = window.innerWidth + 'px';
+  renderer.domElement.style.height = window.innerHeight + 'px';
+  render();
+
+  const imgData = renderer.domElement.toDataURL('image/png');
+
+  // Restore original size
+  renderer.setSize(window.innerWidth, window.innerHeight, false);
+  renderer.domElement.style.width = '';
+  renderer.domElement.style.height = '';
+  render();
+
+  const { jsPDF } = window.jspdf;
+  const landscape = window.innerWidth > window.innerHeight;
+  const pdf = new jsPDF({ orientation: landscape ? 'landscape' : 'portrait', unit: 'mm', format: 'a4' });
+
+  const pageW = pdf.internal.pageSize.getWidth();
+  const pageH = pdf.internal.pageSize.getHeight();
+  const margin = 10;
+
+  // Title
+  const levelIdx = LEVELS.indexOf(currentLevel);
+  const title = BLDG.name + ' — ' + (is3DView ? '3D View' : BLDG.labels[levelIdx] || currentLevel);
+  pdf.setFontSize(14);
+  pdf.text(title, margin, margin + 4);
+  pdf.setFontSize(8);
+  pdf.setTextColor(128);
+  pdf.text(new Date().toLocaleString(), pageW - margin, margin + 4, { align: 'right' });
+  pdf.setTextColor(0);
+
+  // Fit canvas image into remaining space
+  const imgTop = margin + 8;
+  const availW = pageW - margin * 2;
+  const availH = pageH - imgTop - margin;
+  const aspect = window.innerWidth / window.innerHeight;
+  let imgW, imgH;
+  if (availW / availH > aspect) {
+    imgH = availH; imgW = imgH * aspect;
+  } else {
+    imgW = availW; imgH = imgW / aspect;
+  }
+  const imgX = margin + (availW - imgW) / 2;
+  pdf.addImage(imgData, 'PNG', imgX, imgTop, imgW, imgH);
+
+  const filename = currentBuilding + '_' + (is3DView ? '3D' : BLDG.levels[levelIdx] || 'view') + '.pdf';
+  pdf.save(filename);
+
+  st.textContent = 'PDF saved!'; st.style.color = '#5cb85c';
+  setTimeout(() => { st.textContent = ''; }, 3000);
+}
+
+document.getElementById('btnExportPDF2').addEventListener('click', exportPDF);
+
+window.addEventListener('keydown', (e) => {if((e.ctrlKey||e.metaKey)&&e.key==='z'){e.preventDefault();doUndo();}});
+window.addEventListener('beforeunload', (e) => {if(isDirty){e.preventDefault();e.returnValue='';}});
+
+// Search
+let highlightedMesh = null;
+function clearHighlight() {
+  if (highlightedMesh) {
+    const li = highlightedMesh.userData._levelIdx;
+    const type = highlightedMesh.userData.type;
+    highlightedMesh.material.color.setHex(type === 'corridor' ? 0x5c5c2a : FLOOR_COLORS[li !== undefined ? li : 0]);
+    highlightedMesh.material.opacity = 0.4;
+    highlightedMesh = null;
+  }
+}
+
+function searchAndZoom(roomName, level) {
+  clearHighlight();
+  const data = floorData[level];
+  if (!data) return;
+  const room = data.rooms.find(r => r.name === roomName);
+  if (!room) return;
+  _lastSearchedRoom = { name: roomName, level };
+
+  const levelIdx = LEVELS.indexOf(level);
+  const pw = data.page.width, ph = data.page.height;
+  const [wx, wy] = pdfToWorld(room.center[0], room.center[1], pw, ph);
+
+  // Highlight the room in bright green
+  // Make all floors visible first so we can see it in 3D
+  LEVELS.forEach((l, i) => {
+    const fg = floorGroups[l];
+    if (fg) { const a = FLOOR_ALIGN[i]||{x:0,y:0}; fg.container.visible = true; fg.container.position.set(a.x, a.y, i * FLOOR_SPACING); }
+  });
+
+  const fg = floorGroups[level];
+  const mesh = fg.meshes.find(m => m.userData.name === roomName);
+  if (mesh) {
+    mesh.userData._levelIdx = levelIdx;
+    mesh.material.color.setHex(0x00ff88);
+    mesh.material.opacity = 0.7;
+    highlightedMesh = mesh;
+  }
+
+  document.getElementById('info-content').innerHTML = `<b>${roomName}</b> (Floor ${levelIdx})`;
+
+  if (is3DView) {
+    _eqFilterRoom = roomName;
+    filterEquipment();
+
+    // 3D fly-in: move camera to look at the room
+    const targetPos = new THREE.Vector3(wx + 80, wy - 80, levelIdx * FLOOR_SPACING + 120);
+    const targetLook = new THREE.Vector3(wx, wy, levelIdx * FLOOR_SPACING);
+    const startPos = camera3D.position.clone();
+    const startLook = orbitControls.target.clone();
+    const duration = 1500;
+    const startTime = performance.now();
+
+    function animate3D(now) {
+      const t = Math.min(1, (now - startTime) / duration);
+      const ease = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+      camera3D.position.lerpVectors(startPos, targetPos, ease);
+      orbitControls.target.lerpVectors(startLook, targetLook, ease);
+      orbitControls.update();
+      render();
+      if (t < 1) requestAnimationFrame(animate3D);
+    }
+    requestAnimationFrame(animate3D);
+  } else {
+    // Switch to floor, show collapsed icon for searched room
+    switchToFloor(level);
+    _eqFilterRoom = roomName;
+    filterEquipment();
+
+    const startFrustum = frustumSize;
+    const startPan = panOffset.clone();
+    const targetFrustum = 80;
+    const targetPan = new THREE.Vector2(wx, wy);
+    const duration = 1000;
+    const startTime = performance.now();
+
+    function animate2D(now) {
+      const t = Math.min(1, (now - startTime) / duration);
+      const ease = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+      frustumSize = startFrustum + (targetFrustum - startFrustum) * ease;
+      panOffset.lerpVectors(startPan, targetPan, ease);
+      updateCamera2D();
+      render();
+      if (t < 1) requestAnimationFrame(animate2D);
+    }
+    requestAnimationFrame(animate2D);
+  }
+}
+
+document.getElementById('searchRoom').addEventListener('input', (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  const results = document.getElementById('searchResults');
+  if (q.length < 2) { results.innerHTML = ''; return; }
+
+  let matches = [];
+  for (const level of LEVELS) {
+    const data = floorData[level];
+    if (!data) continue;
+    for (const room of data.rooms) {
+      if (room.name && room.name.toLowerCase().includes(q)) {
+        matches.push({ name: room.name, level, levelIdx: LEVELS.indexOf(level) });
+      }
+    }
+  }
+  matches = matches.slice(0, 10);
+
+  results.innerHTML = matches.map(m =>
+    `<div style="cursor:pointer;padding:2px 4px;color:#8ab4f8"
+          onmouseover="this.style.background='#2a3a5c'"
+          onmouseout="this.style.background=''"
+          onclick="window._searchZoom('${m.name}','${m.level}')">
+      ${m.name} <span style="color:#666">(Floor ${m.levelIdx})</span>
+    </div>`
+  ).join('');
+});
+
+window._searchZoom = searchAndZoom;
+
+// === Route finding ===
+let routeGroup = new THREE.Group();
+scene.add(routeGroup);
+let routeHighlightedMeshes = [];
+
+function clearRoute() {
+  while(routeGroup.children.length>0){const c=routeGroup.children[0];routeGroup.remove(c);c.geometry.dispose();c.material.dispose();}
+  routeHighlightedMeshes.forEach(m=>{
+    const li = m.userData._levelIdx;
+    const type = m.userData.type;
+    m.material.color.setHex(type==='corridor'?0x5c5c2a:FLOOR_COLORS[li!==undefined?li:0]);
+    m.material.opacity=0.4;
+  });
+  routeHighlightedMeshes=[];
+  document.getElementById('routeInfo').innerHTML='';
+  document.getElementById('btnClearRoute').style.display='none';
+}
+
+function buildFullGraph() {
+  const nodes = {};  // key -> {level, name, x, y, id}
+  const adj = {};    // key -> [{key, weight, type}]
+  const nameToKey = {}; // "level:name" -> key (first match, for route lookup)
+
+  for (const level of LEVELS) {
+    const data = floorData[level];
+    if (!data || !data.graph) continue;
+
+    for (const n of data.graph.nodes) {
+      const key = level+':'+n.id;  // unique key using ID
+      nodes[key] = {level, name:n.name, x:n.x, y:n.y, id:n.id};
+      adj[key] = [];
+      // Map name to first matching key (for user lookup)
+      const nameKey = level+':'+n.name;
+      if (!nameToKey[nameKey]) nameToKey[nameKey] = key;
+    }
+    let edgeSkipped = 0;
+    for (const e of data.graph.edges) {
+      const kA = level+':'+e.from, kB = level+':'+e.to;
+      if(!adj[kA]||!adj[kB]||kA===kB) { edgeSkipped++; continue; }
+      adj[kA].push({key:kB, weight:e.weight||1, type:'walk'});
+      adj[kB].push({key:kA, weight:e.weight||1, type:'walk'});
+    }
+    if(edgeSkipped) console.log(level, 'skipped edges:', edgeSkipped);
+  }
+
+  // Cross-floor edges: match by name
+  for (const ce of crossFloorEdges) {
+    const kA = nameToKey[ce.from_level+':'+ce.from_name];
+    const kB = nameToKey[ce.to_level+':'+ce.to_name];
+    if(kA && kB && adj[kA] && adj[kB]) {
+      const w = ce.type==='elevator' ? 5 : 15;
+      adj[kA].push({key:kB, weight:w, type:ce.type});
+      adj[kB].push({key:kA, weight:w, type:ce.type});
+    }
+  }
+
+  let totalEdges = 0;
+  let isolated = 0;
+  for(const k in adj) { totalEdges += adj[k].length; if(adj[k].length===0) isolated++; }
+  console.log('Graph built:', Object.keys(nodes).length, 'nodes,', totalEdges/2, 'edges,', isolated, 'isolated');
+  // Debug: check a specific node
+  for(const k in adj) {
+    if(k.includes(':213') && k.startsWith('level1')) {
+      console.log('DEBUG level1:213 adj:', adj[k].length, adj[k].map(e=>e.key));
+    }
+  }
+  return {nodes, adj, nameToKey};
+}
+
+function dijkstra(adj, startKey, endKey) {
+  const dist = {};
+  const prev = {};
+  const visited = new Set();
+  dist[startKey] = 0;
+
+  // BFS-like with distance tracking
+  const queue = [startKey];
+
+  while(queue.length > 0) {
+    // Find unvisited node with smallest distance
+    let bestIdx = -1, bestDist = Infinity;
+    for(let i = 0; i < queue.length; i++) {
+      if(!visited.has(queue[i]) && (dist[queue[i]] !== undefined) && dist[queue[i]] < bestDist) {
+        bestDist = dist[queue[i]];
+        bestIdx = i;
+      }
+    }
+    if(bestIdx === -1) break;
+
+    const key = queue[bestIdx];
+    queue.splice(bestIdx, 1);
+
+    if(visited.has(key)) continue;
+    visited.add(key);
+    if(key === endKey) break;
+
+    for(const edge of (adj[key] || [])) {
+      if(visited.has(edge.key)) continue;
+      const nd = bestDist + (edge.weight || 1);
+      if(dist[edge.key] === undefined || nd < dist[edge.key]) {
+        dist[edge.key] = nd;
+        prev[edge.key] = {from: key, type: edge.type};
+        queue.push(edge.key);
+      }
+    }
+  }
+
+  // Reconstruct path
+  if(prev[endKey] === undefined && startKey !== endKey) return null;
+  const path = [];
+  let cur = endKey;
+  while(cur) {
+    path.unshift(cur);
+    cur = prev[cur] ? prev[cur].from : null;
+  }
+  return {path, dist:dist[endKey]||0, prev};
+}
+
+async function findAndShowRoute(fromName, toName) {
+  clearRoute(); clearHighlight();
+
+  // Find which level each room is on
+  let fromLevel = null, toLevel = null;
+  for (const l of LEVELS) {
+    const data = floorData[l];
+    if (!data) continue;
+    const levelKey = l.split('/').pop();
+    if (!fromLevel && data.rooms.find(r => r.name === fromName)) fromLevel = levelKey;
+    if (!toLevel && data.rooms.find(r => r.name === toName)) toLevel = levelKey;
+  }
+
+  if (!fromLevel || !toLevel) {
+    document.getElementById('routeInfo').innerHTML = '<span style="color:#e04040">Room not found: ' +
+      (!fromLevel ? fromName + ' ' : '') + (!toLevel ? toName : '') + '</span>';
+    return;
+  }
+
+  // Use walkable graph API — omit level for cross-floor routing
+  try {
+    const url = fromLevel === toLevel
+      ? `/api/graph/route?from_name=${encodeURIComponent(fromName)}&to_name=${encodeURIComponent(toName)}&level=${fromLevel}&type=walkable`
+      : `/api/graph/route?from_name=${encodeURIComponent(fromName)}&to_name=${encodeURIComponent(toName)}&type=walkable`;
+    const resp = await fetch(url);
+    if (!resp.ok) {
+      const err = await resp.json();
+      document.getElementById('routeInfo').innerHTML = '<span style="color:#e04040">' + (err.error || 'No route found') + '</span>';
+      return;
+    }
+    const result = await resp.json();
+
+    // Check if route spans multiple floors
+    const levels = new Set(result.path.map(n => n.level).filter(Boolean));
+    const isMultiFloor = levels.size > 1;
+
+    if (isMultiFloor && !is3DView) switchTo3D();
+
+    renderSmoothRoute(result, isMultiFloor ? null : fromLevel);
+  } catch(e) {
+    document.getElementById('routeInfo').innerHTML = '<span style="color:#e04040">Error: ' + e.message + '</span>';
+  }
+}
+
+function renderSmoothRoute(result, levelKey) {
+  const defaultData = floorData[LEVELS[0]];
+  if (!defaultData) return;
+
+  // Convert path to world coordinates, handling per-node level
+  const rawPoints = result.path.map(n => {
+    const nodeLevel = n.level
+      ? LEVELS.find(l => l.endsWith(n.level)) || LEVELS[0]
+      : (levelKey ? LEVELS.find(l => l.endsWith(levelKey)) || LEVELS[0] : LEVELS[0]);
+    const data = floorData[nodeLevel] || defaultData;
+    const pw = data.page.width, ph = data.page.height;
+    const levelIdx = LEVELS.indexOf(nodeLevel);
+    const z = is3DView ? levelIdx * FLOOR_SPACING + 5 : 6;
+    const [wx, wy] = pdfToWorld(n.x, n.y, pw, ph);
+    const align = is3DView ? (FLOOR_ALIGN[levelIdx] || {x:0,y:0}) : {x:0,y:0};
+    return new THREE.Vector3(wx + align.x, wy - align.y, z);
+  });
+
+  if (rawPoints.length < 2) return;
+
+  // Build rounded-corner path: straight segments with arc fillets at turns
+  const cornerRadius = 1.5;
+  const smoothPoints = [];
+
+  for (let i = 0; i < rawPoints.length; i++) {
+    if (i === 0 || i === rawPoints.length - 1) {
+      smoothPoints.push(rawPoints[i].clone());
+      continue;
+    }
+    const prev = rawPoints[i - 1];
+    const curr = rawPoints[i];
+    const next = rawPoints[i + 1];
+
+    // Vectors to previous and next
+    const toPrev = new THREE.Vector3().subVectors(prev, curr).normalize();
+    const toNext = new THREE.Vector3().subVectors(next, curr).normalize();
+
+    // Distance to neighbors
+    const distPrev = prev.distanceTo(curr);
+    const distNext = next.distanceTo(curr);
+    const r = Math.min(cornerRadius, distPrev * 0.4, distNext * 0.4);
+
+    // Points before and after the corner
+    const before = curr.clone().addScaledVector(toPrev, r);
+    const after = curr.clone().addScaledVector(toNext, r);
+
+    smoothPoints.push(before);
+    // Add arc points between before and after
+    for (let t = 0.25; t <= 0.75; t += 0.25) {
+      const p = new THREE.Vector3().lerpVectors(before, after, t);
+      // Pull toward the corner point slightly for a rounder curve
+      p.lerp(curr, 0.15);
+      smoothPoints.push(p);
+    }
+    smoothPoints.push(after);
+  }
+
+  // Build tube from the smooth points
+  const curve = new THREE.CatmullRomCurve3(smoothPoints, false, 'chordal', 0.5);
+  const tubeGeom = new THREE.TubeGeometry(curve, smoothPoints.length * 4, 0.4, 6, false);
+  const tubeMat = new THREE.MeshBasicMaterial({ color: 0x00ff88, depthTest: false, transparent: true, opacity: 0.85 });
+  const tube = new THREE.Mesh(tubeGeom, tubeMat);
+  tube.renderOrder = 1000;
+  routeGroup.add(tube);
+
+  // Start marker (green sphere)
+  const startDot = new THREE.Mesh(new THREE.SphereGeometry(1.5, 12, 12),
+    new THREE.MeshBasicMaterial({ color: 0x00ff44, depthTest: false }));
+  startDot.position.copy(rawPoints[0]);
+  startDot.renderOrder = 1001;
+  routeGroup.add(startDot);
+
+  // End marker (red sphere)
+  const endDot = new THREE.Mesh(new THREE.SphereGeometry(1.5, 12, 12),
+    new THREE.MeshBasicMaterial({ color: 0xff2244, depthTest: false }));
+  endDot.position.copy(rawPoints[rawPoints.length - 1]);
+  endDot.renderOrder = 1001;
+  routeGroup.add(endDot);
+
+  // Highlight start and end rooms
+  const firstName = result.path[0]?.name;
+  const lastName = result.path[result.path.length - 1]?.name;
+  const firstLevel = result.path[0]?.level;
+  const lastLevel = result.path[result.path.length - 1]?.level;
+
+  for (const [name, hexColor, lvl] of [[firstName, 0x00ff44, firstLevel], [lastName, 0xff4444, lastLevel]]) {
+    const fl = lvl ? LEVELS.find(l => l.endsWith(lvl)) : (levelKey ? LEVELS.find(l => l.endsWith(levelKey)) : null);
+    if (!fl) continue;
+    const fg = floorGroups[fl];
+    if (!fg) continue;
+    const mesh = fg.meshes.find(m => m.userData.name === name);
+    if (mesh) {
+      mesh.material.color.setHex(hexColor);
+      mesh.material.opacity = 0.7;
+      routeHighlightedMeshes.push(mesh);
+    }
+  }
+
+  // Route description
+  const levels = new Set(result.path.map(n => n.level).filter(Boolean));
+  let desc = `<b style="color:#00ff44">${firstName}</b> → <b style="color:#ff2244">${lastName}</b><br>`;
+  desc += `${result.path.length} nodes, distance: ${result.distance.toFixed(1)}`;
+  if (levels.size > 1) desc += `<br>Floors: ${[...levels].join(' → ')}`;
+  document.getElementById('routeInfo').innerHTML = desc;
+  document.getElementById('btnClearRoute').style.display = 'block';
+
+  render();
+}
+
+// Autocomplete for route inputs
+function setupRouteAutocomplete(inputId) {
+  const input = document.getElementById(inputId);
+  let dropdown = null;
+
+  input.addEventListener('input', () => {
+    if(dropdown) dropdown.remove();
+    const q = input.value.trim().toLowerCase();
+    if(q.length<2) return;
+
+    let matches = [];
+    for(const level of LEVELS) {
+      const data = floorData[level];
+      if(!data) continue;
+      for(const r of data.rooms) {
+        if(r.name && r.name.toLowerCase().includes(q))
+          matches.push(r.name);
+      }
+    }
+    matches = [...new Set(matches)].slice(0,8);
+    if(!matches.length) return;
+
+    dropdown = document.createElement('div');
+    dropdown.style.cssText = 'position:absolute;background:#1a1a2e;border:1px solid #4a6fa5;border-radius:4px;z-index:100;max-height:100px;overflow-y:auto;font-size:11px;';
+    const rect = input.getBoundingClientRect();
+    dropdown.style.left = rect.left+'px';
+    dropdown.style.top = rect.bottom+'px';
+    dropdown.style.width = rect.width+'px';
+
+    for(const m of matches) {
+      const d = document.createElement('div');
+      d.textContent = m;
+      d.style.cssText = 'padding:3px 6px;cursor:pointer;color:#8ab4f8;';
+      d.onmouseover = ()=>d.style.background='#2a3a5c';
+      d.onmouseout = ()=>d.style.background='';
+      d.onclick = ()=>{input.value=m; dropdown.remove(); dropdown=null;};
+      dropdown.appendChild(d);
+    }
+    document.body.appendChild(dropdown);
+  });
+
+  input.addEventListener('blur', ()=>{setTimeout(()=>{if(dropdown){dropdown.remove();dropdown=null;}},200);});
+}
+
+setupRouteAutocomplete('routeFrom');
+setupRouteAutocomplete('routeTo');
+
+document.getElementById('btnFindRoute').addEventListener('click', () => {
+  const from = document.getElementById('routeFrom').value.trim();
+  const to = document.getElementById('routeTo').value.trim();
+  if(!from || !to) { document.getElementById('routeInfo').innerHTML='<span style="color:#e04040">Enter both rooms</span>'; return; }
+  try {
+    document.getElementById('routeInfo').innerHTML='Finding route...';
+    setTimeout(() => findAndShowRoute(from, to), 50);
+  } catch(e) {
+    console.error('Route error:', e);
+    document.getElementById('routeInfo').innerHTML='<span style="color:#e04040">Error: '+e.message+'</span>';
+  }
+});
+
+document.getElementById('btnClearRoute').addEventListener('click', () => {
+  clearRoute(); render();
+});
+
+// Enter key triggers route finding
+document.getElementById('routeTo').addEventListener('keydown', (e) => {
+  if(e.key==='Enter') document.getElementById('btnFindRoute').click();
+});
+document.getElementById('routeFrom').addEventListener('keydown', (e) => {
+  if(e.key==='Enter') document.getElementById('routeTo').focus();
+});
+
+document.getElementById('btnSearch').addEventListener('click', () => {
+  const first = document.getElementById('searchResults').querySelector('div');
+  if (first) first.click();
+  else {
+    // Trigger search
+    document.getElementById('searchRoom').dispatchEvent(new Event('input'));
+    setTimeout(() => {
+      const f = document.getElementById('searchResults').querySelector('div');
+      if (f) f.click();
+    }, 100);
+  }
+});
+document.getElementById('searchRoom').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    document.getElementById('btnSearch').click();
+  }
+});
+// === Equipment search ===
+document.getElementById('searchEquipment').addEventListener('input', (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  const results = document.getElementById('eqSearchResults');
+  const btn = document.getElementById('btnInspectionRoute');
+  if (q.length < 1) { results.innerHTML = ''; btn.style.display = equipment.length > 0 ? 'block' : 'none'; return; }
+
+  let matches = equipment.filter(eq =>
+    (eq.name && eq.name.toLowerCase().includes(q)) ||
+    (eq.type && eq.type.toLowerCase().includes(q)) ||
+    (eq.room && eq.room.toLowerCase().includes(q)) ||
+    (eq.status && eq.status.toLowerCase().includes(q)) ||
+    (eq.id && eq.id.toLowerCase().includes(q)) ||
+    (eq.details?.model && eq.details.model.toLowerCase().includes(q))
+  ).slice(0, 10);
+
+  results.innerHTML = matches.map(eq => {
+    const sc = eq.status === 'running' ? '#00e676' : eq.status === 'warning' ? '#ffab00' : '#ff1744';
+    const levelKey = eq.level;
+    const fullLevel = LEVELS.find(l => l.endsWith(levelKey));
+    const levelIdx = fullLevel ? LEVELS.indexOf(fullLevel) : 0;
+    let overdueTag = '';
+    if (eq.inspection) {
+      const nextDate = new Date(new Date(eq.inspection.last_inspected).getTime() + eq.inspection.interval_days * 86400000);
+      const daysUntil = Math.ceil((nextDate - new Date()) / 86400000);
+      if (daysUntil < 0) overdueTag = ' <span style="color:#ff1744;font-weight:bold">OVERDUE</span>';
+      else if (daysUntil < 14) overdueTag = ` <span style="color:#ffab00">${daysUntil}d</span>`;
+    }
+    return `<div style="cursor:pointer;padding:3px 4px;border-left:3px solid ${sc};margin:2px 0;padding-left:6px"
+          onmouseover="this.style.background='#2a3a5c'"
+          onmouseout="this.style.background=''"
+          onclick="window._eqZoom('${eq.room}','${fullLevel||''}','${eq.id}')">
+      <span style="color:${sc}">${eq.name}</span>${overdueTag}
+      <span style="color:#666"> Rm ${eq.room} (Floor ${levelIdx})</span>
+    </div>`;
+  }).join('');
+  btn.style.display = 'none';
+});
+
+document.getElementById('searchEquipment').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const first = document.getElementById('eqSearchResults').querySelector('div');
+    if (first) first.click();
+  }
+});
+
+window._eqZoom = function(roomName, level, eqId) {
+  if (level) searchAndZoom(roomName, level);
+  const eq = equipment.find(e => e.id === eqId);
+  if (eq) {
+    const sc = eq.status === 'running' ? '#00e676' : eq.status === 'warning' ? '#ffab00' : '#ff1744';
+    let html = `<b style="color:${sc}">${eq.name}</b> <span style="color:${sc}">${eq.status.toUpperCase()}</span>`;
+    html += `<br><span style="color:#aaa">Room: ${eq.room} | ${eq.details?.model || eq.type}</span>`;
+    if (eq.inspection) {
+      const lastDate = new Date(eq.inspection.last_inspected);
+      const nextDate = new Date(lastDate.getTime() + eq.inspection.interval_days * 86400000);
+      const daysUntil = Math.ceil((nextDate - new Date()) / 86400000);
+      const overdue = daysUntil < 0;
+      html += `<br><span style="color:${overdue ? '#ff1744' : '#aaa'}">Last: ${eq.inspection.last_inspected}`;
+      html += overdue ? ` <b>OVERDUE ${-daysUntil}d</b>` : ` (next in ${daysUntil}d)`;
+      html += `</span>`;
+    }
+    // Show notes for this equipment
+    const eqNotes = inspectionNotes.filter(n => n.equipment_id === eqId);
+    if (eqNotes.length > 0) {
+      html += '<div style="margin-top:4px;font-size:10px;color:#aaa;max-height:100px;overflow-y:auto">';
+      html += '<b style="color:#8ab4f8">Notes:</b>';
+      for (const note of eqNotes.slice(-5)) {
+        html += `<div style="border-left:2px solid #4a6fa5;padding-left:4px;margin:2px 0">`;
+        html += `<span style="color:#666">${note.date} ${note.author||''}</span><br>${note.text}</div>`;
+      }
+      html += '</div>';
+    }
+    html += `<button onclick="window._showNoteForm('${eqId}')" style="margin-top:4px;padding:3px 8px;background:#2a3a5c;color:#8ab4f8;border:1px solid #4a6fa5;border-radius:3px;cursor:pointer;font-size:11px">+ Add Note</button>`;
+    html += '<div id="noteFormContainer"></div>';
+
+    document.getElementById('info-content').innerHTML = html;
+  }
+};
+
+window._showNoteForm = function(eqId) {
+  const container = document.getElementById('noteFormContainer') || document.getElementById('info-content');
+  const existing = document.getElementById('noteForm');
+  if (existing) { existing.remove(); return; }
+
+  const form = document.createElement('div');
+  form.id = 'noteForm';
+  form.style.cssText = 'margin-top:6px;padding:6px;background:rgba(42,58,92,0.5);border:1px solid #4a6fa5;border-radius:4px;';
+  form.innerHTML = `
+    <input type="text" id="noteAuthor" placeholder="Your name" style="width:100%;padding:3px 6px;margin-bottom:4px;background:#1a1a2e;color:#e0e0e0;border:1px solid #4a6fa5;border-radius:3px;font-size:11px;">
+    <textarea id="noteText" placeholder="Inspection note..." rows="3" style="width:100%;padding:3px 6px;margin-bottom:4px;background:#1a1a2e;color:#e0e0e0;border:1px solid #4a6fa5;border-radius:3px;font-size:11px;resize:vertical;font-family:inherit;"></textarea>
+    <div style="display:flex;gap:4px">
+      <button onclick="window._saveNote('${eqId}')" style="flex:1;padding:4px;background:#1a3a2a;color:#00e676;border:1px solid #00e676;border-radius:3px;cursor:pointer;font-size:11px">Save</button>
+      <button onclick="document.getElementById('noteForm').remove()" style="flex:1;padding:4px;background:#2a3a5c;color:#aaa;border:1px solid #4a6fa5;border-radius:3px;cursor:pointer;font-size:11px">Cancel</button>
+    </div>
+    <div id="noteSaveStatus" style="font-size:10px;color:#aaa;margin-top:2px"></div>
+  `;
+  container.appendChild(form);
+  document.getElementById('noteText').focus();
+};
+
+window._saveNote = async function(eqId) {
+  const text = document.getElementById('noteText').value.trim();
+  const author = document.getElementById('noteAuthor').value.trim();
+  const status = document.getElementById('noteSaveStatus');
+  if (!text) { status.textContent = 'Note cannot be empty'; status.style.color = '#e04040'; return; }
+
+  const note = {
+    equipment_id: eqId,
+    date: new Date().toISOString().slice(0, 10),
+    timestamp: new Date().toISOString(),
+    author: author || 'Unknown',
+    text: text
+  };
+
+  inspectionNotes.push(note);
+  status.textContent = 'Saving...';
+  status.style.color = '#aaa';
+
+  try {
+    const resp = await fetch(`/save/notes/${currentBuilding}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(inspectionNotes)
+    });
+    if (resp.ok) {
+      status.textContent = 'Saved!';
+      status.style.color = '#00e676';
+      setTimeout(() => {
+        const form = document.getElementById('noteForm');
+        if (form) form.remove();
+        // Refresh the info panel
+        if (selectedRoom) updateInfo();
+      }, 800);
+    } else {
+      status.textContent = 'Save failed!';
+      status.style.color = '#e04040';
+      inspectionNotes.pop();
+    }
+  } catch(e) {
+    status.textContent = 'Error: ' + e.message;
+    status.style.color = '#e04040';
+    inspectionNotes.pop();
+  }
+};
+
+// === Inspection route planner ===
+// Show button when there's equipment
+setTimeout(() => {
+  if (equipment.length > 0) document.getElementById('btnInspectionRoute').style.display = 'block';
+}, 1000);
+
+let inspectionRouteActive = false;
+
+document.getElementById('btnInspectionRoute').addEventListener('click', () => {
+  if (inspectionRouteActive) {
+    // Clear inspection route
+    clearRoute(); clearHighlight();
+    document.getElementById('inspectionInfo').innerHTML = '';
+    document.getElementById('btnInspectionRoute').textContent = 'Plan Inspection Route';
+    document.getElementById('btnInspectionRoute').style.background = '#1a3a2a';
+    inspectionRouteActive = false;
+    render();
+    return;
+  }
+
+  // Sort equipment by urgency: overdue first (most overdue first), then soonest upcoming
+  const now = new Date();
+  const sorted = equipment.slice().map(eq => {
+    let urgency = 999999;
+    if (eq.inspection) {
+      const nextDate = new Date(new Date(eq.inspection.last_inspected).getTime() + eq.inspection.interval_days * 86400000);
+      urgency = (nextDate - now) / 86400000;
+    }
+    return { ...eq, _urgency: urgency };
+  }).sort((a, b) => a._urgency - b._urgency);
+
+  // Build inspection route: visit each equipment in urgency order, using pathfinding between them
+  const {nodes, adj, nameToKey} = buildFullGraph();
+
+  // Find graph keys for each equipment's room
+  const eqWithKeys = sorted.map(eq => {
+    const fullLevel = LEVELS.find(l => l.endsWith(eq.level));
+    if (!fullLevel) return null;
+    const key = nameToKey[fullLevel + ':' + eq.room];
+    return key ? { ...eq, _key: key, _level: fullLevel } : null;
+  }).filter(Boolean);
+
+  if (eqWithKeys.length < 1) {
+    document.getElementById('inspectionInfo').innerHTML = '<span style="color:#e04040">No reachable equipment found</span>';
+    return;
+  }
+
+  // Build ordered stops using nearest-neighbor from first (most urgent)
+  const stops = [eqWithKeys[0]];
+  const remaining = eqWithKeys.slice(1);
+  while (remaining.length > 0) {
+    const last = stops[stops.length - 1];
+    let bestIdx = 0, bestDist = Infinity;
+    for (let i = 0; i < remaining.length; i++) {
+      const result = dijkstra(adj, last._key, remaining[i]._key);
+      const d = result ? result.dist : Infinity;
+      // Weight by urgency: overdue items get distance bonus (prefer visiting them sooner)
+      const urgencyBonus = remaining[i]._urgency < 0 ? d * 0.5 : 0;
+      if (d - urgencyBonus < bestDist) { bestDist = d - urgencyBonus; bestIdx = i; }
+    }
+    stops.push(remaining.splice(bestIdx, 1)[0]);
+  }
+
+  // Show the route
+  clearRoute(); clearHighlight();
+  inspectionRouteActive = true;
+  document.getElementById('btnInspectionRoute').textContent = 'Clear Inspection Route';
+  document.getElementById('btnInspectionRoute').style.background = '#3a1a1a';
+
+  // Draw route segments between consecutive stops
+  let totalDist = 0;
+  const segColors = [0x00e676, 0x66ffaa, 0x44ddff, 0xffaa44, 0xff66aa, 0xaa88ff];
+  for (let i = 0; i < stops.length - 1; i++) {
+    const result = dijkstra(adj, stops[i]._key, stops[i+1]._key);
+    const path = result ? result.path : [];
+    if (path.length < 2) continue;
+
+    const color = segColors[i % segColors.length];
+    for (let j = 0; j < path.length - 1; j++) {
+      const nA = nodes[path[j]], nB = nodes[path[j+1]];
+      if (!nA || !nB) continue;
+      const liA = LEVELS.indexOf(nA.level), liB = LEVELS.indexOf(nB.level);
+      const pwA = floorData[nA.level]?.page?.width || 595, phA = floorData[nA.level]?.page?.height || 842;
+      const pwB = floorData[nB.level]?.page?.width || 595, phB = floorData[nB.level]?.page?.height || 842;
+      const [x1,y1] = pdfToWorld(nA.x, nA.y, pwA, phA);
+      const [x2,y2] = pdfToWorld(nB.x, nB.y, pwB, phB);
+      const z1 = is3DView ? liA * FLOOR_SPACING + 5 : 5;
+      const z2 = is3DView ? liB * FLOOR_SPACING + 5 : 5;
+      const tube = new THREE.TubeGeometry(
+        new THREE.LineCurve3(new THREE.Vector3(x1,y1,z1), new THREE.Vector3(x2,y2,z2)), 1, 0.6, 6, false);
+      routeGroup.add(new THREE.Mesh(tube, new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.8 })));
+      totalDist += Math.sqrt((x2-x1)**2 + (y2-y1)**2);
+    }
+  }
+
+  // Highlight stop markers with numbered labels
+  for (let i = 0; i < stops.length; i++) {
+    const eq = stops[i];
+    const data = floorData[eq._level];
+    if (!data) continue;
+    const room = data.rooms.find(r => r.name === eq.room);
+    if (!room) continue;
+    const pw = data.page.width, ph = data.page.height;
+    const [wx, wy] = pdfToWorld(room.center[0], room.center[1], pw, ph);
+    const li = LEVELS.indexOf(eq._level);
+    const zPos = is3DView ? li * FLOOR_SPACING + 8 : 8;
+
+    // Number marker
+    const mc = document.createElement('canvas');
+    mc.width = 128; mc.height = 128;
+    const ctx = mc.getContext('2d');
+    // Circle background
+    ctx.beginPath(); ctx.arc(64, 64, 56, 0, Math.PI * 2);
+    const sc = eq.status === 'running' ? '#00e676' : eq.status === 'warning' ? '#ffab00' : '#ff1744';
+    ctx.fillStyle = sc; ctx.fill();
+    ctx.lineWidth = 4; ctx.strokeStyle = '#fff'; ctx.stroke();
+    // Number
+    ctx.font = 'bold 52px monospace'; ctx.fillStyle = '#000'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(String(i + 1), 64, 64);
+    const marker = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(mc), transparent: true }));
+    marker.position.set(wx, wy + 4, zPos);
+    marker.scale.set(6, 6, 1);
+    routeGroup.add(marker);
+
+    // Highlight the room
+    const fg = floorGroups[eq._level];
+    if (fg) {
+      const mesh = fg.meshes.find(m => m.userData.name === eq.room);
+      if (mesh) {
+        mesh.userData._levelIdx = li;
+        mesh.material.color.setHex(parseInt(sc.replace('#',''), 16));
+        mesh.material.opacity = 0.6;
+        routeHighlightedMeshes.push(mesh);
+      }
+    }
+  }
+
+  // Build info HTML
+  let infoHtml = '<div style="border:1px solid #00e676;border-radius:4px;padding:6px;margin:4px 0;background:rgba(0,230,118,0.05)">';
+  infoHtml += `<b style="color:#00e676">Inspection Route</b> (${stops.length} stops)<br>`;
+  for (let i = 0; i < stops.length; i++) {
+    const eq = stops[i];
+    const sc = eq.status === 'running' ? '#00e676' : eq.status === 'warning' ? '#ffab00' : '#ff1744';
+    const daysUntil = Math.ceil(eq._urgency);
+    const urgTag = daysUntil < 0 ? `<b style="color:#ff1744">OVERDUE ${-daysUntil}d</b>` :
+                   daysUntil < 14 ? `<span style="color:#ffab00">${daysUntil}d left</span>` :
+                   `<span style="color:#aaa">${daysUntil}d left</span>`;
+    infoHtml += `<div style="margin:3px 0;padding:2px 0;border-bottom:1px solid #222">`;
+    infoHtml += `<span style="color:${sc};font-weight:bold">${i+1}.</span> `;
+    infoHtml += `<span style="color:#fff">${eq.name}</span> `;
+    infoHtml += `<span style="color:#666">Rm ${eq.room}</span> ${urgTag}`;
+    infoHtml += `</div>`;
+  }
+  infoHtml += '</div>';
+  document.getElementById('inspectionInfo').innerHTML = infoHtml;
+
+  // Switch to 3D if equipment spans multiple floors
+  const floors = new Set(stops.map(s => s.level));
+  if (floors.size > 1 && !is3DView) switchTo3D();
+
+  render();
+});
+
+window.addEventListener('resize', () => {
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  camera3D.aspect=window.innerWidth/window.innerHeight;camera3D.updateProjectionMatrix();
+  updateCamera2D();render();
+});
+
+init();
+animate();
+</script>
+</body>
+</html>

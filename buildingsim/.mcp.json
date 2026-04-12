@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "buildsim": {
+      "command": "python3",
+      "args": ["mcp/server.py", "--buildsim-url", "http://localhost:9090"]
+    }
+  }
+}

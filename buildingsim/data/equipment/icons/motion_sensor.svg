@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="msBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a4a55"/>
+      <stop offset="100%" stop-color="#1e2830"/>
+    </linearGradient>
+    <radialGradient id="msDome" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#5a7080" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#1e3040" stop-opacity="0.9"/>
+    </radialGradient>
+  </defs>
+  <!-- Mounting bracket (wall) -->
+  <rect x="44" y="6" width="40" height="16" rx="4" fill="#1e2830"/>
+  <circle cx="56" cy="14" r="4" fill="#1a2030"/><circle cx="56" cy="14" r="2.5" fill="#334455"/>
+  <circle cx="72" cy="14" r="4" fill="#1a2030"/><circle cx="72" cy="14" r="2.5" fill="#334455"/>
+  <!-- Swivel bracket -->
+  <rect x="58" y="18" width="12" height="16" rx="3" fill="#2a3845"/>
+  <!-- PIR housing body -->
+  <rect x="20" y="30" width="88" height="56" rx="8" fill="url(#msBody)"/>
+  <rect x="20" y="30" width="88" height="56" rx="8" fill="none" stroke="#667788" stroke-width="1.2" opacity="0.5"/>
+  <!-- Body top chrome strip -->
+  <rect x="20" y="30" width="88" height="6" rx="4" fill="#445566" opacity="0.5"/>
+  <!-- Fresnel lens dome -->
+  <ellipse cx="55" cy="58" rx="26" ry="24" fill="url(#msDome)"/>
+  <ellipse cx="55" cy="58" rx="26" ry="24" fill="none" stroke="#88aacc" stroke-width="0.8" opacity="0.6"/>
+  <!-- Fresnel facets (radiating lines) -->
+  <line x1="55" y1="34" x2="55" y2="82" stroke="#88aacc" stroke-width="0.4" opacity="0.3"/>
+  <line x1="29" y1="58" x2="81" y2="58" stroke="#88aacc" stroke-width="0.4" opacity="0.3"/>
+  <line x1="37" y1="41" x2="73" y2="75" stroke="#88aacc" stroke-width="0.4" opacity="0.3"/>
+  <line x1="73" y1="41" x2="37" y2="75" stroke="#88aacc" stroke-width="0.4" opacity="0.3"/>
+  <circle cx="55" cy="58" rx="16" ry="14" r="16" fill="none" stroke="#88aacc" stroke-width="0.4" opacity="0.3"/>
+  <circle cx="55" cy="58" r="10" fill="none" stroke="#88aacc" stroke-width="0.4" opacity="0.3"/>
+  <circle cx="55" cy="58" r="5" fill="#1e2840" opacity="0.8"/>
+  <!-- LED indicator -->
+  <circle cx="93" cy="40" r="5" fill="#1a2030"/>
+  <circle cx="93" cy="40" r="3.5" fill="#ffffff" opacity="0.8"/>
+  <circle cx="93" cy="40" r="2" fill="#ffffff"/>
+  <!-- Status text area -->
+  <rect x="82" y="52" width="22" height="16" rx="3" fill="#1a2030"/>
+  <rect x="84" y="54" width="18" height="4" rx="1" fill="#88aacc" opacity="0.4"/>
+  <rect x="84" y="61" width="12" height="3" rx="1" fill="#88aacc" opacity="0.3"/>
+  <!-- Detection zone rays -->
+  <path d="M20 44 L4 22" stroke="#ffffff" stroke-width="1" opacity="0.12" stroke-linecap="round"/>
+  <path d="M20 58 L4 58" stroke="#ffffff" stroke-width="1" opacity="0.1" stroke-linecap="round"/>
+  <path d="M20 72 L4 94" stroke="#ffffff" stroke-width="1" opacity="0.12" stroke-linecap="round"/>
+  <path d="M22 38 L10 16" stroke="#ffffff" stroke-width="0.8" opacity="0.08" stroke-linecap="round"/>
+  <path d="M22 78 L10 100" stroke="#ffffff" stroke-width="0.8" opacity="0.08" stroke-linecap="round"/>
+  <!-- Corner screws on housing -->
+  <circle cx="28" cy="38" r="2.5" fill="#1a2030"/><circle cx="28" cy="38" r="1.5" fill="#334455"/>
+  <circle cx="100" cy="38" r="2.5" fill="#1a2030"/><circle cx="100" cy="38" r="1.5" fill="#334455"/>
+  <circle cx="28" cy="78" r="2.5" fill="#1a2030"/><circle cx="28" cy="78" r="1.5" fill="#334455"/>
+  <circle cx="100" cy="78" r="2.5" fill="#1a2030"/><circle cx="100" cy="78" r="1.5" fill="#334455"/>
+  <!-- Cable entry -->
+  <rect x="54" y="84" width="20" height="8" rx="3" fill="#1a2030"/>
+  <rect x="57" y="86" width="5" height="4" rx="1" fill="#2a3845"/>
+  <rect x="64" y="86" width="5" height="4" rx="1" fill="#2a3845"/>
+</svg>

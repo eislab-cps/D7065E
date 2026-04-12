@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="alienSkull" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e2828"/>
+      <stop offset="50%" stop-color="#0e1818"/>
+      <stop offset="100%" stop-color="#060e0e"/>
+    </linearGradient>
+    <linearGradient id="alienShine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4a8080" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#4a8080" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="alienSaliva" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#88ccaa" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#44aa66" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+  <!-- Elongated biomechanical skull - profile/frontal view -->
+  <!-- Cranial dome (massively elongated) -->
+  <path d="M64 4 Q82 4 92 16 Q104 28 102 46 Q100 62 92 72 Q84 82 76 84 Q70 90 64 90 Q58 90 52 84 Q44 82 36 72 Q28 62 26 46 Q24 28 36 16 Q46 4 64 4Z" fill="url(#alienSkull)"/>
+  <!-- Ridged dome texture lines -->
+  <path d="M64 6 Q80 8 90 20" fill="none" stroke="#2a4040" stroke-width="1" opacity="0.7"/>
+  <path d="M64 6 Q48 8 38 20" fill="none" stroke="#2a4040" stroke-width="1" opacity="0.7"/>
+  <path d="M64 10 Q82 14 94 30" fill="none" stroke="#1a3030" stroke-width="0.8" opacity="0.6"/>
+  <path d="M64 10 Q46 14 34 30" fill="none" stroke="#1a3030" stroke-width="0.8" opacity="0.6"/>
+  <path d="M64 18 Q84 22 98 40" fill="none" stroke="#1a3030" stroke-width="0.7" opacity="0.5"/>
+  <path d="M64 18 Q44 22 30 40" fill="none" stroke="#1a3030" stroke-width="0.7" opacity="0.5"/>
+  <!-- Skull shine (biomechanical sheen) -->
+  <path d="M42 12 Q54 8 62 10" fill="none" stroke="#4a8080" stroke-width="3" opacity="0.3" stroke-linecap="round"/>
+  <path d="M40 22 Q50 16 58 18" fill="none" stroke="#4a8080" stroke-width="2" opacity="0.2" stroke-linecap="round"/>
+  <!-- Inner jaw / secondary mouth (biomech detail) -->
+  <path d="M52 78 Q56 82 64 84 Q72 82 76 78 Q72 92 64 94 Q56 92 52 78Z" fill="#0e1818"/>
+  <path d="M54 80 Q64 86 74 80" fill="none" stroke="#2a5040" stroke-width="1" opacity="0.6"/>
+  <!-- Inner pharyngeal jaw (inner teeth protruding) -->
+  <path d="M58 82 L60 90 L62 82" fill="none" stroke="#3a7060" stroke-width="1.5" opacity="0.7" stroke-linejoin="round"/>
+  <path d="M63 82 L65 92 L67 82" fill="none" stroke="#3a7060" stroke-width="1.5" opacity="0.7" stroke-linejoin="round"/>
+  <!-- Outer teeth (main mouth area) -->
+  <path d="M46 74 Q50 80 48 88 L42 104 L46 100 L50 108 L54 98 L58 106 L60 96 L64 104 L68 96 L70 106 L74 98 L78 108 L82 100 L86 104 L80 88 Q78 80 82 74" fill="#0a1414" stroke="#2a5040" stroke-width="0.8"/>
+  <!-- Individual teeth highlights -->
+  <path d="M48 88 L44 104" stroke="#3a7060" stroke-width="1" opacity="0.5"/>
+  <path d="M54 96 L52 108" stroke="#3a7060" stroke-width="1" opacity="0.5"/>
+  <path d="M62 98 L62 106" stroke="#3a7060" stroke-width="1" opacity="0.5"/>
+  <path d="M72 96 L74 108" stroke="#3a7060" stroke-width="1" opacity="0.5"/>
+  <path d="M80 88 L82 102" stroke="#3a7060" stroke-width="1" opacity="0.5"/>
+  <!-- Saliva drips -->
+  <path d="M50 108 Q50 116 52 122" stroke="url(#alienSaliva)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M64 110 Q64 118 63 124" stroke="url(#alienSaliva)" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M78 108 Q79 116 78 122" stroke="url(#alienSaliva)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <circle cx="52" cy="122" r="2" fill="#44aa66" opacity="0.4"/>
+  <circle cx="63" cy="124" r="2.5" fill="#44aa66" opacity="0.4"/>
+  <circle cx="78" cy="122" r="2" fill="#44aa66" opacity="0.4"/>
+  <!-- Eye socket (no eyes - just dark pits) -->
+  <ellipse cx="50" cy="52" rx="10" ry="7" fill="#060e0e"/>
+  <ellipse cx="78" cy="52" rx="10" ry="7" fill="#060e0e"/>
+  <!-- Eye socket rim glow (bioluminescent) -->
+  <ellipse cx="50" cy="52" rx="10" ry="7" fill="none" stroke="#2a6050" stroke-width="1" opacity="0.5"/>
+  <ellipse cx="78" cy="52" rx="10" ry="7" fill="none" stroke="#2a6050" stroke-width="1" opacity="0.5"/>
+  <!-- Dorsal tubes (pipes on back of skull) -->
+  <path d="M34 30 Q24 24 18 30 Q14 36 18 44" fill="none" stroke="#1a3030" stroke-width="4" stroke-linecap="round"/>
+  <path d="M36 42 Q24 38 20 46 Q16 52 20 58" fill="none" stroke="#1a3030" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M38 52 Q26 50 22 58 Q18 66 22 72" fill="none" stroke="#1a3030" stroke-width="3" stroke-linecap="round"/>
+  <path d="M94 30 Q104 24 110 30 Q114 36 110 44" fill="none" stroke="#1a3030" stroke-width="4" stroke-linecap="round"/>
+  <path d="M92 42 Q104 38 108 46 Q112 52 108 58" fill="none" stroke="#1a3030" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Tube end caps -->
+  <circle cx="18" cy="44" r="3" fill="#2a4040"/>
+  <circle cx="20" cy="58" r="2.5" fill="#2a4040"/>
+  <circle cx="22" cy="72" r="2" fill="#2a4040"/>
+  <circle cx="110" cy="44" r="3" fill="#2a4040"/>
+  <circle cx="108" cy="58" r="2.5" fill="#2a4040"/>
+  <!-- Neck (if visible) -->
+  <path d="M52 88 Q52 96 50 106" fill="none" stroke="#1a2828" stroke-width="6" stroke-linecap="round"/>
+  <path d="M76 88 Q76 96 78 106" fill="none" stroke="#1a2828" stroke-width="6" stroke-linecap="round"/>
+  <!-- Carapace surface detail -->
+  <path d="M40 34 Q50 30 60 32" fill="none" stroke="#2a5040" stroke-width="0.5" opacity="0.4"/>
+  <path d="M68 32 Q78 30 88 34" fill="none" stroke="#2a5040" stroke-width="0.5" opacity="0.4"/>
+</svg>

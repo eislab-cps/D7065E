@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="ahuBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a4a55"/>
+      <stop offset="100%" stop-color="#1e2a34"/>
+    </linearGradient>
+    <linearGradient id="ahuSection" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a3a45"/>
+      <stop offset="100%" stop-color="#1a2830"/>
+    </linearGradient>
+  </defs>
+  <!-- Main AHU body -->
+  <rect x="4" y="24" width="120" height="70" rx="5" fill="url(#ahuBody)"/>
+  <rect x="4" y="24" width="120" height="70" rx="5" fill="none" stroke="#667788" stroke-width="1.2" opacity="0.6"/>
+  <!-- Top edge highlight -->
+  <rect x="4" y="24" width="120" height="5" rx="3" fill="#445566" opacity="0.5"/>
+  <!-- Section dividers (vertical lines showing filter/fan/coil sections) -->
+  <line x1="36" y1="26" x2="36" y2="92" stroke="#334455" stroke-width="1.5" opacity="0.8"/>
+  <line x1="72" y1="26" x2="72" y2="92" stroke="#334455" stroke-width="1.5" opacity="0.8"/>
+  <line x1="96" y1="26" x2="96" y2="92" stroke="#334455" stroke-width="1.5" opacity="0.8"/>
+  <!-- Section labels (lines representing text) -->
+  <rect x="8" y="28" width="24" height="2" rx="1" fill="#667788" opacity="0.5"/>
+  <rect x="40" y="28" width="28" height="2" rx="1" fill="#667788" opacity="0.5"/>
+  <rect x="76" y="28" width="16" height="2" rx="1" fill="#667788" opacity="0.5"/>
+  <rect x="100" y="28" width="20" height="2" rx="1" fill="#667788" opacity="0.5"/>
+  <!-- Filter section (left) -->
+  <rect x="8" y="34" width="24" height="52" rx="2" fill="url(#ahuSection)"/>
+  <rect x="8" y="34" width="24" height="52" rx="2" fill="none" stroke="#445566" stroke-width="0.7"/>
+  <!-- Filter mesh -->
+  <line x1="12" y1="36" x2="12" y2="84" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="16" y1="36" x2="16" y2="84" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="20" y1="36" x2="20" y2="84" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="24" y1="36" x2="24" y2="84" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="8" y1="40" x2="32" y2="40" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="8" y1="46" x2="32" y2="46" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="8" y1="52" x2="32" y2="52" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="8" y1="58" x2="32" y2="58" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="8" y1="64" x2="32" y2="64" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="8" y1="70" x2="32" y2="70" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="8" y1="76" x2="32" y2="76" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <line x1="8" y1="82" x2="32" y2="82" stroke="#334455" stroke-width="0.8" opacity="0.7"/>
+  <!-- Fan section (center-left) -->
+  <rect x="39" y="34" width="30" height="52" rx="2" fill="url(#ahuSection)"/>
+  <circle cx="54" cy="60" r="22" fill="#1a2530" stroke="#334455" stroke-width="1"/>
+  <!-- Fan blades -->
+  <path d="M54 38 Q60 46 54 54 Q48 46 54 38Z" fill="#2a4050" opacity="0.9"/>
+  <path d="M76 60 Q68 66 60 60 Q68 54 76 60Z" fill="#2a4050" opacity="0.9"/>
+  <path d="M54 82 Q48 74 54 66 Q60 74 54 82Z" fill="#2a4050" opacity="0.9"/>
+  <path d="M32 60 Q40 54 48 60 Q40 66 32 60Z" fill="#2a4050" opacity="0.9"/>
+  <circle cx="54" cy="60" r="6" fill="#334455"/>
+  <circle cx="54" cy="60" r="3" fill="#88aacc" opacity="0.5"/>
+  <!-- Coil section (center-right) -->
+  <rect x="75" y="34" width="18" height="52" rx="2" fill="url(#ahuSection)"/>
+  <!-- Coil fin lines -->
+  <line x1="78" y1="36" x2="78" y2="84" stroke="#2a3845" stroke-width="1.5"/>
+  <line x1="82" y1="36" x2="82" y2="84" stroke="#2a3845" stroke-width="1.5"/>
+  <line x1="86" y1="36" x2="86" y2="84" stroke="#2a3845" stroke-width="1.5"/>
+  <line x1="90" y1="36" x2="90" y2="84" stroke="#2a3845" stroke-width="1.5"/>
+  <!-- Control panel (right) -->
+  <rect x="99" y="34" width="21" height="52" rx="2" fill="#1a2030"/>
+  <rect x="99" y="34" width="21" height="52" rx="2" fill="none" stroke="#334455" stroke-width="0.7"/>
+  <!-- Control panel display -->
+  <rect x="101" y="38" width="17" height="12" rx="2" fill="#1a2840"/>
+  <rect x="103" y="40" width="10" height="2" rx="1" fill="#88aacc" opacity="0.6"/>
+  <rect x="103" y="44" width="7" height="2" rx="1" fill="#88aacc" opacity="0.4"/>
+  <!-- Panel buttons -->
+  <rect x="101" y="54" width="6" height="4" rx="1" fill="#2a3845"/>
+  <rect x="109" y="54" width="6" height="4" rx="1" fill="#2a3845"/>
+  <rect x="101" y="61" width="6" height="4" rx="1" fill="#2a3845"/>
+  <rect x="109" y="61" width="6" height="4" rx="1" fill="#2a3845"/>
+  <!-- Access door hinge indicator -->
+  <rect x="101" y="70" width="17" height="14" rx="1" fill="#1e2830" stroke="#334455" stroke-width="0.6"/>
+  <circle cx="103" cy="77" r="1.5" fill="#334455"/>
+  <line x1="103" y1="71" x2="103" y2="83" stroke="#334455" stroke-width="0.5"/>
+  <!-- Top duct connections -->
+  <rect x="14" y="10" width="14" height="16" rx="2" fill="#1e2a34"/>
+  <rect x="14" y="10" width="14" height="16" rx="2" fill="none" stroke="#334455" stroke-width="0.8"/>
+  <!-- Damper in duct -->
+  <line x1="14" y1="18" x2="28" y2="18" stroke="#445566" stroke-width="1.5"/>
+  <rect x="100" y="10" width="16" height="16" rx="2" fill="#1e2a34"/>
+  <rect x="100" y="10" width="16" height="16" rx="2" fill="none" stroke="#334455" stroke-width="0.8"/>
+  <line x1="100" y1="18" x2="116" y2="18" stroke="#445566" stroke-width="1.5"/>
+  <!-- Bottom drain pan -->
+  <rect x="4" y="92" width="120" height="6" rx="3" fill="#1a2030"/>
+  <rect x="58" y="96" width="12" height="8" rx="2" fill="#2a3040"/>
+  <!-- Status LED on panel -->
+  <circle cx="110" cy="81" r="2.5" fill="#ffffff" opacity="0.8"/>
+</svg>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="acBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a4a55"/>
+      <stop offset="100%" stop-color="#1e2a34"/>
+    </linearGradient>
+    <linearGradient id="acShine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#88aacc" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#88aacc" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+  <!-- Outer casing -->
+  <rect x="6" y="22" width="116" height="84" rx="8" fill="url(#acBody)"/>
+  <rect x="6" y="22" width="116" height="84" rx="8" fill="url(#acShine)"/>
+  <rect x="6" y="22" width="116" height="84" rx="8" fill="none" stroke="#667788" stroke-width="1" opacity="0.5"/>
+  <!-- Top stripe -->
+  <rect x="6" y="22" width="116" height="8" rx="5" fill="#445566" opacity="0.6"/>
+  <!-- Fan grille section (left 2/3) -->
+  <rect x="10" y="32" width="76" height="66" rx="5" fill="#1a2530"/>
+  <rect x="10" y="32" width="76" height="66" rx="5" fill="none" stroke="#334455" stroke-width="0.8"/>
+  <!-- Grille horizontal bars -->
+  <rect x="12" y="36" width="72" height="2" rx="1" fill="#2a3845" opacity="0.8"/>
+  <rect x="12" y="41" width="72" height="2" rx="1" fill="#2a3845" opacity="0.8"/>
+  <rect x="12" y="46" width="72" height="2" rx="1" fill="#2a3845" opacity="0.8"/>
+  <rect x="12" y="51" width="72" height="2" rx="1" fill="#2a3845" opacity="0.8"/>
+  <rect x="12" y="56" width="72" height="2" rx="1" fill="#2a3845" opacity="0.8"/>
+  <rect x="12" y="61" width="72" height="2" rx="1" fill="#2a3845" opacity="0.8"/>
+  <rect x="12" y="66" width="72" height="2" rx="1" fill="#2a3845" opacity="0.8"/>
+  <rect x="12" y="71" width="72" height="2" rx="1" fill="#2a3845" opacity="0.8"/>
+  <rect x="12" y="76" width="72" height="2" rx="1" fill="#2a3845" opacity="0.8"/>
+  <rect x="12" y="81" width="72" height="2" rx="1" fill="#2a3845" opacity="0.8"/>
+  <rect x="12" y="86" width="72" height="2" rx="1" fill="#2a3845" opacity="0.8"/>
+  <rect x="12" y="91" width="72" height="2" rx="1" fill="#2a3845" opacity="0.8"/>
+  <!-- Fan blades (circular overlay) -->
+  <circle cx="48" cy="65" r="26" fill="none" stroke="#334455" stroke-width="1.5"/>
+  <path d="M48 39 Q56 48 48 57 Q40 48 48 39Z" fill="#2a4050" opacity="0.7"/>
+  <path d="M74 65 Q65 73 56 65 Q65 57 74 65Z" fill="#2a4050" opacity="0.7"/>
+  <path d="M48 91 Q40 82 48 73 Q56 82 48 91Z" fill="#2a4050" opacity="0.7"/>
+  <path d="M22 65 Q31 57 40 65 Q31 73 22 65Z" fill="#2a4050" opacity="0.7"/>
+  <circle cx="48" cy="65" r="6" fill="#2a3845"/>
+  <circle cx="48" cy="65" r="3" fill="#334455"/>
+  <circle cx="48" cy="65" r="1.5" fill="#88aacc" opacity="0.6"/>
+  <!-- Heat exchanger fins (right section) -->
+  <rect x="90" y="32" width="28" height="66" rx="3" fill="#1e2a34"/>
+  <rect x="90" y="32" width="28" height="66" rx="3" fill="none" stroke="#334455" stroke-width="0.6"/>
+  <!-- Fin lines -->
+  <line x1="94" y1="36" x2="94" y2="95" stroke="#2a3845" stroke-width="1.5"/>
+  <line x1="98" y1="36" x2="98" y2="95" stroke="#2a3845" stroke-width="1.5"/>
+  <line x1="102" y1="36" x2="102" y2="95" stroke="#2a3845" stroke-width="1.5"/>
+  <line x1="106" y1="36" x2="106" y2="95" stroke="#2a3845" stroke-width="1.5"/>
+  <line x1="110" y1="36" x2="110" y2="95" stroke="#2a3845" stroke-width="1.5"/>
+  <line x1="114" y1="36" x2="114" y2="95" stroke="#2a3845" stroke-width="1.5"/>
+  <!-- Copper pipes -->
+  <circle cx="93" cy="50" r="3" fill="#7a5020" stroke="#aa7030" stroke-width="0.8"/>
+  <circle cx="93" cy="50" r="1.5" fill="#cc9040" opacity="0.6"/>
+  <circle cx="93" cy="80" r="3" fill="#7a5020" stroke="#aa7030" stroke-width="0.8"/>
+  <circle cx="93" cy="80" r="1.5" fill="#cc9040" opacity="0.6"/>
+  <!-- Control panel bottom strip -->
+  <rect x="88" y="92" width="28" height="8" rx="3" fill="#1a2030"/>
+  <!-- Status LED -->
+  <circle cx="96" cy="96" r="2.5" fill="#ffffff" opacity="0.8"/>
+  <!-- Airflow arrows -->
+  <path d="M6 55 L14 55 M10 52 L14 55 L10 58" stroke="#88aacc" stroke-width="1.2" opacity="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M6 65 L14 65 M10 62 L14 65 L10 68" stroke="#88aacc" stroke-width="1.2" opacity="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M6 75 L14 75 M10 72 L14 75 L10 78" stroke="#88aacc" stroke-width="1.2" opacity="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>
