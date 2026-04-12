@@ -24,6 +24,12 @@ type MemoryStore struct {
 	actuatorEquipment map[string]string          // actuator id -> equipment id
 	equipmentVersion int64
 
+	// Global occupancy and coverage (persistent, not per-session)
+	occupancy        map[int]model.RoomOccupancy
+	occupancyVersion int64
+	coverage         []model.CoverageZone
+	coverageVersion  int64
+
 	// Sessions
 	sessions map[string]*model.Session
 }
@@ -36,6 +42,8 @@ func NewMemoryStore() *MemoryStore {
 		sensorEquipment:   make(map[string]string),
 		actuators:         make(map[string]*model.Actuator),
 		actuatorEquipment: make(map[string]string),
+		occupancy:         make(map[int]model.RoomOccupancy),
+		coverage:          []model.CoverageZone{},
 		sessions:          make(map[string]*model.Session),
 	}
 }
@@ -319,6 +327,44 @@ func (s *MemoryStore) SetActuatorState(actuatorID string, state model.ActuatorSt
 		}
 	}
 	return false
+}
+
+// === Global Occupancy ===
+
+func (s *MemoryStore) SetOccupancy(occ map[int]model.RoomOccupancy) int64 {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.occupancy = occ
+	s.occupancyVersion++
+	return s.occupancyVersion
+}
+
+func (s *MemoryStore) GetOccupancy() map[int]model.RoomOccupancy {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return s.occupancy
+}
+
+func (s *MemoryStore) GetOccupancyVersion() int64 {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return s.occupancyVersion
+}
+
+// === Global Coverage ===
+
+func (s *MemoryStore) SetCoverage(cov []model.CoverageZone) int64 {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.coverage = cov
+	s.coverageVersion++
+	return s.coverageVersion
+}
+
+func (s *MemoryStore) GetCoverage() []model.CoverageZone {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return s.coverage
 }
 
 // === Sessions ===

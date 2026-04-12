@@ -96,6 +96,14 @@ func setupTestRouter() (*gin.Engine, *store.MemoryStore) {
 		api.DELETE("/actuators/:id", acth.DeleteActuator)
 		api.PUT("/actuators/:id/state", acth.SetState)
 
+		oh := &handlers.OccupancyHandlers{Store: st, Hub: hub}
+		api.GET("/occupancy", oh.Get)
+		api.PUT("/occupancy", oh.Set)
+
+		covh := &handlers.CoverageHandlers{Store: st, Hub: hub}
+		api.GET("/coverage", covh.Get)
+		api.PUT("/coverage", covh.Set)
+
 		sh := &handlers.SessionHandlers{Store: st, Hub: hub}
 		api.GET("/sessions", sh.List)
 		api.POST("/sessions", sh.Create)
@@ -579,6 +587,81 @@ func TestDuplicateActuator(t *testing.T) {
 	w = doRequest(r, "POST", "/api/equipment/eq-dup-a/actuators", act)
 	if w.Code != 409 {
 		t.Fatalf("duplicate add: expected 409, got %d: %s", w.Code, w.Body.String())
+	}
+}
+
+func TestGlobalOccupancy(t *testing.T) {
+	r, _ := setupTestRouter()
+
+	// Initially empty
+	w := doRequest(r, "GET", "/api/occupancy", nil)
+	if w.Code != 200 {
+		t.Fatalf("expected 200, got %d", w.Code)
+	}
+
+	// Set occupancy
+	occ := map[int]model.RoomOccupancy{
+		1: {Persons: []model.Person{{ID: "p1", Name: "Alice"}}, Aliens: []model.Alien{{ID: "x1"}}},
+	}
+	w = doRequest(r, "PUT", "/api/occupancy", occ)
+	if w.Code != 200 {
+		t.Fatalf("set: expected 200, got %d", w.Code)
+	}
+
+	// Verify persists
+	w = doRequest(r, "GET", "/api/occupancy", nil)
+	var got map[int]model.RoomOccupancy
+	parseJSON(w, &got)
+	if len(got) != 1 {
+		t.Fatalf("expected 1 room, got %d", len(got))
+	}
+	if len(got[1].Persons) != 1 || got[1].Persons[0].Name != "Alice" {
+		t.Fatalf("expected Alice, got %v", got[1])
+	}
+	if len(got[1].Aliens) != 1 {
+		t.Fatalf("expected 1 alien, got %d", len(got[1].Aliens))
+	}
+
+}
+
+func TestGlobalCoverage(t *testing.T) {
+	r, _ := setupTestRouter()
+
+	// Initially empty
+	w := doRequest(r, "GET", "/api/coverage", nil)
+	if w.Code != 200 {
+		t.Fatalf("expected 200, got %d", w.Code)
+	}
+
+	// Set coverage
+	zones := []model.CoverageZone{
+		{ID: "z1", Name: "WiFi", Room: "R001", Radius: 30, Color: "#00aaff", Opacity: 0.1},
+	}
+	w = doRequest(r, "PUT", "/api/coverage", zones)
+	if w.Code != 200 {
+		t.Fatalf("set: expected 200, got %d", w.Code)
+	}
+
+	// Verify persists
+	w = doRequest(r, "GET", "/api/coverage", nil)
+	var got []model.CoverageZone
+	parseJSON(w, &got)
+	if len(got) != 1 {
+		t.Fatalf("expected 1 zone, got %d", len(got))
+	}
+	if got[0].Name != "WiFi" {
+		t.Fatalf("expected WiFi, got %s", got[0].Name)
+	}
+
+	// Clear
+	w = doRequest(r, "PUT", "/api/coverage", []model.CoverageZone{})
+	if w.Code != 200 {
+		t.Fatalf("clear: expected 200, got %d", w.Code)
+	}
+	w = doRequest(r, "GET", "/api/coverage", nil)
+	parseJSON(w, &got)
+	if len(got) != 0 {
+		t.Fatalf("expected empty after clear, got %d", len(got))
 	}
 }
 

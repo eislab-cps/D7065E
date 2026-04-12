@@ -6,7 +6,7 @@ type Session struct {
 	ID           string                  `json:"id"`
 	Viewport     Viewport                `json:"viewport"`
 	Highlights   []RoomHighlight         `json:"highlights"`
-	Occupancy    map[int]RoomOccupancy   `json:"occupancy"`
+	Occupancy    map[int]RoomOccupancy   `json:"occupancy"`    // deprecated, use global /api/occupancy
 	Route        *RouteResult            `json:"route,omitempty"`
 	Coverage     []CoverageZone          `json:"coverage"`
 	LastWSActive time.Time               `json:"last_ws_active"`

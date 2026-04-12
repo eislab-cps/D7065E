@@ -7,7 +7,7 @@ source "$DIR/find_session.sh" "$@"
 
 echo ""
 echo "=== Setting Room Occupancy (people and aliens) ==="
-curl -s -X PUT http://$BASE/api/sessions/$SESSION/occupancy -H 'Content-Type: application/json' -d '{
+curl -s -X PUT http://$BASE/api/occupancy -H 'Content-Type: application/json' -d '{
   "5": {
     "persons": [
       {"id": "person-1", "name": "Johan"}

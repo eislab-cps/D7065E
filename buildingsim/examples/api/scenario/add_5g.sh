@@ -72,7 +72,7 @@ echo "=== Setting 5G Coverage Zone ==="
 DIR="$(cd "$(dirname "$0")" && pwd)"
 source "$DIR/../session/find_session.sh" "$@"
 
-curl -s -X PUT http://$BASE/api/sessions/$SESSION/coverage -H 'Content-Type: application/json' -d '[
+curl -s -X PUT http://$BASE/api/coverage -H 'Content-Type: application/json' -d '[
   {
     "id": "5g-coverage-1",
     "name": "5G Coverage - A-Building",

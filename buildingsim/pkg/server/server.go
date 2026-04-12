@@ -155,6 +155,14 @@ func (s *Server) Start() error {
 		api.DELETE("/actuators/:id", acth.DeleteActuator)
 		api.PUT("/actuators/:id/state", acth.SetState)
 
+		oh := &handlers.OccupancyHandlers{Store: s.store, Hub: s.hub}
+		api.GET("/occupancy", oh.Get)
+		api.PUT("/occupancy", oh.Set)
+
+		covh := &handlers.CoverageHandlers{Store: s.store, Hub: s.hub}
+		api.GET("/coverage", covh.Get)
+		api.PUT("/coverage", covh.Set)
+
 		sh := &handlers.SessionHandlers{Store: s.store, Hub: s.hub}
 		api.GET("/sessions", sh.List)
 		api.POST("/sessions", sh.Create)

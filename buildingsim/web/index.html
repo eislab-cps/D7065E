@@ -476,6 +476,10 @@ async function init() {
   switchTo3D();
   render();
 
+  // Load global occupancy and coverage
+  fetchAndApplyOccupancy();
+  fetchAndApplyCoverage();
+
   // === Check edit mode ===
   try {
     const cfgResp = await fetch('/api/config');
@@ -552,7 +556,8 @@ function handleSessionMessage(msg) {
       applyRoute(msg.data);
       break;
     case 'coverage':
-      applyCoverage(msg.data);
+      if (msg.data) applyCoverage(msg.data);
+      else fetchAndApplyCoverage();
       break;
     case 'occupancy':
       if (msg.version > localOccupancyVersion) {
@@ -724,12 +729,19 @@ function applyRoute(route) {
 }
 
 async function fetchAndApplyOccupancy() {
-  if (!sessionId) return;
   try {
-    const resp = await fetch(`/api/sessions/${sessionId}`);
-    const sess = await resp.json();
-    renderOccupancy(sess.occupancy);
+    const resp = await fetch('/api/occupancy');
+    const occ = await resp.json();
+    renderOccupancy(occ);
   } catch(e) { console.log('Failed to fetch occupancy:', e); }
+}
+
+async function fetchAndApplyCoverage() {
+  try {
+    const resp = await fetch('/api/coverage');
+    const zones = await resp.json();
+    applyCoverage(zones);
+  } catch(e) { console.log('Failed to fetch coverage:', e); }
 }
 
 function renderOccupancy(occupancy) {
@@ -769,56 +781,49 @@ function renderOccupancy(occupancy) {
 
     const [wx, wy] = pdfToWorld(roomCenter[0], roomCenter[1], roomPw, roomPh);
     const levelIdx = LEVELS.indexOf(roomLevel);
-    const zBase = is3DView ? levelIdx * FLOOR_SPACING + 9 : 9;
-    let xOff = 0;
+    const zBase = is3DView ? levelIdx * FLOOR_SPACING + 12 : 12;
+    const iconSize = 3;
+    const spacing = iconSize * 1.3;
+    const yOffset = is3DView ? 0 : iconSize * 3; // offset upward in 2D to avoid equipment overlap
 
-    // Person icon (single or group)
-    if (personCount > 0) {
-      const iconType = personCount === 1 ? 'man' : 'group';
-      const p = loadEquipmentIcon(iconType, null, true).then(canvas => {
-        const sprite = createEquipmentSprite(wx + xOff, wy, zBase, 3, canvas);
-        occupancyGroup.add(sprite);
-
-        // Person count label if > 1
-        if (personCount > 1) {
-          const lc = document.createElement('canvas');
-          lc.width = 64; lc.height = 32;
-          const ctx = lc.getContext('2d');
-          ctx.font = 'bold 22px monospace';
-          ctx.fillStyle = '#00ccff';
-          ctx.textAlign = 'center';
-          ctx.fillText('x' + personCount, 32, 22);
-          const label = new THREE.Sprite(new THREE.SpriteMaterial({
-            map: new THREE.CanvasTexture(lc), transparent: true }));
-          label.position.set(wx + xOff + 3, wy, zBase);
-          label.scale.set(4, 2, 1);
-          occupancyGroup.add(label);
-        }
-      });
-      iconPromises.push(p);
-      xOff += 5;
+    // Collect all entities to render
+    const entities = [];
+    if (occ.persons) {
+      for (const person of occ.persons) {
+        entities.push({ type: 'man', name: person.name, id: person.id });
+      }
+    }
+    if (occ.aliens) {
+      for (const alien of occ.aliens) {
+        entities.push({ type: 'alien', name: 'Alien', id: alien.id });
+      }
     }
 
-    // Alien icon(s)
-    if (alienCount > 0) {
-      const p = loadEquipmentIcon('alien', null, true).then(canvas => {
-        const sprite = createEquipmentSprite(wx + xOff, wy, zBase, 3, canvas);
+    // Spread entities horizontally, centered on room
+    const totalWidth = (entities.length - 1) * spacing;
+    const startX = wx - totalWidth / 2;
+
+    for (let ei = 0; ei < entities.length; ei++) {
+      const ent = entities[ei];
+      const ex = startX + ei * spacing;
+
+      const p = loadEquipmentIcon(ent.type, null, true).then(canvas => {
+        const sprite = createEquipmentSprite(ex, wy + yOffset, zBase, iconSize, canvas);
         occupancyGroup.add(sprite);
 
-        if (alienCount > 1) {
-          const lc = document.createElement('canvas');
-          lc.width = 64; lc.height = 32;
-          const ctx = lc.getContext('2d');
-          ctx.font = 'bold 22px monospace';
-          ctx.fillStyle = '#ff2222';
-          ctx.textAlign = 'center';
-          ctx.fillText('x' + alienCount, 32, 22);
-          const label = new THREE.Sprite(new THREE.SpriteMaterial({
-            map: new THREE.CanvasTexture(lc), transparent: true }));
-          label.position.set(wx + xOff + 3, wy, zBase);
-          label.scale.set(4, 2, 1);
-          occupancyGroup.add(label);
-        }
+        // Name label below icon
+        const lc = document.createElement('canvas');
+        lc.width = 128; lc.height = 32;
+        const ctx = lc.getContext('2d');
+        ctx.font = 'bold 14px monospace';
+        ctx.fillStyle = ent.type === 'alien' ? '#ff2222' : '#00ccff';
+        ctx.textAlign = 'center';
+        ctx.fillText(ent.name || ent.type, 64, 18);
+        const label = new THREE.Sprite(new THREE.SpriteMaterial({
+          map: new THREE.CanvasTexture(lc), transparent: true }));
+        label.position.set(ex, wy + yOffset - iconSize * 1.2, zBase);
+        label.scale.set(6, 1.5, 1);
+        occupancyGroup.add(label);
       });
       iconPromises.push(p);
     }

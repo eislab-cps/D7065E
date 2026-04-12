@@ -7,7 +7,7 @@ source "$DIR/find_session.sh" "$@"
 
 echo ""
 echo "=== Setting Coverage Zones ==="
-curl -s -X PUT http://$BASE/api/sessions/$SESSION/coverage -H 'Content-Type: application/json' -d '[
+curl -s -X PUT http://$BASE/api/coverage -H 'Content-Type: application/json' -d '[
   {
     "id": "wifi-1",
     "name": "WiFi AP Central",
@@ -62,4 +62,4 @@ curl -s -X PUT http://$BASE/api/sessions/$SESSION/coverage -H 'Content-Type: app
 
 echo ""
 echo "=== To clear coverage ==="
-echo "curl -X PUT http://$BASE/api/sessions/$SESSION/coverage -H 'Content-Type: application/json' -d '[]'"
+echo "curl -X PUT http://$BASE/api/coverage -H 'Content-Type: application/json' -d '[]'"
