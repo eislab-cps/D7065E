@@ -333,7 +333,7 @@ function createLabels(labels, group, pw, ph) {
     const ctx = lc.getContext('2d');
     ctx.fillStyle = '#aaccff'; ctx.font = '14px monospace'; ctx.textAlign = 'center';
     ctx.fillText(label.text, 64, 20);
-    const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(lc), transparent: true }));
+    const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(lc), transparent: true, depthWrite: false }));
     sprite.position.set(wx, wy, 3);
     sprite.scale.set(12, 3, 1);
     group.add(sprite);
@@ -731,8 +731,8 @@ function applyRoute(route) {
 async function fetchAndApplyOccupancy() {
   try {
     const resp = await fetch('/api/occupancy');
-    const occ = await resp.json();
-    renderOccupancy(occ);
+    window._globalOccupancy = await resp.json();
+    buildAllEquipment(); // rebuild to include occupants in circles
   } catch(e) { console.log('Failed to fetch occupancy:', e); }
 }
 
@@ -784,13 +784,13 @@ function renderOccupancy(occupancy) {
     const zBase = is3DView ? levelIdx * FLOOR_SPACING + 3 : 12;
     const iconSize = 3;
     const spacing = iconSize * 1.3;
-    const yOffset = is3DView ? 0 : iconSize * 3; // offset upward in 2D to avoid equipment overlap
+    const yOffset = is3DView ? 0 : iconSize * 5; // offset upward in 2D to clear equipment icons
 
     // Collect all entities to render
     const entities = [];
     if (occ.persons) {
       for (const person of occ.persons) {
-        entities.push({ type: 'man', name: person.name, id: person.id });
+        entities.push({ type: person.icon || 'man', name: person.name, id: person.id });
       }
     }
     if (occ.aliens) {
@@ -820,7 +820,7 @@ function renderOccupancy(occupancy) {
         ctx.textAlign = 'center';
         ctx.fillText(ent.name || ent.type, 64, 18);
         const label = new THREE.Sprite(new THREE.SpriteMaterial({
-          map: new THREE.CanvasTexture(lc), transparent: true }));
+          map: new THREE.CanvasTexture(lc), transparent: true, depthWrite: false }));
         label.position.set(ex, wy + yOffset - iconSize * 1.2, zBase);
         label.scale.set(6, 1.5, 1);
         occupancyGroup.add(label);
@@ -1237,7 +1237,7 @@ function loadEquipmentIcon(type, statusColor, noRecolor) {
 function createEquipmentSprite(x, y, z, size, canvas) {
   const texture = new THREE.CanvasTexture(canvas);
   texture.minFilter = THREE.LinearFilter;
-  const mat = new THREE.SpriteMaterial({ map: texture, transparent: true });
+  const mat = new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false, alphaTest: 0.01 });
   const sprite = new THREE.Sprite(mat);
   sprite.position.set(x, y, z);
   sprite.scale.set(size, size, 1);
@@ -1920,7 +1920,7 @@ function buildEquipmentForLevel(level) {
         bctx.font = 'bold 20px monospace'; bctx.fillStyle = '#ffffff'; bctx.textAlign = 'center';
         bctx.fillText(roomEquips.length.toString(), 32, 22);
         const badge = new THREE.Sprite(new THREE.SpriteMaterial({
-          map: new THREE.CanvasTexture(bc), transparent: true }));
+          map: new THREE.CanvasTexture(bc), transparent: true, depthWrite: false }));
         badge.position.set(wx + 2, wy + 2, 7);
         badge.scale.set(3, 1.5, 1);
         badge.userData.eqRoom = roomName;
@@ -1931,30 +1931,53 @@ function buildEquipmentForLevel(level) {
     });
     iconPromises.push(collapsedP);
 
+    // === Build combined list: equipment + occupants ===
+    const allItems = roomEquips.map(eq => ({
+      iconType: eq.type, name: eq.name, colorHex: STATUS_HEX[eq.status] || '#00e676',
+      noRecolor: false, eqData: eq, isOccupant: false
+    }));
+
+    // Add occupants from global occupancy
+    const globalOcc = window._globalOccupancy || {};
+    const roomOcc = globalOcc[room.id];
+    if (roomOcc) {
+      if (roomOcc.persons) {
+        for (const p of roomOcc.persons) {
+          allItems.push({ iconType: p.icon || 'man', name: p.name, colorHex: null, noRecolor: true, isOccupant: true });
+        }
+      }
+      if (roomOcc.aliens) {
+        for (const a of roomOcc.aliens) {
+          allItems.push({ iconType: 'alien', name: 'Alien', colorHex: null, noRecolor: true, isOccupant: true });
+        }
+      }
+    }
+
+    const totalItems = allItems.length;
+
     // === 3D stacked icons + 2D expanded circle ===
-    for (let idx = 0; idx < roomEquips.length; idx++) {
-      const eq = roomEquips[idx];
-      const statusHex = STATUS_HEX[eq.status] || '#00e676';
+    for (let idx = 0; idx < totalItems; idx++) {
+      const item = allItems[idx];
       const size = 3;
 
-      const p = loadEquipmentIcon(eq.type, statusHex).then(canvas => {
+      const p = loadEquipmentIcon(item.iconType, item.colorHex, item.noRecolor).then(canvas => {
         // 3D: stack on z-axis
         const zOff = idx * size * 1.1;
         const iconSprite = createEquipmentSprite(wx, wy, 6 + zOff, size, canvas);
-        iconSprite.userData.equipment = eq;
+        if (item.eqData) iconSprite.userData.equipment = item.eqData;
         iconSprite.userData.eqRoom = roomName;
         iconSprite.userData.eqMode = '3d';
         iconSprite.visible = false;
         eqGroup.add(iconSprite);
 
         // 2D expanded: arrange in circle
-        const angle = (idx / roomEquips.length) * Math.PI * 2 - Math.PI / 2;
-        const radius = Math.max(5, roomEquips.length * 1.2);
+        const angle = (idx / totalItems) * Math.PI * 2 - Math.PI / 2;
+        const radius = Math.max(5, totalItems * 1.2);
         const ex = wx + Math.cos(angle) * radius;
         const ey = wy + Math.sin(angle) * radius;
 
         const expandedSprite = createEquipmentSprite(ex, ey, 6, size, canvas);
-        expandedSprite.userData.equipment = eq;
+        if (item.eqData) expandedSprite.userData.equipment = item.eqData;
         expandedSprite.userData.eqRoom = roomName;
         expandedSprite.userData.eqMode = 'expanded';
         expandedSprite.visible = false;
@@ -1964,13 +1987,14 @@ function buildEquipmentForLevel(level) {
         const lc = document.createElement('canvas');
         lc.width = 256; lc.height = 32;
         const ctx = lc.getContext('2d');
-        ctx.font = 'bold 14px monospace'; ctx.fillStyle = statusHex; ctx.textAlign = 'center';
-        ctx.fillText(eq.name, 128, 16);
+        const labelColor = item.isOccupant ? (item.iconType === 'alien' ? '#ff2222' : '#00ccff') : (item.colorHex || '#88aacc');
+        ctx.font = 'bold 14px monospace'; ctx.fillStyle = labelColor; ctx.textAlign = 'center';
+        ctx.fillText(item.name, 128, 16);
         const labelSprite = new THREE.Sprite(new THREE.SpriteMaterial({
-          map: new THREE.CanvasTexture(lc), transparent: true }));
+          map: new THREE.CanvasTexture(lc), transparent: true, depthWrite: false }));
         labelSprite.position.set(ex, ey - size, 7);
         labelSprite.scale.set(8, 1.2, 1);
-        labelSprite.userData.equipment = eq;
+        if (item.eqData) labelSprite.userData.equipment = item.eqData;
         labelSprite.userData.eqRoom = roomName;
         labelSprite.userData.eqMode = 'expanded';
         labelSprite.visible = false;
@@ -1980,13 +2004,13 @@ function buildEquipmentForLevel(level) {
         const lc3 = document.createElement('canvas');
         lc3.width = 256; lc3.height = 32;
         const ctx3 = lc3.getContext('2d');
-        ctx3.font = 'bold 14px monospace'; ctx3.fillStyle = statusHex; ctx3.textAlign = 'center';
-        ctx3.fillText(eq.name, 128, 16);
+        ctx3.font = 'bold 14px monospace'; ctx3.fillStyle = labelColor; ctx3.textAlign = 'center';
+        ctx3.fillText(item.name, 128, 16);
         const label3d = new THREE.Sprite(new THREE.SpriteMaterial({
-          map: new THREE.CanvasTexture(lc3), transparent: true }));
+          map: new THREE.CanvasTexture(lc3), transparent: true, depthWrite: false }));
         label3d.position.set(wx, wy - size, 7 + zOff);
         label3d.scale.set(8, 1.2, 1);
-        label3d.userData.equipment = eq;
+        if (item.eqData) label3d.userData.equipment = item.eqData;
         label3d.userData.eqRoom = roomName;
         label3d.userData.eqMode = '3d';
         label3d.visible = false;
@@ -4189,7 +4213,7 @@ document.getElementById('btnInspectionRoute').addEventListener('click', () => {
     // Number
     ctx.font = 'bold 52px monospace'; ctx.fillStyle = '#000'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.fillText(String(i + 1), 64, 64);
-    const marker = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(mc), transparent: true }));
+    const marker = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(mc), transparent: true, depthWrite: false }));
     marker.position.set(wx, wy + 4, zPos);
     marker.scale.set(6, 6, 1);
     routeGroup.add(marker);
