@@ -15,6 +15,7 @@ A cyber-physical system (CPS) is one where computation and physical processes ar
 These two layers form a continuous feedback loop. Sensors measure the physical world, software reasons about what the measurements mean, actuators change the physical environment in response, and sensors measure the result. This loop must be fast enough for safety-critical decisions, reliable enough to work when components fail, and correct enough that a wrong decision does not cause harm.
 
 ```mermaid
+%%{init: {"theme": "neutral"}}%%
 graph LR
     subgraph Physical["Physical Layer"]
         P1[Rooms & HVAC]
@@ -149,6 +150,7 @@ The following examples show how each viewpoint applies to building control scena
 The context diagram shows your entire system as a single box, surrounded by the people and systems it interacts with.
 
 ```mermaid
+%%{init: {"theme": "neutral"}}%%
 graph TB
     BM([Building Manager])
     OCC([Building Occupants])
@@ -168,6 +170,7 @@ graph TB
 The container diagram shows every deployable unit. Each box becomes a Docker container or process in your `docker-compose.yml`.
 
 ```mermaid
+%%{init: {"theme": "neutral"}}%%
 graph TB
     subgraph External
         BS["BuildSim API"]
@@ -197,6 +200,7 @@ graph TB
 A different use case leads to a different architecture. This system uses MQTT pub/sub instead of direct REST calls, because the HVAC controller needs to react to multiple sensor types simultaneously and pub/sub decouples the sensors from the controller.
 
 ```mermaid
+%%{init: {"theme": "neutral"}}%%
 graph TB
     subgraph External
         BS["BuildSim API"]
@@ -225,6 +229,7 @@ graph TB
 When a single container is complex enough to warrant its own diagram, you zoom in to show its internal structure.
 
 ```mermaid
+%%{init: {"theme": "neutral"}}%%
 graph TB
     subgraph Agent["Safety Agent Container"]
         CLIENT["BuildSim API Client"]
@@ -244,6 +249,7 @@ graph TB
 A sequence diagram shows how components interact over time for one specific scenario.
 
 ```mermaid
+%%{init: {"theme": "neutral"}}%%
 sequenceDiagram
     participant SIM as Fire Simulator
     participant SMOKE as Smoke Sensor
@@ -272,6 +278,7 @@ sequenceDiagram
 A state machine diagram shows the states a component can be in and the events that cause transitions. This tells you exactly what error handling your code must implement.
 
 ```mermaid
+%%{init: {"theme": "neutral"}}%%
 stateDiagram-v2
     [*] --> Starting
     Starting --> Registering: process starts
