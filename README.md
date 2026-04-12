@@ -19,11 +19,11 @@ The lab assignment centers on **autonomous building control**: you instrument a 
 
 ## Specification-First Development
 
-Most developers write code first, then tests, then discover the design was wrong. With AI coding tools this gets worse — AI generates clean-looking code that satisfies the prompt, not the problem.
+Most developers write code first, then tests, then discover the design was wrong. With AI coding tools this can sometimes gets worse, where AI generates clean-looking code that satisfies the prompt, not the problem.
 
 This course uses **Model-Based Systems Engineering (MBSE)**: you design the system with precise models (component diagrams, sequence diagrams, data flows, requirements) before writing any code. These models become the input to AI coding tools. Tests are derived from the specification, not invented after the fact.
 
-The result: your architecture document is the prompt, your tests are the contract, and AI is the contractor. A clear specification produces working code. A vague one produces days of debugging.
+In this case, the architecture artifacts become he prompt, your tests are the contract, and AI is the contractor. A clear specification produces working code. A vague specification results in days of debugging.
 
 ## Contents
 
