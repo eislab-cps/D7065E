@@ -70,6 +70,10 @@ The edge-cloud continuum has several layers, each with different properties:
 | **Fog** | Building/campus level | 10–50 ms | High | Rack server, mini data centre |
 | **Cloud** | Regional data centre | 50–200 ms | Unlimited | AWS, Azure, GCP |
 
+**Edge computing** refers to processing data near the source of generation rather than in a centralized data centre. The term was popularized by Shi et al. in their 2016 survey ["Edge Computing: Vision and Challenges"](https://doi.org/10.1109/JIOT.2016.2579198) (IEEE IoT Journal). In building control, edge computing typically means running sensor data processing, ML inference, and control logic on a local server in the building's server room, avoiding dependency on external network connectivity for real-time decisions. See also the [Edge Computing article on Wikipedia](https://en.wikipedia.org/wiki/Edge_computing).
+
+**Fog computing** extends edge computing by introducing a hierarchical layer between edge devices and the cloud. The term was coined by [Cisco in 2012](https://en.wikipedia.org/wiki/Fog_computing) and formalized by the [OpenFog Consortium](https://www.iiconsortium.org/), now part of the Industrial Internet Consortium. While edge computing is typically a single device or gateway, fog computing refers to a distributed infrastructure spanning multiple nodes at the building or campus level. In practice, for a single building, the distinction between edge and fog is often academic, but it becomes relevant when managing a campus of buildings with shared compute resources. See Bonomi et al., ["Fog Computing and Its Role in the Internet of Things"](https://doi.org/10.1145/2342509.2342513) (MCC Workshop, 2012).
+
 For building control, the typical distribution places sensor firmware and simple threshold alarms at the device level; data collection, real-time ML inference, and agent decision-making at the edge level; and model training, long-term analytics, fleet management, and dashboards in the cloud.
 
 **Hybrid edge-cloud** is the dominant real-world pattern: run inference at the edge, train models in the cloud. The edge model is updated periodically from the cloud with a freshly trained version. This combines the latency benefits of edge with the computational power of cloud for training. [TensorFlow Lite](https://www.tensorflow.org/lite) and [ONNX Runtime](https://onnxruntime.ai/) are the standard tools for deploying ML models at the edge.
@@ -163,6 +167,8 @@ This decouples producers from consumers entirely. A sensor process publishes to 
 
 **Kafka** ([kafka.apache.org](https://kafka.apache.org/)) is a distributed log designed for high-throughput, durable event streaming. Unlike MQTT, Kafka stores messages durably, so subscribers can replay historical events. This is valuable for building a data lake (see Lecture 3). Kafka is appropriate at fleet scale, managing many buildings rather than a single one.
 
+**RabbitMQ** ([rabbitmq.com](https://www.rabbitmq.com/)) is a general-purpose message broker that supports multiple messaging patterns: pub/sub, work queues, request/reply, and routing. It implements the AMQP protocol and offers more sophisticated routing than MQTT (exchanges, bindings, dead-letter queues) while being simpler to operate than Kafka. For building control, RabbitMQ is a good middle ground when MQTT is too simple (no message acknowledgement guarantees, no complex routing) and Kafka is too heavy (no need for durable log replay). It also supports [MQTT as a plugin](https://www.rabbitmq.com/docs/mqtt), allowing MQTT-speaking sensors to connect to a RabbitMQ broker alongside AMQP consumers.
+
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
 graph LR
@@ -219,6 +225,7 @@ WebSocket is appropriate for real-time push from server to client (sensor stream
 |---------|----------|---------|-------------|-----------|------------------------|
 | REST | Tight | Low | Medium | No | Control commands, API queries |
 | MQTT pub/sub | Loose | Low | High | Optional | Sensor data distribution |
+| RabbitMQ | Loose | Low | High | Yes | Complex routing, work queues |
 | Kafka | Loose | Medium | Very high | Yes | Multi-building event log |
 | WebSocket | Medium | Very low | Medium | No | Real-time sensor streams |
 | gRPC | Tight | Very low | High | No | High-performance internal services |
