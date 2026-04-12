@@ -1,35 +1,18 @@
-# Lecture 0: Introduction & Model-Based Systems Engineering
+# Introduction & Model-Based Systems Engineering
 
-## Learning Objectives
+## Course Overview
 
-After this lecture, students will be able to:
-- Explain the course goals and the lab assignment
-- Describe what autonomous building control means as a CPS problem
-- Apply MBSE methods to analyze requirements, decompose systems, and validate designs
-- Use architecture viewpoints to document a system from multiple perspectives
-- Connect MBSE artifacts to the lab assignment deliverables
+This course is built around one substantial lab assignment: designing and implementing an autonomous building control system using [BuildSim](https://github.com/eislab-cps/D7065E/tree/main/buildingsim), a simulated building with a REST/WebSocket API. The lectures provide the theoretical foundation, and the lab is where you apply it.
 
----
+The course follows a specification-first workflow. You design your system with precise models before writing code, derive tests from the specification, then implement using AI-assisted development tools. Your architecture document is due in week 2, it must be approved before you start coding, and it forms the basis for the oral examination.
 
-## 1. Course Introduction (15 min)
+"Embedded intelligence at the edge" means that the intelligence lives on the same network as the building, making decisions in under a second, without depending on the cloud. The physical world does not wait for a round-trip to a remote server.
 
-The course is built around one substantial lab assignment: designing and implementing an autonomous building control system using [BuildSim](https://github.com/eislab-cps/D7065E/tree/main/buildingsim), a simulated building with a REST/WebSocket API.
+## The Building as a Cyber-Physical System
 
-**Milestones:**
-1. Architecture document (week 2), design your system before writing code
-2. Architecture approval, instructor feedback and sign-off
-3. Implementation (weeks 3-5), build the system using AI-driven development
-4. Demo and oral exam (week 6), demonstrate the system, defend your design decisions
+A cyber-physical system (CPS) is one where computation and physical processes are deeply intertwined. In a smart building, the physical layer includes rooms, HVAC ducts, occupants, temperature gradients, smoke, and airflow. The cyber layer includes sensors, actuators, data pipelines, AI agents, and the software that orchestrates them.
 
-"Embedded intelligence at the edge" means that intelligence lives on the same network as the building, making decisions in under a second, without depending on the cloud. The physical world does not wait for a round-trip.
-
----
-
-## 2. The Building as a Cyber-Physical System (15 min)
-
-A **cyber-physical system (CPS)** is one where computation and physical processes are deeply intertwined. In a smart building, the physical layer includes rooms, HVAC ducts, occupants, temperature, smoke, and airflow. The cyber layer includes sensors, actuators, data pipelines, AI agents, and the software that orchestrates them.
-
-These layers form a continuous feedback loop: sensors measure the physical world, software reasons about it, actuators change it, and sensors measure the result.
+These two layers form a continuous feedback loop. Sensors measure the physical world, software reasons about what the measurements mean, actuators change the physical environment in response, and sensors measure the result. This loop must be fast enough for safety-critical decisions, reliable enough to work when components fail, and correct enough that a wrong decision does not cause harm.
 
 ```mermaid
 graph LR
@@ -52,33 +35,33 @@ graph LR
     P1 -->|affects| P3
 ```
 
-A thermostat is *automated*, it follows a fixed rule. An *autonomous* system uses data and models to reason about context (time of day, occupancy patterns, weather), predicts problems before they happen, and adapts over time.
+It is important to distinguish between automation and autonomy. A thermostat is automated: it follows a fixed rule. An autonomous system uses data and models to reason about context such as time of day, occupancy patterns, and weather forecasts. It predicts problems before they happen and adapts its behaviour over time based on what it learns. Examples of autonomous building systems in production include [Johnson Controls OpenBlue](https://www.johnsoncontrols.com/openblue), [Siemens Desigo CC](https://www.siemens.com/global/en/products/buildings/products/hvac-control-products/desigo-cc.html), and [DeepMind's cooling system for Google data centres](https://deepmind.google/discover/blog/deepmind-ai-reduces-google-data-centre-cooling-bill-by-40/) which achieved a 40% reduction in energy consumption.
 
-Real-world examples: [Johnson Controls OpenBlue](https://www.johnsoncontrols.com/openblue), [Siemens Desigo CC](https://www.siemens.com/global/en/products/buildings/products/hvac-control-products/desigo-cc.html), [DeepMind cooling at Google data centres](https://deepmind.google/discover/blog/deepmind-ai-reduces-google-data-centre-cooling-bill-by-40/) (40% energy reduction).
+## Model-Based Systems Engineering
 
----
+Traditional systems engineering relies on Word documents, informal diagrams, and verbal agreements. Requirements end up buried in prose. Two engineers reading the same document understand different things. By the time the system is built, the documentation is already out of date.
 
-## 3. Why Model-Based Systems Engineering? (10 min)
+Model-Based Systems Engineering (MBSE) replaces documents with models: structured, precise representations of the system that can be analyzed, simulated, and used to generate code and tests. A model is unambiguous. It either specifies something or it does not. For cyber-physical systems this matters especially, because the interactions between physical and digital components are complex, timing-dependent, and difficult to reason about informally. A sequence diagram showing a smoke sensor, a data pipeline, and a safety agent makes the design concrete in a way that a paragraph of prose cannot.
 
-Traditional systems engineering relies on Word documents, informal diagrams, and verbal agreements. Requirements end up buried in prose. Two engineers reading the same document understand different things. By the time the system is built, the documentation is out of date.
+The MBSE process follows a progression. You begin with **requirements analysis**, writing testable statements about what the system must do. Functional requirements describe what the system does ("detect fire conditions within 30 seconds"), non-functional requirements describe how well it does it ("survive a sensor process crash"), and regulatory requirements describe external constraints ("comply with [BBR](https://www.boverket.se/sv/lag--ratt/författningssamling/gallande/bbr---bfs-20116/) fire protection requirements").
 
-**Model-Based Systems Engineering (MBSE)** replaces documents with models, structured and precise representations that can be analyzed, simulated, and used to generate code and tests. A model is unambiguous: it either specifies something or it does not.
+From requirements, you perform **functional decomposition**: breaking a high-level requirement into the functions needed to satisfy it. "Detect fire" decomposes into collecting sensor readings, validating the data, applying a detection model, triggering an alert, commanding actuators, and notifying occupants. Each function maps to one or more software components. This decomposition drives your architecture.
 
-For CPS, MBSE matters because interactions between physical and digital components are complex, timing-dependent, and hard to reason about informally. A sequence diagram showing a smoke sensor, data pipeline, and safety agent makes the design concrete in a way that prose cannot.
+**Architecture design** determines how components are organized and where they run. **Interface design** specifies exactly how components communicate: REST endpoint URLs, JSON schemas, MQTT topic names, message formats. This is where ambiguity is most expensive, because a wrong assumption about an interface wastes days of implementation time.
+
+**Behaviour modeling** captures how the system behaves over time. Sequence diagrams show the exchange of messages between components for a specific scenario. State machine diagrams show the discrete states a component can be in and the events that cause transitions. **Validation** closes the loop by linking each requirement to a design element and to a test case.
 
 Reference: [INCOSE Systems Engineering Handbook](https://www.incose.org/products-and-publications/se-handbook)
 
----
+## Architecture Viewpoints
 
-## 4. Architecture Viewpoints (20 min)
+A single diagram cannot capture everything about a system. A developer needs to see software components. An operator needs to see deployment topology. A safety engineer needs to see failure modes. A building manager needs to see how the system relates to building regulations.
 
-A single diagram cannot capture everything about a system. Different stakeholders care about different things: a developer needs to see software components, an operator needs to see deployment, a safety engineer needs to see failure modes.
+Architecture viewpoints solve this problem by providing multiple perspectives on the same system, each tailored to a specific stakeholder concern. The concept originates from [IEEE 42010](https://en.wikipedia.org/wiki/ISO/IEC/IEEE_42010) (the international standard for architecture descriptions) and is central to enterprise architecture frameworks like [ArchiMate](https://pubs.opengroup.org/architecture/archimate3-doc/) and to Kruchten's influential [4+1 View Model](https://www.cs.ubc.ca/~gregor/teaching/papers/4+1view-architecture.pdf).
 
-**Architecture viewpoints** address this by providing multiple perspectives on the same system, each tailored to a specific concern. The concept originates from [IEEE 42010](https://en.wikipedia.org/wiki/ISO/IEC/IEEE_42010) and is central to frameworks like [ArchiMate](https://pubs.opengroup.org/architecture/archimate3-doc/) and [Kruchten's 4+1 model](https://www.cs.ubc.ca/~gregor/teaching/papers/4+1view-architecture.pdf).
+### ArchiMate Layers
 
-### ArchiMate's Three Layers
-
-[ArchiMate](https://pubs.opengroup.org/architecture/archimate3-doc/) organizes architecture across three layers. For a building control system:
+The [ArchiMate](https://pubs.opengroup.org/architecture/archimate3-doc/) framework organizes architecture across three layers. Applied to building control:
 
 | Layer | What it covers | Building control examples |
 |-------|---------------|--------------------------|
@@ -86,50 +69,45 @@ A single diagram cannot capture everything about a system. Different stakeholder
 | **Application** | Software components, data flows, interfaces | AI agent, anomaly detector, data pipeline |
 | **Technology** | Infrastructure, devices, containers, networks | Docker containers, GPU server, MQTT broker |
 
-See [ArchiMate viewpoint examples](https://pubs.opengroup.org/architecture/archimate3-doc/ch-Viewpoints.html) for visual examples of each type.
+Visual examples of ArchiMate viewpoints can be found in the [ArchiMate specification, Chapter 14](https://pubs.opengroup.org/architecture/archimate3-doc/ch-Viewpoints.html).
 
 ### Common Viewpoints
 
-Each viewpoint answers a different question:
+Each viewpoint answers a different question about your system:
 
 | Viewpoint | Question it answers | What it shows |
 |-----------|-------------------|---------------|
 | **Context** | What interacts with our system? | System boundary, users, external services |
 | **Functional** | What are the parts and how do they connect? | Components, interfaces, data flows |
 | **Information** | What data exists and how does it flow? | Data models, storage, transformations |
-| **Behavioral** | What happens when X occurs? | Sequence of interactions for a scenario |
+| **Behavioral** | What happens when a specific event occurs? | Sequence of interactions for a scenario |
 | **Deployment** | What runs where? | Containers, hardware, network topology |
 
-### Why Multiple Viewpoints Matter
+Each viewpoint catches design flaws that others miss. A functional diagram might look correct, but the deployment view reveals that two components require a network connection that does not exist. A data flow might seem clean, but the behavioral view reveals a timing issue. The business view might expose a compliance requirement that no component addresses.
 
-Each viewpoint catches design flaws that others miss. A functional diagram might look correct, but the deployment view reveals two components need a network connection that does not exist. A data flow might seem clean, but the behavioral view reveals a race condition. The business view might show a compliance requirement that no component addresses.
+For this course, your architecture document must contain at least five viewpoints:
 
-For this course, you produce at least five viewpoints:
+1. **Context**, showing who and what interacts with your system (C4 Level 1)
+2. **Functional**, showing what components exist and how they connect (C4 Level 2)
+3. **Information**, showing how sensor data flows from measurement to decision (data flow diagram)
+4. **Behavioral**, showing how components interact for a key scenario (sequence diagram)
+5. **Deployment**, showing what runs where (containers, hardware, networks)
 
-1. **Context**, who and what interacts with your system (C4 Level 1)
-2. **Functional**, what components exist and how they connect (C4 Level 2)
-3. **Information**, how sensor data flows through to decisions (data flow diagram)
-4. **Behavioral**, how components interact for a key scenario (sequence diagram)
-5. **Deployment**, what runs where (containers, hardware)
+For further reading on viewpoints, see Rozanski & Woods, [Software Systems Architecture](https://www.viewpoints-and-perspectives.info/).
 
-**Further reading:**
-- [ArchiMate 3.2 Specification](https://pubs.opengroup.org/architecture/archimate3-doc/)
-- Rozanski & Woods, [Software Systems Architecture](https://www.viewpoints-and-perspectives.info/), practical guide to viewpoints
-- Kruchten, ["The 4+1 View Model of Architecture"](https://www.cs.ubc.ca/~gregor/teaching/papers/4+1view-architecture.pdf) (IEEE Software, 1995)
+## Modeling Notations
 
----
-
-## 5. Modeling Notations (15 min)
+There are many notations available for creating architecture models, ranging from informal sketches to formal specification languages. The choice depends on how much precision your project needs.
 
 ### UML and SysML
 
-**UML** ([uml.org](https://www.uml.org/)) defines 14 diagram types. **SysML** ([sysml.org](https://sysml.org/)) extends UML for CPS with diagrams for requirements traceability, physical constraints, and hardware/software integration. These are industry standards for aerospace, defense, and automotive. Tools include [Cameo](https://www.3ds.com/products/catia/no-magic/cameo-systems-modeler) and [Papyrus](https://eclipse.dev/papyrus/).
+**UML** ([uml.org](https://www.uml.org/)) is the standard for modeling software systems, defining 14 diagram types. **SysML** ([sysml.org](https://sysml.org/)) extends UML for systems engineering with diagrams for requirements traceability, physical constraints, and hardware/software integration. These are industry standards in aerospace, defence, and automotive, used with tools like [Cameo Systems Modeler](https://www.3ds.com/products/catia/no-magic/cameo-systems-modeler) and [Papyrus](https://eclipse.dev/papyrus/).
 
-For this course, SysML is overkill. Know it exists, you will not use it.
+For this course, SysML is overkill. The tooling is heavy, the learning curve is steep, and the formalism adds more overhead than value for a two-person team working for eight weeks. You should know it exists and understand when it is appropriate, but you will not use it here.
 
 ### The C4 Model
 
-The **C4 Model** ([c4model.com](https://c4model.com/)) was created by [Simon Brown](https://simonbrown.je/) because UML was too complex for most teams. It provides four zoom levels:
+The **C4 Model** ([c4model.com](https://c4model.com/)) was created by [Simon Brown](https://simonbrown.je/) specifically because UML was too complex for most software teams. It provides exactly four levels of abstraction:
 
 | Level | What it shows |
 |-------|--------------|
@@ -138,40 +116,37 @@ The **C4 Model** ([c4model.com](https://c4model.com/)) was created by [Simon Bro
 | **Level 3, Components** | Internal structure of a single container |
 | **Level 4, Code** | Class-level detail (rarely needed) |
 
-For this course, you need Levels 1 and 2. Level 3 is useful for your AI agent container.
+C4 is technology-agnostic and focuses on structure and relationships. For this course, you need Levels 1 and 2. Level 3 is useful for complex containers like your AI agent.
 
 **C4 resources:**
-- [c4model.com](https://c4model.com/), official site with examples
+- [c4model.com](https://c4model.com/), the official site with examples and FAQ
 - [The C4 Model for Visualising Software Architecture](https://www.infoq.com/articles/C4-architecture-model/) (InfoQ)
 - [Software Architecture for Developers](https://softwarearchitecturefordevelopers.com/), the book behind C4
-- [Structurizr DSL](https://structurizr.com/dsl), text-based C4 diagram tool
-- [Mermaid C4 support](https://mermaid.js.org/syntax/c4.html), C4 diagrams in Markdown
+- [Structurizr DSL](https://structurizr.com/dsl), a text-based tool for creating C4 diagrams
+- [Mermaid C4 support](https://mermaid.js.org/syntax/c4.html), C4 diagrams directly in Markdown
 
-### Comparison
+### Choosing a Notation
 
-| Aspect | Informal (whiteboard) | C4 Model | UML/SysML |
-|--------|----------------------|----------|-----------|
-| **Learning curve** | None | 1 hour | Days to weeks |
+| Aspect | Informal sketches | C4 Model | UML/SysML |
+|--------|------------------|----------|-----------|
+| **Learning curve** | None | About an hour | Days to weeks |
 | **Precision** | Low | Medium | High |
-| **Tooling** | Marker | Mermaid, draw.io | Cameo, Papyrus |
-| **This course** | Workshop discussions | Architecture document | Know it exists |
+| **Tooling** | Whiteboard, pen | Mermaid, draw.io | Cameo, Papyrus |
+| **Best for** | Early brainstorming | Design documentation | Safety-critical systems, large teams |
 
-### Tools
+### Recommended Tools
 
-- [Mermaid](https://mermaid.js.org/), diagrams as code in Markdown, renders on GitHub. **Recommended.**
-- [draw.io](https://app.diagrams.net/), free, visual, exports PNG/SVG
-- [Excalidraw](https://excalidraw.com/), hand-drawn style, good for brainstorming
-- [Mermaid live editor](https://mermaid.live/), preview before committing
+[Mermaid](https://mermaid.js.org/) is the recommended diagramming tool for this course. Diagrams are written as text in Markdown files, versioned with git, and render automatically on GitHub. The [Mermaid live editor](https://mermaid.live/) lets you preview diagrams interactively.
 
----
+Other useful tools include [draw.io](https://app.diagrams.net/) for more complex visual layouts and [Excalidraw](https://excalidraw.com/) for informal hand-drawn style diagrams during brainstorming.
 
-## 6. Viewpoints in Practice (20 min)
+## Viewpoints in Practice
 
-The following examples show each viewpoint applied to building control scenarios.
+The following examples show how each viewpoint applies to building control scenarios.
 
 ### Context View (C4 Level 1)
 
-Your system as a single box. Who interacts with it?
+The context diagram shows your entire system as a single box, surrounded by the people and systems it interacts with.
 
 ```mermaid
 graph TB
@@ -190,7 +165,7 @@ graph TB
 
 ### Functional View (C4 Level 2), Fire Detection
 
-Every deployable unit. Each box becomes a Docker container.
+The container diagram shows every deployable unit. Each box becomes a Docker container or process in your `docker-compose.yml`.
 
 ```mermaid
 graph TB
@@ -219,7 +194,7 @@ graph TB
 
 ### Functional View (C4 Level 2), HVAC Optimization
 
-A different use case with a different architecture. This one uses MQTT pub/sub instead of direct REST, because the controller needs to react to multiple sensor types simultaneously.
+A different use case leads to a different architecture. This system uses MQTT pub/sub instead of direct REST calls, because the HVAC controller needs to react to multiple sensor types simultaneously and pub/sub decouples the sensors from the controller.
 
 ```mermaid
 graph TB
@@ -247,7 +222,7 @@ graph TB
 
 ### Component View (C4 Level 3), AI Agent Internals
 
-When a single container is complex, zoom into its internal structure:
+When a single container is complex enough to warrant its own diagram, you zoom in to show its internal structure.
 
 ```mermaid
 graph TB
@@ -266,7 +241,7 @@ graph TB
 
 ### Behavioral View, Fire Detection Scenario
 
-How components interact over time for a specific scenario:
+A sequence diagram shows how components interact over time for one specific scenario.
 
 ```mermaid
 sequenceDiagram
@@ -294,7 +269,7 @@ sequenceDiagram
 
 ### Deployment View, Sensor Process Lifecycle
 
-A state machine showing what your sensor process code must handle:
+A state machine diagram shows the states a component can be in and the events that cause transitions. This tells you exactly what error handling your code must implement.
 
 ```mermaid
 stateDiagram-v2
@@ -323,39 +298,17 @@ stateDiagram-v2
 
 Each requirement ID traces to a test case. FR-01 maps to `test_fire_detection_latency()`.
 
----
+## The Architecture Document
 
-## 7. Your Architecture Document (10 min)
+Your architecture document is the contract between your design and your implementation. It is reviewed and approved before you write code.
 
-Your architecture document is the contract between design and implementation. It is reviewed and approved before you write code.
+It must contain the five viewpoints described above: context diagram, container diagram, requirements table, data flow diagram, sequence diagram, and deployment diagram.
 
-**Required viewpoints:**
+Beyond the diagrams, the design specification should include data models (JSON schemas for messages between components), API contracts (REST endpoints with request/response formats), state machines for your AI agent and critical components, and an ML model specification covering inputs, outputs, training data, and evaluation metrics.
 
-1. **Context diagram (C4 Level 1)**, your system, its users, and external dependencies
-2. **Container diagram (C4 Level 2)**, every Docker container, database, and process, with protocols on each connection
-3. **Requirements table**, minimum 10 requirements with IDs, types, and acceptance criteria
-4. **Data flow diagram**, trace a sensor reading through the system to a decision and back to an actuator
-5. **Sequence diagram**, at least one key scenario end-to-end
-6. **Deployment diagram**, what runs where
+The test plan is written before implementation, not after. It links each requirement to one or more test cases, describes test scenarios with initial state, stimulus, expected response, and pass/fail criteria, and defines what a successful demonstration looks like.
 
-**Design specification** (beyond diagrams):
-- Data models: JSON schemas for messages between components
-- API contracts: REST endpoints, methods, request/response formats
-- State machines: for your AI agent and critical components
-- ML model spec: inputs, outputs, training data, evaluation metric
-
-**Test plan** (written before implementation):
-- Requirements traceability matrix: every requirement maps to a test
-- Test scenarios: initial state, stimulus, expected response, pass/fail
-- Validation criteria: what does a successful demo look like?
-
----
-
-## 8. Tools and Practicalities (5 min)
-
-Mermaid in Markdown is the recommended diagramming tool. Diagrams live in `.md` files, are versioned with git, and render on GitHub. Use the [Mermaid live editor](https://mermaid.live/) to preview.
-
-**Repository structure** for the lab:
+## Repository Structure
 
 ```
 ├── docs/
@@ -375,26 +328,13 @@ Mermaid in Markdown is the recommended diagramming tool. Diagrams live in `.md` 
 └── README.md
 ```
 
----
-
-## Lab Connection
-
-- Run the BuildSim demo and explore the [API documentation](https://github.com/eislab-cps/D7065E/tree/main/buildingsim/docs/api)
-- Choose your use case
-- List at least 10 requirements before starting architecture design
-- Architecture document is due week 2
-
----
-
 ## Recommended Reading
 
-- [c4model.com](https://c4model.com/), the C4 model (read the whole site, it is short)
-- [ArchiMate 3.2 Specification](https://pubs.opengroup.org/architecture/archimate3-doc/), enterprise architecture viewpoints
+- [c4model.com](https://c4model.com/), read the entire site, it is short and practical
+- [ArchiMate 3.2 Specification](https://pubs.opengroup.org/architecture/archimate3-doc/), the enterprise architecture modeling language
 - [ArchiMate Viewpoint Examples](https://pubs.opengroup.org/architecture/archimate3-doc/ch-Viewpoints.html), visual examples of each viewpoint type
 - Kruchten, ["The 4+1 View Model of Architecture"](https://www.cs.ubc.ca/~gregor/teaching/papers/4+1view-architecture.pdf) (IEEE Software, 1995)
 - Rozanski & Woods, [Software Systems Architecture](https://www.viewpoints-and-perspectives.info/)
-- [arc42 Architecture Documentation Template](https://arc42.org/), practical, free template
+- [arc42 Architecture Documentation Template](https://arc42.org/)
 - Brown, [Software Architecture for Developers](https://softwarearchitecturefordevelopers.com/)
-- Kleppmann, "Designing Data-Intensive Applications" (O'Reilly), Ch. 1
-- [Mermaid syntax reference](https://mermaid.js.org/intro/syntax-reference.html)
-- [Mermaid live editor](https://mermaid.live/)
+- Kleppmann, "Designing Data-Intensive Applications" (O'Reilly), Chapter 1
