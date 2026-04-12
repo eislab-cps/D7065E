@@ -14,6 +14,8 @@ A cyber-physical system (CPS) is one where computation and physical processes ar
 
 These two layers form a continuous feedback loop. Sensors measure the physical world, software reasons about what the measurements mean, actuators change the physical environment in response, and sensors measure the result. This loop must be fast enough for safety-critical decisions, reliable enough to work when components fail, and correct enough that a wrong decision does not cause harm.
 
+<div style="max-width:500px">
+
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
 graph LR
@@ -35,6 +37,8 @@ graph LR
     C4 -->|controls| P1
     P1 -->|affects| P3
 ```
+
+</div>
 
 It is important to distinguish between automation and autonomy. A thermostat is automated: it follows a fixed rule. An autonomous system uses data and models to reason about context such as time of day, occupancy patterns, and weather forecasts. It predicts problems before they happen and adapts its behaviour over time based on what it learns. Examples of autonomous building systems in production include [Johnson Controls OpenBlue](https://www.johnsoncontrols.com/openblue), [Siemens Desigo CC](https://www.siemens.com/global/en/products/buildings/products/hvac-control-products/desigo-cc.html), and [DeepMind's cooling system for Google data centres](https://deepmind.google/discover/blog/deepmind-ai-reduces-google-data-centre-cooling-bill-by-40/) which achieved a 40% reduction in energy consumption.
 
@@ -149,6 +153,8 @@ The following examples show how each viewpoint applies to building control scena
 
 The context diagram shows your entire system as a single box, surrounded by the people and systems it interacts with.
 
+<div style="max-width:500px">
+
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
 graph TB
@@ -165,9 +171,13 @@ graph TB
     BS -->|3D visualization| BM
 ```
 
+</div>
+
 ### Functional View (C4 Level 2), Fire Detection
 
 The container diagram shows every deployable unit. Each box becomes a Docker container or process in your `docker-compose.yml`.
+
+<div style="max-width:500px">
 
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
@@ -195,9 +205,13 @@ graph TB
     SPRINK -->|PUT state| BS
 ```
 
+</div>
+
 ### Functional View (C4 Level 2), HVAC Optimization
 
 A different use case leads to a different architecture. This system uses MQTT pub/sub instead of direct REST calls, because the HVAC controller needs to react to multiple sensor types simultaneously and pub/sub decouples the sensors from the controller.
+
+<div style="max-width:500px">
 
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
@@ -224,9 +238,13 @@ graph TB
     HVAC -->|PUT state| BS
 ```
 
+</div>
+
 ### Component View (C4 Level 3), AI Agent Internals
 
 When a single container is complex enough to warrant its own diagram, you zoom in to show its internal structure.
+
+<div style="max-width:500px">
 
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
@@ -244,9 +262,13 @@ graph TB
     CHAIN -->|LLM calls| GPU["GPU Server"]
 ```
 
+</div>
+
 ### Behavioral View, Fire Detection Scenario
 
 A sequence diagram shows how components interact over time for one specific scenario.
+
+<div style="max-width:600px">
 
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
@@ -273,9 +295,13 @@ sequenceDiagram
     SIM->>SIM: Sprinkler ON, smoke decreasing
 ```
 
+</div>
+
 ### Deployment View, Sensor Process Lifecycle
 
 A state machine diagram shows the states a component can be in and the events that cause transitions. This tells you exactly what error handling your code must implement.
+
+<div style="max-width:500px">
 
 ```mermaid
 %%{init: {"theme": "neutral"}}%%
@@ -291,6 +317,8 @@ stateDiagram-v2
     Running --> Stopped: SIGTERM
     Stopped --> [*]
 ```
+
+</div>
 
 ### Information View, Requirements Table
 
