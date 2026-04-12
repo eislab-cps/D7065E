@@ -42,44 +42,35 @@ flowchart LR
 
 ## Test-Driven Generation
 
-### The Problem with AI-Generated Code
+AI coding tools produce code that compiles, follows idiomatic patterns, and reads as though a competent programmer wrote it. The difficulty is that the generated code can contain **hallucinated logic**, subtle errors that survive casual review. In distributed systems these errors are especially costly. A hallucinated API call may work in isolation but fail under concurrent access. A state management error may pass unit tests yet corrupt data under load. A constraint violation that a mock tolerates will be rejected by a real database.
 
-AI coding tools generate code that looks correct. It compiles, it is well-formatted, and it follows idiomatic patterns. The problem is that it can contain **hallucinated logic**, subtle errors that are difficult to detect through code review alone. In distributed systems, these errors are particularly dangerous: a hallucinated API call that works in isolation fails under concurrent access, a state management error that passes unit tests causes data corruption under load, a constraint violation that mocks hide but a real database rejects.
-
-Traditional debugging does not scale for AI-generated code. If the AI produces 200 methods across 14 interfaces, manually reviewing each one for correctness is impractical. The solution is to make the generated code **disposable**: if it fails a test, regenerate it rather than debug it. This requires a different relationship between specification, tests, and implementation.
+Manual review does not scale when the AI produces hundreds of methods across dozens of interfaces. A more practical approach is to treat generated code as **disposable**: if it fails a test, discard it and regenerate rather than debug line by line. This shifts the locus of value from the implementation to the specification. The architecture, the interfaces, and the tests become the durable artifacts; the code is derived from them and can be re-derived at any time.
 
 ### The Test-Driven Generation Workflow
 
-**Test-Driven Generation (TDG)** extends classical [Test-Driven Development](https://www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530) into the AI era. The workflow has three phases:
+Test-Driven Generation (TDG) extends classical [Test-Driven Development](https://www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530) to AI-assisted workflows. Where TDD prescribes writing a failing test, then writing the minimum code to pass it, TDG replaces the second step with AI generation. The workflow proceeds in three phases.
 
-**Phase 1: Collaborative Specification.** The developer and AI jointly define the architecture, interfaces, and test strategy. The architecture document (C4 diagrams, sequence diagrams, API contracts) establishes **generation boundaries**, well-defined interfaces that scope exactly what the AI must implement. In a hexagonal architecture, these boundaries are the ports: the AI generates the adapters.
+**Phase 1, Collaborative Specification.** The developer and the AI jointly define the system architecture, interfaces, and test strategy. Architecture documents such as C4 diagrams, sequence diagrams, and API contracts establish **generation boundaries**, well-defined interfaces that scope exactly what the AI must implement. In a hexagonal architecture these boundaries correspond to the ports; the AI generates the adapters.
 
-**Phase 2: Initial Generation.** The developer writes integration tests against real infrastructure (not mocks). These tests encode the expected behavior precisely. The AI is then given the interface definition and the tests, and generates an implementation that must pass all tests. If it fails, the implementation is discarded and regenerated with refined context, not debugged line by line.
+**Phase 2, Initial Generation.** The developer writes integration tests against real infrastructure. These tests encode the expected behavior as executable assertions. The AI receives the interface definition together with the tests and produces an implementation that must pass all of them. If it fails, the implementation is discarded and regenerated with refined context rather than debugged incrementally.
 
-**Phase 3: Adversarial Test Expansion.** Once the basic implementation passes, the developer systematically adds harder tests: concurrent access, malformed input, network failures, edge cases at boundaries. Each new test either passes (the AI got it right) or fails (the implementation is regenerated). Over time, the test suite becomes a comprehensive behavioral specification that any correct implementation must satisfy.
+**Phase 3, Adversarial Test Expansion.** Once the basic implementation passes, the developer adds progressively harder tests: concurrent access, malformed input, network failures, boundary conditions. Each new test either passes, confirming that the AI handled the case correctly, or fails, triggering regeneration. Over successive iterations the test suite grows into a comprehensive behavioral specification that any correct implementation must satisfy.
 
-The key insight: **implementation becomes disposable**. The specification (architecture + tests) is the valuable artifact, not the code. If a better model is released or requirements change, the implementation can be regenerated from the same tests.
+The central insight is that **implementation becomes disposable**. The specification, consisting of the architecture and the test suite, is the valuable artifact. If a better model is released or requirements change, the implementation can be regenerated from the same specification.
 
 ### Generation Boundaries
 
-A **generation boundary** is a well-defined interface that separates what the developer specifies from what the AI generates. In a hexagonal (ports-and-adapters) architecture, the domain core and its ports are specified by the developer, and the adapters are generated by the AI.
+A generation boundary is a well-defined interface that separates what the developer specifies from what the AI generates. In a hexagonal (ports-and-adapters) architecture, the domain core and its ports are specified by the developer while the adapters are generated by the AI.
 
-For building control, generation boundaries might be:
-- The sensor process interface (reads from BuildSim, writes to database) — the developer defines the port, the AI generates the adapter
-- The AI agent's tool interface (read_sensors, set_actuator) — the developer defines what tools exist, the AI generates the implementation
-- The data pipeline interface (subscribe to MQTT, transform, write to InfluxDB) — the developer defines the contract, the AI generates the pipeline code
+In the context of autonomous building control, generation boundaries might include the sensor process interface that reads from BuildSim and writes to a database, the AI agent's tool interface that exposes operations such as reading sensors and setting actuators, and the data pipeline interface that subscribes to a message broker, transforms readings, and writes to a time-series database. In each case the developer defines the port and the AI generates the adapter.
 
-Well-chosen generation boundaries make the AI's job tractable: each adapter is isolated, testable, and small enough that the AI can produce a correct implementation in one pass.
+Well-chosen generation boundaries make the AI's task tractable. Each adapter is isolated, testable, and small enough that the AI can produce a correct implementation in a single pass. Integration tests run against real infrastructure rather than mocks, ensuring that the generated adapters conform to the actual behavior of the systems they interact with.
 
-### Why Not Mocks?
+### Test Types for Cyber-Physical Systems
 
-A common temptation is to test AI-generated code with mocks, simulating the database, the message broker, and the external APIs. This is dangerous because mocks encode assumptions about how external systems behave, and AI-generated code often violates exactly those assumptions. A mock database accepts any query; a real PostgreSQL instance rejects a malformed constraint. A mock MQTT broker delivers messages instantly; a real broker has ordering guarantees that the code must respect.
+Several categories of tests are relevant when applying TDG to cyber-physical systems.
 
-Integration tests against real infrastructure (running in Docker containers) are more work to set up but catch an entire class of errors that mocks hide. For this course, sensor processes should be tested against a running BuildSim instance, not a mock.
-
-### Test Types for CPS
-
-**Unit tests** test a single function or class in isolation. For building control:
+**Unit tests** verify a single function or class in isolation:
 
 ```python
 # Example: test that a smoke sensor reading is correctly classified
@@ -97,20 +88,20 @@ def test_smoke_classifier_rejects_invalid_input():
         classifier.classify(1.5)   # Smoke level cannot exceed 1.0
 ```
 
-**Integration tests** test that two or more components work together correctly. They require a running BuildSim instance (or a mock of it):
+**Integration tests** verify that two or more components work together correctly. They run against a live BuildSim instance and a real database:
 
 ```python
 # Example: test that sensor process stores readings in the database
-def test_sensor_process_stores_readings(buildsim_mock, db_connection):
-    sensor_process = SensorProcess(api_url="http://localhost:8080", db=db_connection)
-    buildsim_mock.set_sensor("smoke-A2306", value=0.82)
+def test_sensor_process_stores_readings(buildsim_client, db_connection):
+    sensor_process = SensorProcess(api_url="http://localhost:9090", db=db_connection)
+    buildsim_client.set_sensor("smoke-A2306", value=0.82)
     sensor_process.poll_once()
     readings = db_connection.query("SELECT * FROM readings WHERE sensor_id='smoke-A2306'")
     assert len(readings) == 1
     assert readings[0]["value"] == pytest.approx(0.82)
 ```
 
-**Behavioural tests** test the end-to-end response to a scenario. These are the most valuable tests for CPS, verifying the entire system against a requirement:
+**Behavioural tests** verify the end-to-end response of the system to a scenario. These are the most valuable tests for cyber-physical systems because they encode requirements as executable assertions:
 
 ```python
 # Requirement R-FIRE-01: fire detected → sprinklers on within 30 seconds
