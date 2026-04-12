@@ -141,7 +141,7 @@ Must be approved before implementation.
 
 8. **Dashboard / Visualization** — extend BuildSim using the session API or build a separate dashboard.
 
-9. **Programming language is free choice.** Use of AI coding assistants is allowed and encouraged.
+9. **Go (Golang) is the recommended language** for this course. It produces single static binaries, has excellent concurrency support, and is well suited for building networked services and containerized processes. BuildSim itself is written in Go. Other languages (Python, Rust, Java) may be used if strongly motivated, but Go is preferred. Use of AI coding assistants is allowed and encouraged.
 
 ### Deliverables
 

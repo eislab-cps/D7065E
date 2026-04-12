@@ -41,7 +41,7 @@ Before coding, generate an implementation plan from the approved architecture.
 Based on my architecture in docs/architecture.md, create an implementation plan.
 For each component (sensor process, AI agent, data pipeline, actuator process):
 1. List the files to create
-2. List the dependencies (Python packages, Docker base image)
+2. List the dependencies (Go modules or packages, Docker base image)
 3. List the API endpoints it calls or exposes
 4. Estimate the implementation order (what depends on what)
 Start with the component that has the fewest dependencies.
@@ -58,7 +58,7 @@ It should:
 - Handle BuildSim being unavailable (retry with backoff)
 - Re-register if BuildSim restarts
 
-Generate the Python code, Dockerfile, and add it to docker-compose.yml.
+Generate the Go code, Dockerfile, and add it to docker-compose.yml.
 The BuildSim API documentation is in ../buildingsim/docs/api/equipment.md.
 ```
 
@@ -137,7 +137,7 @@ My AI agent sometimes makes wrong decisions. Add an evaluation framework:
 ```
 Set up the data pipeline described in my architecture. I need:
 1. An InfluxDB container with a database called "building"
-2. A Python service that subscribes to MQTT topic "sensors/#" and writes to InfluxDB
+2. A Go service that subscribes to MQTT topic "sensors/#" and writes to InfluxDB
 3. SQL queries (via InfluxQL) for:
    - Average temperature per room over the last hour
    - Maximum CO2 reading per floor today
