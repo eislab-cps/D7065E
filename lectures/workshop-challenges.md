@@ -4,7 +4,7 @@ Each lecture is an interactive workshop. Two challenges are given in advance —
 
 ---
 
-## Lecture 0: Introduction & MBSE
+## Lecture 1: Introduction & MBSE
 
 ### Challenge A: Decompose a Fire Safety System
 
@@ -35,7 +35,7 @@ An AI agent decides not to activate sprinklers because its anomaly detection mod
 
 ---
 
-## Lecture 1: CPS Architectures
+## Lecture 2: CPS Architectures
 
 ### Challenge A: Design a Communication Architecture
 
@@ -77,7 +77,7 @@ Draw a deployment diagram showing where each component runs.
 
 ---
 
-## Lecture 2: Data Engineering for CPS
+## Lecture 3: Data Engineering for CPS
 
 ### Challenge A: Design a Sensor Data Pipeline
 
@@ -118,7 +118,7 @@ Design features for an ML model that predicts "will this room need ventilation b
 
 ---
 
-## Lecture 3: AI-Driven Development
+## Lecture 4: AI-Driven Development
 
 ### Challenge A: Specification-to-Tests
 
@@ -179,7 +179,7 @@ Before the workshop:
 
 ---
 
-## Lecture 4: Agentic AI for Autonomous Systems
+## Lecture 5: Agentic AI for Autonomous Systems
 
 ### Challenge A: Design an Agent for Conflicting Objectives
 
