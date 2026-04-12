@@ -152,6 +152,13 @@ C4 is **technology-agnostic** — it doesn't care if you use REST or MQTT, Pytho
 
 **For this course, you need Levels 1 and 2.** Level 3 is useful for your AI agent container. Level 4 is rarely needed.
 
+**C4 resources:**
+- [c4model.com](https://c4model.com/) — the official C4 model site with examples and FAQ
+- Simon Brown, ["The C4 Model for Visualising Software Architecture"](https://www.infoq.com/articles/C4-architecture-model/) (InfoQ)
+- Simon Brown, ["Software Architecture for Developers"](https://softwarearchitecturefordevelopers.com/) — the book behind C4
+- [Structurizr DSL](https://structurizr.com/dsl) — text-based tool for creating C4 diagrams
+- [C4 with Mermaid examples](https://mermaid.js.org/syntax/c4.html) — Mermaid's built-in C4 diagram support
+
 ```mermaid
 graph TB
     subgraph Building["Building Environment"]
@@ -383,6 +390,45 @@ This state machine tells you exactly what your sensor process code must handle �
 | REG-01 | Regulatory | Fire doors shall close within time limits per BBR | Must | Door actuator responds within 5s of command |
 
 Each requirement has an ID, which traces to a test case. "FR-01 → test_fire_detection_latency()".
+
+#### Architecture Viewpoints
+
+A single diagram can't capture everything about a system. Different stakeholders care about different things: a developer needs to see code structure, an operator needs to see deployment, a safety engineer needs to see failure modes. **Architecture viewpoints** solve this by providing multiple perspectives on the same system, each tailored to a specific concern.
+
+The concept comes from [IEEE 42010](https://www.iso.org/standard/50508.html) and is central to enterprise architecture frameworks like [ArchiMate](https://pubs.opengroup.org/architecture/archimate3-doc/). ArchiMate organizes viewpoints across three layers:
+
+| Layer | What it covers | Building control examples |
+|-------|---------------|--------------------------|
+| **Business** | Processes, actors, roles, goals, regulations | Building manager monitors fire safety; compliance with BBR regulations |
+| **Application** | Software components, data flows, interfaces | AI agent reads sensors via REST, anomaly detection model, data pipeline |
+| **Technology** | Infrastructure, networks, devices, containers | Raspberry Pi sensors, Docker containers, GPU server, MQTT broker |
+
+Each layer has specific viewpoints:
+
+| Viewpoint | Shows | Example for building control |
+|-----------|-------|------------------------------|
+| **Organization** | Who is involved and their roles | Building manager, security guard, maintenance technician, AI agent |
+| **Business process** | How work flows end-to-end | Fire detected → agent decides → sprinklers activate → manager notified |
+| **Application cooperation** | How software components interact | Sensor process → MQTT → data pipeline → AI agent → BuildSim API |
+| **Information structure** | What data exists and how it relates | Sensor readings, equipment state, room occupancy, alert history |
+| **Technology** | What infrastructure runs the system | Edge server, containers, network topology, GPU server |
+| **Layered** | All three layers together | Full stack from regulation to sensor hardware |
+
+The key insight: **your architecture document should contain multiple viewpoints**, not one monolithic diagram. For this course, you produce at least:
+
+1. A **context view** (who/what interacts with your system — C4 Level 1)
+2. A **functional view** (what components exist and how they connect — C4 Level 2)
+3. A **data flow view** (how sensor data moves through the system to decisions)
+4. A **behavioral view** (how components interact for a key scenario — sequence diagram)
+5. A **deployment view** (what runs where — containers, hardware)
+
+This is not busywork. Each viewpoint catches design flaws that the others miss. A functional diagram might look correct, but the deployment view reveals that two components need a network connection that doesn't exist. A data flow view might seem clean, but the behavioral view reveals a race condition.
+
+**Further reading:**
+- [ArchiMate 3.2 Specification](https://pubs.opengroup.org/architecture/archimate3-doc/) — the full enterprise architecture modeling language
+- [ISO/IEC/IEEE 42010](https://en.wikipedia.org/wiki/ISO/IEC/IEEE_42010) — the international standard for architecture descriptions and viewpoints
+- Rozanski, N. & Woods, E. [Software Systems Architecture](https://www.viewpoints-and-perspectives.info/) — practical guide to viewpoints and perspectives
+- Kruchten, P. ["The 4+1 View Model of Architecture"](https://www.cs.ubc.ca/~gregor/teaching/papers/4+1view-architecture.pdf) (IEEE Software, 1995) — the original multi-view architecture paper
 
 #### Comparing the approaches
 
