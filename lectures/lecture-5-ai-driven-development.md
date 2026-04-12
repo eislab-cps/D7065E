@@ -147,6 +147,8 @@ def test_agent_activates_sprinklers_on_fire_decision(mock_llm):
 | **GitHub Copilot** | Inline code completion and chat in VS Code/JetBrains | [github.com/features/copilot](https://github.com/features/copilot) |
 | **Cursor** | AI-first IDE with codebase-aware chat, edit, and generation; based on VS Code | [cursor.com](https://cursor.com/) |
 | **Windsurf** | AI IDE with "Cascade" agent that can plan and execute multi-file changes | [windsurf.com](https://windsurf.com/) |
+| **Google Gemini Code Assist** | AI coding assistant integrated with Google Cloud and IDEs | [cloud.google.com/gemini/docs/codeassist](https://cloud.google.com/gemini/docs/codeassist/overview) |
+| **OpenAI Codex / ChatGPT** | Code generation via chat or API, supports function calling | [platform.openai.com](https://platform.openai.com/) |
 
 **Cursor** is the most popular AI IDE for professional software development in 2025. Its `@codebase` feature indexes an entire repository and enables questions about the code as well as changes with full codebase context. The [Cursor documentation](https://docs.cursor.com/) is the best starting point.
 
