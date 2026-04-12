@@ -181,6 +181,7 @@ Each use case lists the specific sensor processes, actuator processes, ML models
 | [resources.md](resources.md) | Tools, frameworks, and links (BuildSim, AI frameworks, infrastructure, data engineering) |
 | [grading.md](grading.md) | Detailed grading criteria for grades 3, 4, and 5 |
 | [oral-examination.md](oral-examination.md) | Examination format: presentation, whiteboard session, questions |
+| [prompt-examples.md](prompt-examples.md) | AI coding prompts for architecture review, implementation, testing, deployment |
 | [timeline.md](timeline.md) | Weekly milestones and key dates |
 
 ### Grading Summary
