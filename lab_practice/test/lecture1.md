@@ -8,7 +8,7 @@ Standalone notes for the first lecture of D7065E. Read on its own or alongside `
 
 <figure class="diagram">
 <img src="figures/lecture1-fig01.svg" alt="Edge intelligence vs cloud">
-<figcaption>Local intelligence sits on the same network as the sensors and actuators it controls. The cloud helps with slow tasks, but the critical loop never depends on it.</figcaption>
+<figcaption><em>Local intelligence sits on the same network as the sensors and actuators it controls. The cloud helps with slow tasks, but the critical loop never depends on it.</em></figcaption>
 </figure>
 
 A modern building, a modern car, a modern factory — none of these are simple machines anymore. Each contains hundreds of sensors and actuators, and a continuous stream of small decisions is needed to keep it running safely, efficiently, and comfortably. The branch of computer science that deals with making those decisions on the same network as the physical system, rather than in a remote data centre far away, is called **embedded intelligence at the edge**.
@@ -31,7 +31,7 @@ Before any code is written, a discipline called Model-Based Systems Engineering 
 
 <figure class="diagram">
 <img src="figures/lecture1-fig02.svg" alt="CPS feedback loop">
-<figcaption>A continuous feedback loop joins the world the system lives in to the software that observes and changes it. Every component in a CPS sits somewhere on this loop.</figcaption>
+<figcaption><em>A continuous feedback loop joins the world the system lives in to the software that observes and changes it. Every component in a CPS sits somewhere on this loop.</em></figcaption>
 </figure>
 
 ### The two halves of a CPS
@@ -101,7 +101,7 @@ The course's autonomous building control project asks for the autonomous version
 
 <figure class="diagram">
 <img src="figures/lecture1-fig03.svg" alt="MBSE: prose vs structured specification">
-<figcaption>MBSE replaces ambiguous documents with structured, precise models. Two engineers reading the same model build the same mental picture.</figcaption>
+<figcaption><em>MBSE replaces ambiguous documents with structured, precise models. Two engineers reading the same model build the same mental picture.</em></figcaption>
 </figure>
 
 ### Why prose breaks down
@@ -166,7 +166,7 @@ A useful image: imagine asking a contractor to "build me a house." You will get 
 
 <figure class="diagram">
 <img src="figures/lecture1-fig04.svg" alt="Architecture viewpoints — one system, many lenses">
-<figcaption>Different stakeholders need different views — no single diagram serves them all. Each viewpoint filters out everything not relevant to one specific concern.</figcaption>
+<figcaption><em>Different stakeholders need different views — no single diagram serves them all. Each viewpoint filters out everything not relevant to one specific concern.</em></figcaption>
 </figure>
 
 ### Why one diagram is never enough
@@ -219,7 +219,7 @@ A useful image: five different home inspections of the same house. The structura
 
 <figure class="diagram">
 <img src="figures/lecture1-fig05.svg" alt="Modeling notations spectrum">
-<figcaption>Three notations along a spectrum from informal to industrial. C4 with Mermaid is the chosen middle ground — enough precision to be useful, light enough to stay in version control.</figcaption>
+<figcaption><em>Three notations along a spectrum from informal to industrial. C4 with Mermaid is the chosen middle ground — enough precision to be useful, light enough to stay in version control.</em></figcaption>
 </figure>
 
 Picking the right notation is partly about precision and partly about overhead. Different tools sit at different points on that trade-off.
@@ -282,7 +282,7 @@ For this course, C4 with Mermaid is the chosen middle ground.
 
 <figure class="diagram">
 <img src="figures/lecture1-fig06.svg" alt="The five viewpoints in practice">
-<figcaption>Each viewpoint asks a different question — and each catches a kind of design error the others would hide.</figcaption>
+<figcaption><em>Each viewpoint asks a different question — and each catches a kind of design error the others would hide.</em></figcaption>
 </figure>
 
 Each viewpoint introduced in Part 4 looks like something specific when drawn. The following examples apply each viewpoint to building control.
@@ -420,7 +420,7 @@ A useful image: an invoice with line items. Each line is a deliverable. The tota
 
 <figure class="diagram">
 <img src="figures/lecture1-fig07.svg" alt="Contents of the architecture document">
-<figcaption>The architecture document carries diagrams, specifications, a test plan, and a repository structure — each binding the design to the running system.</figcaption>
+<figcaption><em>The architecture document carries diagrams, specifications, a test plan, and a repository structure — each binding the design to the running system.</em></figcaption>
 </figure>
 
 The architecture document is the contract between design and implementation. It is reviewed and approved before any code is written. It contains the five viewpoints described above, plus the specifications below.
@@ -487,7 +487,7 @@ A useful image: the kitchen of a restaurant. Each station (grill, salad, dessert
 
 <figure class="diagram">
 <img src="figures/lecture1-fig08.svg" alt="Fire detection — end-to-end pipeline">
-<figcaption>Every component of the fire-detection scenario, in the order they participate. The dashed arrow closes the loop — the sprinkler changes the world, the next sensor reading reflects it.</figcaption>
+<figcaption><em>Every component of the fire-detection scenario, in the order they participate. The dashed arrow closes the loop — the sprinkler changes the world, the next sensor reading reflects it.</em></figcaption>
 </figure>
 
 To make the abstract MBSE process concrete, follow a fire-detection system through every step.

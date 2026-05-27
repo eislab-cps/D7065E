@@ -8,7 +8,7 @@ Standalone notes for the third lecture of D7065E. Read on its own or alongside `
 
 <figure class="diagram">
 <img src="figures/lecture3-fig01.svg" alt="Why data engineering matters">
-<figcaption>A modern building generates millions of readings a day. Data engineering is the discipline that turns that flood into a trustworthy substrate an AI can act on.</figcaption>
+<figcaption><em>A modern building generates millions of readings a day. Data engineering is the discipline that turns that flood into a trustworthy substrate an AI can act on.</em></figcaption>
 </figure>
 
 Before any AI agent can be smart, it needs data. Lots of it, well-organised, fresh enough to be useful, and clean enough to trust. The plumbing that gets raw sensor readings from the building into the agent's hands is called **data engineering**, and it is just as important as the agent itself. A brilliant model trained on bad data will produce bad predictions. A simple model trained on excellent data often beats a sophisticated model trained on garbage.
@@ -23,7 +23,7 @@ This chapter is the kitchen.
 
 <figure class="diagram">
 <img src="figures/lecture3-fig02.svg" alt="The three V\u2019s — volume, velocity, variety">
-<figcaption>Volume, velocity and variety are the three pressures every data system has to absorb. They shape every choice that follows.</figcaption>
+<figcaption><em>Volume, velocity and variety are the three pressures every data system has to absorb. They shape every choice that follows.</em></figcaption>
 </figure>
 
 A modest commercial building with 100 sensors, each reporting every 5 seconds, produces about 1.7 million readings per day. Multiply that across a year and the system holds half a billion data points. Add video cameras, vibration sensors at industrial frequencies, and access events, and the number reaches hundreds of millions of records per month.
@@ -56,7 +56,7 @@ The fundamental tension: real-time decisions need data within seconds, machine-l
 
 <figure class="diagram">
 <img src="figures/lecture3-fig03.svg" alt="Ingestion patterns">
-<figcaption>A broker in the middle decouples sensor producers from the consumers downstream. New consumers can subscribe without anyone changing the sensors.</figcaption>
+<figcaption><em>A broker in the middle decouples sensor producers from the consumers downstream. New consumers can subscribe without anyone changing the sensors.</em></figcaption>
 </figure>
 
 The first step in any pipeline is **ingestion**: getting data from sensors into a durable store. Three patterns dominate, each fitting a different scale.
@@ -109,7 +109,7 @@ Most real systems use **two patterns at once**: the broker for the real-time pat
 
 <figure class="diagram">
 <img src="figures/lecture3-fig04.svg" alt="Stream processing — rolling window">
-<figcaption>Stream processing keeps a sliding window of recent readings in memory and produces answers continuously, with millisecond latency.</figcaption>
+<figcaption><em>Stream processing keeps a sliding window of recent readings in memory and produces answers continuously, with millisecond latency.</em></figcaption>
 </figure>
 
 Once data is flowing in, the next question is how to process it. Two main modes exist: streaming (processing each reading as it arrives) and batch (processing a large pile of stored data at once). This part covers streaming; the next covers batch.
@@ -186,7 +186,7 @@ The right tool depends on scale.
 
 <figure class="diagram">
 <img src="figures/lecture3-fig05.svg" alt="Batch processing — accumulate, then process">
-<figcaption>Batch processing waits for data to settle, then processes large windows at once. Cheaper, simpler, but the freshest answer is from yesterday.</figcaption>
+<figcaption><em>Batch processing waits for data to settle, then processes large windows at once. Cheaper, simpler, but the freshest answer is from yesterday.</em></figcaption>
 </figure>
 
 Batch processing operates on large volumes of stored data all at once. A daily job that prepares training data, a weekly report that summarises energy use, a monthly anomaly analysis. Batch jobs run on a schedule (nightly, weekly) or on demand.
@@ -217,7 +217,7 @@ GROUP BY room;
 
 <figure class="diagram">
 <img src="figures/lecture3-fig06.svg" alt="Medallion architecture — bronze, silver, gold">
-<figcaption>Bronze, silver, gold. Data gets more refined and more trustworthy at each tier — and the rules that produce each tier are versioned in code.</figcaption>
+<figcaption><em>Bronze, silver, gold. Data gets more refined and more trustworthy at each tier — and the rules that produce each tier are versioned in code.</em></figcaption>
 </figure>
 
 So far the discussion has been about *moving* data and *processing* data. The next question is where to *store* it for the long term.
@@ -363,7 +363,7 @@ The recommended pattern for the course is to combine MinIO (the data lake) with 
 
 <figure class="diagram">
 <img src="figures/lecture3-fig07.svg" alt="Time-series database">
-<figcaption>Time-series databases store rows indexed by time, compressed per chunk, and discarded automatically after a retention period. Far faster than a general-purpose database for this shape of data.</figcaption>
+<figcaption><em>Time-series databases store rows indexed by time, compressed per chunk, and discarded automatically after a retention period. Far faster than a general-purpose database for this shape of data.</em></figcaption>
 </figure>
 
 A general-purpose database like PostgreSQL or MySQL is built for a typical web-application workload: lots of lookups by primary key, joins between tables, transactional updates. Sensor data has a completely different shape.
@@ -537,7 +537,7 @@ The standard stack for this is **Prometheus** (a metrics database that scrapes e
 
 <figure class="diagram">
 <img src="figures/lecture3-fig08.svg" alt="Smoke detection data pipeline">
-<figcaption>Every component of the smoke-detection data pipeline: sensors at the top push readings down through ingestion, processing, modelling, and alerting — and everything is persisted to storage for replay and training.</figcaption>
+<figcaption><em>Every component of the smoke-detection data pipeline: sensors at the top push readings down through ingestion, processing, modelling, and alerting — and everything is persisted to storage for replay and training.</em></figcaption>
 </figure>
 
 To make all of the above concrete, follow one use case — smoke detection — through every stage.

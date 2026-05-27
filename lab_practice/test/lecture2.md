@@ -8,7 +8,7 @@ Standalone notes for the second lecture of D7065E. Read this on its own or along
 
 <figure class="diagram">
 <img src="figures/lecture2-fig01.svg" alt="Anatomy of a CPS">
-<figcaption>Every CPS has the same anatomy: a physical layer at the top, sensors pushing readings down, a message broker fanning them out, storage and intelligence on the side, actuators pushing decisions back up.</figcaption>
+<figcaption><em>Every CPS has the same anatomy: a physical layer at the top, sensors pushing readings down, a message broker fanning them out, storage and intelligence on the side, actuators pushing decisions back up.</em></figcaption>
 </figure>
 
 ### The sense–compute–act loop
@@ -55,7 +55,7 @@ The two layers meet at one specific seam: the **API of the building control syst
 
 <figure class="diagram">
 <img src="figures/lecture2-fig02.svg" alt="Edge vs cloud latency comparison">
-<figcaption>Putting the same control loop in two places gives wildly different latency. For anything safety-critical, the brain belongs on the edge.</figcaption>
+<figcaption><em>Putting the same control loop in two places gives wildly different latency. For anything safety-critical, the brain belongs on the edge.</em></figcaption>
 </figure>
 
 Many newcomers reach for "the cloud" as a default place to run software. For a CPS, that is usually the wrong default. The right place is the **edge** — a computer physically close to the building.
@@ -142,7 +142,7 @@ A common mistake is to over-edge — running everything on a single device becau
 
 <figure class="diagram">
 <img src="figures/lecture2-fig03.svg" alt="REST vs MQTT communication">
-<figcaption>REST is a phone call: synchronous, one-to-one. MQTT is a notice board: one publisher, many subscribers, none of them blocking each other.</figcaption>
+<figcaption><em>REST is a phone call: synchronous, one-to-one. MQTT is a notice board: one publisher, many subscribers, none of them blocking each other.</em></figcaption>
 </figure>
 
 Once components are placed at the right tier, the next question is how they communicate. Each communication pattern has different latency, scalability, coupling, and failure characteristics. Choosing the wrong one is one of the most common architectural mistakes.
@@ -230,7 +230,7 @@ The most useful rule of thumb: REST when one component asks another a specific q
 
 <figure class="diagram">
 <img src="figures/lecture2-fig04.svg" alt="Service-oriented architecture">
-<figcaption>Each service is independently deployable, owns one job, and talks through stable interfaces. Replace one without touching the others.</figcaption>
+<figcaption><em>Each service is independently deployable, owns one job, and talks through stable interfaces. Replace one without touching the others.</em></figcaption>
 </figure>
 
 The patterns above describe **how** components talk. The next question is **how big** each component should be.
@@ -283,7 +283,7 @@ Arrowhead is used in Swedish industrial automation and is worth knowing as the p
 
 <figure class="diagram">
 <img src="figures/lecture2-fig05.svg" alt="Three higher-level architectural patterns">
-<figcaption>Different shapes optimise for different things: layered for simplicity, microservices for scale, event-driven for loose coupling between components that come and go.</figcaption>
+<figcaption><em>Different shapes optimise for different things: layered for simplicity, microservices for scale, event-driven for loose coupling between components that come and go.</em></figcaption>
 </figure>
 
 The previous parts cover individual building blocks. This part describes whole-system patterns that combine them.
@@ -360,7 +360,7 @@ No single pattern fits every use case. A few rules of thumb help:
 
 <figure class="diagram">
 <img src="figures/lecture2-fig06.svg" alt="A worked HVAC control system">
-<figcaption>A full HVAC control system, with each component placed and the data flowing top to bottom: physical world → broker → services → back to the world.</figcaption>
+<figcaption><em>A full HVAC control system, with each component placed and the data flowing top to bottom: physical world → broker → services → back to the world.</em></figcaption>
 </figure>
 
 To make all of the above concrete, consider a fire detection system and walk through the architectural choices.

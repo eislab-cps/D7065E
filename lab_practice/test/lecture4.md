@@ -8,7 +8,7 @@ Standalone notes for the fourth lecture of D7065E. Read on its own or alongside 
 
 <figure class="diagram">
 <img src="figures/lecture4-fig01.svg" alt="Three generations of automation">
-<figcaption>Four generations of automation, each adapting to more situations than the one before. The trade-off is always: more flexible behaviour, harder to predict.</figcaption>
+<figcaption><em>Four generations of automation, each adapting to more situations than the one before. The trade-off is always: more flexible behaviour, harder to predict.</em></figcaption>
 </figure>
 
 The history of building automation is the history of decisions getting smarter. Three generations of automation describe where the field has been and where it is now.
@@ -49,7 +49,7 @@ These three generations are not in competition. A real building uses all three: 
 
 <figure class="diagram">
 <img src="figures/lecture4-fig02.svg" alt="The agent loop">
-<figcaption>The agent loop is the engine that turns a model into a behaviour. Perceive, think, act, observe — and round again.</figcaption>
+<figcaption><em>The agent loop is the engine that turns a model into a behaviour. Perceive, think, act, observe — and round again.</em></figcaption>
 </figure>
 
 Every agent, no matter the framework or the model, runs the same loop. Six steps, repeated forever.
@@ -214,7 +214,7 @@ A useful image: asking a job applicant to fill in a form instead of writing a le
 
 <figure class="diagram">
 <img src="figures/lecture4-fig03.svg" alt="Tool use — giving the agent hands">
-<figcaption>Tools let the agent reach into systems it can't operate by itself. Each tool is a typed function the model can call when it needs to act.</figcaption>
+<figcaption><em>Tools let the agent reach into systems it can't operate by itself. Each tool is a typed function the model can call when it needs to act.</em></figcaption>
 </figure>
 
 An LLM, on its own, can only read text and produce text. It can't read a sensor, write to a database, or command an actuator. **Tool calling** — also called function calling — is the mechanism that extends the LLM with the ability to invoke external functions.
@@ -427,7 +427,7 @@ A useful image: building furniture with a precision template. Less flexible than
 
 <figure class="diagram">
 <img src="figures/lecture4-fig04.svg" alt="ReAct pattern — Thought · Action · Observation">
-<figcaption>In the ReAct pattern, the agent alternates between reasoning (Thought) and acting (Action), with each Observation feeding the next Thought. The trace is also the explanation.</figcaption>
+<figcaption><em>In the ReAct pattern, the agent alternates between reasoning (Thought) and acting (Action), with each Observation feeding the next Thought. The trace is also the explanation.</em></figcaption>
 </figure>
 
 The ReAct pattern — Reasoning + Acting — was introduced by Yao et al. in their 2022 paper. It is short, clear, and has become the de facto template for LLM agents.
@@ -452,7 +452,7 @@ The interleaving also helps the LLM stay on track. A pure plan-then-execute patt
 
 <figure class="diagram">
 <img src="figures/lecture4-fig05.svg" alt="Multi-agent collaboration">
-<figcaption>Specialised agents own a slice of the problem and communicate through a shared bus. A coordinator resolves conflicts; an auditor records every decision.</figcaption>
+<figcaption><em>Specialised agents own a slice of the problem and communicate through a shared bus. A coordinator resolves conflicts; an auditor records every decision.</em></figcaption>
 </figure>
 
 A single agent that controls every aspect of a building is fragile. It is hard to test, hard to update, and has a single point of failure. Multi-agent systems decompose the control problem into specialised agents that coordinate.
@@ -539,7 +539,7 @@ Prevention: rate-limit actuator commands; enforce a minimum time between state c
 
 <figure class="diagram">
 <img src="figures/lecture4-fig06.svg" alt="Safety guardrails — concentric layers">
-<figcaption>An autonomous agent is wrapped in concentric layers of policy. Authority limits what it can touch; policy says what it must never do; humans approve the rest; an audit log records everything.</figcaption>
+<figcaption><em>An autonomous agent is wrapped in concentric layers of policy. Authority limits what it can touch; policy says what it must never do; humans approve the rest; an audit log records everything.</em></figcaption>
 </figure>
 
 An AI agent controlling a building can cause real harm. It can leave emergency doors locked during a fire, over-cool a server room, or cause energy spikes that trip a breaker. Safety in agentic AI is not abstract — it is an engineering requirement, and there are well-established techniques to enforce it.
@@ -587,7 +587,7 @@ Tests for these scenarios are written **before** deployment, not after. They are
 
 <figure class="diagram">
 <img src="figures/lecture4-fig07.svg" alt="Fire-detection agent in action">
-<figcaption>The fire-detection agent in action: a sensor spike triggers reasoning, the agent calls actuator and notification tools, and the next sensor reading closes the loop.</figcaption>
+<figcaption><em>The fire-detection agent in action: a sensor spike triggers reasoning, the agent calls actuator and notification tools, and the next sensor reading closes the loop.</em></figcaption>
 </figure>
 
 To make all of this concrete, walk a fire-detection agent through one complete cycle.
