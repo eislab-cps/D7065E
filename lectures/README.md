@@ -4,10 +4,9 @@
 
 | # | Lecture | Topic |
 |---|--------|-------|
-| 1 | [Introduction & MBSE](lecture-1-introduction.md) | Course overview, autonomous building control, Model-Based Systems Engineering, C4 model |
-| 2 | [CPS Architectures](lecture-2-cps-architectures.md) | Edge-cloud continuum, CPS fundamentals, communication patterns, SOA |
-| 3 | [Data Engineering for CPS](lecture-3-data-engineering.md) | Sensor data pipelines, data lakes, time-series, ETL, SQL analytics |
-| 4 | [Agentic AI for Autonomous Systems](lecture-4-agentic-ai.md) | AI agents, LLMs as controllers, tool use, MCP, multi-agent coordination |
-| 5 | [AI-Driven Development](lecture-5-ai-driven-development.md) | AI coding tools, test-driven generation, specification-first workflow, prompting |
+| 1 | [Introduction & Model-Based Systems Engineering](lecture1.md) | Course overview, embedded intelligence at the edge, Model-Based Systems Engineering, architecture viewpoints, C4 model |
+| 2 | [Edge Intelligence & CPS Architecture](lecture2.md) | CPS fundamentals, edge-cloud continuum, communication patterns (REST/MQTT), SOA, architectural patterns |
+| 3 | [Data Engineering for Cyber-Physical Systems](lecture3.md) | Sensor data pipelines, ingestion, stream/batch processing, medallion architecture, time-series |
+| 4 | [Agentic AI for Autonomous Systems](lecture4.md) | AI agents, the agent loop, tool use, ReAct, multi-agent coordination, safety guardrails |
 
-Lectures 1-4 provide the foundation before the architecture approval checkpoint (week 3). Lecture 5 supports the implementation phase.
+Lectures 1-4 provide the foundation before the architecture approval checkpoint (week 3).
