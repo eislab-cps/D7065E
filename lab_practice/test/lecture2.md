@@ -6,85 +6,10 @@ Standalone notes for the second lecture of D7065E. Read this on its own or along
 
 ## Part 1 — What a Cyber-Physical System Actually Is
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" role="img" aria-label="Anatomy of a CPS" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">The standard anatomy of a CPS</text>
-<!-- Physical layer at top -->
-<g>
-  <rect x="40" y="60" width="640" height="60" rx="10" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="60" y="84" font-size="11" font-weight="700" letter-spacing="2" fill="#8b3a1f">PHYSICAL WORLD</text>
-  <text x="60" y="104" font-size="10.5" fill="#6b6660">rooms · ducts · equipment · people</text>
-  <g transform="translate(360,90)">
-    <circle cx="0" cy="0" r="12" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3.5999999999999996" fill="#8b3a1f"/>
-    <path d="M -9.6 -12 Q -14.399999999999999 -16.8 -9.6 -21.599999999999998" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 9.6 -12 Q 14.399999999999999 -16.8 9.6 -21.599999999999998" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g>
-  <g transform="translate(420,90)">
-    <circle cx="0" cy="0" r="12" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3.5999999999999996" fill="#8b3a1f"/>
-    <path d="M -9.6 -12 Q -14.399999999999999 -16.8 -9.6 -21.599999999999998" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 9.6 -12 Q 14.399999999999999 -16.8 9.6 -21.599999999999998" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g>
-  <g transform="translate(480,90)">
-    <circle cx="0" cy="0" r="12" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3.5999999999999996" fill="#8b3a1f"/>
-    <path d="M -9.6 -12 Q -14.399999999999999 -16.8 -9.6 -21.599999999999998" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 9.6 -12 Q 14.399999999999999 -16.8 9.6 -21.599999999999998" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g>
-  <!-- actuator icon -->
-  <g transform="translate(580,82)">
-    <rect x="0" y="0" width="24" height="14" rx="3" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.3"/>
-    <circle cx="6" cy="7" r="3" fill="#8b3a1f"/>
-  </g>
-</g>
-<!-- Sensors down / Actuator up -->
-<line x1="380" y1="130" x2="380" y2="158" stroke="#8b3a1f" stroke-width="1.8" stroke-linecap="round"/>
-<polygon points="380,165 376,158 384,158" fill="#8b3a1f"/>
-<text x="370" y="152" text-anchor="end" font-size="10" fill="#8b3a1f">readings</text>
-<line x1="560" y1="165" x2="560" y2="137" stroke="#8b3a1f" stroke-width="1.8" stroke-linecap="round"/>
-<polygon points="560,130 564,137 556,137" fill="#8b3a1f"/>
-<text x="572" y="152" font-size="10" fill="#8b3a1f">commands</text>
-<!-- Broker -->
-<g transform="translate(280,170)">
-  <rect width="200" height="50" rx="10" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="100" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#2a5a7a">MESSAGE BROKER</text>
-  <text x="100" y="38" text-anchor="middle" font-size="10" fill="#6b6660">MQTT · publish / subscribe</text>
-</g>
-<!-- Storage + Brain side by side -->
-<g transform="translate(80,240)">
-  <rect width="170" height="100" rx="10" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="85" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#3a5a3a">TIME-SERIES DB</text>
-  <g>
-    <ellipse cx="85" cy="44" rx="23" ry="6" fill="#dde7ec" stroke="#2a2622" stroke-width="1.4"/>
-    <path d="M 62 44 L 62 84 Q 85 92 108 84 L 108 44" fill="#dde7ec" stroke="#2a2622" stroke-width="1.4"/>
-    <ellipse cx="85" cy="44" rx="23" ry="6" fill="none" stroke="#2a2622" stroke-width="1.4"/>
-    <ellipse cx="85" cy="54" rx="21" ry="5" fill="none" stroke="#2a2622" stroke-width="0.8" opacity="0.5"/>
-    <ellipse cx="85" cy="66" rx="20" ry="5" fill="none" stroke="#2a2622" stroke-width="0.8" opacity="0.5"/>
-  </g>
-</g>
-<g transform="translate(280,240)">
-  <rect width="200" height="100" rx="10" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="100" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#8b3a1f">AI AGENT</text>
-  <g><circle cx="100" cy="64" r="22" fill="#8b3a1f" opacity="0.9"/>
-    <text x="100" y="69" text-anchor="middle" font-size="15.399999999999999" font-weight="700" fill="#fdfbf7">AI</text></g>
-  <text x="100" y="92" text-anchor="middle" font-size="10" fill="#6b6660">reason · choose · command</text>
-</g>
-<g transform="translate(510,240)">
-  <rect width="170" height="100" rx="10" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="85" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#7a5a1a">DASHBOARD</text>
-  <rect x="20" y="36" width="130" height="50" rx="4" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.2"/>
-  <polyline points="28,76 50,60 70,68 90,46 110,58 130,48 142,54" fill="none" stroke="#8b3a1f" stroke-width="1.5"/>
-</g>
-<!-- Lines from broker to layer below -->
-<line x1="330" y1="220" x2="171.94913647423596" y2="239.15768042736534" stroke="#6b6660" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="165,240 171.46781100415902,235.1867452992305 172.4304619443129,243.12861555550018" fill="#6b6660"/>
-<line x1="380" y1="220" x2="380" y2="233" stroke="#6b6660" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="380,240 376,233 384,233" fill="#6b6660"/>
-<line x1="430" y1="220" x2="588.050863525764" y2="239.15768042736534" stroke="#6b6660" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="595,240 587.5695380556871,243.12861555550018 588.532188995841,235.1867452992305" fill="#6b6660"/>
-</svg>
-</div><figcaption>Every CPS has the same anatomy: a physical layer at the top, sensors pushing readings down, a message broker fanning them out, storage and intelligence on the side, actuators pushing decisions back up.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture2-fig01.svg" alt="Anatomy of a CPS">
+<figcaption>Every CPS has the same anatomy: a physical layer at the top, sensors pushing readings down, a message broker fanning them out, storage and intelligence on the side, actuators pushing decisions back up.</figcaption>
+</figure>
 
 ### The sense–compute–act loop
 
@@ -128,67 +53,10 @@ The two layers meet at one specific seam: the **API of the building control syst
 
 ## Part 2 — Where the Brain Should Live: Edge vs Cloud
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-label="Edge vs cloud latency comparison" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">Same loop, two architectures</text>
-<!-- LEFT: Edge -->
-<g transform="translate(20,70)">
-  <rect width="320" height="270" rx="14" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="160" y="28" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="2" fill="#8b3a1f">EDGE</text>
-  <g transform="translate(50,80)">
-    <circle cx="0" cy="0" r="14" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="4.199999999999999" fill="#8b3a1f"/>
-    <path d="M -11.2 -14 Q -16.799999999999997 -19.599999999999998 -11.2 -25.2" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 11.2 -14 Q 16.799999999999997 -19.599999999999998 11.2 -25.2" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g>
-  <text x="50" y="108" text-anchor="middle" font-size="10" fill="#2a2622">sensor</text>
-  <line x1="72" y1="80" x2="131" y2="80" stroke="#8b3a1f" stroke-width="1.6" stroke-linecap="round"/>
-<polygon points="138,80 131,84 131,76" fill="#8b3a1f"/>
-  <rect x="138" y="60" width="56" height="40" rx="6" fill="#8b3a1f"/>
-  <text x="166" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="#fdfbf7">AI</text>
-  <text x="166" y="108" text-anchor="middle" font-size="10" fill="#2a2622">edge server</text>
-  <line x1="196" y1="80" x2="255" y2="80" stroke="#8b3a1f" stroke-width="1.6" stroke-linecap="round"/>
-<polygon points="262,80 255,84 255,76" fill="#8b3a1f"/>
-  <g transform="translate(260,68)"><rect width="30" height="24" rx="4" fill="#f3ece6" stroke="#2a2622" stroke-width="1.3"/><circle cx="8" cy="12" r="4" fill="#8b3a1f"/></g>
-  <text x="276" y="108" text-anchor="middle" font-size="10" fill="#2a2622">actuator</text>
-  <text x="160" y="170" text-anchor="middle" font-size="40" font-weight="700" fill="#8b3a1f">5 ms</text>
-  <text x="160" y="200" text-anchor="middle" font-size="11" fill="#6b6660">total round-trip</text>
-  <line x1="40" y1="220" x2="280" y2="220" stroke="#6b6660" stroke-width="0.8"/>
-  <text x="50" y="240" font-size="10" fill="#2a2622">✓ fast</text>
-  <text x="50" y="256" font-size="10" fill="#2a2622">✓ works offline</text>
-  <text x="170" y="240" font-size="10" fill="#2a2622">✓ private</text>
-  <text x="170" y="256" font-size="10" fill="#2a2622">✓ predictable</text>
-</g>
-<!-- RIGHT: Cloud -->
-<g transform="translate(360,70)">
-  <rect width="340" height="270" rx="14" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="170" y="28" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="2" fill="#6b6660">CLOUD</text>
-  <g transform="translate(38,80)">
-    <circle cx="0" cy="0" r="12" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3.5999999999999996" fill="#8b3a1f"/>
-    <path d="M -9.6 -12 Q -14.399999999999999 -16.8 -9.6 -21.599999999999998" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 9.6 -12 Q 14.399999999999999 -16.8 9.6 -21.599999999999998" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g>
-  <path d="M 56 80 Q 90 60 124 80" fill="none" stroke="#6b6660" stroke-width="1.4" stroke-dasharray="4 3"/>
-  <rect x="124" y="68" width="40" height="24" rx="4" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.2"/>
-  <text x="144" y="84" text-anchor="middle" font-size="8" fill="#6b6660">router</text>
-  <path d="M 164 80 Q 200 50 240 80" fill="none" stroke="#6b6660" stroke-width="1.4" stroke-dasharray="4 3"/>
-  <g transform="translate(232.5,48.5) scale(1.1)">
-    <path d="M 20 50 Q 0 50 0 35 Q 0 22 14 20 Q 16 6 32 6 Q 50 0 60 14 Q 78 14 80 30 Q 92 32 90 46 Q 88 60 70 60 L 28 60 Q 14 60 20 50 Z" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
-  </g>
-  <path d="M 264 90 Q 200 130 164 100" fill="none" stroke="#6b6660" stroke-width="1.4" stroke-dasharray="4 3"/>
-  <path d="M 124 100 Q 90 130 56 100" fill="none" stroke="#6b6660" stroke-width="1.4" stroke-dasharray="4 3"/>
-  <g transform="translate(28,116)"><rect width="30" height="24" rx="4" fill="#f3ece6" stroke="#2a2622" stroke-width="1.3"/><circle cx="8" cy="12" r="4" fill="#8b3a1f"/></g>
-  <text x="170" y="170" text-anchor="middle" font-size="40" font-weight="700" fill="#6b6660">200+ ms</text>
-  <text x="170" y="200" text-anchor="middle" font-size="11" fill="#6b6660">round-trip across the internet</text>
-  <line x1="40" y1="220" x2="300" y2="220" stroke="#6b6660" stroke-width="0.8"/>
-  <text x="50" y="240" font-size="10" fill="#2a2622">✗ slow</text>
-  <text x="50" y="256" font-size="10" fill="#2a2622">✗ breaks offline</text>
-  <text x="180" y="240" font-size="10" fill="#2a2622">✗ data leaves</text>
-  <text x="180" y="256" font-size="10" fill="#2a2622">✓ scales easily</text>
-</g>
-</svg>
-</div><figcaption>Putting the same control loop in two places gives wildly different latency. For anything safety-critical, the brain belongs on the edge.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture2-fig02.svg" alt="Edge vs cloud latency comparison">
+<figcaption>Putting the same control loop in two places gives wildly different latency. For anything safety-critical, the brain belongs on the edge.</figcaption>
+</figure>
 
 Many newcomers reach for "the cloud" as a default place to run software. For a CPS, that is usually the wrong default. The right place is the **edge** — a computer physically close to the building.
 
@@ -272,57 +140,10 @@ A common mistake is to over-edge — running everything on a single device becau
 
 ## Part 3 — How Components Talk to Each Other
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="REST vs MQTT communication" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">Two ways for components to talk</text>
-<!-- LEFT: REST -->
-<g transform="translate(40,70)">
-  <rect width="290" height="220" rx="14" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="145" y="28" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="2" fill="#8b3a1f">REST · request / response</text>
-  <rect x="30" y="58" width="80" height="50" rx="6" fill="#f3ece6" stroke="#2a2622" stroke-width="1.4"/>
-  <text x="70" y="88" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Client</text>
-  <rect x="180" y="58" width="80" height="50" rx="6" fill="#dde7ec" stroke="#2a2622" stroke-width="1.4"/>
-  <text x="220" y="88" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Server</text>
-  <line x1="112" y1="76" x2="171" y2="76" stroke="#8b3a1f" stroke-width="1.6" stroke-linecap="round"/>
-<polygon points="178,76 171,80 171,72" fill="#8b3a1f"/>
-  <text x="145" y="68" text-anchor="middle" font-size="10" fill="#8b3a1f">GET /temp</text>
-  <line x1="178" y1="98" x2="119" y2="98" stroke="#8b3a1f" stroke-width="1.6" stroke-linecap="round"/>
-<polygon points="112,98 119,94 119,102" fill="#8b3a1f"/>
-  <text x="145" y="116" text-anchor="middle" font-size="10" fill="#8b3a1f">{ value: 22.4 }</text>
-  <text x="145" y="160" text-anchor="middle" font-size="11" font-style="italic" fill="#6b6660">"Like a phone call."</text>
-  <text x="145" y="186" text-anchor="middle" font-size="10" fill="#2a2622">synchronous · 1-to-1 · request must wait</text>
-</g>
-<!-- RIGHT: MQTT -->
-<g transform="translate(360,70)">
-  <rect width="320" height="220" rx="14" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="160" y="28" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="2" fill="#2a5a7a">MQTT · publish / subscribe</text>
-  <!-- publisher -->
-  <rect x="20" y="58" width="68" height="40" rx="6" fill="#f3ece6" stroke="#2a2622" stroke-width="1.4"/>
-  <text x="54" y="82" text-anchor="middle" font-size="10.5" font-weight="600" fill="#2a2622">Sensor</text>
-  <line x1="90" y1="78" x2="125" y2="78" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="132,78 125,82 125,74" fill="#8b3a1f"/>
-  <!-- broker -->
-  <rect x="132" y="58" width="60" height="100" rx="8" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="162" y="80" text-anchor="middle" font-size="10" font-weight="700" fill="#2a5a7a">BROKER</text>
-  <text x="162" y="100" text-anchor="middle" font-size="9" fill="#6b6660">topic:</text>
-  <text x="162" y="114" text-anchor="middle" font-size="9" font-family="monospace" fill="#2a2622">sensors/#</text>
-  <!-- subscribers -->
-  <line x1="192" y1="68" x2="235.13593527016357" y2="59.37281294596729" stroke="#8b3a1f" stroke-width="1.4" stroke-linecap="round"/>
-<polygon points="242,58 235.9203998107163,63.29513564873097 234.35147072961084,55.45049024320361" fill="#8b3a1f"/>
-  <line x1="192" y1="108" x2="235" y2="108" stroke="#8b3a1f" stroke-width="1.4" stroke-linecap="round"/>
-<polygon points="242,108 235,112 235,104" fill="#8b3a1f"/>
-  <line x1="192" y1="148" x2="235.13593527016357" y2="156.6271870540327" stroke="#8b3a1f" stroke-width="1.4" stroke-linecap="round"/>
-<polygon points="242,158 234.35147072961084,160.5495097567964 235.9203998107163,152.704864351269" fill="#8b3a1f"/>
-  <rect x="242" y="44" width="64" height="28" rx="4" fill="#e2ebde" stroke="#2a2622" stroke-width="1.2"/>
-  <text x="274" y="62" text-anchor="middle" font-size="10" fill="#2a2622">DB writer</text>
-  <rect x="242" y="94" width="64" height="28" rx="4" fill="#f4ead9" stroke="#2a2622" stroke-width="1.2"/>
-  <text x="274" y="112" text-anchor="middle" font-size="10" fill="#2a2622">Detector</text>
-  <rect x="242" y="144" width="64" height="28" rx="4" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.2"/>
-  <text x="274" y="162" text-anchor="middle" font-size="10" fill="#2a2622">Dashboard</text>
-  <text x="160" y="194" text-anchor="middle" font-size="11" font-style="italic" fill="#6b6660">"Like a notice board."</text>
-</g>
-</svg>
-</div><figcaption>REST is a phone call: synchronous, one-to-one. MQTT is a notice board: one publisher, many subscribers, none of them blocking each other.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture2-fig03.svg" alt="REST vs MQTT communication">
+<figcaption>REST is a phone call: synchronous, one-to-one. MQTT is a notice board: one publisher, many subscribers, none of them blocking each other.</figcaption>
+</figure>
 
 Once components are placed at the right tier, the next question is how they communicate. Each communication pattern has different latency, scalability, coupling, and failure characteristics. Choosing the wrong one is one of the most common architectural mistakes.
 
@@ -407,82 +228,10 @@ The most useful rule of thumb: REST when one component asks another a specific q
 
 ## Part 4 — How Components are Organised: Service-Oriented Architecture
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" role="img" aria-label="Service-oriented architecture" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">Each service owns one job</text>
-  <g transform="translate(40,80)">
-    <rect width="120" height="80" rx="12" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="60" y="36" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Sensor service</text>
-    <text x="60" y="54" text-anchor="middle" font-size="10" fill="#6b6660">reads BuildSim</text>
-    <!-- container hint -->
-    <text x="60" y="70" text-anchor="middle" font-size="9" font-family="monospace" fill="#6b6660">docker</text>
-  </g>
-  <g transform="translate(220,80)">
-    <rect width="120" height="80" rx="12" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="60" y="36" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Ingestion service</text>
-    <text x="60" y="54" text-anchor="middle" font-size="10" fill="#6b6660">validates · stores</text>
-    <!-- container hint -->
-    <text x="60" y="70" text-anchor="middle" font-size="9" font-family="monospace" fill="#6b6660">docker</text>
-  </g>
-  <g transform="translate(400,80)">
-    <rect width="120" height="80" rx="12" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="60" y="36" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Detection service</text>
-    <text x="60" y="54" text-anchor="middle" font-size="10" fill="#6b6660">anomaly model</text>
-    <!-- container hint -->
-    <text x="60" y="70" text-anchor="middle" font-size="9" font-family="monospace" fill="#6b6660">docker</text>
-  </g>
-  <g transform="translate(580,80)">
-    <rect width="120" height="80" rx="12" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="60" y="36" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Safety service</text>
-    <text x="60" y="54" text-anchor="middle" font-size="10" fill="#6b6660">agent · decides</text>
-    <!-- container hint -->
-    <text x="60" y="70" text-anchor="middle" font-size="9" font-family="monospace" fill="#6b6660">docker</text>
-  </g>
-  <g transform="translate(40,230)">
-    <rect width="120" height="80" rx="12" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="60" y="36" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Storage</text>
-    <text x="60" y="54" text-anchor="middle" font-size="10" fill="#6b6660">time-series DB</text>
-    <!-- container hint -->
-    <text x="60" y="70" text-anchor="middle" font-size="9" font-family="monospace" fill="#6b6660">docker</text>
-  </g>
-  <g transform="translate(220,230)">
-    <rect width="120" height="80" rx="12" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="60" y="36" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Dashboard</text>
-    <text x="60" y="54" text-anchor="middle" font-size="10" fill="#6b6660">UI · operators</text>
-    <!-- container hint -->
-    <text x="60" y="70" text-anchor="middle" font-size="9" font-family="monospace" fill="#6b6660">docker</text>
-  </g>
-  <g transform="translate(400,230)">
-    <rect width="120" height="80" rx="12" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="60" y="36" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Actuator service</text>
-    <text x="60" y="54" text-anchor="middle" font-size="10" fill="#6b6660">commands BuildSim</text>
-    <!-- container hint -->
-    <text x="60" y="70" text-anchor="middle" font-size="9" font-family="monospace" fill="#6b6660">docker</text>
-  </g>
-  <g transform="translate(580,230)">
-    <rect width="120" height="80" rx="12" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="60" y="36" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Audit log</text>
-    <text x="60" y="54" text-anchor="middle" font-size="10" fill="#6b6660">every decision</text>
-    <!-- container hint -->
-    <text x="60" y="70" text-anchor="middle" font-size="9" font-family="monospace" fill="#6b6660">docker</text>
-  </g>
-<!-- connecting arrows (just a few key flows) -->
-<line x1="160" y1="120" x2="213" y2="120" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="220,120 213,124 213,116" fill="#8b3a1f"/>
-<line x1="340" y1="120" x2="393" y2="120" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="400,120 393,124 393,116" fill="#8b3a1f"/>
-<line x1="520" y1="120" x2="573" y2="120" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="580,120 573,124 573,116" fill="#8b3a1f"/>
-<line x1="340" y1="160" x2="453.8449562342426" y2="221.66601796021473" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="460,225 451.93982364007957,225.18318582636184 455.75008882840564,218.14885009406763" fill="#8b3a1f"/>
-<line x1="280" y1="160" x2="166.15504376575743" y2="221.66601796021473" stroke="#6b6660" stroke-width="1.2" stroke-linecap="round"/>
-<polygon points="160,225 164.24991117159442,218.14885009406763 168.06017635992043,225.18318582636184" fill="#6b6660"/>
-<line x1="640" y1="160" x2="640" y2="218" stroke="#6b6660" stroke-width="1.2" stroke-linecap="round"/>
-<polygon points="640,225 636,218 644,218" fill="#6b6660"/>
-<line x1="640" y1="310" x2="526.6407830863536" y2="272.2135943621179" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="520,270 527.905694150421,268.41886116991583 525.3758720222862,276.0083275543199" fill="#8b3a1f"/>
-</svg>
-</div><figcaption>Each service is independently deployable, owns one job, and talks through stable interfaces. Replace one without touching the others.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture2-fig04.svg" alt="Service-oriented architecture">
+<figcaption>Each service is independently deployable, owns one job, and talks through stable interfaces. Replace one without touching the others.</figcaption>
+</figure>
 
 The patterns above describe **how** components talk. The next question is **how big** each component should be.
 
@@ -532,46 +281,10 @@ Arrowhead is used in Swedish industrial automation and is worth knowing as the p
 
 ## Part 5 — Higher-Level Architectural Patterns
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" role="img" aria-label="Three higher-level architectural patterns" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">Three shapes a system can take</text>
-<!-- Layered -->
-<g transform="translate(30,70)">
-  <rect width="200" height="180" rx="12" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="100" y="26" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.5" fill="#8b3a1f">LAYERED</text>
-  <rect x="22" y="44" width="156" height="22" rx="4" fill="#f3ece6" stroke="#2a2622" stroke-width="1.2"/>
-  <text x="100" y="59" text-anchor="middle" font-size="10" fill="#2a2622">UI · dashboard</text>
-  <rect x="22" y="72" width="156" height="22" rx="4" fill="#dde7ec" stroke="#2a2622" stroke-width="1.2"/>
-  <text x="100" y="87" text-anchor="middle" font-size="10" fill="#2a2622">Agents · logic</text>
-  <rect x="22" y="100" width="156" height="22" rx="4" fill="#e2ebde" stroke="#2a2622" stroke-width="1.2"/>
-  <text x="100" y="115" text-anchor="middle" font-size="10" fill="#2a2622">Storage</text>
-  <rect x="22" y="128" width="156" height="22" rx="4" fill="#f4ead9" stroke="#2a2622" stroke-width="1.2"/>
-  <text x="100" y="143" text-anchor="middle" font-size="10" fill="#2a2622">Sensors · actuators</text>
-  <text x="100" y="168" text-anchor="middle" font-size="9.5" font-style="italic" fill="#6b6660">each layer talks down</text>
-</g>
-<!-- Microservices -->
-<g transform="translate(250,70)">
-  <rect width="220" height="180" rx="12" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="110" y="26" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.5" fill="#8b3a1f">MICROSERVICES</text>
-  <rect x="22" y="43" width="36" height="26" rx="6" fill="#f3ece6" stroke="#2a2622" stroke-width="1.2"/><rect x="92" y="43" width="36" height="26" rx="6" fill="#f3ece6" stroke="#2a2622" stroke-width="1.2"/><rect x="162" y="43" width="36" height="26" rx="6" fill="#f3ece6" stroke="#2a2622" stroke-width="1.2"/><rect x="22" y="93" width="36" height="26" rx="6" fill="#f3ece6" stroke="#2a2622" stroke-width="1.2"/><rect x="92" y="93" width="36" height="26" rx="6" fill="#f3ece6" stroke="#2a2622" stroke-width="1.2"/><rect x="162" y="93" width="36" height="26" rx="6" fill="#f3ece6" stroke="#2a2622" stroke-width="1.2"/>
-  <line x1="40" y1="68" x2="110" y2="42" stroke="#6b6660" stroke-width="1"/><line x1="110" y1="68" x2="180" y2="42" stroke="#6b6660" stroke-width="1"/><line x1="40" y1="68" x2="110" y2="92" stroke="#6b6660" stroke-width="1"/><line x1="110" y1="68" x2="110" y2="92" stroke="#6b6660" stroke-width="1"/><line x1="180" y1="68" x2="180" y2="92" stroke="#6b6660" stroke-width="1"/><line x1="40" y1="118" x2="110" y2="92" stroke="#6b6660" stroke-width="1"/><line x1="110" y1="118" x2="180" y2="92" stroke="#6b6660" stroke-width="1"/>
-  <text x="110" y="148" text-anchor="middle" font-size="10" fill="#2a2622">small · independent · networked</text>
-  <text x="110" y="168" text-anchor="middle" font-size="9.5" font-style="italic" fill="#6b6660">talk through APIs</text>
-</g>
-<!-- Event-driven -->
-<g transform="translate(490,70)">
-  <rect width="200" height="180" rx="12" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="100" y="26" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.5" fill="#8b3a1f">EVENT-DRIVEN</text>
-  <rect x="40" y="80" width="120" height="22" rx="6" fill="#dde7ec" stroke="#2a2622" stroke-width="1.4"/>
-  <text x="100" y="95" text-anchor="middle" font-size="10" font-weight="600" fill="#2a2622">Event bus</text>
-  <rect x="46" y="38" width="28" height="22" rx="4" fill="#f3ece6" stroke="#2a2622" stroke-width="1.2"/><rect x="86" y="38" width="28" height="22" rx="4" fill="#f3ece6" stroke="#2a2622" stroke-width="1.2"/><rect x="126" y="38" width="28" height="22" rx="4" fill="#f3ece6" stroke="#2a2622" stroke-width="1.2"/>
-  <line x1="60" y1="62" x2="60" y2="80" stroke="#8b3a1f" stroke-width="1.2"/><line x1="100" y1="62" x2="100" y2="80" stroke="#8b3a1f" stroke-width="1.2"/><line x1="140" y1="62" x2="140" y2="80" stroke="#8b3a1f" stroke-width="1.2"/>
-  <rect x="46" y="128" width="28" height="22" rx="4" fill="#e2ebde" stroke="#2a2622" stroke-width="1.2"/><rect x="86" y="128" width="28" height="22" rx="4" fill="#e2ebde" stroke="#2a2622" stroke-width="1.2"/><rect x="126" y="128" width="28" height="22" rx="4" fill="#e2ebde" stroke="#2a2622" stroke-width="1.2"/>
-  <line x1="60" y1="102" x2="60" y2="128" stroke="#8b3a1f" stroke-width="1.2"/><line x1="100" y1="102" x2="100" y2="128" stroke="#8b3a1f" stroke-width="1.2"/><line x1="140" y1="102" x2="140" y2="128" stroke="#8b3a1f" stroke-width="1.2"/>
-  <text x="100" y="170" text-anchor="middle" font-size="9.5" font-style="italic" fill="#6b6660">publishers · subscribers · loose</text>
-</g>
-</svg>
-</div><figcaption>Different shapes optimise for different things: layered for simplicity, microservices for scale, event-driven for loose coupling between components that come and go.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture2-fig05.svg" alt="Three higher-level architectural patterns">
+<figcaption>Different shapes optimise for different things: layered for simplicity, microservices for scale, event-driven for loose coupling between components that come and go.</figcaption>
+</figure>
 
 The previous parts cover individual building blocks. This part describes whole-system patterns that combine them.
 
@@ -645,89 +358,10 @@ No single pattern fits every use case. A few rules of thumb help:
 
 ## Part 6 — A Worked Example
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" role="img" aria-label="A worked HVAC control system" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">A full HVAC control system, placed</text>
-<!-- Top: building/sensors -->
-<g transform="translate(40,60)">
-  <rect width="640" height="64" rx="10" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="20" y="22" font-size="11" font-weight="700" letter-spacing="1.5" fill="#8b3a1f">SENSORS & ACTUATORS</text>
-  <g transform="translate(160,42)">
-    <circle cx="0" cy="0" r="11" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3.3000000000000003" fill="#8b3a1f"/>
-    <path d="M -8.8 -11 Q -13.200000000000001 -15.400000000000002 -8.8 -19.8" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 8.8 -11 Q 13.200000000000001 -15.400000000000002 8.8 -19.8" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g><text x="160" y="64" text-anchor="middle" font-size="9" fill="#2a2622">temp</text>
-  <g transform="translate(220,42)">
-    <circle cx="0" cy="0" r="11" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3.3000000000000003" fill="#8b3a1f"/>
-    <path d="M -8.8 -11 Q -13.200000000000001 -15.400000000000002 -8.8 -19.8" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 8.8 -11 Q 13.200000000000001 -15.400000000000002 8.8 -19.8" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g><text x="220" y="64" text-anchor="middle" font-size="9" fill="#2a2622">CO₂</text>
-  <g transform="translate(280,42)">
-    <circle cx="0" cy="0" r="11" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3.3000000000000003" fill="#8b3a1f"/>
-    <path d="M -8.8 -11 Q -13.200000000000001 -15.400000000000002 -8.8 -19.8" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 8.8 -11 Q 13.200000000000001 -15.400000000000002 8.8 -19.8" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g><text x="280" y="64" text-anchor="middle" font-size="9" fill="#2a2622">occ.</text>
-  <g transform="translate(420,30)"><rect width="28" height="20" rx="4" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.3"/><circle cx="8" cy="10" r="4" fill="#8b3a1f"/></g>
-  <text x="434" y="64" text-anchor="middle" font-size="9" fill="#2a2622">fan</text>
-  <g transform="translate(480,30)"><rect width="28" height="20" rx="4" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.3"/><circle cx="8" cy="10" r="4" fill="#8b3a1f"/></g>
-  <text x="494" y="64" text-anchor="middle" font-size="9" fill="#2a2622">damper</text>
-</g>
-<!-- Middle: broker -->
-<g transform="translate(220,150)">
-  <rect width="280" height="38" rx="8" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="140" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#2a5a7a">MQTT BROKER · sensors/* · actuators/*</text>
-</g>
-<!-- Bottom row: services -->
-  <g transform="translate(40,220)">
-    <rect width="120" height="110" rx="10" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
-    <polyline points="20,38 32,28 44,32 56,22 68,30 80,18 92,24" fill="none" stroke="#8b3a1f" stroke-width="1.5"/>
-    <text x="60" y="80" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Forecast service</text>
-    <text x="60" y="96" text-anchor="middle" font-size="9.5" fill="#6b6660">next-hour temp</text>
-  </g>
-  <g transform="translate(200,220)">
-    <rect width="120" height="110" rx="10" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
-    <g transform="translate(56,32)"><g><circle cx="0" cy="0" r="18" fill="#8b3a1f" opacity="0.9"/>
-    <text x="0" y="5" text-anchor="middle" font-size="12.6" font-weight="700" fill="#fdfbf7">AI</text></g></g>
-    <text x="60" y="80" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">HVAC controller</text>
-    <text x="60" y="96" text-anchor="middle" font-size="9.5" fill="#6b6660">optimise comfort</text>
-  </g>
-  <g transform="translate(360,220)">
-    <rect width="120" height="110" rx="10" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
-    <rect x="32" y="20" width="48" height="32" rx="3" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/><line x1="32" y1="28" x2="80" y2="28" stroke="#2a2622" stroke-width="0.8"/><line x1="48" y1="20" x2="48" y2="52" stroke="#2a2622" stroke-width="0.6"/><line x1="64" y1="20" x2="64" y2="52" stroke="#2a2622" stroke-width="0.6"/><circle cx="56" cy="40" r="3" fill="#8b3a1f"/>
-    <text x="60" y="80" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Schedule</text>
-    <text x="60" y="96" text-anchor="middle" font-size="9.5" fill="#6b6660">occupancy rules</text>
-  </g>
-  <g transform="translate(520,220)">
-    <rect width="120" height="110" rx="10" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
-    <g transform="translate(56,36)"><g>
-    <ellipse cx="0" cy="-14" rx="20" ry="6" fill="#dde7ec" stroke="#2a2622" stroke-width="1.4"/>
-    <path d="M -20 -14 L -20 14 Q 0 22 20 14 L 20 -14" fill="#dde7ec" stroke="#2a2622" stroke-width="1.4"/>
-    <ellipse cx="0" cy="-14" rx="20" ry="6" fill="none" stroke="#2a2622" stroke-width="1.4"/>
-    <ellipse cx="0" cy="-4" rx="18" ry="5" fill="none" stroke="#2a2622" stroke-width="0.8" opacity="0.5"/>
-    <ellipse cx="0" cy="8" rx="17" ry="5" fill="none" stroke="#2a2622" stroke-width="0.8" opacity="0.5"/>
-  </g></g>
-    <text x="60" y="80" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Time-series DB</text>
-    <text x="60" y="96" text-anchor="middle" font-size="9.5" fill="#6b6660">history · 6 months</text>
-  </g>
-<!-- arrows: top -> broker -->
-<line x1="220" y1="125" x2="293.27251487249083" y2="146.06584802584112" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="300,148 292.16728517297145,149.91012524156065 294.3777445720102,142.2215708101216" fill="#8b3a1f"/>
-<line x1="500" y1="125" x2="426.72748512750917" y2="146.06584802584112" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="420,148 425.6222554279898,142.2215708101216 427.83271482702855,149.91012524156065" fill="#8b3a1f"/>
-<!-- arrows: broker -> services -->
-<line x1="280" y1="190" x2="106.904757466825" y2="218.8492070888625" stroke="#6b6660" stroke-width="1.3" stroke-linecap="round"/>
-<polygon points="100,220 106.24716151760357,214.9036313935339 107.56235341604643,222.79478278419109" fill="#6b6660"/>
-<line x1="320" y1="190" x2="266.2609903369994" y2="216.8695048315003" stroke="#6b6660" stroke-width="1.3" stroke-linecap="round"/>
-<polygon points="260,220 264.47213595499954,213.29179606750066 268.0498447189992,220.44721359549996" fill="#6b6660"/>
-<line x1="400" y1="190" x2="416.1170986264234" y2="214.1756479396351" stroke="#6b6660" stroke-width="1.3" stroke-linecap="round"/>
-<polygon points="420,220 412.788897449072,216.394448724536 419.4452998037748,211.9568471547342" fill="#6b6660"/>
-<line x1="440" y1="190" x2="573.1553831014581" y2="218.53329637888388" stroke="#6b6660" stroke-width="1.3" stroke-linecap="round"/>
-<polygon points="580,220 572.3172667465346,222.4445060351935 573.9934994563816,214.62208672257424" fill="#6b6660"/>
-</svg>
-</div><figcaption>A full HVAC control system, with each component placed and the data flowing top to bottom: physical world → broker → services → back to the world.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture2-fig06.svg" alt="A worked HVAC control system">
+<figcaption>A full HVAC control system, with each component placed and the data flowing top to bottom: physical world → broker → services → back to the world.</figcaption>
+</figure>
 
 To make all of the above concrete, consider a fire detection system and walk through the architectural choices.
 

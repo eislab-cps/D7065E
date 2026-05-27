@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" role="img" aria-label="Safety guardrails — concentric layers" class="dgm">
+<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">Multiple layers of policy keep an autonomous system safe</text>
+<!-- concentric rings -->
+<circle cx="360" cy="190" r="140" fill="#f3ece6" stroke="#2a2622" stroke-width="1.3" opacity="0.55"/>
+            <text x="360" y="80" text-anchor="middle" font-size="11" font-weight="700" fill="#2a2622">Audit log</text><circle cx="360" cy="190" r="110" fill="#f4ead9" stroke="#2a2622" stroke-width="1.3" opacity="0.55"/>
+            <text x="360" y="108" text-anchor="middle" font-size="11" font-weight="700" fill="#2a2622">Human-in-loop</text><circle cx="360" cy="190" r="80" fill="#dde7ec" stroke="#2a2622" stroke-width="1.3" opacity="0.55"/>
+            <text x="360" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="#2a2622">Policy</text><circle cx="360" cy="190" r="50" fill="#e2ebde" stroke="#2a2622" stroke-width="1.3" opacity="0.55"/>
+            <text x="360" y="168" text-anchor="middle" font-size="11" font-weight="700" fill="#2a2622">Authority</text>
+<!-- center agent -->
+<g><circle cx="360" cy="200" r="22" fill="#8b3a1f" opacity="0.9"/>
+    <text x="360" y="205" text-anchor="middle" font-size="15.399999999999999" font-weight="700" fill="#fdfbf7">AI</text></g>
+<text x="360" y="234" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Agent</text>
+<!-- labels on right -->
+<g transform="translate(40,90)">
+  <rect width="14" height="14" fill="#f3ece6" stroke="#2a2622" stroke-width="1"/>
+  <text x="22" y="12" font-size="10" fill="#2a2622"><tspan font-weight="700">Audit log</tspan> — every decision recorded for replay</text>
+</g>
+<g transform="translate(40,110)">
+  <rect width="14" height="14" fill="#f4ead9" stroke="#2a2622" stroke-width="1"/>
+  <text x="22" y="12" font-size="10" fill="#2a2622"><tspan font-weight="700">Human-in-loop</tspan> — approval for high-stakes actions</text>
+</g>
+<g transform="translate(40,130)">
+  <rect width="14" height="14" fill="#dde7ec" stroke="#2a2622" stroke-width="1"/>
+  <text x="22" y="12" font-size="10" fill="#2a2622"><tspan font-weight="700">Policy</tspan> — rules the agent cannot violate</text>
+</g>
+<g transform="translate(40,150)">
+  <rect width="14" height="14" fill="#e2ebde" stroke="#2a2622" stroke-width="1"/>
+  <text x="22" y="12" font-size="10" fill="#2a2622"><tspan font-weight="700">Authority</tspan> — only specific tools, scopes, rooms</text>
+</g>
+</svg>

@@ -6,54 +6,10 @@ Standalone notes for the fourth lecture of D7065E. Read on its own or alongside 
 
 ## Part 1 — From a Switch to a Thinker: Three Generations of Automation
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" role="img" aria-label="Three generations of automation" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">From a switch to a thinker</text>
-  <g transform="translate(30,70)">
-    <rect width="120" height="120" rx="12" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
-    <g transform="translate(60,52)"><rect x="-20" y="-16" width="40" height="32" rx="4" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/><circle cx="0" cy="0" r="6" fill="#8b3a1f"/><line x1="0" y1="-16" x2="0" y2="-22" stroke="#2a2622" stroke-width="1.4"/></g>
-    <text x="60" y="100" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Rule</text>
-    <text x="60" y="116" text-anchor="middle" font-size="9.5" fill="#6b6660">if temp < 20: heat on</text>
-  </g>
-  <line x1="150" y1="130" x2="193" y2="130" stroke="#8b3a1f" stroke-width="1.6" stroke-linecap="round"/>
-<polygon points="200,130 193,134 193,126" fill="#8b3a1f"/>
-  <g transform="translate(200,70)">
-    <rect width="120" height="120" rx="12" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
-    <g transform="translate(60,52)">
-     <circle cx="-30" cy="-16" r="6" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.3"/><circle cx="-30" cy="0" r="6" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.3"/><circle cx="-30" cy="16" r="6" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.3"/>
-     <circle cx="0" cy="-16" r="6" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.3"/><circle cx="0" cy="0" r="6" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.3"/><circle cx="0" cy="16" r="6" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.3"/>
-     <circle cx="30" cy="0" r="6" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.3"/>
-     <line x1="-24" y1="-16" x2="-6" y2="-16" stroke="#6b6660" stroke-width="0.6"/><line x1="-24" y1="-16" x2="-6" y2="0" stroke="#6b6660" stroke-width="0.6"/><line x1="-24" y1="-16" x2="-6" y2="16" stroke="#6b6660" stroke-width="0.6"/><line x1="-24" y1="0" x2="-6" y2="-16" stroke="#6b6660" stroke-width="0.6"/><line x1="-24" y1="0" x2="-6" y2="0" stroke="#6b6660" stroke-width="0.6"/><line x1="-24" y1="0" x2="-6" y2="16" stroke="#6b6660" stroke-width="0.6"/><line x1="-24" y1="16" x2="-6" y2="-16" stroke="#6b6660" stroke-width="0.6"/><line x1="-24" y1="16" x2="-6" y2="0" stroke="#6b6660" stroke-width="0.6"/><line x1="-24" y1="16" x2="-6" y2="16" stroke="#6b6660" stroke-width="0.6"/>
-     <line x1="6" y1="-16" x2="24" y2="0" stroke="#6b6660" stroke-width="0.6"/><line x1="6" y1="0" x2="24" y2="0" stroke="#6b6660" stroke-width="0.6"/><line x1="6" y1="16" x2="24" y2="0" stroke="#6b6660" stroke-width="0.6"/>
-   </g>
-    <text x="60" y="100" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">ML model</text>
-    <text x="60" y="116" text-anchor="middle" font-size="9.5" fill="#6b6660">learn the pattern</text>
-  </g>
-  <line x1="320" y1="130" x2="363" y2="130" stroke="#8b3a1f" stroke-width="1.6" stroke-linecap="round"/>
-<polygon points="370,130 363,134 363,126" fill="#8b3a1f"/>
-  <g transform="translate(370,70)">
-    <rect width="120" height="120" rx="12" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
-    <g transform="translate(60,52)"><rect x="-30" y="-22" width="60" height="44" rx="22" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/><text x="0" y="6" text-anchor="middle" font-size="14" font-weight="700" fill="#8b3a1f">LLM</text></g>
-    <text x="60" y="100" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">LLM</text>
-    <text x="60" y="116" text-anchor="middle" font-size="9.5" fill="#6b6660">language reasoning</text>
-  </g>
-  <line x1="490" y1="130" x2="533" y2="130" stroke="#8b3a1f" stroke-width="1.6" stroke-linecap="round"/>
-<polygon points="540,130 533,134 533,126" fill="#8b3a1f"/>
-  <g transform="translate(540,70)">
-    <rect width="120" height="120" rx="12" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
-    <g transform="translate(60,52)"><g><circle cx="0" cy="-4" r="18" fill="#8b3a1f" opacity="0.9"/>
-    <text x="0" y="1" text-anchor="middle" font-size="12.6" font-weight="700" fill="#fdfbf7">AI</text></g>
-     <line x1="-22" y1="20" x2="-10" y2="14" stroke="#2a2622" stroke-width="1.4"/>
-     <line x1="22" y1="20" x2="10" y2="14" stroke="#2a2622" stroke-width="1.4"/>
-   </g>
-    <text x="60" y="100" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Agent</text>
-    <text x="60" y="116" text-anchor="middle" font-size="9.5" fill="#6b6660">perceive · think · act</text>
-  </g>
-<text x="360" y="222" text-anchor="middle" font-size="11" font-style="italic" fill="#6b6660">each one adapts to more situations than the one before</text>
-<text x="60" y="248" font-size="10" fill="#6b6660">brittle, predictable</text>
-<text x="660" y="248" text-anchor="end" font-size="10" fill="#6b6660">flexible, harder to verify</text>
-</svg>
-</div><figcaption>Four generations of automation, each adapting to more situations than the one before. The trade-off is always: more flexible behaviour, harder to predict.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture4-fig01.svg" alt="Three generations of automation">
+<figcaption>Four generations of automation, each adapting to more situations than the one before. The trade-off is always: more flexible behaviour, harder to predict.</figcaption>
+</figure>
 
 The history of building automation is the history of decisions getting smarter. Three generations of automation describe where the field has been and where it is now.
 
@@ -91,44 +47,10 @@ These three generations are not in competition. A real building uses all three: 
 
 ## Part 2 — The Agent Loop
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" role="img" aria-label="The agent loop" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">The agent loop — the engine that makes a model behave</text>
-<!-- center circle -->
-<circle cx="360" cy="210" r="100" fill="none" stroke="#6b6660" stroke-width="1.2" stroke-dasharray="4 4"/>
-  <g transform="translate(300,58)">
-    <rect width="120" height="64" rx="32" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="60" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="#2a2622">Perceive</text>
-    <text x="60" y="48" text-anchor="middle" font-size="10" fill="#6b6660">read sensors</text>
-  </g>
-  <g transform="translate(460,178)">
-    <rect width="120" height="64" rx="32" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="60" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="#2a2622">Think</text>
-    <text x="60" y="48" text-anchor="middle" font-size="10" fill="#6b6660">reason · choose</text>
-  </g>
-  <g transform="translate(300,298)">
-    <rect width="120" height="64" rx="32" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="60" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="#2a2622">Act</text>
-    <text x="60" y="48" text-anchor="middle" font-size="10" fill="#6b6660">send command</text>
-  </g>
-  <g transform="translate(140,178)">
-    <rect width="120" height="64" rx="32" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="60" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="#2a2622">Observe</text>
-    <text x="60" y="48" text-anchor="middle" font-size="10" fill="#6b6660">world responds</text>
-  </g>
-<!-- arrows around the loop -->
-<line x1="430" y1="110" x2="485.25203928086853" y2="169.85637588760758" stroke="#8b3a1f" stroke-width="1.8" stroke-linecap="round"/>
-<polygon points="490,175 482.3128255023586,172.56949629853986 488.1912530593785,167.1432554766753" fill="#8b3a1f"/>
-<line x1="490" y1="248" x2="434.7875879021693" y2="306.8932395710194" stroke="#8b3a1f" stroke-width="1.8" stroke-linecap="round"/>
-<polygon points="430,312 431.869439085609,304.1574750554941 437.70573671872967,309.62900408654474" fill="#8b3a1f"/>
-<line x1="290" y1="312" x2="234.78758790216932" y2="253.1067604289806" stroke="#8b3a1f" stroke-width="1.8" stroke-linecap="round"/>
-<polygon points="230,248 237.70573671872967,250.3709959134553 231.86943908560897,255.84252494450593" fill="#8b3a1f"/>
-<line x1="230" y1="175" x2="285.25203928086853" y2="115.14362411239242" stroke="#8b3a1f" stroke-width="1.8" stroke-linecap="round"/>
-<polygon points="290,110 288.1912530593785,117.85674452332468 282.3128255023586,112.43050370146015" fill="#8b3a1f"/>
-<g><circle cx="360" cy="210" r="26" fill="#8b3a1f" opacity="0.9"/>
-    <text x="360" y="215" text-anchor="middle" font-size="18.2" font-weight="700" fill="#fdfbf7">AI</text></g>
-</svg>
-</div><figcaption>The agent loop is the engine that turns a model into a behaviour. Perceive, think, act, observe — and round again.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture4-fig02.svg" alt="The agent loop">
+<figcaption>The agent loop is the engine that turns a model into a behaviour. Perceive, think, act, observe — and round again.</figcaption>
+</figure>
 
 Every agent, no matter the framework or the model, runs the same loop. Six steps, repeated forever.
 
@@ -290,63 +212,10 @@ A useful image: asking a job applicant to fill in a form instead of writing a le
 
 ## Part 6 — Giving the Agent Hands: Tool Use and Function Calling
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Tool use — giving the agent hands" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">Tools extend the agent\u2019s reach</text>
-<!-- agent in center -->
-<g transform="translate(310,140)">
-  <rect width="120" height="100" rx="14" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
-  <g><circle cx="60" cy="40" r="22" fill="#8b3a1f" opacity="0.9"/>
-    <text x="60" y="45" text-anchor="middle" font-size="15.399999999999999" font-weight="700" fill="#fdfbf7">AI</text></g>
-  <text x="60" y="80" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Agent</text>
-</g>
-<!-- tools around -->
-  <g transform="translate(50,80)">
-    <rect width="120" height="80" rx="12" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
-    <g transform="translate(45,40)"><g transform="translate(0,0)">
-    <circle cx="0" cy="0" r="10" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3" fill="#8b3a1f"/>
-    <path d="M -8 -10 Q -12 -14 -8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 8 -10 Q 12 -14 8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g></g>
-    <text x="60" y="68" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Sensor API</text>
-  </g>
-  <text x="110" y="178" text-anchor="middle" font-size="9.5" font-family="monospace" fill="#6b6660">get_temperature(room)</text>
-  <g transform="translate(50,200)">
-    <rect width="120" height="80" rx="12" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
-    <g transform="translate(45,40)"><g>
-    <ellipse cx="0" cy="-11" rx="18" ry="6" fill="#dde7ec" stroke="#2a2622" stroke-width="1.4"/>
-    <path d="M -18 -11 L -18 11 Q 0 19 18 11 L 18 -11" fill="#dde7ec" stroke="#2a2622" stroke-width="1.4"/>
-    <ellipse cx="0" cy="-11" rx="18" ry="6" fill="none" stroke="#2a2622" stroke-width="1.4"/>
-    <ellipse cx="0" cy="-1" rx="16" ry="5" fill="none" stroke="#2a2622" stroke-width="0.8" opacity="0.5"/>
-    <ellipse cx="0" cy="11" rx="15" ry="5" fill="none" stroke="#2a2622" stroke-width="0.8" opacity="0.5"/>
-  </g></g>
-    <text x="60" y="68" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Database</text>
-  </g>
-  <text x="110" y="194" text-anchor="middle" font-size="9.5" font-family="monospace" fill="#6b6660">query history</text>
-  <g transform="translate(540,80)">
-    <rect width="120" height="80" rx="12" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
-    <g transform="translate(30,28)"><rect width="30" height="22" rx="4" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.3"/><circle cx="8" cy="11" r="4" fill="#8b3a1f"/></g>
-    <text x="60" y="68" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Actuator</text>
-  </g>
-  <text x="600" y="178" text-anchor="middle" font-size="9.5" font-family="monospace" fill="#6b6660">set_sprinkler(room, on)</text>
-  <g transform="translate(540,200)">
-    <rect width="120" height="80" rx="12" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
-    <g transform="translate(40,30)"><rect width="30" height="32" rx="2" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.3"/><line x1="4" y1="8" x2="26" y2="8" stroke="#2a2622" stroke-width="0.8"/><line x1="4" y1="14" x2="22" y2="14" stroke="#2a2622" stroke-width="0.8"/><line x1="4" y1="20" x2="26" y2="20" stroke="#2a2622" stroke-width="0.8"/></g>
-    <text x="60" y="68" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Knowledge</text>
-  </g>
-  <text x="600" y="194" text-anchor="middle" font-size="9.5" font-family="monospace" fill="#6b6660">lookup_policy(BBR)</text>
-<!-- arrows from agent to tools -->
-<line x1="310" y1="165" x2="206.2609903369994" y2="113.1304951684997" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="200,110 208.04984471899925,109.55278640450004 204.47213595499957,116.70820393249937" fill="#8b3a1f"/>
-<line x1="310" y1="215" x2="206.82592999054023" y2="238.44865227487722" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="200,240 205.93944557618437,234.5481208517114 207.7124144048961,242.34918369804305" fill="#8b3a1f"/>
-<line x1="430" y1="165" x2="533.7390096630006" y2="113.1304951684997" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="540,110 535.5278640450005,116.70820393249937 531.9501552810008,109.55278640450004" fill="#8b3a1f"/>
-<line x1="430" y1="215" x2="533.1740700094598" y2="238.44865227487722" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="540,240 532.2875855951039,242.34918369804305 534.0605544238157,234.5481208517114" fill="#8b3a1f"/>
-</svg>
-</div><figcaption>Tools let the agent reach into systems it can't operate by itself. Each tool is a typed function the model can call when it needs to act.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture4-fig03.svg" alt="Tool use — giving the agent hands">
+<figcaption>Tools let the agent reach into systems it can't operate by itself. Each tool is a typed function the model can call when it needs to act.</figcaption>
+</figure>
 
 An LLM, on its own, can only read text and produce text. It can't read a sensor, write to a database, or command an actuator. **Tool calling** — also called function calling — is the mechanism that extends the LLM with the ability to invoke external functions.
 
@@ -556,51 +425,10 @@ A useful image: building furniture with a precision template. Less flexible than
 
 ## Part 10 — The ReAct Pattern in Detail
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" role="img" aria-label="ReAct pattern — Thought · Action · Observation" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">ReAct interleaves reasoning and acting</text>
-<!-- column of thought / action / observation cycle -->
-  <g transform="translate(120,70)">
-    <circle cx="-32" cy="22" r="18" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="-32" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#2a2622">T</text>
-    <rect x="0" y="0" width="480" height="44" rx="8" fill="#f0d9d1" opacity="0.4" stroke="#2a2622" stroke-width="1.2"/>
-    <text x="14" y="20" font-size="11" font-weight="600" fill="#2a2622">Thought</text>
-    <text x="14" y="36" font-size="10.5" font-family="monospace" fill="#2a2622">"smoke is rising — I should look at the trend"</text>
-  </g>
-  <g transform="translate(120,140)">
-    <circle cx="-32" cy="22" r="18" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="-32" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#2a2622">A</text>
-    <rect x="0" y="0" width="480" height="44" rx="8" fill="#f4ead9" opacity="0.4" stroke="#2a2622" stroke-width="1.2"/>
-    <text x="14" y="20" font-size="11" font-weight="600" fill="#2a2622">Action</text>
-    <text x="14" y="36" font-size="10.5" font-family="monospace" fill="#2a2622">query_history("A2306", "smoke", "60s")</text>
-  </g>
-  <g transform="translate(120,210)">
-    <circle cx="-32" cy="22" r="18" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="-32" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#2a2622">O</text>
-    <rect x="0" y="0" width="480" height="44" rx="8" fill="#dde7ec" opacity="0.4" stroke="#2a2622" stroke-width="1.2"/>
-    <text x="14" y="20" font-size="11" font-weight="600" fill="#2a2622">Observation</text>
-    <text x="14" y="36" font-size="10.5" font-family="monospace" fill="#2a2622">spike from 0.1 → 0.8 in last 30 seconds</text>
-  </g>
-  <g transform="translate(120,280)">
-    <circle cx="-32" cy="22" r="18" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="-32" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#2a2622">T</text>
-    <rect x="0" y="0" width="480" height="44" rx="8" fill="#f0d9d1" opacity="0.4" stroke="#2a2622" stroke-width="1.2"/>
-    <text x="14" y="20" font-size="11" font-weight="600" fill="#2a2622">Thought</text>
-    <text x="14" y="36" font-size="10.5" font-family="monospace" fill="#2a2622">"this is a fire — activate sprinkler"</text>
-  </g>
-<!-- arrows between -->
-<line x1="360" y1="114" x2="360" y2="131" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="360,138 356,131 364,131" fill="#8b3a1f"/>
-<line x1="360" y1="184" x2="360" y2="201" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="360,208 356,201 364,201" fill="#8b3a1f"/>
-<line x1="360" y1="254" x2="360" y2="271" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="360,278 356,271 364,271" fill="#8b3a1f"/>
-<!-- loop arrow back -->
-<path d="M 620 325 Q 660 280 660 200 Q 660 90 620 90" fill="none" stroke="#8b3a1f" stroke-width="1.8" stroke-dasharray="5 4"/>
-<polygon points="620,90 624,98 628,90" fill="#8b3a1f"/>
-<text x="685" y="200" text-anchor="middle" font-size="10" font-style="italic" fill="#8b3a1f" transform="rotate(90,685,200)">repeat</text>
-</svg>
-</div><figcaption>In the ReAct pattern, the agent alternates between reasoning (Thought) and acting (Action), with each Observation feeding the next Thought. The trace is also the explanation.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture4-fig04.svg" alt="ReAct pattern — Thought · Action · Observation">
+<figcaption>In the ReAct pattern, the agent alternates between reasoning (Thought) and acting (Action), with each Observation feeding the next Thought. The trace is also the explanation.</figcaption>
+</figure>
 
 The ReAct pattern — Reasoning + Acting — was introduced by Yao et al. in their 2022 paper. It is short, clear, and has become the de facto template for LLM agents.
 
@@ -622,67 +450,10 @@ The interleaving also helps the LLM stay on track. A pure plan-then-execute patt
 
 ## Part 11 — Multi-Agent Systems
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" role="img" aria-label="Multi-agent collaboration" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">Specialised agents collaborate</text>
-<!-- shared bus in middle -->
-<rect x="200" y="150" width="320" height="40" rx="10" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
-<text x="360" y="174" text-anchor="middle" font-size="11" font-weight="700" fill="#2a5a7a">SHARED EVENT BUS</text>
-  <g transform="translate(30,60)">
-    <rect width="130" height="80" rx="12" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
-    <g><circle cx="65" cy="28" r="15" fill="#8b3a1f" opacity="0.9"/>
-    <text x="65" y="33" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fdfbf7">AI</text></g>
-    <text x="65" y="60" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Safety agent</text>
-    <text x="65" y="74" text-anchor="middle" font-size="9.5" fill="#6b6660">fire · smoke</text>
-  </g>
-  <g transform="translate(220,60)">
-    <rect width="130" height="80" rx="12" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
-    <g><circle cx="65" cy="28" r="15" fill="#8b3a1f" opacity="0.9"/>
-    <text x="65" y="33" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fdfbf7">AI</text></g>
-    <text x="65" y="60" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Comfort agent</text>
-    <text x="65" y="74" text-anchor="middle" font-size="9.5" fill="#6b6660">temp · CO₂</text>
-  </g>
-  <g transform="translate(410,60)">
-    <rect width="130" height="80" rx="12" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
-    <g><circle cx="65" cy="28" r="15" fill="#8b3a1f" opacity="0.9"/>
-    <text x="65" y="33" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fdfbf7">AI</text></g>
-    <text x="65" y="60" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Energy agent</text>
-    <text x="65" y="74" text-anchor="middle" font-size="9.5" fill="#6b6660">optimise cost</text>
-  </g>
-  <g transform="translate(600,60)">
-    <rect width="130" height="80" rx="12" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
-    <g><circle cx="65" cy="28" r="15" fill="#8b3a1f" opacity="0.9"/>
-    <text x="65" y="33" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fdfbf7">AI</text></g>
-    <text x="65" y="60" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Security agent</text>
-    <text x="65" y="74" text-anchor="middle" font-size="9.5" fill="#6b6660">access · alarm</text>
-  </g>
-  <g transform="translate(130,240)">
-    <rect width="160" height="80" rx="12" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
-    <g><circle cx="80" cy="28" r="15" fill="#8b3a1f" opacity="0.9"/>
-    <text x="80" y="33" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fdfbf7">AI</text></g>
-    <text x="80" y="60" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Coordinator</text>
-    <text x="80" y="74" text-anchor="middle" font-size="9.5" fill="#6b6660">resolves conflicts</text>
-  </g>
-  <g transform="translate(430,240)">
-    <rect width="160" height="80" rx="12" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
-    <g><circle cx="80" cy="28" r="15" fill="#8b3a1f" opacity="0.9"/>
-    <text x="80" y="33" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fdfbf7">AI</text></g>
-    <text x="80" y="60" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Auditor</text>
-    <text x="80" y="74" text-anchor="middle" font-size="9.5" fill="#6b6660">logs every decision</text>
-  </g>
-<!-- arrows top → bus -->
-<line x1="95" y1="140" x2="95" y2="143" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="95,150 91,143 99,143" fill="#8b3a1f"/><line x1="285" y1="140" x2="285" y2="143" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="285,150 281,143 289,143" fill="#8b3a1f"/><line x1="475" y1="140" x2="475" y2="143" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="475,150 471,143 479,143" fill="#8b3a1f"/><line x1="665" y1="140" x2="665" y2="143" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="665,150 661,143 669,143" fill="#8b3a1f"/>
-<!-- arrows bus → bottom -->
-<line x1="210" y1="192" x2="210" y2="233" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="210,240 206,233 214,233" fill="#8b3a1f"/>
-<line x1="510" y1="192" x2="510" y2="233" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="510,240 506,233 514,233" fill="#8b3a1f"/>
-</svg>
-</div><figcaption>Specialised agents own a slice of the problem and communicate through a shared bus. A coordinator resolves conflicts; an auditor records every decision.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture4-fig05.svg" alt="Multi-agent collaboration">
+<figcaption>Specialised agents own a slice of the problem and communicate through a shared bus. A coordinator resolves conflicts; an auditor records every decision.</figcaption>
+</figure>
 
 A single agent that controls every aspect of a building is fragile. It is hard to test, hard to update, and has a single point of failure. Multi-agent systems decompose the control problem into specialised agents that coordinate.
 
@@ -766,38 +537,10 @@ Prevention: rate-limit actuator commands; enforce a minimum time between state c
 
 ## Part 13 — Safety and Trust in Agentic AI
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" role="img" aria-label="Safety guardrails — concentric layers" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">Multiple layers of policy keep an autonomous system safe</text>
-<!-- concentric rings -->
-<circle cx="360" cy="190" r="140" fill="#f3ece6" stroke="#2a2622" stroke-width="1.3" opacity="0.55"/>
-            <text x="360" y="80" text-anchor="middle" font-size="11" font-weight="700" fill="#2a2622">Audit log</text><circle cx="360" cy="190" r="110" fill="#f4ead9" stroke="#2a2622" stroke-width="1.3" opacity="0.55"/>
-            <text x="360" y="108" text-anchor="middle" font-size="11" font-weight="700" fill="#2a2622">Human-in-loop</text><circle cx="360" cy="190" r="80" fill="#dde7ec" stroke="#2a2622" stroke-width="1.3" opacity="0.55"/>
-            <text x="360" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="#2a2622">Policy</text><circle cx="360" cy="190" r="50" fill="#e2ebde" stroke="#2a2622" stroke-width="1.3" opacity="0.55"/>
-            <text x="360" y="168" text-anchor="middle" font-size="11" font-weight="700" fill="#2a2622">Authority</text>
-<!-- center agent -->
-<g><circle cx="360" cy="200" r="22" fill="#8b3a1f" opacity="0.9"/>
-    <text x="360" y="205" text-anchor="middle" font-size="15.399999999999999" font-weight="700" fill="#fdfbf7">AI</text></g>
-<text x="360" y="234" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Agent</text>
-<!-- labels on right -->
-<g transform="translate(40,90)">
-  <rect width="14" height="14" fill="#f3ece6" stroke="#2a2622" stroke-width="1"/>
-  <text x="22" y="12" font-size="10" fill="#2a2622"><tspan font-weight="700">Audit log</tspan> — every decision recorded for replay</text>
-</g>
-<g transform="translate(40,110)">
-  <rect width="14" height="14" fill="#f4ead9" stroke="#2a2622" stroke-width="1"/>
-  <text x="22" y="12" font-size="10" fill="#2a2622"><tspan font-weight="700">Human-in-loop</tspan> — approval for high-stakes actions</text>
-</g>
-<g transform="translate(40,130)">
-  <rect width="14" height="14" fill="#dde7ec" stroke="#2a2622" stroke-width="1"/>
-  <text x="22" y="12" font-size="10" fill="#2a2622"><tspan font-weight="700">Policy</tspan> — rules the agent cannot violate</text>
-</g>
-<g transform="translate(40,150)">
-  <rect width="14" height="14" fill="#e2ebde" stroke="#2a2622" stroke-width="1"/>
-  <text x="22" y="12" font-size="10" fill="#2a2622"><tspan font-weight="700">Authority</tspan> — only specific tools, scopes, rooms</text>
-</g>
-</svg>
-</div><figcaption>An autonomous agent is wrapped in concentric layers of policy. Authority limits what it can touch; policy says what it must never do; humans approve the rest; an audit log records everything.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture4-fig06.svg" alt="Safety guardrails — concentric layers">
+<figcaption>An autonomous agent is wrapped in concentric layers of policy. Authority limits what it can touch; policy says what it must never do; humans approve the rest; an audit log records everything.</figcaption>
+</figure>
 
 An AI agent controlling a building can cause real harm. It can leave emergency doors locked during a fire, over-cool a server room, or cause energy spikes that trip a breaker. Safety in agentic AI is not abstract — it is an engineering requirement, and there are well-established techniques to enforce it.
 
@@ -842,51 +585,10 @@ Tests for these scenarios are written **before** deployment, not after. They are
 
 ## Part 14 — A Worked Example: Fire-Detection Agent
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Fire-detection agent in action" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">The fire-detection agent in action</text>
-<!-- sensor reading panel -->
-<g transform="translate(40,80)">
-  <rect width="160" height="100" rx="10" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="80" y="22" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.5" fill="#8b3a1f">SENSOR INPUT</text>
-  <text x="80" y="46" text-anchor="middle" font-size="11" font-family="monospace" fill="#2a2622">smoke: 0.82</text>
-  <text x="80" y="62" text-anchor="middle" font-size="11" font-family="monospace" fill="#2a2622">temp: 41 °C</text>
-  <text x="80" y="78" text-anchor="middle" font-size="11" font-family="monospace" fill="#2a2622">room: A2306</text>
-  <text x="80" y="94" text-anchor="middle" font-size="9.5" font-style="italic" fill="#6b6660">spike detected</text>
-</g>
-<line x1="200" y1="130" x2="263" y2="130" stroke="#8b3a1f" stroke-width="1.8" stroke-linecap="round"/>
-<polygon points="270,130 263,134 263,126" fill="#8b3a1f"/>
-<!-- agent reasoning -->
-<g transform="translate(270,60)">
-  <rect width="220" height="140" rx="10" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
-  <g><circle cx="110" cy="40" r="22" fill="#8b3a1f" opacity="0.9"/>
-    <text x="110" y="45" text-anchor="middle" font-size="15.399999999999999" font-weight="700" fill="#fdfbf7">AI</text></g>
-  <text x="110" y="86" text-anchor="middle" font-size="11" font-weight="700" fill="#2a2622">Safety agent</text>
-  <text x="20" y="106" font-size="9.5" font-family="monospace" fill="#2a2622">T: smoke + temp consistent</text>
-  <text x="20" y="120" font-size="9.5" font-family="monospace" fill="#2a2622">     with active fire.</text>
-  <text x="20" y="134" font-size="9.5" font-family="monospace" fill="#2a2622">A: sprinkler_on(A2306)</text>
-</g>
-<line x1="490" y1="130" x2="553" y2="130" stroke="#8b3a1f" stroke-width="1.8" stroke-linecap="round"/>
-<polygon points="560,130 553,134 553,126" fill="#8b3a1f"/>
-<!-- actions -->
-<g transform="translate(560,60)">
-  <rect width="130" height="60" rx="8" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="65" y="22" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.5" fill="#7a5a1a">ACTIONS</text>
-  <text x="65" y="40" text-anchor="middle" font-size="9.5" fill="#2a2622">sprinkler ON</text>
-  <text x="65" y="54" text-anchor="middle" font-size="9.5" fill="#2a2622">doors close</text>
-</g>
-<g transform="translate(560,140)">
-  <rect width="130" height="60" rx="8" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="65" y="22" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.5" fill="#3a5a3a">NOTIFY</text>
-  <text x="65" y="40" text-anchor="middle" font-size="9.5" fill="#2a2622">building manager</text>
-  <text x="65" y="54" text-anchor="middle" font-size="9.5" fill="#2a2622">fire brigade</text>
-</g>
-<!-- feedback loop -->
-<path d="M 625 200 Q 625 270 350 270 Q 80 270 80 180" fill="none" stroke="#8b3a1f" stroke-width="2" stroke-dasharray="6 4"/>
-<polygon points="80,180 76,190 84,190" fill="#8b3a1f"/>
-<text x="360" y="290" text-anchor="middle" font-size="10.5" font-style="italic" fill="#8b3a1f">sprinkler reduces smoke → next reading reflects it</text>
-</svg>
-</div><figcaption>The fire-detection agent in action: a sensor spike triggers reasoning, the agent calls actuator and notification tools, and the next sensor reading closes the loop.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture4-fig07.svg" alt="Fire-detection agent in action">
+<figcaption>The fire-detection agent in action: a sensor spike triggers reasoning, the agent calls actuator and notification tools, and the next sensor reading closes the loop.</figcaption>
+</figure>
 
 To make all of this concrete, walk a fire-detection agent through one complete cycle.
 

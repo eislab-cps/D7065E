@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" role="img" aria-label="Why data engineering matters" class="dgm">
+<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">From a flood of readings to something usable</text>
+<!-- Many sensors emitting dots -->
+<g transform="translate(40,80)">
+  <g transform="translate(0,0)">
+    <circle cx="0" cy="0" r="10" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
+    <circle cx="0" cy="0" r="3" fill="#8b3a1f"/>
+    <path d="M -8 -10 Q -12 -14 -8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
+    <path d="M 8 -10 Q 12 -14 8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
+  </g><g transform="translate(0,40)">
+    <circle cx="0" cy="0" r="10" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
+    <circle cx="0" cy="0" r="3" fill="#8b3a1f"/>
+    <path d="M -8 -10 Q -12 -14 -8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
+    <path d="M 8 -10 Q 12 -14 8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
+  </g><g transform="translate(0,80)">
+    <circle cx="0" cy="0" r="10" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
+    <circle cx="0" cy="0" r="3" fill="#8b3a1f"/>
+    <path d="M -8 -10 Q -12 -14 -8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
+    <path d="M 8 -10 Q 12 -14 8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
+  </g><g transform="translate(0,120)">
+    <circle cx="0" cy="0" r="10" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
+    <circle cx="0" cy="0" r="3" fill="#8b3a1f"/>
+    <path d="M -8 -10 Q -12 -14 -8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
+    <path d="M 8 -10 Q 12 -14 8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
+  </g><g transform="translate(0,160)">
+    <circle cx="0" cy="0" r="10" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
+    <circle cx="0" cy="0" r="3" fill="#8b3a1f"/>
+    <path d="M -8 -10 Q -12 -14 -8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
+    <path d="M 8 -10 Q 12 -14 8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
+  </g>
+</g>
+<!-- chaotic dots flowing right -->
+<circle cx="232.26884024831867" cy="217.85485277327285" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="184.02820025246598" cy="169.67505126691213" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="203.55902171535809" cy="101.41208450312848" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="157.53763187752065" cy="125.29103956464519" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="126.97615660814257" cy="190.6462483792548" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="210.7811800539409" cy="102.87000947989311" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="120.88048814096327" cy="105.07504735462852" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="90.25789528551493" cy="85.81127280101046" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="247.7550312828177" cy="172.51756548768833" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="119.49398758604417" cy="229.3076429587822" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="199.42207310845623" cy="89.94385842604763" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="169.7979951065526" cy="240.39594939563082" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="170.507317870907" cy="127.22437837664198" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="122.52100127144699" cy="182.1702997870683" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="187.40356490994031" cy="153.20561110625908" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="115.49877942305307" cy="165.70739644292183" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="154.55104701103684" cy="195.2341802939285" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="226.24026397798548" cy="96.51314092012117" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="243.44706959145026" cy="92.09509879512301" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="202.1852128777553" cy="85.49238701846333" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="219.22041818594025" cy="141.39349929785448" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="207.46537579243895" cy="205.38272594652932" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="183.27945574150425" cy="194.37400303512902" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="203.271882403615" cy="132.89357882432796" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="120.97985563182502" cy="198.1440546362665" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="171.76392327873978" cy="221.21280584632515" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="226.2411529071279" cy="213.38455522371405" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="223.2217584711932" cy="234.56271255909294" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="102.21342090942909" cy="162.85757980235968" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="244.4328410983301" cy="113.5747482459523" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="158.44221488296358" cy="179.67364561406933" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="93.08254924374593" cy="137.45632983535313" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="212.1693672628211" cy="174.49664467012582" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="152.59737676551555" cy="154.49109434353613" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="187.18623284119593" cy="239.97168415355432" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="106.37115038139024" cy="174.7229756871927" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="145.21153180984714" cy="96.71923106648248" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="196.7022780982079" cy="222.3811923514005" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="225.78676965398265" cy="108.33048751200374" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="144.50540586797158" cy="92.641118179716" r="2.2" fill="#6b6660" opacity="0.55"/>
+<!-- Funnel -->
+<polygon points="280,90 480,90 410,180 350,180" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
+<text x="380" y="140" text-anchor="middle" font-size="13" font-weight="700" fill="#8b3a1f">DATA</text>
+<text x="380" y="158" text-anchor="middle" font-size="13" font-weight="700" fill="#8b3a1f">ENGINEERING</text>
+<!-- Clean stream out -->
+<path d="M 380 182 L 380 230" fill="none" stroke="#8b3a1f" stroke-width="2"/>
+<circle cx="430" cy="200" r="2.5" fill="#8b3a1f"/><circle cx="430" cy="205" r="2.5" fill="#8b3a1f"/><circle cx="430" cy="210" r="2.5" fill="#8b3a1f"/><circle cx="430" cy="215" r="2.5" fill="#8b3a1f"/><circle cx="430" cy="220" r="2.5" fill="#8b3a1f"/>
+<line x1="395" y1="200" x2="533" y2="200" stroke="#8b3a1f" stroke-width="2" stroke-linecap="round"/>
+<polygon points="540,200 533,204 533,196" fill="#8b3a1f"/>
+<g transform="translate(560,180)">
+  <rect width="120" height="40" rx="6" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
+  <text x="60" y="24" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Trustworthy</text>
+</g>
+<text x="160" y="270" text-anchor="middle" font-size="10.5" font-style="italic" fill="#6b6660">millions of raw readings/day</text>
+<text x="620" y="240" text-anchor="middle" font-size="10.5" font-style="italic" fill="#6b6660">substrate for AI</text>
+</svg>

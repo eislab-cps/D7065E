@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Fire-detection agent in action" class="dgm">
+<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">The fire-detection agent in action</text>
+<!-- sensor reading panel -->
+<g transform="translate(40,80)">
+  <rect width="160" height="100" rx="10" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
+  <text x="80" y="22" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.5" fill="#8b3a1f">SENSOR INPUT</text>
+  <text x="80" y="46" text-anchor="middle" font-size="11" font-family="monospace" fill="#2a2622">smoke: 0.82</text>
+  <text x="80" y="62" text-anchor="middle" font-size="11" font-family="monospace" fill="#2a2622">temp: 41 °C</text>
+  <text x="80" y="78" text-anchor="middle" font-size="11" font-family="monospace" fill="#2a2622">room: A2306</text>
+  <text x="80" y="94" text-anchor="middle" font-size="9.5" font-style="italic" fill="#6b6660">spike detected</text>
+</g>
+<line x1="200" y1="130" x2="263" y2="130" stroke="#8b3a1f" stroke-width="1.8" stroke-linecap="round"/>
+<polygon points="270,130 263,134 263,126" fill="#8b3a1f"/>
+<!-- agent reasoning -->
+<g transform="translate(270,60)">
+  <rect width="220" height="140" rx="10" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
+  <g><circle cx="110" cy="40" r="22" fill="#8b3a1f" opacity="0.9"/>
+    <text x="110" y="45" text-anchor="middle" font-size="15.399999999999999" font-weight="700" fill="#fdfbf7">AI</text></g>
+  <text x="110" y="86" text-anchor="middle" font-size="11" font-weight="700" fill="#2a2622">Safety agent</text>
+  <text x="20" y="106" font-size="9.5" font-family="monospace" fill="#2a2622">T: smoke + temp consistent</text>
+  <text x="20" y="120" font-size="9.5" font-family="monospace" fill="#2a2622">     with active fire.</text>
+  <text x="20" y="134" font-size="9.5" font-family="monospace" fill="#2a2622">A: sprinkler_on(A2306)</text>
+</g>
+<line x1="490" y1="130" x2="553" y2="130" stroke="#8b3a1f" stroke-width="1.8" stroke-linecap="round"/>
+<polygon points="560,130 553,134 553,126" fill="#8b3a1f"/>
+<!-- actions -->
+<g transform="translate(560,60)">
+  <rect width="130" height="60" rx="8" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
+  <text x="65" y="22" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.5" fill="#7a5a1a">ACTIONS</text>
+  <text x="65" y="40" text-anchor="middle" font-size="9.5" fill="#2a2622">sprinkler ON</text>
+  <text x="65" y="54" text-anchor="middle" font-size="9.5" fill="#2a2622">doors close</text>
+</g>
+<g transform="translate(560,140)">
+  <rect width="130" height="60" rx="8" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
+  <text x="65" y="22" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.5" fill="#3a5a3a">NOTIFY</text>
+  <text x="65" y="40" text-anchor="middle" font-size="9.5" fill="#2a2622">building manager</text>
+  <text x="65" y="54" text-anchor="middle" font-size="9.5" fill="#2a2622">fire brigade</text>
+</g>
+<!-- feedback loop -->
+<path d="M 625 200 Q 625 270 350 270 Q 80 270 80 180" fill="none" stroke="#8b3a1f" stroke-width="2" stroke-dasharray="6 4"/>
+<polygon points="80,180 76,190 84,190" fill="#8b3a1f"/>
+<text x="360" y="290" text-anchor="middle" font-size="10.5" font-style="italic" fill="#8b3a1f">sprinkler reduces smoke → next reading reflects it</text>
+</svg>

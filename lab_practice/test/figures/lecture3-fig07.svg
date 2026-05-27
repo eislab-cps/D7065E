@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" role="img" aria-label="Time-series database" class="dgm">
+<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">Time-series databases are tuned for one shape of data</text>
+<!-- regular DB -->
+<g transform="translate(60,80)">
+  <rect width="200" height="160" rx="10" fill="#fdfbf7" stroke="#6b6660" stroke-width="1.5"/>
+  <text x="100" y="26" text-anchor="middle" font-size="11" font-weight="700" fill="#6b6660">RELATIONAL DB</text>
+  <g>
+    <ellipse cx="100" cy="52" rx="30" ry="6" fill="#dde7ec" stroke="#2a2622" stroke-width="1.4"/>
+    <path d="M 70 52 L 70 108 Q 100 116 130 108 L 130 52" fill="#dde7ec" stroke="#2a2622" stroke-width="1.4"/>
+    <ellipse cx="100" cy="52" rx="30" ry="6" fill="none" stroke="#2a2622" stroke-width="1.4"/>
+    <ellipse cx="100" cy="62" rx="28" ry="5" fill="none" stroke="#2a2622" stroke-width="0.8" opacity="0.5"/>
+    <ellipse cx="100" cy="74" rx="27" ry="5" fill="none" stroke="#2a2622" stroke-width="0.8" opacity="0.5"/>
+  </g>
+  <text x="100" y="142" text-anchor="middle" font-size="10" fill="#2a2622">rows · keys · joins</text>
+  <text x="100" y="156" text-anchor="middle" font-size="9.5" fill="#6b6660" font-style="italic">general-purpose</text>
+</g>
+<line x1="280" y1="160" x2="333" y2="160" stroke="#6b6660" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="340,160 333,164 333,156" fill="#6b6660"/>
+<text x="310" y="148" text-anchor="middle" font-size="10" fill="#6b6660">vs</text>
+<!-- time-series DB -->
+<g transform="translate(360,80)">
+  <rect width="290" height="160" rx="10" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
+  <text x="145" y="26" text-anchor="middle" font-size="11" font-weight="700" fill="#3a5a3a">TIME-SERIES DB</text>
+  <!-- chunks by time -->
+  <rect x="20" y="50" width="36" height="60" rx="3" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/><rect x="60" y="50" width="36" height="60" rx="3" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/><rect x="100" y="50" width="36" height="60" rx="3" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/><rect x="140" y="50" width="36" height="60" rx="3" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/><rect x="180" y="50" width="36" height="60" rx="3" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/><rect x="220" y="50" width="36" height="60" rx="3" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/>
+  <text x="38" y="120" text-anchor="middle" font-size="8" fill="#6b6660">09:00</text><text x="78" y="120" text-anchor="middle" font-size="8" fill="#6b6660">10:00</text><text x="118" y="120" text-anchor="middle" font-size="8" fill="#6b6660">11:00</text><text x="158" y="120" text-anchor="middle" font-size="8" fill="#6b6660">12:00</text><text x="198" y="120" text-anchor="middle" font-size="8" fill="#6b6660">13:00</text><text x="238" y="120" text-anchor="middle" font-size="8" fill="#6b6660">14:00</text>
+  <circle cx="32.14493019872775" cy="60" r="2" fill="#8b3a1f"/><circle cx="31.812033719713373" cy="72" r="2" fill="#8b3a1f"/><circle cx="34.496815568083136" cy="84" r="2" fill="#8b3a1f"/><circle cx="36.30165808028192" cy="96" r="2" fill="#8b3a1f"/><circle cx="72.46711143593049" cy="60" r="2" fill="#8b3a1f"/><circle cx="76.16842794430146" cy="72" r="2" fill="#8b3a1f"/><circle cx="70.34742750452574" cy="84" r="2" fill="#8b3a1f"/><circle cx="79.83153278802558" cy="96" r="2" fill="#8b3a1f"/><circle cx="119.29248020556241" cy="60" r="2" fill="#8b3a1f"/><circle cx="113.31128127293475" cy="72" r="2" fill="#8b3a1f"/><circle cx="111.7177515844459" cy="84" r="2" fill="#8b3a1f"/><circle cx="111.57450501107621" cy="96" r="2" fill="#8b3a1f"/><circle cx="156.98920883510516" cy="60" r="2" fill="#8b3a1f"/><circle cx="159.32343746297823" cy="72" r="2" fill="#8b3a1f"/><circle cx="160.26684259566184" cy="84" r="2" fill="#8b3a1f"/><circle cx="158.37638349111023" cy="96" r="2" fill="#8b3a1f"/><circle cx="191.04786647113912" cy="60" r="2" fill="#8b3a1f"/><circle cx="195.75286568079974" cy="72" r="2" fill="#8b3a1f"/><circle cx="203.16823703305926" cy="84" r="2" fill="#8b3a1f"/><circle cx="192.84578089867776" cy="96" r="2" fill="#8b3a1f"/><circle cx="243.95115354373297" cy="60" r="2" fill="#8b3a1f"/><circle cx="232.4105862145665" cy="72" r="2" fill="#8b3a1f"/><circle cx="228.3429618317438" cy="84" r="2" fill="#8b3a1f"/><circle cx="241.31790943336227" cy="96" r="2" fill="#8b3a1f"/>
+  <text x="145" y="144" text-anchor="middle" font-size="10" fill="#2a2622">chunks by time · compressed · auto-aged</text>
+  <text x="145" y="158" text-anchor="middle" font-size="9.5" fill="#6b6660" font-style="italic">TimescaleDB · InfluxDB · QuestDB</text>
+</g>
+</svg>

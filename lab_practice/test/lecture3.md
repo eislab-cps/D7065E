@@ -6,57 +6,10 @@ Standalone notes for the third lecture of D7065E. Read on its own or alongside `
 
 ## Part 1 — Why a Whole Lecture About Data
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" role="img" aria-label="Why data engineering matters" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">From a flood of readings to something usable</text>
-<!-- Many sensors emitting dots -->
-<g transform="translate(40,80)">
-  <g transform="translate(0,0)">
-    <circle cx="0" cy="0" r="10" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3" fill="#8b3a1f"/>
-    <path d="M -8 -10 Q -12 -14 -8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 8 -10 Q 12 -14 8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g><g transform="translate(0,40)">
-    <circle cx="0" cy="0" r="10" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3" fill="#8b3a1f"/>
-    <path d="M -8 -10 Q -12 -14 -8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 8 -10 Q 12 -14 8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g><g transform="translate(0,80)">
-    <circle cx="0" cy="0" r="10" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3" fill="#8b3a1f"/>
-    <path d="M -8 -10 Q -12 -14 -8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 8 -10 Q 12 -14 8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g><g transform="translate(0,120)">
-    <circle cx="0" cy="0" r="10" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3" fill="#8b3a1f"/>
-    <path d="M -8 -10 Q -12 -14 -8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 8 -10 Q 12 -14 8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g><g transform="translate(0,160)">
-    <circle cx="0" cy="0" r="10" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3" fill="#8b3a1f"/>
-    <path d="M -8 -10 Q -12 -14 -8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 8 -10 Q 12 -14 8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g>
-</g>
-<!-- chaotic dots flowing right -->
-<circle cx="232.26884024831867" cy="217.85485277327285" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="184.02820025246598" cy="169.67505126691213" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="203.55902171535809" cy="101.41208450312848" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="157.53763187752065" cy="125.29103956464519" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="126.97615660814257" cy="190.6462483792548" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="210.7811800539409" cy="102.87000947989311" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="120.88048814096327" cy="105.07504735462852" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="90.25789528551493" cy="85.81127280101046" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="247.7550312828177" cy="172.51756548768833" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="119.49398758604417" cy="229.3076429587822" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="199.42207310845623" cy="89.94385842604763" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="169.7979951065526" cy="240.39594939563082" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="170.507317870907" cy="127.22437837664198" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="122.52100127144699" cy="182.1702997870683" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="187.40356490994031" cy="153.20561110625908" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="115.49877942305307" cy="165.70739644292183" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="154.55104701103684" cy="195.2341802939285" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="226.24026397798548" cy="96.51314092012117" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="243.44706959145026" cy="92.09509879512301" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="202.1852128777553" cy="85.49238701846333" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="219.22041818594025" cy="141.39349929785448" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="207.46537579243895" cy="205.38272594652932" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="183.27945574150425" cy="194.37400303512902" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="203.271882403615" cy="132.89357882432796" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="120.97985563182502" cy="198.1440546362665" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="171.76392327873978" cy="221.21280584632515" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="226.2411529071279" cy="213.38455522371405" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="223.2217584711932" cy="234.56271255909294" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="102.21342090942909" cy="162.85757980235968" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="244.4328410983301" cy="113.5747482459523" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="158.44221488296358" cy="179.67364561406933" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="93.08254924374593" cy="137.45632983535313" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="212.1693672628211" cy="174.49664467012582" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="152.59737676551555" cy="154.49109434353613" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="187.18623284119593" cy="239.97168415355432" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="106.37115038139024" cy="174.7229756871927" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="145.21153180984714" cy="96.71923106648248" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="196.7022780982079" cy="222.3811923514005" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="225.78676965398265" cy="108.33048751200374" r="2.2" fill="#6b6660" opacity="0.55"/><circle cx="144.50540586797158" cy="92.641118179716" r="2.2" fill="#6b6660" opacity="0.55"/>
-<!-- Funnel -->
-<polygon points="280,90 480,90 410,180 350,180" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
-<text x="380" y="140" text-anchor="middle" font-size="13" font-weight="700" fill="#8b3a1f">DATA</text>
-<text x="380" y="158" text-anchor="middle" font-size="13" font-weight="700" fill="#8b3a1f">ENGINEERING</text>
-<!-- Clean stream out -->
-<path d="M 380 182 L 380 230" fill="none" stroke="#8b3a1f" stroke-width="2"/>
-<circle cx="430" cy="200" r="2.5" fill="#8b3a1f"/><circle cx="430" cy="205" r="2.5" fill="#8b3a1f"/><circle cx="430" cy="210" r="2.5" fill="#8b3a1f"/><circle cx="430" cy="215" r="2.5" fill="#8b3a1f"/><circle cx="430" cy="220" r="2.5" fill="#8b3a1f"/>
-<line x1="395" y1="200" x2="533" y2="200" stroke="#8b3a1f" stroke-width="2" stroke-linecap="round"/>
-<polygon points="540,200 533,204 533,196" fill="#8b3a1f"/>
-<g transform="translate(560,180)">
-  <rect width="120" height="40" rx="6" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="60" y="24" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Trustworthy</text>
-</g>
-<text x="160" y="270" text-anchor="middle" font-size="10.5" font-style="italic" fill="#6b6660">millions of raw readings/day</text>
-<text x="620" y="240" text-anchor="middle" font-size="10.5" font-style="italic" fill="#6b6660">substrate for AI</text>
-</svg>
-</div><figcaption>A modern building generates millions of readings a day. Data engineering is the discipline that turns that flood into a trustworthy substrate an AI can act on.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture3-fig01.svg" alt="Why data engineering matters">
+<figcaption>A modern building generates millions of readings a day. Data engineering is the discipline that turns that flood into a trustworthy substrate an AI can act on.</figcaption>
+</figure>
 
 Before any AI agent can be smart, it needs data. Lots of it, well-organised, fresh enough to be useful, and clean enough to trust. The plumbing that gets raw sensor readings from the building into the agent's hands is called **data engineering**, and it is just as important as the agent itself. A brilliant model trained on bad data will produce bad predictions. A simple model trained on excellent data often beats a sophisticated model trained on garbage.
 
@@ -68,41 +21,10 @@ This chapter is the kitchen.
 
 ## Part 2 — The Three Pressures: Volume, Velocity, Variety
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="The three V\u2019s — volume, velocity, variety" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">Three pressures every data system feels</text>
-  <g transform="translate(60,70)">
-    <rect width="160" height="220" rx="14" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
-    <rect x="40" y="64" width="80" height="20" fill="#8b3a1f" opacity="0.85"/>
-    <rect x="40" y="86" width="80" height="20" fill="#8b3a1f" opacity="0.7"/>
-    <rect x="40" y="108" width="80" height="20" fill="#8b3a1f" opacity="0.55"/>
-    <rect x="40" y="130" width="80" height="20" fill="#8b3a1f" opacity="0.4"/>
-    <text x="80" y="50" text-anchor="middle" font-size="14" font-weight="700" fill="#8b3a1f">TB</text>
-    <text x="80" y="190" text-anchor="middle" font-size="15" font-weight="700" fill="#2a2622">Volume</text>
-    <text x="80" y="208" text-anchor="middle" font-size="11" fill="#6b6660" font-style="italic">how much?</text>
-  </g>
-  <g transform="translate(280,70)">
-    <rect width="160" height="220" rx="14" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
-    <circle cx="80" cy="100" r="34" fill="none" stroke="#8b3a1f" stroke-width="2"/>
-    <line x1="80" y1="100" x2="80" y2="72" stroke="#8b3a1f" stroke-width="2.5"/>
-    <line x1="80" y1="100" x2="100" y2="100" stroke="#8b3a1f" stroke-width="2.5"/>
-    <text x="80" y="146" text-anchor="middle" font-size="11" fill="#2a2622">100 Hz · per sensor</text>
-    <text x="80" y="190" text-anchor="middle" font-size="15" font-weight="700" fill="#2a2622">Velocity</text>
-    <text x="80" y="208" text-anchor="middle" font-size="11" fill="#6b6660" font-style="italic">how fast?</text>
-  </g>
-  <g transform="translate(500,70)">
-    <rect width="160" height="220" rx="14" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
-    <rect x="40" y="72" width="22" height="22" rx="3" fill="#8b3a1f" opacity="0.7"/>
-    <circle cx="80" cy="83" r="11" fill="#8b3a1f" opacity="0.55"/>
-    <polygon points="108,72 122,94 94,94" fill="#8b3a1f" opacity="0.4"/>
-    <rect x="56" y="106" width="18" height="18" rx="9" fill="#8b3a1f" opacity="0.85"/>
-    <polygon points="90,108 102,108 102,120 90,120" fill="#8b3a1f" opacity="0.3"/>
-    <text x="80" y="156" text-anchor="middle" font-size="10" fill="#2a2622">JSON · CSV · binary</text>
-    <text x="80" y="190" text-anchor="middle" font-size="15" font-weight="700" fill="#2a2622">Variety</text>
-    <text x="80" y="208" text-anchor="middle" font-size="11" fill="#6b6660" font-style="italic">how many shapes?</text>
-  </g>
-</svg>
-</div><figcaption>Volume, velocity and variety are the three pressures every data system has to absorb. They shape every choice that follows.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture3-fig02.svg" alt="The three V\u2019s — volume, velocity, variety">
+<figcaption>Volume, velocity and variety are the three pressures every data system has to absorb. They shape every choice that follows.</figcaption>
+</figure>
 
 A modest commercial building with 100 sensors, each reporting every 5 seconds, produces about 1.7 million readings per day. Multiply that across a year and the system holds half a billion data points. Add video cameras, vibration sensors at industrial frequencies, and access events, and the number reaches hundreds of millions of records per month.
 
@@ -132,72 +54,10 @@ The fundamental tension: real-time decisions need data within seconds, machine-l
 
 ## Part 3 — Getting Sensor Data Into the System (Ingestion Patterns)
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Ingestion patterns" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">A broker lets producers and consumers evolve apart</text>
-<!-- Sensors -->
-<g transform="translate(40,70)">
-  <g transform="translate(0,0)"><g transform="translate(20,16)">
-    <circle cx="0" cy="0" r="10" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3" fill="#8b3a1f"/>
-    <path d="M -8 -10 Q -12 -14 -8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 8 -10 Q 12 -14 8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g><text x="44" y="20" font-size="10.5" fill="#2a2622">sensor 1</text></g><g transform="translate(0,50)"><g transform="translate(20,16)">
-    <circle cx="0" cy="0" r="10" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3" fill="#8b3a1f"/>
-    <path d="M -8 -10 Q -12 -14 -8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 8 -10 Q 12 -14 8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g><text x="44" y="20" font-size="10.5" fill="#2a2622">sensor 2</text></g><g transform="translate(0,100)"><g transform="translate(20,16)">
-    <circle cx="0" cy="0" r="10" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3" fill="#8b3a1f"/>
-    <path d="M -8 -10 Q -12 -14 -8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 8 -10 Q 12 -14 8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g><text x="44" y="20" font-size="10.5" fill="#2a2622">sensor 3</text></g><g transform="translate(0,150)"><g transform="translate(20,16)">
-    <circle cx="0" cy="0" r="10" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3" fill="#8b3a1f"/>
-    <path d="M -8 -10 Q -12 -14 -8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 8 -10 Q 12 -14 8 -18" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g><text x="44" y="20" font-size="10.5" fill="#2a2622">sensor 4</text></g>
-</g>
-<!-- Arrows in -->
-<line x1="140" y1="86" x2="254.04180391193208" y2="156.32577907902478" stroke="#8b3a1f" stroke-width="1.4" stroke-linecap="round"/>
-<polygon points="260,160 251.94224909994622,159.73046255792073 256.1413587239179,152.92109560012884" fill="#8b3a1f"/><line x1="140" y1="136" x2="253.13593527016357" y2="158.6271870540327" stroke="#8b3a1f" stroke-width="1.4" stroke-linecap="round"/>
-<polygon points="260,160 252.35147072961084,162.5495097567964 253.9203998107163,154.704864351269" fill="#8b3a1f"/><line x1="140" y1="186" x2="253.15873801981243" y2="161.48227342904065" stroke="#8b3a1f" stroke-width="1.4" stroke-linecap="round"/>
-<polygon points="260,160 254.00575140783565,165.39156598914784 252.31172463178922,157.57298086893346" fill="#8b3a1f"/><line x1="140" y1="236" x2="254.0862664711204" y2="163.74536456829043" stroke="#8b3a1f" stroke-width="1.4" stroke-linecap="round"/>
-<polygon points="260,160 256.22647479585777,167.12464087050733 251.94605814638302,160.36608826607352" fill="#8b3a1f"/>
-<!-- Broker -->
-<g transform="translate(260,100)">
-  <rect width="170" height="130" rx="12" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="85" y="36" text-anchor="middle" font-size="12" font-weight="700" fill="#2a5a7a">BROKER</text>
-  <text x="85" y="60" text-anchor="middle" font-size="10" fill="#2a2622">topics</text>
-  <text x="85" y="80" text-anchor="middle" font-size="10" font-family="monospace" fill="#6b6660">sensors/temp/#</text>
-  <text x="85" y="96" text-anchor="middle" font-size="10" font-family="monospace" fill="#6b6660">sensors/co2/#</text>
-  <text x="85" y="112" text-anchor="middle" font-size="10" font-family="monospace" fill="#6b6660">sensors/smoke/#</text>
-</g>
-<!-- Arrows out -->
-<line x1="430" y1="165" x2="553.7390096630006" y2="103.1304951684997" stroke="#8b3a1f" stroke-width="1.4" stroke-linecap="round"/>
-<polygon points="560,100 555.5278640450005,106.70820393249937 551.9501552810008,99.55278640450004" fill="#8b3a1f"/><line x1="430" y1="165" x2="553.0051717775808" y2="169.73096814529157" stroke="#8b3a1f" stroke-width="1.4" stroke-linecap="round"/>
-<polygon points="560,170 552.851439289176,173.72801284381683 553.1589042659856,165.7339234467663" fill="#8b3a1f"/><line x1="430" y1="165" x2="553.9367008976598" y2="236.50194282557297" stroke="#8b3a1f" stroke-width="1.4" stroke-linecap="round"/>
-<polygon points="560,240 551.9378110837015,239.96668516976737 555.935590711618,233.03720048137856" fill="#8b3a1f"/>
-<!-- Consumers -->
-  <g transform="translate(560,80)">
-    <rect width="130" height="50" rx="8" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="65" y="24" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">DB writer</text>
-    <text x="65" y="40" text-anchor="middle" font-size="9.5" fill="#6b6660">persist all</text>
-  </g>
-  <g transform="translate(560,150)">
-    <rect width="130" height="50" rx="8" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="65" y="24" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Anomaly model</text>
-    <text x="65" y="40" text-anchor="middle" font-size="9.5" fill="#6b6660">streaming</text>
-  </g>
-  <g transform="translate(560,220)">
-    <rect width="130" height="50" rx="8" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="65" y="24" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Dashboard</text>
-    <text x="65" y="40" text-anchor="middle" font-size="9.5" fill="#6b6660">live view</text>
-  </g>
-<text x="345" y="265" text-anchor="middle" font-size="10" font-style="italic" fill="#6b6660">one source · many independent consumers</text>
-</svg>
-</div><figcaption>A broker in the middle decouples sensor producers from the consumers downstream. New consumers can subscribe without anyone changing the sensors.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture3-fig03.svg" alt="Ingestion patterns">
+<figcaption>A broker in the middle decouples sensor producers from the consumers downstream. New consumers can subscribe without anyone changing the sensors.</figcaption>
+</figure>
 
 The first step in any pipeline is **ingestion**: getting data from sensors into a durable store. Three patterns dominate, each fitting a different scale.
 
@@ -247,33 +107,10 @@ Most real systems use **two patterns at once**: the broker for the real-time pat
 
 ## Part 4 — Stream Processing: Working on Data as It Flows
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" role="img" aria-label="Stream processing — rolling window" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">Stream processing acts on each reading as it arrives</text>
-<!-- Timeline -->
-<line x1="40" y1="150" x2="680" y2="150" stroke="#6b6660" stroke-width="1.5"/>
-<polygon points="680,150 672,146 672,154" fill="#6b6660"/>
-<text x="680" y="172" text-anchor="end" font-size="10" fill="#6b6660">time</text>
-<!-- Dots on timeline -->
-<circle cx="60" cy="137.69106782026958" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="60" y1="141.69106782026958" x2="60" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="86" cy="127.0343622399297" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="86" y1="131.0343622399297" x2="86" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="112" cy="116.5242500668093" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="112" y1="120.5242500668093" x2="112" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="138" cy="110.62357793840603" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="138" y1="114.62357793840603" x2="138" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="164" cy="111.58371493426253" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="164" y1="115.58371493426253" x2="164" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="190" cy="117.19975237774231" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="190" y1="121.19975237774231" x2="190" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="216" cy="117.56667198738626" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="216" y1="121.56667198738626" x2="216" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="242" cy="131.87911622016276" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="242" y1="135.87911622016276" x2="242" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="268" cy="134.63456497475886" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="268" y1="138.63456497475886" x2="268" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="294" cy="126.50066350388242" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="294" y1="130.50066350388244" x2="294" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="320" cy="125.77916331486284" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="320" y1="129.77916331486284" x2="320" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="346" cy="111.55590499704161" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="346" y1="115.55590499704161" x2="346" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="372" cy="118.93975903179386" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="372" y1="122.93975903179386" x2="372" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="398" cy="108.64861095322684" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="398" y1="112.64861095322684" x2="398" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="424" cy="116.10491830722312" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="424" y1="120.10491830722312" x2="424" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="450" cy="117.81720669365123" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="450" y1="121.81720669365123" x2="450" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="476" cy="111.82886435517696" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="476" y1="115.82886435517696" x2="476" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="502" cy="119.28605489134205" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="502" y1="123.28605489134205" x2="502" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="528" cy="126.7034703795506" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="528" y1="130.7034703795506" x2="528" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="554" cy="111.6536993070161" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="554" y1="115.6536993070161" x2="554" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="580" cy="135.71824416129854" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="580" y1="139.71824416129854" x2="580" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="606" cy="131.96205067462418" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="606" y1="135.96205067462418" x2="606" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="632" cy="125.7825230769656" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="632" y1="129.78252307696562" x2="632" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/><circle cx="658" cy="112.21007159271315" r="4" fill="#8b3a1f" opacity="0.85"/><line x1="658" y1="116.21007159271315" x2="658" y2="150" stroke="#8b3a1f" stroke-width="0.8" opacity="0.4"/>
-<!-- Rolling window -->
-<rect x="380" y="80" width="200" height="100" rx="10" fill="#f3ece6" stroke="#8b3a1f" stroke-width="2" opacity="0.8"/>
-<text x="480" y="98" text-anchor="middle" font-size="11" font-weight="600" fill="#8b3a1f">rolling window</text>
-<text x="480" y="114" text-anchor="middle" font-size="10" fill="#8b3a1f">last 60 seconds</text>
-<!-- Window movement arrow -->
-<line x1="580" y1="130" x2="633" y2="130" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="640,130 633,134 633,126" fill="#8b3a1f"/>
-<!-- Operator -->
-<g transform="translate(280,210)">
-  <rect width="200" height="50" rx="10" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="100" y="24" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Operator</text>
-  <text x="100" y="40" text-anchor="middle" font-size="10" fill="#6b6660">moving average · spike detection</text>
-</g>
-<line x1="480" y1="182" x2="386.7407481379993" y2="208.1125905213602" stroke="#8b3a1f" stroke-width="1.4" stroke-linecap="round"/>
-<polygon points="380,210 385.6622284359194,204.2607344425035 387.81926784007914,211.96444660021692" fill="#8b3a1f"/>
-<text x="360" y="290" text-anchor="middle" font-size="10" font-style="italic" fill="#6b6660">latency: milliseconds — answers appear before the data finishes arriving</text>
-</svg>
-</div><figcaption>Stream processing keeps a sliding window of recent readings in memory and produces answers continuously, with millisecond latency.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture3-fig04.svg" alt="Stream processing — rolling window">
+<figcaption>Stream processing keeps a sliding window of recent readings in memory and produces answers continuously, with millisecond latency.</figcaption>
+</figure>
 
 Once data is flowing in, the next question is how to process it. Two main modes exist: streaming (processing each reading as it arrives) and batch (processing a large pile of stored data at once). This part covers streaming; the next covers batch.
 
@@ -347,35 +184,10 @@ The right tool depends on scale.
 
 ## Part 5 — Batch Processing: Working on Data After It Settles
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" role="img" aria-label="Batch processing — accumulate, then process" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">Batch processing waits for data to settle</text>
-<!-- Accumulating pile -->
-<g transform="translate(60,90)">
-  <text x="100" y="0" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">readings collect over 24 h</text>
-  <rect x="0" y="30" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.58354050955375"/><rect x="22" y="30" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.7709718128537411"/><rect x="44" y="30" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.7215726175567279"/><rect x="66" y="30" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.7961893851263965"/><rect x="88" y="30" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.6096143530530314"/><rect x="110" y="30" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.7267102860373983"/><rect x="132" y="30" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.40352455880955557"/><rect x="154" y="30" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.7676489372213462"/><rect x="0" y="52" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.7235847980818126"/><rect x="22" y="52" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.6931860640129712"/><rect x="44" y="52" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.5171255960491383"/><rect x="66" y="52" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.5485025180034772"/><rect x="88" y="52" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.5057863351970471"/><rect x="110" y="52" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.6737490166833934"/><rect x="132" y="52" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.709200024276273"/><rect x="154" y="52" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.5435142031878195"/><rect x="0" y="74" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.8587639120211747"/><rect x="22" y="74" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.5152973979428195"/><rect x="44" y="74" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.8459559591059096"/><rect x="66" y="74" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.5380312845864945"/><rect x="88" y="74" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.5762637514330995"/><rect x="110" y="74" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.7724183237299822"/><rect x="132" y="74" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.5858081241263571"/><rect x="154" y="74" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.7054831018822191"/><rect x="0" y="96" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.8390222849035274"/><rect x="22" y="96" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.8456289260315373"/><rect x="44" y="96" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.8688018586332698"/><rect x="66" y="96" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.8184163412112202"/><rect x="88" y="96" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.6944401091490404"/><rect x="110" y="96" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.45881973307334767"/><rect x="132" y="96" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.7008670308171119"/><rect x="154" y="96" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.8139018300883945"/><rect x="0" y="118" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.5668999559238751"/><rect x="22" y="118" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.525986113932835"/><rect x="44" y="118" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.8523212324054299"/><rect x="66" y="118" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.7713871294324837"/><rect x="88" y="118" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.46364006968798993"/><rect x="110" y="118" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.7159823563562582"/><rect x="132" y="118" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.6987346145678066"/><rect x="154" y="118" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.6035633653706605"/><rect x="0" y="140" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.5607849888860854"/><rect x="22" y="140" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.5762522720347163"/><rect x="44" y="140" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.7823558529045014"/><rect x="66" y="140" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.5957910090488178"/><rect x="88" y="140" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.6263058693155441"/><rect x="110" y="140" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.7103859762084832"/><rect x="132" y="140" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.4389996080473376"/><rect x="154" y="140" width="18" height="18" rx="2" fill="#8b3a1f" opacity="0.6505474567343614"/>
-</g>
-<line x1="280" y1="150" x2="353" y2="150" stroke="#8b3a1f" stroke-width="2.2" stroke-linecap="round"/>
-<polygon points="360,150 353,154 353,146" fill="#8b3a1f"/>
-<text x="320" y="138" text-anchor="middle" font-size="10" font-weight="600" fill="#8b3a1f">2 a.m.</text>
-<text x="320" y="170" text-anchor="middle" font-size="9.5" fill="#6b6660">scheduled run</text>
-<!-- batch job box -->
-<g transform="translate(380,110)">
-  <rect width="160" height="80" rx="10" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="80" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Batch job</text>
-  <text x="80" y="52" text-anchor="middle" font-size="10" fill="#6b6660">aggregate · ML training</text>
-  <text x="80" y="68" text-anchor="middle" font-size="10" fill="#6b6660">~30 minutes</text>
-</g>
-<line x1="540" y1="150" x2="603" y2="150" stroke="#8b3a1f" stroke-width="2.2" stroke-linecap="round"/>
-<polygon points="610,150 603,154 603,146" fill="#8b3a1f"/>
-<g transform="translate(610,130)">
-  <rect width="80" height="40" rx="6" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="40" y="20" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Reports</text>
-  <text x="40" y="34" text-anchor="middle" font-size="9.5" fill="#6b6660">models</text>
-</g>
-<text x="360" y="290" text-anchor="middle" font-size="10" font-style="italic" fill="#6b6660">latency: minutes to hours — for the answers that don't have to be live</text>
-</svg>
-</div><figcaption>Batch processing waits for data to settle, then processes large windows at once. Cheaper, simpler, but the freshest answer is from yesterday.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture3-fig05.svg" alt="Batch processing — accumulate, then process">
+<figcaption>Batch processing waits for data to settle, then processes large windows at once. Cheaper, simpler, but the freshest answer is from yesterday.</figcaption>
+</figure>
 
 Batch processing operates on large volumes of stored data all at once. A daily job that prepares training data, a weekly report that summarises energy use, a monthly anomaly analysis. Batch jobs run on a schedule (nightly, weekly) or on demand.
 
@@ -403,42 +215,10 @@ GROUP BY room;
 
 ## Part 6 — The Data Lake (with the Medallion Architecture)
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Medallion architecture — bronze, silver, gold" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">Data refines through three tiers</text>
-  <g transform="translate(40,70)">
-    <rect width="200" height="200" rx="14" fill="#f0d9b8" stroke="#2a2622" stroke-width="1.5"/>
-    <circle cx="100" cy="60" r="34" fill="#d9a370" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="100" y="66" text-anchor="middle" font-size="13" font-weight="700" fill="#fdfbf7">B</text>
-    <text x="100" y="118" text-anchor="middle" font-size="14" font-weight="700" fill="#2a2622">Bronze</text>
-    <text x="100" y="136" text-anchor="middle" font-size="11" font-style="italic" fill="#6b6660">raw · unfiltered</text>
-    <line x1="30" y1="152" x2="170" y2="152" stroke="#2a2622" stroke-width="0.6" opacity="0.4"/>
-    <text x="100" y="172" text-anchor="middle" font-size="10" fill="#2a2622">every reading, exactly as it arrived</text>
-  </g>
-  <line x1="240" y1="170" x2="263" y2="170" stroke="#8b3a1f" stroke-width="1.8" stroke-linecap="round"/>
-<polygon points="270,170 263,174 263,166" fill="#8b3a1f"/><text x="255" y="160" text-anchor="middle" font-size="9" fill="#8b3a1f">refine</text>
-  <g transform="translate(260,70)">
-    <rect width="200" height="200" rx="14" fill="#e6e6e6" stroke="#2a2622" stroke-width="1.5"/>
-    <circle cx="100" cy="60" r="34" fill="#a8a8a8" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="100" y="66" text-anchor="middle" font-size="13" font-weight="700" fill="#fdfbf7">S</text>
-    <text x="100" y="118" text-anchor="middle" font-size="14" font-weight="700" fill="#2a2622">Silver</text>
-    <text x="100" y="136" text-anchor="middle" font-size="11" font-style="italic" fill="#6b6660">clean · validated</text>
-    <line x1="30" y1="152" x2="170" y2="152" stroke="#2a2622" stroke-width="0.6" opacity="0.4"/>
-    <text x="100" y="172" text-anchor="middle" font-size="10" fill="#2a2622">deduplicated, typed, joined</text>
-  </g>
-  <line x1="460" y1="170" x2="483" y2="170" stroke="#8b3a1f" stroke-width="1.8" stroke-linecap="round"/>
-<polygon points="490,170 483,174 483,166" fill="#8b3a1f"/><text x="475" y="160" text-anchor="middle" font-size="9" fill="#8b3a1f">refine</text>
-  <g transform="translate(480,70)">
-    <rect width="200" height="200" rx="14" fill="#f4e5b8" stroke="#2a2622" stroke-width="1.5"/>
-    <circle cx="100" cy="60" r="34" fill="#d9b34a" stroke="#2a2622" stroke-width="1.5"/>
-    <text x="100" y="66" text-anchor="middle" font-size="13" font-weight="700" fill="#fdfbf7">G</text>
-    <text x="100" y="118" text-anchor="middle" font-size="14" font-weight="700" fill="#2a2622">Gold</text>
-    <text x="100" y="136" text-anchor="middle" font-size="11" font-style="italic" fill="#6b6660">curated · business-ready</text>
-    <line x1="30" y1="152" x2="170" y2="152" stroke="#2a2622" stroke-width="0.6" opacity="0.4"/>
-    <text x="100" y="172" text-anchor="middle" font-size="10" fill="#2a2622">aggregates · features · KPIs</text>
-  </g>
-</svg>
-</div><figcaption>Bronze, silver, gold. Data gets more refined and more trustworthy at each tier — and the rules that produce each tier are versioned in code.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture3-fig06.svg" alt="Medallion architecture — bronze, silver, gold">
+<figcaption>Bronze, silver, gold. Data gets more refined and more trustworthy at each tier — and the rules that produce each tier are versioned in code.</figcaption>
+</figure>
 
 So far the discussion has been about *moving* data and *processing* data. The next question is where to *store* it for the long term.
 
@@ -581,39 +361,10 @@ The recommended pattern for the course is to combine MinIO (the data lake) with 
 
 ## Part 9 — Time-Series Databases
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" role="img" aria-label="Time-series database" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">Time-series databases are tuned for one shape of data</text>
-<!-- regular DB -->
-<g transform="translate(60,80)">
-  <rect width="200" height="160" rx="10" fill="#fdfbf7" stroke="#6b6660" stroke-width="1.5"/>
-  <text x="100" y="26" text-anchor="middle" font-size="11" font-weight="700" fill="#6b6660">RELATIONAL DB</text>
-  <g>
-    <ellipse cx="100" cy="52" rx="30" ry="6" fill="#dde7ec" stroke="#2a2622" stroke-width="1.4"/>
-    <path d="M 70 52 L 70 108 Q 100 116 130 108 L 130 52" fill="#dde7ec" stroke="#2a2622" stroke-width="1.4"/>
-    <ellipse cx="100" cy="52" rx="30" ry="6" fill="none" stroke="#2a2622" stroke-width="1.4"/>
-    <ellipse cx="100" cy="62" rx="28" ry="5" fill="none" stroke="#2a2622" stroke-width="0.8" opacity="0.5"/>
-    <ellipse cx="100" cy="74" rx="27" ry="5" fill="none" stroke="#2a2622" stroke-width="0.8" opacity="0.5"/>
-  </g>
-  <text x="100" y="142" text-anchor="middle" font-size="10" fill="#2a2622">rows · keys · joins</text>
-  <text x="100" y="156" text-anchor="middle" font-size="9.5" fill="#6b6660" font-style="italic">general-purpose</text>
-</g>
-<line x1="280" y1="160" x2="333" y2="160" stroke="#6b6660" stroke-width="1.5" stroke-linecap="round"/>
-<polygon points="340,160 333,164 333,156" fill="#6b6660"/>
-<text x="310" y="148" text-anchor="middle" font-size="10" fill="#6b6660">vs</text>
-<!-- time-series DB -->
-<g transform="translate(360,80)">
-  <rect width="290" height="160" rx="10" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
-  <text x="145" y="26" text-anchor="middle" font-size="11" font-weight="700" fill="#3a5a3a">TIME-SERIES DB</text>
-  <!-- chunks by time -->
-  <rect x="20" y="50" width="36" height="60" rx="3" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/><rect x="60" y="50" width="36" height="60" rx="3" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/><rect x="100" y="50" width="36" height="60" rx="3" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/><rect x="140" y="50" width="36" height="60" rx="3" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/><rect x="180" y="50" width="36" height="60" rx="3" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/><rect x="220" y="50" width="36" height="60" rx="3" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/>
-  <text x="38" y="120" text-anchor="middle" font-size="8" fill="#6b6660">09:00</text><text x="78" y="120" text-anchor="middle" font-size="8" fill="#6b6660">10:00</text><text x="118" y="120" text-anchor="middle" font-size="8" fill="#6b6660">11:00</text><text x="158" y="120" text-anchor="middle" font-size="8" fill="#6b6660">12:00</text><text x="198" y="120" text-anchor="middle" font-size="8" fill="#6b6660">13:00</text><text x="238" y="120" text-anchor="middle" font-size="8" fill="#6b6660">14:00</text>
-  <circle cx="32.14493019872775" cy="60" r="2" fill="#8b3a1f"/><circle cx="31.812033719713373" cy="72" r="2" fill="#8b3a1f"/><circle cx="34.496815568083136" cy="84" r="2" fill="#8b3a1f"/><circle cx="36.30165808028192" cy="96" r="2" fill="#8b3a1f"/><circle cx="72.46711143593049" cy="60" r="2" fill="#8b3a1f"/><circle cx="76.16842794430146" cy="72" r="2" fill="#8b3a1f"/><circle cx="70.34742750452574" cy="84" r="2" fill="#8b3a1f"/><circle cx="79.83153278802558" cy="96" r="2" fill="#8b3a1f"/><circle cx="119.29248020556241" cy="60" r="2" fill="#8b3a1f"/><circle cx="113.31128127293475" cy="72" r="2" fill="#8b3a1f"/><circle cx="111.7177515844459" cy="84" r="2" fill="#8b3a1f"/><circle cx="111.57450501107621" cy="96" r="2" fill="#8b3a1f"/><circle cx="156.98920883510516" cy="60" r="2" fill="#8b3a1f"/><circle cx="159.32343746297823" cy="72" r="2" fill="#8b3a1f"/><circle cx="160.26684259566184" cy="84" r="2" fill="#8b3a1f"/><circle cx="158.37638349111023" cy="96" r="2" fill="#8b3a1f"/><circle cx="191.04786647113912" cy="60" r="2" fill="#8b3a1f"/><circle cx="195.75286568079974" cy="72" r="2" fill="#8b3a1f"/><circle cx="203.16823703305926" cy="84" r="2" fill="#8b3a1f"/><circle cx="192.84578089867776" cy="96" r="2" fill="#8b3a1f"/><circle cx="243.95115354373297" cy="60" r="2" fill="#8b3a1f"/><circle cx="232.4105862145665" cy="72" r="2" fill="#8b3a1f"/><circle cx="228.3429618317438" cy="84" r="2" fill="#8b3a1f"/><circle cx="241.31790943336227" cy="96" r="2" fill="#8b3a1f"/>
-  <text x="145" y="144" text-anchor="middle" font-size="10" fill="#2a2622">chunks by time · compressed · auto-aged</text>
-  <text x="145" y="158" text-anchor="middle" font-size="9.5" fill="#6b6660" font-style="italic">TimescaleDB · InfluxDB · QuestDB</text>
-</g>
-</svg>
-</div><figcaption>Time-series databases store rows indexed by time, compressed per chunk, and discarded automatically after a retention period. Far faster than a general-purpose database for this shape of data.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture3-fig07.svg" alt="Time-series database">
+<figcaption>Time-series databases store rows indexed by time, compressed per chunk, and discarded automatically after a retention period. Far faster than a general-purpose database for this shape of data.</figcaption>
+</figure>
 
 A general-purpose database like PostgreSQL or MySQL is built for a typical web-application workload: lots of lookups by primary key, joins between tables, transactional updates. Sensor data has a completely different shape.
 
@@ -784,76 +535,10 @@ The standard stack for this is **Prometheus** (a metrics database that scrapes e
 
 ## Part 12 — A Worked Example: Smoke Detection Data Pipeline
 
-<figure class="diagram"><div class="dgm-frame">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-label="Smoke detection data pipeline" class="dgm">
-<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">End-to-end pipeline for smoke detection</text>
-  <g transform="translate(30,90)">
-    <rect width="100" height="110" rx="10" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
-    <g transform="translate(50,42)"><g transform="translate(0,0)">
-    <circle cx="0" cy="0" r="13" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.4"/>
-    <circle cx="0" cy="0" r="3.9000000000000004" fill="#8b3a1f"/>
-    <path d="M -10.4 -13 Q -15.600000000000001 -18.2 -10.4 -23.400000000000002" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-    <path d="M 10.4 -13 Q 15.600000000000001 -18.2 10.4 -23.400000000000002" fill="none" stroke="#6b6660" stroke-width="1.2"/>
-  </g></g>
-    <text x="50" y="88" text-anchor="middle" font-size="10.5" font-weight="600" fill="#2a2622">Smoke sensor</text>
-    <text x="50" y="102" text-anchor="middle" font-size="9" fill="#6b6660">10 Hz reading</text>
-  </g>
-  <g transform="translate(170,90)">
-    <rect width="100" height="110" rx="10" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
-    <rect x="22" y="36" width="56" height="32" rx="6" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.3"/><text x="50" y="58" text-anchor="middle" font-size="10" font-weight="700" fill="#2a2622">MQTT</text>
-    <text x="50" y="88" text-anchor="middle" font-size="10.5" font-weight="600" fill="#2a2622">Broker</text>
-    <text x="50" y="102" text-anchor="middle" font-size="9" fill="#6b6660">MQTT topic</text>
-  </g>
-  <g transform="translate(310,90)">
-    <rect width="100" height="110" rx="10" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
-    <polyline points="20,46 32,38 44,52 56,32 68,46 80,30" fill="none" stroke="#8b3a1f" stroke-width="1.8"/>
-    <text x="50" y="88" text-anchor="middle" font-size="10.5" font-weight="600" fill="#2a2622">Stream processor</text>
-    <text x="50" y="102" text-anchor="middle" font-size="9" fill="#6b6660">60s window</text>
-  </g>
-  <g transform="translate(450,90)">
-    <rect width="100" height="110" rx="10" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
-    <g transform="translate(50,48)"><polyline points="-26,-4 -14,-8 -2,6 10,-16 22,-2 30,4" fill="none" stroke="#8b3a1f" stroke-width="2"/><circle cx="10" cy="-16" r="3" fill="#8b3a1f"/></g>
-    <text x="50" y="88" text-anchor="middle" font-size="10.5" font-weight="600" fill="#2a2622">Anomaly model</text>
-    <text x="50" y="102" text-anchor="middle" font-size="9" fill="#6b6660">scores spike</text>
-  </g>
-  <g transform="translate(590,90)">
-    <rect width="100" height="110" rx="10" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
-    <g transform="translate(50,46)"><g><circle cx="0" cy="0" r="18" fill="#8b3a1f" opacity="0.9"/>
-    <text x="0" y="5" text-anchor="middle" font-size="12.6" font-weight="700" fill="#fdfbf7">AI</text></g></g>
-    <text x="50" y="88" text-anchor="middle" font-size="10.5" font-weight="600" fill="#2a2622">Alert + log</text>
-    <text x="50" y="102" text-anchor="middle" font-size="9" fill="#6b6660">safety agent</text>
-  </g>
-<line x1="130" y1="145" x2="163" y2="145" stroke="#8b3a1f" stroke-width="1.6" stroke-linecap="round"/>
-<polygon points="170,145 163,149 163,141" fill="#8b3a1f"/><line x1="270" y1="145" x2="303" y2="145" stroke="#8b3a1f" stroke-width="1.6" stroke-linecap="round"/>
-<polygon points="310,145 303,149 303,141" fill="#8b3a1f"/><line x1="410" y1="145" x2="443" y2="145" stroke="#8b3a1f" stroke-width="1.6" stroke-linecap="round"/>
-<polygon points="450,145 443,149 443,141" fill="#8b3a1f"/><line x1="550" y1="145" x2="583" y2="145" stroke="#8b3a1f" stroke-width="1.6" stroke-linecap="round"/>
-<polygon points="590,145 583,149 583,141" fill="#8b3a1f"/>
-<!-- Bottom: storage tier -->
-<g transform="translate(40,250)">
-  <rect width="640" height="80" rx="10" fill="#fdfbf7" stroke="#2a2622" stroke-width="1.5" stroke-dasharray="6 4"/>
-  <text x="20" y="22" font-size="11" font-weight="700" letter-spacing="1.5" fill="#6b6660">STORAGE TIER</text>
-  <g transform="translate(110,40)"><g>
-    <ellipse cx="0" cy="-14" rx="23" ry="6" fill="#dde7ec" stroke="#2a2622" stroke-width="1.4"/>
-    <path d="M -23 -14 L -23 14 Q 0 22 23 14 L 23 -14" fill="#dde7ec" stroke="#2a2622" stroke-width="1.4"/>
-    <ellipse cx="0" cy="-14" rx="23" ry="6" fill="none" stroke="#2a2622" stroke-width="1.4"/>
-    <ellipse cx="0" cy="-4" rx="21" ry="5" fill="none" stroke="#2a2622" stroke-width="0.8" opacity="0.5"/>
-    <ellipse cx="0" cy="8" rx="20" ry="5" fill="none" stroke="#2a2622" stroke-width="0.8" opacity="0.5"/>
-  </g></g>
-  <text x="120" y="70" text-anchor="middle" font-size="9.5" fill="#2a2622">time-series DB</text>
-  <g transform="translate(250,42)"><rect width="50" height="38" rx="4" fill="#f3ece6" stroke="#2a2622" stroke-width="1.2"/><text x="25" y="24" text-anchor="middle" font-size="9" fill="#2a2622">parquet</text></g>
-  <text x="275" y="92" text-anchor="middle" font-size="9.5" fill="#2a2622">data lake</text>
-  <g transform="translate(430,42)"><rect width="50" height="38" rx="4" fill="#e2ebde" stroke="#2a2622" stroke-width="1.2"/><text x="25" y="20" text-anchor="middle" font-size="8" fill="#2a2622">model</text><text x="25" y="32" text-anchor="middle" font-size="8" fill="#2a2622">artifacts</text></g>
-  <text x="455" y="92" text-anchor="middle" font-size="9.5" fill="#2a2622">model registry</text>
-</g>
-<!-- arrows from sensors layer to storage -->
-<line x1="220" y1="200" x2="165.37754895718163" y2="245.51870920234865" stroke="#6b6660" stroke-width="1.2" stroke-linecap="round"/>
-<polygon points="160,250 162.81681135852372,242.44582408395914 167.93828655583954,248.59159432073815" fill="#6b6660"/>
-<line x1="360" y1="200" x2="281.0335395061044" y2="246.45085911405624" stroke="#6b6660" stroke-width="1.2" stroke-linecap="round"/>
-<polygon points="275,250 279.0054589998508,243.00312225342518 283.06162001235793,249.8985959746873" fill="#6b6660"/>
-<line x1="500" y1="200" x2="459.68275312135717" y2="244.79694097626984" stroke="#6b6660" stroke-width="1.2" stroke-linecap="round"/>
-<polygon points="455,250 456.7095765363685,242.12108204978003 462.65592970634583,247.47279990275965" fill="#6b6660"/>
-</svg>
-</div><figcaption>Every component of the smoke-detection data pipeline: sensors at the top push readings down through ingestion, processing, modelling, and alerting — and everything is persisted to storage for replay and training.</figcaption></figure>
+<figure class="diagram">
+<img src="figures/lecture3-fig08.svg" alt="Smoke detection data pipeline">
+<figcaption>Every component of the smoke-detection data pipeline: sensors at the top push readings down through ingestion, processing, modelling, and alerting — and everything is persisted to storage for replay and training.</figcaption>
+</figure>
 
 To make all of the above concrete, follow one use case — smoke detection — through every stage.
 

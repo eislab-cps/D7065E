@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-label="Architecture viewpoints — one system, many lenses" class="dgm">
+<text x="360" y="32" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">One system, many lenses</text>
+<g>
+    <polygon points="305,180 360,150 415,180" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
+    <rect x="305" y="180" width="110" height="100" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
+    <rect x="317" y="200" width="22" height="22" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/>
+    <rect x="349" y="200" width="22" height="22" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/>
+    <rect x="381" y="200" width="22" height="22" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/>
+    <rect x="342" y="240" width="36" height="30" fill="#fdfbf7" stroke="#2a2622" stroke-width="1"/>
+  </g>
+<text x="360" y="304" text-anchor="middle" font-size="11" fill="#2a2622" font-weight="600">The system</text>
+<!-- 5 lenses around -->
+  <g>
+    <ellipse cx="90" cy="90" rx="56" ry="36" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
+    <text x="90" y="88" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Business</text>
+    <text x="90" y="103" text-anchor="middle" font-size="10" fill="#6b6660">goals · regs</text>
+  </g>
+  <g>
+    <ellipse cx="580" cy="90" rx="56" ry="36" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
+    <text x="580" y="88" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Functional</text>
+    <text x="580" y="103" text-anchor="middle" font-size="10" fill="#6b6660">components</text>
+  </g>
+  <g>
+    <ellipse cx="560" cy="240" rx="56" ry="36" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
+    <text x="560" y="238" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Behavioural</text>
+    <text x="560" y="253" text-anchor="middle" font-size="10" fill="#6b6660">sequences</text>
+  </g>
+  <g>
+    <ellipse cx="100" cy="240" rx="56" ry="36" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
+    <text x="100" y="238" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Information</text>
+    <text x="100" y="253" text-anchor="middle" font-size="10" fill="#6b6660">data flow</text>
+  </g>
+  <g>
+    <ellipse cx="340" cy="80" rx="56" ry="36" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
+    <text x="340" y="78" text-anchor="middle" font-size="12" font-weight="600" fill="#2a2622">Deployment</text>
+    <text x="340" y="93" text-anchor="middle" font-size="10" fill="#6b6660">where it runs</text>
+  </g>
+<!-- lines connecting lenses to building (subtle) -->
+<line x1="146" y1="90" x2="360" y2="200" stroke="#6b6660" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/><line x1="524" y1="90" x2="360" y2="200" stroke="#6b6660" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/><line x1="504" y1="240" x2="360" y2="200" stroke="#6b6660" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/><line x1="156" y1="240" x2="360" y2="200" stroke="#6b6660" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/><line x1="360" y1="80" x2="360" y2="200" stroke="#6b6660" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
+</svg>

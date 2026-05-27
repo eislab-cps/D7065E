@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" role="img" aria-label="ReAct pattern — Thought · Action · Observation" class="dgm">
+<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">ReAct interleaves reasoning and acting</text>
+<!-- column of thought / action / observation cycle -->
+  <g transform="translate(120,70)">
+    <circle cx="-32" cy="22" r="18" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
+    <text x="-32" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#2a2622">T</text>
+    <rect x="0" y="0" width="480" height="44" rx="8" fill="#f0d9d1" opacity="0.4" stroke="#2a2622" stroke-width="1.2"/>
+    <text x="14" y="20" font-size="11" font-weight="600" fill="#2a2622">Thought</text>
+    <text x="14" y="36" font-size="10.5" font-family="monospace" fill="#2a2622">"smoke is rising — I should look at the trend"</text>
+  </g>
+  <g transform="translate(120,140)">
+    <circle cx="-32" cy="22" r="18" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
+    <text x="-32" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#2a2622">A</text>
+    <rect x="0" y="0" width="480" height="44" rx="8" fill="#f4ead9" opacity="0.4" stroke="#2a2622" stroke-width="1.2"/>
+    <text x="14" y="20" font-size="11" font-weight="600" fill="#2a2622">Action</text>
+    <text x="14" y="36" font-size="10.5" font-family="monospace" fill="#2a2622">query_history("A2306", "smoke", "60s")</text>
+  </g>
+  <g transform="translate(120,210)">
+    <circle cx="-32" cy="22" r="18" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
+    <text x="-32" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#2a2622">O</text>
+    <rect x="0" y="0" width="480" height="44" rx="8" fill="#dde7ec" opacity="0.4" stroke="#2a2622" stroke-width="1.2"/>
+    <text x="14" y="20" font-size="11" font-weight="600" fill="#2a2622">Observation</text>
+    <text x="14" y="36" font-size="10.5" font-family="monospace" fill="#2a2622">spike from 0.1 → 0.8 in last 30 seconds</text>
+  </g>
+  <g transform="translate(120,280)">
+    <circle cx="-32" cy="22" r="18" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
+    <text x="-32" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#2a2622">T</text>
+    <rect x="0" y="0" width="480" height="44" rx="8" fill="#f0d9d1" opacity="0.4" stroke="#2a2622" stroke-width="1.2"/>
+    <text x="14" y="20" font-size="11" font-weight="600" fill="#2a2622">Thought</text>
+    <text x="14" y="36" font-size="10.5" font-family="monospace" fill="#2a2622">"this is a fire — activate sprinkler"</text>
+  </g>
+<!-- arrows between -->
+<line x1="360" y1="114" x2="360" y2="131" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="360,138 356,131 364,131" fill="#8b3a1f"/>
+<line x1="360" y1="184" x2="360" y2="201" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="360,208 356,201 364,201" fill="#8b3a1f"/>
+<line x1="360" y1="254" x2="360" y2="271" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="360,278 356,271 364,271" fill="#8b3a1f"/>
+<!-- loop arrow back -->
+<path d="M 620 325 Q 660 280 660 200 Q 660 90 620 90" fill="none" stroke="#8b3a1f" stroke-width="1.8" stroke-dasharray="5 4"/>
+<polygon points="620,90 624,98 628,90" fill="#8b3a1f"/>
+<text x="685" y="200" text-anchor="middle" font-size="10" font-style="italic" fill="#8b3a1f" transform="rotate(90,685,200)">repeat</text>
+</svg>

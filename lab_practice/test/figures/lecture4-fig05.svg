@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" role="img" aria-label="Multi-agent collaboration" class="dgm">
+<text x="360" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#2a2622">Specialised agents collaborate</text>
+<!-- shared bus in middle -->
+<rect x="200" y="150" width="320" height="40" rx="10" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
+<text x="360" y="174" text-anchor="middle" font-size="11" font-weight="700" fill="#2a5a7a">SHARED EVENT BUS</text>
+  <g transform="translate(30,60)">
+    <rect width="130" height="80" rx="12" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
+    <g><circle cx="65" cy="28" r="15" fill="#8b3a1f" opacity="0.9"/>
+    <text x="65" y="33" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fdfbf7">AI</text></g>
+    <text x="65" y="60" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Safety agent</text>
+    <text x="65" y="74" text-anchor="middle" font-size="9.5" fill="#6b6660">fire · smoke</text>
+  </g>
+  <g transform="translate(220,60)">
+    <rect width="130" height="80" rx="12" fill="#f3ece6" stroke="#2a2622" stroke-width="1.5"/>
+    <g><circle cx="65" cy="28" r="15" fill="#8b3a1f" opacity="0.9"/>
+    <text x="65" y="33" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fdfbf7">AI</text></g>
+    <text x="65" y="60" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Comfort agent</text>
+    <text x="65" y="74" text-anchor="middle" font-size="9.5" fill="#6b6660">temp · CO₂</text>
+  </g>
+  <g transform="translate(410,60)">
+    <rect width="130" height="80" rx="12" fill="#f4ead9" stroke="#2a2622" stroke-width="1.5"/>
+    <g><circle cx="65" cy="28" r="15" fill="#8b3a1f" opacity="0.9"/>
+    <text x="65" y="33" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fdfbf7">AI</text></g>
+    <text x="65" y="60" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Energy agent</text>
+    <text x="65" y="74" text-anchor="middle" font-size="9.5" fill="#6b6660">optimise cost</text>
+  </g>
+  <g transform="translate(600,60)">
+    <rect width="130" height="80" rx="12" fill="#e2ebde" stroke="#2a2622" stroke-width="1.5"/>
+    <g><circle cx="65" cy="28" r="15" fill="#8b3a1f" opacity="0.9"/>
+    <text x="65" y="33" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fdfbf7">AI</text></g>
+    <text x="65" y="60" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Security agent</text>
+    <text x="65" y="74" text-anchor="middle" font-size="9.5" fill="#6b6660">access · alarm</text>
+  </g>
+  <g transform="translate(130,240)">
+    <rect width="160" height="80" rx="12" fill="#f0d9d1" stroke="#2a2622" stroke-width="1.5"/>
+    <g><circle cx="80" cy="28" r="15" fill="#8b3a1f" opacity="0.9"/>
+    <text x="80" y="33" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fdfbf7">AI</text></g>
+    <text x="80" y="60" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Coordinator</text>
+    <text x="80" y="74" text-anchor="middle" font-size="9.5" fill="#6b6660">resolves conflicts</text>
+  </g>
+  <g transform="translate(430,240)">
+    <rect width="160" height="80" rx="12" fill="#dde7ec" stroke="#2a2622" stroke-width="1.5"/>
+    <g><circle cx="80" cy="28" r="15" fill="#8b3a1f" opacity="0.9"/>
+    <text x="80" y="33" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fdfbf7">AI</text></g>
+    <text x="80" y="60" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2622">Auditor</text>
+    <text x="80" y="74" text-anchor="middle" font-size="9.5" fill="#6b6660">logs every decision</text>
+  </g>
+<!-- arrows top → bus -->
+<line x1="95" y1="140" x2="95" y2="143" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="95,150 91,143 99,143" fill="#8b3a1f"/><line x1="285" y1="140" x2="285" y2="143" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="285,150 281,143 289,143" fill="#8b3a1f"/><line x1="475" y1="140" x2="475" y2="143" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="475,150 471,143 479,143" fill="#8b3a1f"/><line x1="665" y1="140" x2="665" y2="143" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="665,150 661,143 669,143" fill="#8b3a1f"/>
+<!-- arrows bus → bottom -->
+<line x1="210" y1="192" x2="210" y2="233" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="210,240 206,233 214,233" fill="#8b3a1f"/>
+<line x1="510" y1="192" x2="510" y2="233" stroke="#8b3a1f" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="510,240 506,233 514,233" fill="#8b3a1f"/>
+</svg>
