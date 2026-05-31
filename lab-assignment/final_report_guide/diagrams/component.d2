@@ -1,0 +1,16 @@
+direction: right
+store: "Data store\n[TSDB / lake]"
+act: "Actuator process\n[Container]"
+svc: "Autonomous service  [Container]" {
+  style.stroke-dash: 4
+    style.fill: transparent
+  feat: "Feature builder\n[Component]"
+  rules: "Decision logic\n[Component]"
+  guard: "Guardrails\n[Component]"
+  client: "Actuator client\n[Component]"
+}
+store -> svc.feat: "query"
+svc.feat -> svc.rules: "features"
+svc.rules -> svc.guard: "proposed action"
+svc.guard -> svc.client: "approved action"
+svc.client -> act: "command"

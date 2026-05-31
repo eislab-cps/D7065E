@@ -1,0 +1,18 @@
+direction: right
+start: "" { shape: circle; width: 30; height: 30 }
+Starting
+Registering
+Controlling
+Degraded
+Stopped
+done: "" { shape: circle; width: 30; height: 30 }
+start -> Starting
+Starting -> Registering
+Registering -> Controlling: "registered with BuildSim"
+Controlling -> Controlling: "decide every 30 s"
+Controlling -> Degraded: "inputs stale / sensor flagged"
+Degraded -> Degraded: "ventilate at safe default"
+Degraded -> Controlling: "fresh data returns"
+Controlling -> Stopped: "SIGTERM"
+Degraded -> Stopped: "SIGTERM"
+Stopped -> done

@@ -1,0 +1,207 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Project Proposal (Week 2), A Short Guide},
+  pdfauthor={Course staff},
+  colorlinks=true,
+  linkcolor={RoyalBlue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[a4paper,margin=2.4cm]{geometry}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{newunicodechar}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\newunicodechar{°}{\textdegree}
+\newunicodechar{₂}{\textsubscript{2}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{✓}{\ensuremath{\checkmark}}
+\newunicodechar{–}{--}
+\newunicodechar{—}{---}
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\footnotesize}
+\AtBeginEnvironment{tabular}{\footnotesize}
+\usepackage{fancyhdr}
+\pagestyle{fancy}\fancyhf{}
+\rhead{\small D7065E\,--\,Project Proposal}
+\lhead{\small Week 2 Proposal -- Guide}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{0.5em}{}
+\usepackage{microtype}
+\setlength{\emergencystretch}{2em}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Project Proposal (Week 2), A Short Guide}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{D7065E, what the Week 2 proposal must contain}
+\author{Course staff}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{quote}
+\textbf{How to use this guide.} It explains what to put in the
+\textbf{Week 2 proposal}. See the accompanying worked proposal example.
+Keep the proposal to \textbf{1--2 pages}.
+\end{quote}
+
+\hypertarget{what-the-proposal-is-and-is-not}{%
+\subsection{What the proposal is, and is
+not}\label{what-the-proposal-is-and-is-not}}
+
+The proposal exists to agree on a \textbf{direction} and get a
+\textbf{green light to start building}. It is \textbf{not} the
+architecture: C4 diagrams, requirements tables, interfaces, and tests are
+\emph{not} expected yet. Those are built \textbf{iteratively} during
+development and end up in the architecture document and final report (see
+the report-writing guide and the worked report example). At this stage
+all that is needed is the intended build, the reasons for it, and the
+open uncertainties. The design \emph{will} change later, that is
+expected and good.
+
+\hypertarget{what-it-must-answer}{%
+\subsection{What it must answer}\label{what-it-must-answer}}
+
+Six short questions, a paragraph or a few bullets each:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Use case, and why.} Which use case, and why it was chosen.
+\item
+  \textbf{Scenario.} The one end-to-end story being aimed for (the
+  eventual demo).
+\item
+  \textbf{What will be built.} A rough sketch of the major pieces: what
+  senses, what decides, what acts, \textbf{how data flows through the
+  system, where it is stored}, and what users will see. No formal
+  diagrams required. Each major piece should run as its \textbf{own
+  process}, communicate through defined interfaces, and connect to
+  \textbf{BuildSim}.
+\item
+  \textbf{The autonomous part.} Roughly what decides what, and the
+  approach to \emph{start} with. Rule-based, optimisation, ML, or
+  LLM are all fine, \emph{sophistication earns no marks}, so start
+  simple.
+\item
+  \textbf{Biggest unknowns \& risks.} What is uncertain or might not
+  work. Honesty here is the point.
+\item
+  \textbf{Physical simulation approach.} How environmental conditions
+  and occupancy will be generated, what physical model, dataset, or
+  hybrid approach will drive the sensor values. This makes the
+  simulator a first-class part of the project, not an implementation
+  detail; the next section gives examples.
+\item
+  \textbf{First step \& rough plan.} The riskiest thing to prototype
+  first to test the idea, plus a rough sense of the weeks ahead.
+\end{enumerate}
+
+Include, at the top of the proposal, a link to the team's
+\textbf{GitHub repository} where the project will be developed.
+
+\hypertarget{simulating-the-building}{%
+\subsection{Simulating the building}\label{simulating-the-building}}
+
+BuildSim provides the rooms but \textbf{not their physics}, so the
+proposal should say how the \textbf{physical processes} that produce
+sensor values and the \textbf{movement of people} that drives them are
+simulated.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Physical processes}, sketch how each sensor value will be
+  generated: a simple physics-based model (for example a heat balance
+  for temperature, or a mass balance for CO₂ that rises with occupancy
+  and falls with ventilation), replay of a public dataset, or a hybrid.
+  It need not be exact, it must have realistic trends and respond to
+  the actuators so the control loop closes.
+\item
+  \textbf{Movement of people (occupancy)}, occupancy usually drives
+  everything else (heat, CO₂, lighting). Describe the pattern to
+  model: a weekday schedule (arrivals, lunch, departures), meeting-room
+  bookings, empty weekends, and some randomness so no two days are
+  identical.
+\end{itemize}
+
+\textbf{Examples of approaches.} Simple physics, a heat balance for
+temperature, or CO₂ rising about 40 ppm per person per hour and decaying
+with ventilation. Data replay, feed a public dataset through the
+sensors (e.g.~the UCI \emph{Occupancy Detection} set, or \emph{ASHRAE}
+building-energy data). Hybrid, replay real data with an injected
+event (e.g.~a real temperature trace plus a simulated fire). For
+occupancy, a schedule such as arrive 07:00--09:00, lunch 11:30--13:00,
+leave 16:00--18:00, with meeting bookings and weekend gaps.
+
+No equations are needed yet, just the intended approach.
+
+\hypertarget{how-it-is-approved}{%
+\subsection{How it is approved}\label{how-it-is-approved}}
+
+The proposal is approvable when the \textbf{direction is clear and
+feasible}, not when the design is complete. Approval is a green light
+to start, not a grade. What follows is the architecture document, which
+grows alongside the code; a brief ``changes since the proposal'' note
+in the final report, explaining what was revised and why, is something
+the examiner looks for.
+
+\end{document}

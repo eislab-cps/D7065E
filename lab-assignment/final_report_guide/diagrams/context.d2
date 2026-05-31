@@ -1,0 +1,10 @@
+direction: down
+manager: "Building manager\n[Person]\nMonitors / overrides" { shape: person }
+occ: "Building occupants\n[Person]\nPresence is sensed" { shape: person }
+sys: "Your system\n[Software System]\nAutonomous control"
+bs: "BuildSim\n[Software System]\nBuilding environment + 3D viewer"
+ext: "External compute\n[Software System]\nOptional; off critical path"
+manager -> sys: monitors
+occ -> sys: presence
+sys -> bs: "reads sensors / commands actuators [REST]"
+sys -> ext: "offloads heavy analysis [optional]"

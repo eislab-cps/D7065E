@@ -1,0 +1,26 @@
+direction: right
+laptop: "Laptop — all processes" {
+  style.stroke-dash: 4
+    style.fill: transparent
+  sensors: "Sensor processes"
+  broker: "Message broker" { shape: queue }
+  consumer: "Pipeline + data-quality"
+  store: "Time-series DB" { shape: cylinder }
+  ctrl: "Autonomous service"
+  acts: "Actuators"
+  dash: "Dashboard"
+  bs: "BuildSim"
+}
+cloud: "External compute (optional)" {
+  style.stroke-dash: 4
+    style.fill: transparent
+  study: "Heavy / overnight analysis"
+}
+laptop.sensors -> laptop.broker
+laptop.broker -> laptop.consumer
+laptop.consumer -> laptop.store
+laptop.store -> laptop.ctrl
+laptop.ctrl -> laptop.acts
+laptop.acts -> laptop.bs
+laptop.store -> cloud.study: "nightly"
+cloud.study -> laptop.ctrl: "updated model"

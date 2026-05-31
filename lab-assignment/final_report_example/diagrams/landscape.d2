@@ -1,0 +1,15 @@
+direction: down
+fm: "Facilities manager\n[Person]" { shape: person }
+vent: "Ventilation & Climate Control\n[Software System — this project]"
+fire: "Fire detection & response\n[Software System]"
+sec: "Security & access\n[Software System]"
+energy: "Energy management\n[Software System]"
+bs: "BuildSim\n[Building environment]"
+fm -> vent: monitors
+fm -> fire: monitors
+fm -> sec: monitors
+fm -> energy: monitors
+vent -> bs: "sensors / actuators"
+fire -> bs: "sensors / actuators"
+sec -> bs: "sensors / actuators"
+energy -> bs: "sensors / actuators"

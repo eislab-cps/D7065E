@@ -1,0 +1,16 @@
+shape: sequence_diagram
+occ: Occupancy sensor
+co2: CO2 sensor
+pipe: Pipeline
+ctrl: Autonomous service
+vent: Ventilation actuator
+bs: BuildSim
+occ -> pipe: "1: occupancy = 5 (meeting starts)"
+co2 -> pipe: "2: CO2 = 740 ppm, rising"
+pipe -> ctrl: "3: features (occupied, CO2 740, +40/min)"
+ctrl -> vent: "4: fan level 2 (reason: CO2 rising)"
+vent -> bs: "5: PUT fan = 2"
+bs -> co2: "6: ventilation increased (physics)"
+co2 -> pipe: "7: CO2 = 690 ppm, falling"
+pipe -> ctrl: "8: features (CO2 falling)"
+ctrl -> ctrl: "9: hold (within 5 min dwell)"

@@ -1,0 +1,14 @@
+direction: right
+A: "Sensor reading"
+B: "Broker" { shape: queue }
+C: "Consumer"
+D: "Hot store" { shape: cylinder }
+E: "Cold store / lake" { shape: cylinder }
+F: "Features"
+G: "Autonomous service"
+A -> B
+B -> C
+C -> D
+C -> E
+D -> F
+F -> G

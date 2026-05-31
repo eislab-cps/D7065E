@@ -1,0 +1,14 @@
+direction: right
+occ: "Occupancy sampler\n(room type x time)"
+out: "Outdoor conditions"
+phys: "Room physics\n(temperature + CO2 update)"
+bs: "BuildSim (the environment)"
+ctrl: "Autonomous service"
+act: "Actuators"
+occ -> phys
+out -> phys
+phys -> bs: "writes sensor values"
+bs -> ctrl: "readings (via pipeline)"
+ctrl -> act: "fan / setpoint"
+act -> bs: "PUT actuator state"
+bs -> phys: "actuator state"

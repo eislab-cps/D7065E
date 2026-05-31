@@ -1,0 +1,9 @@
+direction: down
+fm: "Facilities manager\n[Person]" { shape: person }
+sys: "Your system\n[Software System — in scope]"
+other: "Other building systems\ne.g. fire, security, energy\n[Software Systems]"
+bs: "BuildSim\n[Building environment]"
+fm -> sys: monitors
+fm -> other: monitors
+sys -> bs: "sensors / actuators"
+other -> bs: "sensors / actuators"

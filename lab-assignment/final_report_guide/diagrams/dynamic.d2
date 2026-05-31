@@ -1,0 +1,11 @@
+shape: sequence_diagram
+s: Sensor
+p: Pipeline
+a: Autonomous service
+act: Actuator
+bs: BuildSim
+s -> p: "1: reading"
+p -> a: "2: feature / alert"
+a -> act: "3: command (with reason)"
+act -> bs: "4: PUT actuator state"
+bs -> s: "5: environment changes, next reading reflects it"

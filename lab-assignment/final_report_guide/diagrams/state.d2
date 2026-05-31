@@ -1,0 +1,16 @@
+direction: right
+start: "" { shape: circle; width: 30; height: 30 }
+Starting
+Registering
+Running
+Degraded
+Stopped
+done: "" { shape: circle; width: 30; height: 30 }
+start -> Starting
+Starting -> Registering
+Registering -> Running: "registered"
+Running -> Running: "act every cycle"
+Running -> Degraded: "inputs stale"
+Degraded -> Running: "fresh data returns"
+Running -> Stopped: "SIGTERM"
+Stopped -> done

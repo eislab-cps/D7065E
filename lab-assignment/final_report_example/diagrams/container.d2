@@ -1,0 +1,27 @@
+direction: down
+bs: "BuildSim\n[Software System]\nEnvironment: sensor values,\nactuator state, 3D viewer"
+sys: "Ventilation & Climate Control  [System]" {
+  style.stroke-dash: 4
+    style.fill: transparent
+  sim: "Physical simulator\n[Container: Go]\nAdvances room physics; writes\nsensor values, reads actuator state"
+  sensor: "Sensor processes\n[Container: Go]\nRead values from BuildSim; publish"
+  broker: "Message broker\n[MQTT]\nDecouples producers from consumers" { shape: queue }
+  pipe: "Pipeline + data-quality\n[Container: Python]\nStores readings; flags stuck sensors"
+  tsdb: "Hot store\n[TimescaleDB]\nRecent readings for control" { shape: cylinder }
+  lake: "Cold store\n[Parquet / MinIO]\nHistory for analysis" { shape: cylinder }
+  ctrl: "Autonomous service\n[Container: Python]\nDecides ventilation & heating"
+  act: "HVAC + ventilation actuators\n[Container: Go]\nApply commands to BuildSim"
+  dash: "Dashboard\n[Container: Web]\nVisualises state & decisions"
+}
+sys.sim -> bs: "Writes values / reads state [REST]"
+bs -> sys.sensor: "Read values [REST]"
+sys.sensor -> sys.broker: "Publish [MQTT]"
+sys.broker -> sys.pipe: "Consume [MQTT]"
+sys.pipe -> sys.tsdb: "Write recent [SQL]"
+sys.pipe -> sys.lake: "Write history [Parquet]"
+sys.tsdb -> sys.ctrl: "Query window [SQL]"
+sys.pipe -> sys.ctrl: "Sensor-health flags [MQTT]"
+sys.ctrl -> sys.act: "Command [REST]"
+sys.act -> bs: "Set actuator state [REST]"
+sys.tsdb -> sys.dash: "Query [SQL]"
+bs -> sys.dash: "Live state [WebSocket]"

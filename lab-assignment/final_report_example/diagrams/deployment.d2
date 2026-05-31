@@ -1,0 +1,28 @@
+direction: right
+laptop: "Edge — laptop (all processes)" {
+  style.stroke-dash: 4
+    style.fill: transparent
+  sensors: "Sensor processes"
+  broker: "MQTT broker" { shape: queue }
+  consumer: "Pipeline + data-quality"
+  tsdb: "TimescaleDB" { shape: cylinder }
+  lake: "MinIO / Parquet" { shape: cylinder }
+  ctrl: "Autonomous service"
+  acts: "HVAC + ventilation actuators"
+  dash: "Dashboard"
+  bs: "BuildSim"
+}
+cloud: "External compute (optional)" {
+  style.stroke-dash: 4
+    style.fill: transparent
+  study: "Overnight occupancy study"
+}
+laptop.sensors -> laptop.broker
+laptop.broker -> laptop.consumer
+laptop.consumer -> laptop.tsdb
+laptop.tsdb -> laptop.ctrl
+laptop.ctrl -> laptop.acts
+laptop.acts -> laptop.bs
+laptop.consumer -> laptop.lake
+laptop.lake -> cloud.study: "nightly"
+cloud.study -> laptop.ctrl: "updated prior"

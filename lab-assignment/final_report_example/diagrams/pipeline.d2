@@ -1,0 +1,19 @@
+direction: right
+A: "Sensor readings"
+B: "MQTT broker" { shape: queue }
+C: "Pipeline consumer"
+D: "TimescaleDB (hot)" { shape: cylinder }
+E: "Parquet / MinIO (cold)" { shape: cylinder }
+Q: "Data-quality monitor\n(rolling variance)"
+F: "Features: rolling CO2, rate,\noccupancy, time-of-day"
+G: "Autonomous service"
+H: "Overnight occupancy study"
+A -> B
+B -> C
+C -> D
+C -> E
+C -> Q
+D -> F
+F -> G
+Q -> G: "stuck-sensor flags"
+E -> H: "nightly"

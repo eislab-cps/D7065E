@@ -1,0 +1,20 @@
+direction: right
+tsdb: "Hot store\n[TimescaleDB]"
+dq: "Data-quality monitor\n[Container: Python]"
+act: "Actuator processes\n[Container: Go]"
+svc: "Autonomous service  [Container: Python]" {
+  style.stroke-dash: 4
+    style.fill: transparent
+  feat: "Feature builder\n[Component]\nRolling CO2, rate, occupancy"
+  rules: "Decision logic\n[Component]\nRules + hysteresis + setback"
+  guard: "Safety guardrails\n[Component]\nClamp to regulatory minimum"
+  client: "Actuator client\n[Component]\nIssues REST commands"
+  log: "Decision log\n[Component]\nRecords reason per action"
+}
+tsdb -> svc.feat: "query window [SQL]"
+dq -> svc.rules: "stuck-sensor flags"
+svc.feat -> svc.rules: "features"
+svc.rules -> svc.guard: "proposed action"
+svc.guard -> svc.client: "approved action"
+svc.client -> act: "command [REST]"
+svc.rules -> svc.log: "reason"

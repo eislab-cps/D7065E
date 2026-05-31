@@ -1,0 +1,24 @@
+direction: down
+bs: "BuildSim\n[Software System]\nEnvironment: sensor values,\nactuator state, 3D viewer"
+sys: "Your system  [System]" {
+  style.stroke-dash: 4
+    style.fill: transparent
+  sim: "Physical simulator\n[Container: Go]\nAdvances physics; writes\nvalues, reads state"
+  sensor: "Sensor process\n[Container: Go]\nReads from BuildSim, publishes"
+  broker: "Message broker\n[MQTT]\nDecouples producers/consumers" { shape: queue }
+  pipe: "Pipeline consumer\n[Container: Python]\nStores readings"
+  store: "Data store\n[TSDB / lake]\nRecent window + history" { shape: cylinder }
+  ctrl: "Autonomous service\n[Container: Python]\nDecides and commands"
+  act: "Actuator process\n[Container: Go]\nApplies commands to BuildSim"
+  dash: "Dashboard\n[Container: Web]\nVisualises state"
+}
+sys.sim -> bs: "Writes values / reads state [REST]"
+bs -> sys.sensor: "Read values [REST]"
+sys.sensor -> sys.broker: "Publish [MQTT]"
+sys.broker -> sys.pipe: "Consume [MQTT]"
+sys.pipe -> sys.store: "Write [SQL]"
+sys.store -> sys.ctrl: "Query [SQL]"
+sys.ctrl -> sys.act: "Command [REST]"
+sys.act -> bs: "Set actuator state [REST]"
+sys.store -> sys.dash: "Query [SQL]"
+bs -> sys.dash: "Live state [WebSocket]"

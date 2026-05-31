@@ -1,0 +1,237 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Project Proposal (Week 2), Energy-Aware Ventilation \& Climate Control},
+  pdfauthor={Example team: A. Andersson \& B. Berg},
+  colorlinks=true,
+  linkcolor={RoyalBlue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[a4paper,margin=2.4cm]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{newunicodechar}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\newunicodechar{°}{\textdegree}
+\newunicodechar{₂}{\textsubscript{2}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{✓}{\ensuremath{\checkmark}}
+\newunicodechar{–}{--}
+\newunicodechar{—}{---}
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\footnotesize}
+\AtBeginEnvironment{tabular}{\footnotesize}
+\usepackage{fancyhdr}
+\pagestyle{fancy}\fancyhf{}
+\rhead{\small D7065E\,--\,Project Proposal}
+\lhead{\small Example: Week 2 Proposal}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{0.5em}{}
+\usepackage{microtype}
+\setlength{\emergencystretch}{2em}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Project Proposal (Week 2), Energy-Aware Ventilation \& Climate
+Control}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{D7065E, worked example}
+\author{Example team: A. Andersson \& B. Berg}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{quote}
+\textbf{About this document.} A short, worked example of the
+\textbf{Week 2 proposal}. It is deliberately provisional, its job is
+to get a \emph{direction} approved, not to lock down the design. Some
+early choices here (REST transport, an ML occupancy model) are revised
+later in the final report; that is expected and good.
+\end{quote}
+
+\hypertarget{summary}{%
+\subsection{Summary}\label{summary}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule
+\endhead
+\textbf{Team} & A. Andersson, B. Berg \\
+\textbf{Use case} & Energy-aware ventilation \& climate control \\
+\textbf{Pitch} & Ventilate and heat rooms based on who is actually
+present, to keep air quality and comfort high while cutting energy. \\
+\textbf{Repository} &
+\texttt{github.com/example-team/d7065e-ventilation} \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{use-case-and-why}{%
+\subsection{1. Use case, and why}\label{use-case-and-why}}
+
+This project controls ventilation and heating in a BuildSim office
+floor. It was chosen because it has a genuine tension, air quality and
+comfort pull one way, energy the other, which makes the autonomous
+decision interesting, and because BuildSim provides rooms and occupancy
+to work with.
+
+\hypertarget{scenario}{%
+\subsection{2. Scenario}\label{scenario}}
+
+A meeting fills a room; CO₂ and temperature rise; the system detects it
+and increases ventilation, holding CO₂ below 1000 ppm; when the room
+empties it falls back to a low-energy setback. The same loop runs in
+every room.
+
+\hypertarget{what-well-build-rough-sketch}{%
+\subsection{\texorpdfstring{3. What will be built \emph{(rough
+sketch)}}{3. What will be built (rough sketch)}}\label{what-well-build-rough-sketch}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Sensors:} temperature, CO₂, and occupancy per room, registered
+  with BuildSim.
+\item
+  \textbf{Autonomous decision-maker:} sets ventilation level and heating
+  setpoint per room.
+\item
+  \textbf{Actuators:} HVAC setpoint and ventilation damper, writing
+  state back to BuildSim.
+\item
+  \textbf{Data pipeline / storage:} collect sensor readings, store
+  recent history, and provide data to the autonomous service and the
+  dashboard.
+\item
+  \textbf{Dashboard:} overlay state and decisions on the BuildSim 3D
+  view.
+\end{itemize}
+
+Each major component (sensors, autonomous service, actuators, storage,
+and dashboard) runs as a \textbf{separate process} communicating through
+\textbf{defined interfaces}, and talks to BuildSim through its API.
+
+\hypertarget{simulating-the-building}{%
+\subsection{4. Simulating the building}\label{simulating-the-building}}
+
+BuildSim provides the rooms; the physics and the people are simulated as
+follows.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Physical processes:} a simple per-room model, temperature
+  from a heat balance (envelope loss, body heat, HVAC), and CO₂ that
+  rises with the number of people and falls with ventilation. Actuator
+  commands feed back into the model so the loop closes.
+\item
+  \textbf{People movement (occupancy):} sample a head-count per room
+  conditioned on \textbf{room type and time of day}, offices steady
+  through the day, the fika room busy around 11:30, conference rooms full
+  during meetings, empty at night. (A richer option that could be added
+  later: move individual people between rooms along BuildSim's
+  \textbf{navigation graph}.)
+\end{itemize}
+
+The models are intentionally simple, but \textbf{actuator actions must
+influence future sensor readings} so that the control loop closes.
+
+\hypertarget{the-autonomous-part}{%
+\subsection{5. The autonomous part}\label{the-autonomous-part}}
+
+It decides each room's fan level and setpoint from CO₂, temperature, and
+occupancy. \textbf{Starting approach:} a small ML model to predict
+occupancy, feeding a simple controller. Plain rules may be used instead
+if the data turns out too thin to train on.
+
+\hypertarget{biggest-unknowns-risks}{%
+\subsection{6. Biggest unknowns \& risks}\label{biggest-unknowns-risks}}
+
+\begin{itemize}
+\tightlist
+\item
+  Whether two weeks of simulated data is enough to train the occupancy
+  model.
+\item
+  Whether sending readings to the controller over REST keeps up as
+  rooms are added.
+\item
+  Whether the room physics is realistic enough for the decisions to mean
+  anything.
+\end{itemize}
+
+\hypertarget{first-step-rough-plan}{%
+\subsection{7. First step \& rough plan}\label{first-step-rough-plan}}
+
+The first step is \textbf{one room working end-to-end}, one set of
+sensors → controller → actuator → BuildSim, to prove the loop closes.
+After that, more rooms, storage, and the dashboard are added, and failure
+handling and evaluation follow toward the Week 8 demo.
+
+\end{document}
