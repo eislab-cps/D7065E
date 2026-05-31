@@ -1,4 +1,4 @@
-# Chapter 3 — Data Engineering for Cyber-Physical Systems
+# Data Engineering for Cyber-Physical Systems
 
 Standalone notes for the third chapter of D7065E.
 

@@ -1,4 +1,4 @@
-# Chapter 1 — Introduction and Model-Based Systems Engineering
+# Introduction and Model-Based Systems Engineering
 
 Standalone notes for the first chapter of D7065E.
 

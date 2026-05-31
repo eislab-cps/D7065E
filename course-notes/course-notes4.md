@@ -1,4 +1,4 @@
-# Chapter 4 — Agentic AI for Autonomous Systems
+# Agentic AI for Autonomous Systems
 
 Standalone notes for the fourth chapter of D7065E.
 

@@ -1,4 +1,4 @@
-# Chapter 2 — Edge Intelligence & CPS Architecture
+# Edge Intelligence & CPS Architecture
 
 Standalone notes for the second chapter of D7065E.
 

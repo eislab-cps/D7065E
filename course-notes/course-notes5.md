@@ -1,4 +1,4 @@
-# Chapter 5 — Diagrams as Code, Generating Architecture Diagrams
+# Diagrams as Code, Generating Architecture Diagrams
 
 Standalone notes for the fifth chapter of D7065E.
 
