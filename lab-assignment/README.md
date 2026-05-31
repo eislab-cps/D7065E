@@ -1,8 +1,8 @@
 # D7065E — Lab assignment documents
 
 Course material for the project in **D7065E, Embedded Intelligence at the Edge**.
-Two kinds of document, each as a *guide* (how to write it, and why) paired with a
-*worked example* (what a strong answer looks like):
+Each deliverable comes as a *guide* (how to write it, and why) and a *worked example*
+(what a strong answer looks like); the final report also has a fill-in *template*:
 
 | Document | Folder | What it is |
 |---|---|---|
@@ -10,6 +10,7 @@ Two kinds of document, each as a *guide* (how to write it, and why) paired with 
 | | `proposal_example/` | A deliberately provisional, filled-in proposal. |
 | **Final report (architecture document)** | `final_report_guide/` | Explains each section, and the MBSE/C4 ideas behind it. |
 | | `final_report_example/` | A complete worked report at the grade-5 standard. |
+| | `final_report_template/` | The blank skeleton to fill in, guidance notes and slots. |
 
 The use case throughout the examples is **energy-aware ventilation & climate
 control** on a BuildSim office floor.
@@ -19,8 +20,9 @@ control** on a BuildSim office floor.
 From this directory:
 
 ```
-make            # build everything (both reports + both proposals)
+make            # build everything (reports + template + proposals)
 make reports    # only the two D2/LaTeX reports
+make template   # only the fill-in report template
 make proposals  # only the two short proposal PDFs
 make clean      # remove LaTeX intermediates everywhere
 make distclean  # also remove generated PDFs and rendered figures
@@ -30,6 +32,7 @@ make distclean  # also remove generated PDFs and rendered figures
 
 - `final_report_guide/report_guide.pdf`
 - `final_report_example/final_report_example.pdf`
+- `final_report_template/final_report_template.pdf`
 - `proposal_guide/proposal_guide.pdf`
 - `proposal_example/proposal_example.pdf`
 
@@ -48,7 +51,7 @@ Each subfolder has its own `Makefile`; the top-level one recurses into them.
   ```
 
   Install with `go install oss.terrastruct.com/d2@latest` and make sure
-  `$(go env GOPATH)/bin` is on your `PATH`.
+  `$(go env GOPATH)/bin` is on the `PATH`.
 - **pgfplots** (native LaTeX) for the evaluation charts in the report example, so
   there is no external charting tool.
 
