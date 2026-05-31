@@ -1,6 +1,6 @@
 # Software Building Blocks: Containers and the Tools to Run Them
 
-This chapter introduces Docker containers, which are used to run sensors, actuators, and services as independent processes.
+This tutorial introduces Docker containers, which are used to run sensors, actuators, and services as independent processes.
 
 ---
 
@@ -33,7 +33,7 @@ The lifecycle ties them together: a `Dockerfile` is *built* into an image, an im
 *run* as containers, and images are *pulled* from (or *pushed* to) a registry.
 
 <figure class="diagram">
-<img src="figures/course-notes6-fig01.svg" alt="Container lifecycle: a Dockerfile is built into an image, the image is pulled from or pushed to a registry, and the image is run as containers">
+<img src="figures/software-building-blocks-fig01.svg" alt="Container lifecycle: a Dockerfile is built into an image, the image is pulled from or pushed to a registry, and the image is run as containers">
 <figcaption><em>The container lifecycle: build a Dockerfile into an image, pull or push images via a registry, and run an image as one or more containers.</em></figcaption>
 </figure>
 
@@ -334,7 +334,7 @@ the plugin (<https://docs.docker.com/compose/install/>).
 Compose places both containers on one network where each is reachable by its **service
 name**, so a consumer added later can read `http://temp-a109:9000/value` without knowing any
 IP address. A real broker (Mosquitto) and a data store join this file in the parts that
-follow; the full recommended stack later in this chapter is exactly such a `compose.yaml`.
+follow; the full recommended stack later in this tutorial is exactly such a `compose.yaml`.
 
 - Compose overview: <https://docs.docker.com/compose/>
 - Compose quickstart: <https://docs.docker.com/compose/gettingstarted/>
@@ -361,6 +361,6 @@ follow; the full recommended stack later in this chapter is exactly such a `comp
 
 Containers are light, but they are not free. Each service uses memory, and some images
 (anything built on the Java Virtual Machine) can use half a gigabyte or more at rest.
-`docker stats` shows the live usage. The chapters that follow recommend tools partly on how
+`docker stats` shows the live usage. The sections that follow recommend tools partly on how
 little they cost to run, because the entire system has to fit on one machine. Keep the
 container count and the heavyweight services modest.

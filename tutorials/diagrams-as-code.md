@@ -1,6 +1,6 @@
 # Diagrams as Code, Generating Architecture Diagrams
 
-Standalone notes for the fifth chapter of D7065E.
+A hands-on tutorial for D7065E.
 
 ---
 
@@ -39,7 +39,7 @@ Diagrams-as-code is a crowded field. The table below sketches the main options a
 | **Excalidraw** | GUI | Quick, hand-drawn look for sketches | Manual; not a model that can be regenerated |
 | **TikZ / pgfplots** | LaTeX | Precise figures and charts inside documents | Steep; better for charts than box-and-line architecture |
 
-For this course the recommended tool is **D2**. It is a single Go binary with no Java dependency, the syntax is readable, the layout engines and themes produce consistent results, and it covers everything the C4 model needs. **Mermaid** is a reasonable lighter alternative when a diagram needs to render directly inside a GitHub README; **pgfplots** is the right choice for evaluation *charts* (it is used for exactly that in the report example). The rest of this chapter is a working introduction to D2.
+For this course the recommended tool is **D2**. It is a single Go binary with no Java dependency, the syntax is readable, the layout engines and themes produce consistent results, and it covers everything the C4 model needs. **Mermaid** is a reasonable lighter alternative when a diagram needs to render directly inside a GitHub README; **pgfplots** is the right choice for evaluation *charts* (it is used for exactly that in the report example). The rest of this tutorial is a working introduction to D2.
 
 ---
 
@@ -77,7 +77,7 @@ control -> buildsim: reads sensors, writes actuators
 Rendered with the course theme, that produces:
 
 <figure class="diagram">
-<img src="figures/course-notes5-fig01.svg" alt="A small D2 context diagram: a facility manager monitoring a ventilation control system that talks to BuildSim">
+<img src="figures/diagrams-as-code-fig01.svg" alt="A small D2 context diagram: a facility manager monitoring a ventilation control system that talks to BuildSim">
 <figcaption><em>A small context-style diagram. Three nodes, two connections, and the layout is computed automatically. The dashed node marks an external system.</em></figcaption>
 </figure>
 
@@ -111,7 +111,7 @@ control.decider -> buildsim: write commands
 ```
 
 <figure class="diagram">
-<img src="figures/course-notes5-fig02.svg" alt="A D2 container diagram: a dashed Ventilation Control boundary containing a sensor service, an autonomous decider, and a history datastore, all interacting with BuildSim">
+<img src="figures/diagrams-as-code-fig02.svg" alt="A D2 container diagram: a dashed Ventilation Control boundary containing a sensor service, an autonomous decider, and a history datastore, all interacting with BuildSim">
 <figcaption><em>A container-style diagram. The dashed, transparent box is the system boundary; its inner nodes are the containers. Connections can cross the boundary by qualifying the node name, <code>control.sensors</code>.</em></figcaption>
 </figure>
 
@@ -147,8 +147,8 @@ d2 --theme 4 --layout elk --pad 25 --scale 2 control.d2 figures/control.png
 The first PNG export downloads a small headless browser that D2 uses to rasterise the SVG; this happens once and is then cached, so later renders are fast. SVG output has no such dependency. The two example figures above are SVG, generated with these commands (swap the `.svg` extension for `.png` to get raster versions):
 
 ```
-d2 --theme 4 --layout dagre --pad 25 context.d2   figures/course-notes5-fig01.svg
-d2 --theme 4 --layout elk   --pad 25 container.d2  figures/course-notes5-fig02.svg
+d2 --theme 4 --layout dagre --pad 25 context.d2   figures/diagrams-as-code-fig01.svg
+d2 --theme 4 --layout elk   --pad 25 container.d2  figures/diagrams-as-code-fig02.svg
 ```
 
 ### Automating with Make
@@ -188,7 +188,7 @@ The C4 model from Chapter 1 maps cleanly onto D2's building blocks, which is muc
 | Relationship | a connection `->` with a label describing the interaction |
 | Dynamic (sequence) diagram | a node with `shape: sequence_diagram` |
 
-Every diagram in the lab assignment is drawn this way. Both the report guide (`lab-assignment/final_report_guide/`) and the worked example (`lab-assignment/final_report_example/`) render their figures from D2 sources with the same theme and Makefile pattern shown above. The example uses exactly these constructs to draw the full C4 set, Context, Container, Component, and a Dynamic diagram, plus a deployment view. Reading those `.d2` sources alongside this chapter is the fastest way to see the conventions applied to a complete system. The point is not the notation for its own sake: a diagram that can be diffed, reviewed, and regenerated is part of the engineering record, in the same way the code is.
+Every diagram in the lab assignment is drawn this way. Both the report guide (`lab-assignment/final_report_guide/`) and the worked example (`lab-assignment/final_report_example/`) render their figures from D2 sources with the same theme and Makefile pattern shown above. The example uses exactly these constructs to draw the full C4 set, Context, Container, Component, and a Dynamic diagram, plus a deployment view. Reading those `.d2` sources alongside this tutorial is the fastest way to see the conventions applied to a complete system. The point is not the notation for its own sake: a diagram that can be diffed, reviewed, and regenerated is part of the engineering record, in the same way the code is.
 
 ---
 
