@@ -11,4 +11,4 @@ This repository holds the technical material. Administrative material, grading, 
 - [Course Notes](course-notes/) — four chapters of reading material
 - [Tutorials](tutorials/) — hands-on guides (diagrams as code, containers and tooling)
 - [Lab Assignment](lab-assignment/) — proposal and final-report templates, with worked examples
-- [BuildSim](buildingsim/) — building simulation server
+- [BuildingSim](buildingsim/) — building simulation server
