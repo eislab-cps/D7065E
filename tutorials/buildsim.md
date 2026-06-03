@@ -1,7 +1,5 @@
 # Using BuildSim
 
-A hands-on tutorial for D7065E.
-
 BuildSim is the building provided for the project: a 3D viewer and a REST API in a single
 binary. It **holds the building state** (rooms, equipment, sensor values, actuator states);
 the project reads and writes that state. This tutorial runs BuildSim, puts a sensor and an
@@ -18,7 +16,7 @@ lab architecture, see `buildingsim/docs/lab-quickstart.md`.
 
 ---
 
-## Part 1 — Run it
+## Part 1 — Start the BuildingSim server 
 
 BuildSim is a single Go binary. Build and start it:
 
