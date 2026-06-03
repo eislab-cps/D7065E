@@ -1,0 +1,30 @@
+\mode<presentation>
+
+\setbeamertemplate{background}
+{
+	\color{mainColor}\vrule width\paperwidth height\paperheight
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																Title Page																	%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defbeamertemplate*{title page}{customized}[1][]{
+\begin{tikzpicture}[remember picture, overlay]
+	
+	\node[at=(current page.east), anchor=east, inner sep=0] {\includegraphics[width=.5\paperwidth, height=\paperheight]{\TitleImagePath}};
+
+	\node[fill=white, rectangle, minimum width=.6\paperwidth, minimum height=.4\paperheight, anchor=center, text width=.55\paperwidth, font=\sffamily] at ($(current page.center)+(0,0.06\paperheight)$) {
+		\usebeamerfont{title}\textcolor{mainColor}\inserttitle\\
+		\vspace{0.1cm}
+		\tiny \textcolor{orange}{\rule{0.1\linewidth}{2pt}}\par
+		\vspace{0.1cm}
+		\usebeamerfont{author}\textcolor{subtleColor}\insertauthor\par
+		\usebeamerfont{date}\textcolor{subtleColor}\insertdate
+	};
+	\end{tikzpicture}
+}
+
+\mode
+<all>

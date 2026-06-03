@@ -2,6 +2,9 @@
 
 All endpoints are relative to `http://localhost:9090`.
 
+New to the D7065E lab? Start with the [Lab Quickstart](../lab-quickstart.md), which maps the
+assignment onto these endpoints.
+
 | Document | Endpoints |
 |----------|-----------|
 | [Building Data](building.md) | `GET /api/building`, `GET /api/building/floors/{level}`, `GET /api/building/cross-floor-edges` |

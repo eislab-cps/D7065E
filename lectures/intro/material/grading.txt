@@ -1,0 +1,274 @@
+Grading
+Expectations and Scope
+Distributed systems and advanced AI
+Students may assume that higher grades require more sophisticated AI models or advanced distributed systems techniques. That is not the case here.
+
+The purpose of this project is to design, implement, and evaluate a distributed cyber-physical system. The primary focus is on architecture, communication patterns, integration, data pipelines, testing, and reasoning about system behaviour.
+
+The autonomous component may be implemented using rule-based logic, optimisation techniques, machine learning models, LLM-based agents, or a combination of approaches. More sophisticated AI does not automatically lead to a higher grade. What matters is that the approach is justified, integrated into the system, and evaluated critically.
+
+Likewise, this course introduces fundamental distributed systems concepts such as service decomposition, APIs, messaging, containerization, fault handling, and data management. You are not expected to implement advanced distributed systems algorithms such as consensus protocols, distributed transactions, distributed databases, or large-scale cloud-native infrastructure. These topics are covered in greater depth in later courses.
+
+A simple solution that is well-architected, well-justified, thoroughly tested, and critically evaluated will score higher than a technically ambitious solution that cannot be clearly explained, defended, or evaluated.
+
+System modelling
+The syllabus is grounded in Model-Based Systems Engineering (MBSE). It is important to understand that the value of MBSE lies in the engineering thinking it promotes, not in any particular modelling notation or tool.
+
+At its core, MBSE is about architectural and systems thinking. It encourages you to reason about requirements, components, interfaces, data flows, behaviour, and feedback loops before implementation. The goal is to identify design issues early, when they are easier and less costly to address.
+Models are a means of communication, not an end in themselves. Formal MBSE languages and tools such as SysML are one way of expressing system models, but they are not the focus of this course. Instead, we use a small set of lightweight artefacts, such as C4 diagrams, requirements tables, interface contracts, and behavioural diagram, that capture the same essential reasoning while remaining practical to maintain alongside the code.
+The purpose of these artefacts is to make your design decisions, assumptions, and reasoning explicit and reviewable. They exist to support discussion, validation, implementation, and evaluation of the system.
+
+Using lightweight modelling artefacts instead of SysML is therefore not a departure from MBSE. It preserves the core principles of model-based engineering while reducing unnecessary notation overhead. What is assessed is the quality of your architectural, systems, and critical reasoning, and your ability to communicate and justify your design decisions—not your proficiency with a particular modelling language or tool.
+
+Grading philosophy
+This course is designed to develop three fundamental engineering skills:
+
+Architectural thinking — designing and modelling a system before building it, making design decisions explicit, and justifying those decisions against viable alternatives.
+Systems thinking — understanding how components interact within a larger cyber-physical system, how information and control flow through the system, and how failures, delays, or design choices in one component affect the behaviour of the whole.
+Critical thinking — evaluating a system using evidence, identifying limitations and failure modes, analysing trade-offs, and being honest about what works, what does not, and why.
+Your grade is based on how well you demonstrate these skills, not on the number of features you implement or the sophistication of the technologies you use. A simple system that is well-designed, well-justified, and critically evaluated will score higher than a complex system that cannot be clearly explained, defended, or evaluated.
+
+Evidence for these skills comes from three sources:
+
+The written report and supporting architectural artefacts.
+The running system, demonstrated and evaluated in operation.
+The individual oral defence, where you explain and justify your design decisions and reasoning.
+Grading consists of two stages.
+
+Stage 1 — Pass/Fail requirements. A small set of mandatory requirements that must be satisfied for the project to be assessable. If any of these requirements are missing, the project is awarded U (Fail) until the deficiencies have been addressed.
+
+Stage 2 — Graded assessment. The project is evaluated across four dimensions (A–D), each described at three performance levels: 3, 4, and 5. Together, these dimensions assess your architectural thinking, systems thinking, and critical thinking.
+
+Grades are determined holistically. To achieve a particular grade level, students are expected to demonstrate performance at or near that level across most dimensions. Significant weaknesses in any dimension may limit the final grade, even when performance in other dimensions is strong.
+
+The emphasis is therefore on balanced engineering competence rather than maximising a numerical score. The goal is to demonstrate the ability to design, implement, evaluate, and justify a complete cyber-physical system rather than excelling in only a subset of those activities.
+
+The individual oral examination is a separate assessment and serves as a validation of individual understanding. It is not an additional graded dimension and cannot increase the grade earned by the project.
+
+Its purpose is to verify that each student personally understands the architecture, design decisions, implementation, and evaluation presented in the report and demonstration. Each student must be able to explain, justify, and defend the system independently. A student who cannot demonstrate understanding at the level indicated by the project will receive only the grade level they can personally justify during the oral examination. A student who cannot explain and defend their own system architecture, design decisions, and implementation does not pass the course, regardless of the quality of the project itself.
+
+See The Oral Examination page for details.
+
+Part 1 — Pass/Fail requirements
+The following requirements must be satisfied for the project to be assessable. If any requirement is missing, the project is awarded U (Fail) until the issue has been addressed.
+
+Sensor, actuator, and autonomous decision-making components run as separate, independently deployable and restartable processes (e.g., Docker containers). The system must not be implemented as a single monolithic application.
+The system operates end-to-end: sensor data is generated, transmitted through the system, processed by an autonomous component, results in a decision, drives an actuator, and produces a visible effect in BuildSim that feeds back into subsequent sensor readings.
+At least one component performs autonomous decision-making based on sensor data and influences actuator behaviour. Rule-based, optimisation-based, ML-based, and LLM-based approaches are all acceptable. The decision-making logic must be genuine, justified, and integrated into the system.
+A data pipeline collects sensor data, stores it, and makes it available to other system components for monitoring, analysis, decision-making, training, or evaluation.
+An architecture document is provided, including:
+A C4 Context Diagram
+A C4 Container Diagram
+A requirements table
+Documentation of key interfaces and communication paths
+A test plan is provided and executed, including:
+Unit tests for selected components
+At least one end-to-end integration test
+Documentation of test results
+A dashboard is provided that visualises relevant aspects of the system state, such as sensor readings, actuator states, environmental conditions, or autonomous decisions.
+A written report is submitted and documents the architecture, implementation, evaluation, and key design decisions.
+In the oral examination, each student can draw, explain, and justify the system architecture from memory, including the major design decisions and trade-offs.
+Dimension A — Architecture & design
+Architectural thinking · serves LO2
+
+Guiding question: Is the system architecture clearly described, well justified, and appropriate for the problem.
+
+Grade
+
+What you demonstrate
+
+3
+
+The architecture is documented using C4 context and container diagrams, a requirements table, and interface contracts. The role and responsibility of each component are clearly explained. Major design decisions (e.g., communication protocols, service boundaries, data storage, deployment choices) are justified against at least one reasonable alternative.
+
+4
+
+Architectural decisions are explicitly linked to functional and non-functional requirements such as latency, reliability, maintainability, scalability, or fault tolerance. Behavioural models (e.g., sequence diagrams, state diagrams, workflow diagrams) describe key system interactions. Interfaces and communication flows are specified with sufficient precision that another team could implement the system from the documentation.
+
+5
+
+The architecture is critically evaluated in terms of its assumptions, limitations, and trade-offs. Alternative designs are discussed and compared using evidence and engineering reasoning. The team demonstrates how the architecture could evolve to support larger deployments, additional buildings, new services, or increased performance requirements while preserving the overall design principles.
+
+Dimension B — Systems integration & the CPS loop
+Systems thinking · serves LO1 and LO3
+
+Guiding question: Do you reason about the behaviour of the system as a whole, rather than as a collection of isolated components?
+
+Grade
+
+What you demonstrate
+
+3
+
+The complete cyber-physical feedback loop operates end-to-end (sense → decide → act → physical effect → sense). Components run as independent processes and communicate through well-defined interfaces. You can trace a sensor reading through the entire system and explain how information and control flow between components.
+
+4
+
+The system is designed as a coherent distributed application with clearly justified service boundaries, communication patterns, and component responsibilities. You demonstrate and analyse behaviour under change or failure, such as process crashes, unavailable services, delayed messages, or invalid sensor data. Recovery mechanisms, fault handling, and operational trade-offs are explained and evaluated.
+
+5
+
+You reason about system-level and emergent behaviour rather than individual components in isolation. This includes analysing cascading failures, feedback effects, resource contention, conflicting decisions, communication bottlenecks, and other interactions that arise from the system architecture. You can identify the limits of the design, explain why they occur, and relate them back to architectural decisions and trade-offs.
+
+Dimension C — Autonomous Services & Data Engineering
+Systems thinking · serves LO1 and LO3
+
+Guiding question: Does the system make autonomous decisions, and are those decisions supported by a well-designed data pipeline?
+
+What you demonstrate
+
+3
+
+At least one component makes autonomous decisions based on sensor data. The decision-making approach may be rule-based, optimisation-based, ML-based, LLM-based, or a combination of approaches. Sensor data flows through a defined data pipeline rather than ad-hoc direct communication. The chosen approach is explained and justified in relation to the problem being solved.
+
+4
+
+The system includes a data pipeline that collects, stores, and makes sensor data available for monitoring, analysis, evaluation, or decision-making. The autonomous component is evaluated using appropriate metrics and evidence. The chosen approach is compared against reasonable alternatives and its strengths and limitations are discussed.
+
+5
+
+The interaction between autonomous decision-making and data engineering is critically analysed. Data quality issues such as missing, delayed, contradictory, or corrupted data are identified and handled appropriately. Where multiple techniques are used, their roles and trade-offs are justified. The impact of data quality and decision-making behaviour on overall system performance is evaluated and discussed.
+
+Dimension D — Critical evaluation
+Critical thinking · serves LO4
+
+Guiding question: What evidence do you have that the system works, and what evidence do you have that it does not?
+
+Grade
+
+What you demonstrate
+
+3
+
+You describe what was tested, how it was tested, and what the results show. Tests verify both individual components and end-to-end system behaviour. Basic system characteristics such as functionality, responsiveness, and correctness are reported and discussed.
+
+4
+
+You perform quantitative evaluation against requirements and design goals. Relevant metrics such as latency, throughput, recovery time, resource usage, decision quality, or system responsiveness are measured and analysed. Fault-injection experiments are performed, and the results are connected back to architectural and implementation decisions.
+
+5
+
+You conduct a systematic evaluation of the system’s limits through stress testing, failure analysis, and breaking-point experiments. Trade-offs involving performance, resource consumption, maintainability, reliability, energy usage, or sustainability are analysed and discussed. The evaluation includes an honest critique of the architecture, identifying weaknesses, assumptions, and areas for future improvement, supported by evidence from testing and experimentation.
+
+Achieving the highest level of critical evaluation requires more than demonstrating that the system works under normal conditions. It requires systematically exploring the limits of the system and understanding how it behaves under stress, failure, and unexpected conditions.
+
+Examples include:
+
+Failure simulation — deliberately introduce faults such as crashing sensor, actuator, data pipeline, or autonomous-service processes; injecting corrupted or missing data; interrupting communication; or simulating slow or unavailable components.
+Boundary testing — identify the operating limits of the system. For example: At what update rate does performance degrade? How many simultaneous events can be handled? How does the system behave when sensor readings conflict or become unreliable?
+Autonomous decision-making evaluation — evaluate how autonomous components behave when presented with imperfect information, sensor drift, missing data, contradictory observations, or unusual operating conditions. Analyse where decisions become unreliable and why.
+System-level failure analysis — investigate how failures propagate through the system. Does one failed component affect others? Are failures isolated or cascading? Does the system recover gracefully, enter an unstable state, or continue operating with degraded functionality?
+Resource and performance stress testing — evaluate behaviour under increased load, constrained resources, communication delays, or other conditions that challenge the assumptions of the design.
+The goal is not to break the system for its own sake. The goal is to generate evidence about the system’s limitations and use that evidence to reason about architectural decisions, trade-offs, and future improvements.
+
+Real hardware integration (Optional)
+Students may choose to integrate real IoT devices, such as Raspberry Pi, ESP32, or physical sensors and actuators, alongside the simulated components. This is entirely optional and is not required to achieve any grade.
+
+Successful hardware integration may provide additional evidence for architectural quality and systems thinking, particularly if the same interfaces, communication patterns, data pipeline, and autonomous services can operate with both simulated and physical devices without modification.
+
+The focus is not on the hardware itself, but on the quality of the abstractions and system design. Simply using real hardware does not result in a higher grade. A project is assessed using the same rubric regardless of whether it uses simulated devices, physical devices, or a combination of both.
+
+Where applicable, teams should discuss any architectural challenges, trade-offs, and lessons learned from integrating physical devices into the system.
+
+Oral examination (individual validation)
+Individual assessment · confirms the grade for each student · serves all learning outcomes
+
+The oral examination is an individual validation of understanding, not an additional project deliverable. Its purpose is to confirm that each student personally understands the architecture, design decisions, implementation, testing, and evaluation presented in the project.
+
+The oral examination is a gate, not a modifier. It does not increase the grade earned by the project. Instead, it confirms that each student can independently demonstrate the level of understanding required for that grade. Because the oral examination is individual, students from the same project team may receive different grades.
+
+To be awarded a particular grade, your oral examination must demonstrate understanding at the corresponding level:
+
+To be awarded…
+
+At the oral examination you must…
+
+3
+
+Draw and explain the system architecture from memory, describe the role of each major component, and justify the key design decisions.
+
+4
+
+In addition to the requirements for grade 3, discuss architectural, implementation, and operational trade-offs in depth and respond effectively to follow-up questions.
+
+5
+
+In addition to the requirements for grades 3 and 4, reason confidently about alternatives, limitations, and consequences under critical questioning, including scenarios and design changes that were not explicitly prepared in advance.
+
+If a student cannot demonstrate understanding at the level indicated by the project, they will be awarded only the highest grade level they can personally justify during the oral examination.
+
+A student who cannot explain and defend their own system architecture, design decisions, and implementation does not pass the course (U), regardless of the quality of the project itself.
+
+Summary
+Dimension (thinking skill · LO)
+
+Grade 3
+
+Grade 4
+
+Grade 5
+
+A. Architecture & Design (architectural · LO2)
+
+Architecture documented and justified; major decisions explained against alternatives
+
+Design decisions linked to requirements; behavioural models and precise interfaces
+
+Architecture critically evaluated; limitations, trade-offs, and future evolution discussed
+
+B. Systems Integration & the CPS Loop (systems · LO1/LO3)
+
+Complete feedback loop operates end-to-end; data and control flow are traceable
+
+Distributed system design justified; communication, fault handling, and recovery evaluated
+
+Emergent behaviour, cascading failures, and system-level interactions analysed
+
+C. Autonomous Services & Data Engineering (systems · LO1/LO3)
+
+Autonomous decision-making component integrated through a data pipeline; approach justified
+
+Data pipeline supports storage, analysis, and evaluation; decision-making evaluated with evidence
+
+Data quality, reliability, and trade-offs analysed; multiple techniques justified where appropriate
+
+D. Critical Evaluation (critical · LO4)
+
+Tests are described and results reported
+
+Quantitative evaluation against requirements; fault injection and measurement
+
+Stress testing, breaking-point analysis, trade-off evaluation, and critical self-assessment
+
+Alignment with the course Learning Outcomes (LO)
+Course Learning Outcome
+
+Assessed by
+
+Primary Thinking Skill
+
+LO1 — Explain the principles of edge intelligence and the edge–cloud continuum, including resource management, data management, and compute orchestration
+
+B, C
+
+Systems Thinking
+
+LO2 — Apply model-based methods for requirements analysis, architectural design, and validation of distributed cyber-physical systems, including data pipelines
+
+A
+
+Architectural Thinking
+
+LO3 — Design, implement, and validate intelligent services in a cyber-physical system and document them using model-based artefacts
+
+A, B, C
+
+Architectural Thinking and Systems Thinking
+
+LO4 — Evaluate performance, latency, energy efficiency, and sustainability in edge-intelligence systems
+
+D
+
+Critical Thinking
+
+

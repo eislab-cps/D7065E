@@ -1,0 +1,91 @@
+
+
+% Requirement
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+
+\RequirePackage{ifthen}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+	family=LTU,
+	prefix=LTU@
+}
+
+%Differentiate between XeTex and other Tex Distros
+\RequirePackage{ifxetex}
+
+\setbeamersize{text margin left=0.05\paperwidth}
+\setlength{\leftmargini}{0.026\paperwidth}
+
+
+
+
+
+\DeclareStringOption[english]{language}
+
+\ProcessKeyvalOptions*\relax
+\ifthenelse{\equal{\LTU@language}{swedish}}{
+	\newcommand{\LTU}{LULEÅ TEKNISKA UNIVERISTET}
+	\newcommand{\LogoPath}{media/template/swedish/LTU_sve_vit.png}
+	\newcommand{\TitleImagePath}{media/template/swedish/title.jpg}
+}{
+	\newcommand{\LTU}{LULEÅ UNIVERSITY OF TECHNOLOGY}
+	\newcommand{\LogoPath}{media/template/english/LTU_eng_vit.png}
+	\newcommand{\TitleImagePath}{media/template/english/title.jpg}
+	
+}
+
+%GlobalColorDefinitions
+\definecolor{mainColor}{HTML}{032040}
+\definecolor{white}{HTML}{ffffff}
+\definecolor{accentColor}{HTML}{ff8247}
+\definecolor{subtleColor}{HTML}{89a5be}
+
+\mode<presentation>
+
+\useinnertheme{LTU}
+\useoutertheme{LTU}
+\usefonttheme{LTU}
+\usecolortheme{LTU}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamertemplate{itemize items}[square]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%									Special Slides								%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%										Agenda									%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{agenda}[1]{
+	% Environment definition
+	\begin{frame}{Agenda}
+		% Custom settings e.g., background
+	\end{frame}
+}{
+\end{frame}
+}
+
+\AtEndDocument{
+	\begin{frame}[plain]
+		\begin{center}
+			\includegraphics[width=0.33\paperwidth]{\LogoPath} % Adjust path and filename as necessary
+		\end{center}
+	\end{frame}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%                       Marcus Liwicki Presentation Mode                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\liwicki}[2][1]{%
+	\alt<#1>{\textcolor{white}{#2}}{\textcolor{subtleColor}{#2}}%
+}
+
+
+
+\mode<all>

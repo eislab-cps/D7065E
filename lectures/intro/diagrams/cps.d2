@@ -1,0 +1,16 @@
+direction: right
+phys: Physical world {
+  rooms: rooms & air
+  hvac: HVAC & doors
+  people: people {
+    shape: person
+  }
+}
+cyber: Cyber / software {
+  sensors: sensor procs
+  pipe: pipeline
+  agent: agents
+  act: actuator procs
+}
+phys -> cyber: measurements
+cyber -> phys: actions

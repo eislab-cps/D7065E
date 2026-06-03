@@ -1,0 +1,43 @@
+Oral examination
+The oral examination is individual, approximately 30 minutes. You will be expected to explain your system, draw diagrams, and answer questions demonstrating understanding of the concepts — not just the implementation.
+
+1. Presentation (10 min) — present your system with a live demo.
+2. Whiteboard session (20 min) — draw and explain diagrams on the whiteboard.
+
+You may not use slides or notes during the whiteboard session.
+
+What You Must Be Able To Do
+Draw and Explain System Architecture
+The architecture of your system and the responsibilities of its major components.
+How sensors, services, data storage, decision-making components, and actuators interact.
+Why particular communication patterns, technologies, and deployment choices were selected.
+Autonomous System Design
+How your system senses, reasons, and acts on its environment.
+How decisions are made and translated into actions.
+The role of autonomy in your system and the limits of that autonomy.
+How the system behaves under uncertainty, missing information, or incorrect decisions.
+Data and Decision-Making
+How data flows through the system from sensing to action.
+How data is stored, processed, and transformed into information used for decision-making.
+How autonomous decisions are generated, validated, and executed.
+Explain Your Testing Strategy
+How the system was tested and evaluated.
+How failures, incorrect sensor readings, communication problems, or component outages affect system behaviour.
+The limitations of the current design and possible improvements.
+Example questions
+Be prepared to answer questions such as:
+
+What makes a system autonomous rather than automated?
+How does your system implement a sense–reason–act loop?
+What happens if a sensor provides incorrect information?
+What happens if a decision-making component becomes unavailable?
+Why was a particular communication pattern chosen?
+How does your system balance local and cloud-based computation?
+What are the main failure modes of your system?
+How would your architecture change if the system were deployed at a larger scale?
+Tips
+Practice drawing your architecture from memory before the exam.
+Be honest about what you don't know — it's better than guessing.
+If you used AI tools to generate code, you must still understand what the code does.
+Focus on why, not just what — the examiner wants to see reasoning, not memorisation.
+

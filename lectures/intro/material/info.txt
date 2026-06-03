@@ -1,0 +1,50 @@
+Welcome to D7065E, Embedded Intelligence at the Edge
+This course teaches how to design and build autonomous intelligent systems that sense, reason, and act in physical environments. The focus is on the intersection of edge computing, AI agents, and cyber-physical systems (CPS).
+
+Course syllabus: https://www.ltu.se/en/education/syllabuses/course-syllabus?id=D7065E
+
+You will learn to:
+
+Design cyber-physical system (CPS) architectures that connect sensors, computation, and actuators into autonomous control loops.
+Apply model-based and specification-driven engineering methods to design, implement, and validate cyber-physical systems.
+Build data pipelines that collect, store, and transform sensor data for monitoring, analytics, and decision-making.
+Develop autonomous services and agents that observe system state, reason about conditions, and take action through software interfaces.
+Evaluate the resilience, safety, scalability, and performance of autonomous systems under failures, uncertainty, and changing operating conditions.
+image.png
+
+The course project centers on autonomous building control: you instrument a simulated smart building with sensors and actuators, then develop software that makes real-time control decisions.  The project is intentionally open-ended: students may choose different control problems, architectures, communication patterns, and autonomous approaches. There is no single correct solution.
+
+Expectations
+This is a systems engineering course. The primary focus is on architecture, communication, data pipelines, testing, and system integration.
+The AI component is intended to demonstrate autonomous decision-making, not advanced AI research. Rule-based agents, machine learning models, and LLM-based solutions are all acceptable.
+You are expected to apply fundamental distributed systems concepts, including service decomposition, inter-process communication, APIs, containerization, and fault handling.
+You are not expected to implement advanced distributed systems algorithms such as consensus protocols, distributed databases, or large-scale cloud infrastructure. These topics are covered in later courses.
+Every design choice should be justified in terms of system requirements, trade-offs, and operational considerations.
+Both team members must understand and be able to explain the complete system architecture and its components.
+AI-Assisted Development
+The use of modern agentic AI development tools is strongly encouraged in this course. Tools such as  Claude Code,  OpenAI Codex, Cursor, Windsurf, Cline, and Aider can autonomously read codebases, edit files, run commands, write tests, and assist with system design and implementation. Agentic coding tools are becoming a major part of professional software engineering workflows and can dramatically increase development speed and project scope. However, you remain responsible for all design decisions, code, tests, and conclusions. The oral examination assesses your understanding of the system, not the AI’s ability to generate it
+
+Examination
+The project may be completed individually or in pairs. At the end of the course, each student will participate in an individual oral examination. The examination focuses on architectural understanding, design decisions, and demonstration of the project implementation.
+
+Specification-First Development
+Most developers write code first, then tests, then discover the design was wrong. With AI coding tools, this problem can become even worse, as the AI may generate clean-looking code that satisfies the prompt rather than the underlying requirements.
+
+This course uses Model-Based Systems Engineering (MBSE) Links to an external site.: you design the system with precise models (component diagrams, sequence diagrams, data flows, requirements) before writing any code. These models become the input to AI coding tools. Tests are derived from the specification, not invented after the fact.
+
+Lectures and Deadlines
+Monday 31/8 13:00-14:30: Lecture 1: Introduction the course and assignment 
+
+Wednesday 02/9: Deadline: Form lab groups. 
+
+Friday 4/9 13:00-14:30: Lecture 2: BuildSim practical workshop
+
+Friday 11/9: Deadline: Submit project proposal 
+
+Monday 12/10: Deadline: Submit project final submission
+
+Wednesday 14/10 14:45 - 18:00: Demonstration and oral examination
+
+Wednesday 16/10 13:00 - 14:30: Demonstration and oral examination
+
+Wednesday 19/10 08:15 - 09:45: Demonstration and oral examination

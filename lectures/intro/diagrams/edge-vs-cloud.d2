@@ -1,0 +1,17 @@
+direction: right
+edge: Edge (local) {
+  l1: milliseconds
+  l2: works offline
+  l3: next to sensors
+}
+cloud: Cloud (remote) {
+  style.stroke-dash: 4
+  c1: 100s of ms
+  c2: needs network
+  c3: far away
+}
+sensors: Sensors & actuators {
+  shape: person
+}
+sensors -> edge: fast local loop
+edge -> cloud: slow / heavy tasks only

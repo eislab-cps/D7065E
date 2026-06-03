@@ -1,0 +1,86 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%							Fonts						   	%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamerfont{title}{size=\Large, series=\fontseries{k}}
+\setbeamerfont{sectionpage}{series=\fontseries{k}}
+\setbeamerfont{subtitle}{parent={normal text}, size=\small, series=\mdseries}
+\setbeamerfont{author}{size=\small, series=\mdseries}
+\setbeamerfont{date}{size=\small, series=\mdseries}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+\setbeamerfont{framesubtitle}{parent={normal text}, series=\mdseries}
+\setbeamerfont{title in head/foot}{parent={footline}}
+\setbeamerfont{author in head/foot}{parent={footline}}
+\setbeamerfont{section in toc}{series=\bfseries}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%						  Frame Title						%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defbeamertemplate*{frametitle}{}[1][]{
+	\vspace*{\baselineskip}%
+	\begin{beamercolorbox}[wd=\paperwidth]{frametitle}
+		% Vertical bar
+		\begin{minipage}[c][\baselineskip][c]{0.05\paperwidth}
+			\hfill
+			\color{accentColor}\vrule width 0.15em height 1.5\baselineskip
+			\hfill\mbox{}
+		\end{minipage}%
+		% Title and subtitle
+		\begin{minipage}[c][\baselineskip][c]{0.95\paperwidth} 		% remaining width for the title
+			\ifx\insertframesubtitle\@empty%
+				\vskip3pt% Space above the title when there is no subtitle
+			\fi
+			\usebeamerfont{frametitle}\insertframetitle
+			% Check if subtitle exists
+			\ifx
+				\insertframesubtitle\@empty%
+			\else%
+				\vskip0.5ex											% spacing between title and subtitle
+				\usebeamercolor[fg]{palette secondary}\usebeamerfont{framesubtitle} \insertframesubtitle
+			\fi%
+		\end{minipage}%
+		\vskip0pt%
+	\end{beamercolorbox}
+}
+
+
+%Require different ways to achieve wider spacings in the footline
+\ifxetex
+	\RequirePackage{fontspec}
+\else
+	\RequirePackage{microtype}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%				   		   Footline						   	%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newlength{\footlineheight}
+\setlength{\footlineheight}{0.04\paperheight}
+
+\defbeamertemplate*{footline}{LTU}
+{
+	\ifnum\insertframenumber=1  % Suppress on the title slide
+	\relax
+	\else
+	\begin{beamercolorbox}[wd=\paperwidth,ht=\footlineheight,dp=0.5\footlineheight]{palette quaternary}
+		\hskip2em  % Left margin
+		\hbox to \dimexpr\paperwidth-4em\relax{%
+			\ifxetex
+			\usebeamercolor[fg]{palette quaternary}\textbf{\addfontfeatures{LetterSpace=125} \LTU}%
+			\else
+			\usebeamercolor[fg]{palette quaternary}\textbf{\textls[125]{\LTU}}%
+			\fi
+			\hfill  % Push the slide number to the right
+			\usebeamercolor[fg]{palette secondary}\textbf{\number\numexpr\insertframenumber-1\relax}%
+		}%
+		\hskip2em  % Right margin
+	\end{beamercolorbox}
+	\fi
+}
+
+

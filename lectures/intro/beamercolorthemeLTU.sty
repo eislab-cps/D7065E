@@ -1,0 +1,65 @@
+% Color palettes
+\setbeamercolor*{palette primary}{fg=white, bg = mainColor}
+\setbeamercolor*{palette secondary}{fg=subtleColor}
+\setbeamercolor*{palette tertiary}{fg=subtleColor, bg=white}
+\setbeamercolor*{palette quaternary}{fg=mainColor, bg=white}
+
+\setbeamercolor*{normal text}{fg = white, bg=mainColor}
+% sets (sub)title, (sub)frametitle if not otherwise specified
+\setbeamercolor*{titlelike}{parent=palette quaternary} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                    Specific Choices                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page, part, section, subsection
+
+\setbeamercolor*{title}{parent=palette quaternary}
+\setbeamercolor*{title page header}{parent=palette quaternary}
+\setbeamercolor*{section title}{parent=palette quaternary}
+\setbeamercolor{author}{parent=palette secondary}
+\setbeamercolor{date}{parent = palette secondary}
+\setbeamercolor{slide separation line}{fg=accentColor}
+
+
+% Table of Contents
+\setbeamercolor{section in toc}{parent = palette primary}
+\setbeamercolor{subsection in toc}{parent = palette primary}
+\setbeamercolor{item in toc}{parent = palette primary}
+
+% - Standard block
+\setbeamercolor{block title}{parent=palette primary}
+\setbeamercolor{block body}{parent=palette primary}
+
+% - Alert block
+\setbeamercolor{block title alerted}{parent = palette primary}
+\setbeamercolor{block body alerted}{bg = accentColor}
+
+
+% - Footnotes
+\setbeamercolor{footnote}{parent = palette tertiary} 
+\setbeamercolor{footnote mark}{parent = palette tertiary}
+
+% - Captions
+% - Itemize/Enumerate (both) item icons -> 
+%\setbeamercolor{item}{parent = palette primary}
+\setbeamercolor*{item}{parent = palette secondary}
+
+% Redefine colors for bibliography entries
+\setbeamercolor{bibliography item}{parent = palette secondary}
+\setbeamercolor*{bibliography entry author}{parent=palette secondary}
+\setbeamercolor*{bibliography entry title}{parent=palette primary}
+\setbeamercolor*{bibliography entry location}{parent=palette secondary}
+\setbeamercolor*{bibliography entry note}{parent=palette secondary}
+\setbeamercolor*{bibliography entry location date}{parent=palette secondary}
+\setbeamercolor*{bibliography entry journal}{parent=palette secondary}
+\setbeamercolor*{bibliography entry doi}{parent=palette secondary}
+\setbeamercolor*{bibliography entry url}{parent=palette secondary}
+
+\setbeamercolor{caption name}{parent = palette primary}
+
+
+\setbeamercolor{frametitle}{parent=palette primary}
+\setbeamercolor{framesubtitle}{parent = palette secondary}
+
+\mode
+<all>

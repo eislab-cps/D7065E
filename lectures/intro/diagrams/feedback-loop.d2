@@ -1,0 +1,15 @@
+direction: right
+sim: Physical model
+sensors: Sensors
+buildsim: BuildSim {
+  shape: cylinder
+}
+agent: Agent\n(reason)
+act: Actuators
+
+sim -> sensors: temperature, CO2, smoke
+sensors -> buildsim: publish
+buildsim -> agent: read
+agent -> act: decide
+act -> buildsim: write
+buildsim -> sim: actuator state feeds back

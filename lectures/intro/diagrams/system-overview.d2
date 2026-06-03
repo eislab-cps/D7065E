@@ -1,0 +1,23 @@
+direction: right
+buildsim: BuildSim {
+  shape: cylinder
+  tooltip: shared building state
+}
+sim: Physical\nsimulator
+sensors: Sensor\nprocesses
+agent: Autonomous\nagent
+act: Actuator\nprocesses
+pipe: Data pipeline\n+ storage {
+  shape: cylinder
+}
+dash: 3D dashboard
+
+sim -> sensors: drives
+sensors -> buildsim: publish values
+buildsim -> agent: read state
+agent -> act: command
+act -> buildsim: write state
+buildsim -> sim: actuator state
+sensors -> pipe: stream
+pipe -> agent: features
+buildsim -> dash: live 3D (WebSocket)

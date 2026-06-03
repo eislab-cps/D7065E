@@ -1,0 +1,13 @@
+direction: right
+perceive: Perceive\n(sensor data)
+reason: Reason\n(rules / ML / LLM)
+plan: Plan
+act: Act\n(tools, actuators)
+observe: Observe\n(effect)
+guardrails: Guardrails +\nhuman-in-the-loop {
+  style.stroke-dash: 4
+}
+
+perceive -> reason -> plan -> act -> observe
+observe -> perceive: world changed
+guardrails -> act: constrain

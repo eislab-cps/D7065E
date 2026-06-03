@@ -1,0 +1,277 @@
+Use case exmaples
+Choose one of the following use cases or propose your own (subject to approval).
+
+Important: All projects must include a data-driven component. This can be machine learning, anomaly detection, forecasting, optimization, statistical analysis, or AI-based reasoning. Simple rule-based thresholds alone are not sufficient.
+
+This is primarily a systems engineering course, not a course on developing advanced AI models. The focus is on designing, implementing, and evaluating complete autonomous systems, including sensors, data pipelines, communication, decision-making, deployment, testing, and resilience. The AI component is only one part of the overall system architecture. For most projects, a simple rule-based controller, heuristic algorithm, basic machine-learning model, or even a random baseline is sufficient. Do not spend significant time developing complex AI models; spend that time designing, integrating, testing, and evaluating the system as a whole.
+
+Safety & Emergency 
+Fire detection and autonomous response
+Deploy smoke, CO, and temperature sensors throughout a building. Train a model to distinguish real fires from false alarms caused by cooking, dust, or sensor failures. When a fire is detected, the system autonomously activates sprinklers, unlocks fire doors, computes evacuation routes, tracks occupants, and highlights safe escape paths on the 3D building model.
+
+Typical components:
+
+Smoke sensor processes
+Client simulating smoke readings with realistic noise patterns.
+CO sensor processes
+Client simulating correlated with smoke for multi-sensor fusion.
+Temperature sensor processes
+Client: generating thermal gradients that propagate between adjacent rooms.
+Sprinkler actuators
+Client receives activation commands, reports state.
+Fire-door actuators
+Client locks/unlocks doors, reports position.
+Data pipeline
+Sensor readings stored time-series DB, feature extraction for ML training.
+Anomaly detection model
+Autoencoder or isolation forest trained on "normal" multi-sensor time series.
+Fire-spread prediction model
+Spatial model using room adjacency graph + temperature gradients.
+Evacuation route planner
+Uses BuildSim walkable graph API with dynamic re-routing around affected zones. 
+Autonomous control agent
+AI agent that orchestrates detection, response and evacuation.
+Monitoring dashboard
+BuildSim session API: room highlights (red=fire, orange=risk, green=safe), coverage zones for smoke spread, route display for evacuation paths.
+Gas leak detection and containment
+Monitor gas concentration and air quality throughout a building. Predict leak propagation using ventilation and room connectivity. Automatically control HVAC systems and doors to contain affected areas and support evacuation.
+
+Typical components:
+
+Gas sensor
+Client simulating gas concentration readings with diffusion model.
+Air-quality sensors
+Client simulating CO2, VOC sensors that react to gas propagation
+HVAC actuators
+Client controlling fan speed, damper position control.
+Door-control actuators
+Client for door control.
+Data pipeline
+Real-time stream processing for fast detection, batch for model training.
+Gas-dispersion model
+Graph neural network or physics-informed ML using room connectivity and ventilation topology.
+Autonomous control agent
+AI agent predicts affected rooms, commands HVAC shutdown, creates containment zones.
+Real-time monitoring dashboard
+Coverage zones showing predicted contamination, room highlights for containment status.
+Energy & Sustainability 
+Smart HVAC optimisation
+Use occupancy, temperature, and humidity data to predict thermal demand and optimize HVAC operation. Balance occupant comfort against energy consumption.
+
+Typical components:
+
+Temperature sensors
+Client simulating sensors with thermal models (heat gain from occupants, loss through walls).
+Humidity sensors
+Client simulating sensor with correlated with occupancy and HVAC state.
+Occupancy counters
+Client simulating entry/exit counts with daily/weekly patterns.
+HVAC actuators
+Client simulating heating, cooling, fan speed control per zone
+Occupancy forecasting model
+LSTM, Prophet, or transformer for time-series prediction.
+Data pipeline
+Sensor readings stored in data lake (e.g. parquet), feature engineering (rolling averages, time features), model training pipeline.
+Thermal prediction model
+Modelled predicting temperature response to HVAC settings + occupancy.
+Optimization controller
+Reinforcement learning or model predictive control for HVAC scheduling.
+Energy-tracking service
+Computes energy consumption, compares against fixed-schedule baseline.
+Monitoring dashboard
+Energy consumption graphs (Grafana), room temperature heatmap (BuildSim highlights), occupancy prediction vs. actual.
+Intelligent lighting control
+Optimise lighting using occupancy, daylight availability, and user preferences. Reduce energy consumption while maintaining comfort.
+
+Typical components:
+
+Light sensors
+Client simulate lux readings based on time-of-day, window orientation, weather.
+Occupancy sensors
+Client simulating presence detection with entry/exit patterns.
+Lighting actuators
+Client simulating dimming control (0-100%), on/off.
+Data pipeline
+Light + occupancy readings → feature store, energy consumption tracking.
+Daylight prediction model
+Regression model using time, season, weather, room orientation.
+Occupancy forecasting model
+Learns daily patterns, predicts when rooms will be occupied.
+Lighting controller
+AI agent that balances natural light, artificial light, occupancy prediction, and energy cost.
+Energy dashboard
+Room brightness visualisation, energy savings report, prediction accuracy.
+Security
+Anomaly-based intrusion detection
+Learn normal building access patterns and detect suspicious behaviour such as unusual access times, unexpected movement paths, or potential tailgating.
+
+Typical components:
+
+Card-reader sensors
+Client simulating badge-in/badge-out events with realistic patterns (employees, visitors).
+Motion sensors
+Client simulating presence detection, report room occupancy changes.
+Door-lock actuators
+Client simulating lock/unlock zones.
+Data pipeline
+Event stream stored in Kafka/MQTT, access logs stored in data lake, real-time scoring.
+Access-pattern model
+Clustering (DBSCAN, GMM) on access event sequences to build "normal" profiles.
+Anomaly detector
+Isolation forest or one-class SVM scoring each access event in real-time.
+Security agent
+AI agent that receives anomaly alerts, assesses severity, recommends action.
+Alert dashboard
+BuildSim highlights for threat zones, anomalous paths drawn on map, alert feed.
+Network & Infrastructure 
+WiFi coverage optimisation
+Monitor wireless coverage throughout the building and optimize access-point placement and transmit power.
+
+Typical components:
+
+WiFi access points
+Client register wifi access point in buildSim, simulating connected user,
+Signal-strength probes
+Client simulating signal strength measurements at various room locations.
+Power-control actuators
+Client simulating transmit power per AP.
+Coverage prediction model
+Bayesian optimisation or genetic algorithm for AP power tuning.
+Optimization engine
+AI agent predicting connected-user counts from occupancy data.
+Coverage dashboard
+BuildSim coverage zones (spheres colored by signal quality), dead zone highlight.
+Predictive maintenance
+Monitor equipment health using vibration, temperature, and power sensors. Predict failures before they occur and schedule maintenance proactively.
+
+Typical components:
+
+Vibration sensors
+Client simulating vibration readings with gradual degradation patterns.
+Equipment temperature sensors
+Client simulating monitor operating temperature (distinct from room temperature).
+Power-consumption sensors
+Client simulating kW per equipment unit.
+Equipment health model
+Autoencoder trained on normal operating data, anomaly = degradation.
+Remaining useful life predictor
+Survival analysis or regression on degradation trend.
+Maintenance planning agent
+AI agent plans inspection routes via walkable graph, prioritises by urgency.
+Maintenance dashboard
+Equipment health status on 3D map (green/yellow/red), maintenance schedule.
+Comfort & Wellbeing
+Indoor air quality management
+Predict air-quality degradation using CO₂, VOC, humidity, and occupancy data. Control ventilation proactively while minimizing energy consumption.
+
+Typical components:
+
+CO₂ sensors
+Client simulating CO2 buildup correlated with occupancy (each person ~40 ppm/hour in typical room).
+VOC sensors
+Client simulating vVolatile organic compound levels linked to activities and materials.
+Humidity sensors
+Client simulating occupancy, HVAC state, weather,
+Ventilation actuators
+REST client simulating fan speed, damper position, fresh air intake control.
+Data pipeline
+Sensor readings → time-series DB, rolling averages, compliance reports.
+Air-quality prediction model
+Predicts CO2 concentration 30 min ahead given current occupancy + ventilation
+Ventilation control agent
+RL or MPC agent balancing air quality targets vs. energy cost.
+Compliance dashboard
+Room-by-room air quality heatmap (BuildSim highlights), compliance status, energy vs. quality trade-off graph.
+Building regulation compliance
+Automated regulatory compliance monitoring
+Continuously monitor building operation against regulations and predict future violations before they occur.
+
+Example areas:
+
+Fire safety
+Workplace temperature regulations
+Legionella prevention
+Radon monitoring
+Typical components:
+
+Compliance-related sensors
+Client simulating door close time, compare against code requirements.
+Client simulating hot water pipes for legionella compliance.
+Client simulating air changes per hour per room type.
+Client simulating workplace temperature compliance during work hours.
+Data pipeline
+Continuous sensor data → compliance event log → violation history → trend analysis.
+Violation prediction model
+Time-series forecasting: "temperature will breach minimum in 45 min".
+Severity classifier
+Classifies violations by risk level and regulatory source.
+ Compliance agent
+AI agent that interprets regulations, monitors sensor data, takes preventive action.
+Compliance dashboard
+Compliance dashboard with red/yellow/green per regulation, violation timeline, predictive alerts on BuildSim map.
+Environmental monitoring
+Mold prevention System
+Predict condensation and mold risk using humidity and temperature data. Automatically adjust heating and ventilation to reduce risk.
+
+Typical components:
+
+Humidity sensors
+Client simulating per-room humidity with wall proximity variants.
+Temperature sensors
+Client simulating air temperature + simulated surface temperature near thermal bridges.
+Ventilation actuators
+Client simulating dehumidification, fresh air control.
+Heating actuators
+Client simulating radiator control near at-risk walls.
+Data pipeline: Humidity + temperature stored in DB, with ERL pipeline for dew point computation, risk scoring, and action.
+Mold-risk model
+VTT model parameterized with ML-learned building-specific factors.
+Prevention controller
+AI agent adjusting ventilation and heating to maintain surface temp > dew point + margin.
+Risk dashboard
+Risk heatmap on BuildSim (coverage zones for moisture risk), thermal bridge locations, seasonal trend graphs
+Health
+Airborne Infection Risk Management
+Use occupancy, CO₂, and ventilation data to estimate airborne infection risk and manage building operation accordingly.
+
+Typical components:
+
+CO₂ sensors
+Client simulating air freshness and aerosol concentration.
+Occupancy sensors
+Client simulating how many people and for how long.
+Ventilation actuators
+Client simulating fresh air rate.
+Data pipeline
+CO2 + occupancy → risk computation → room-level risk scores.
+Infection-risk model
+Epidemiological model: P(infection) = f(quanta rate, ventilation, duration, occupants).
+Autonomous control agent
+AI agent: minimise infection risk while maximising usable room cap.
+Risk dashboard
+Coverage zones showing infection risk levels, room highlights, what-if scenario results.
+Contact Tracing Simulation
+Track simulated occupants moving through the building and estimate exposure risk after a reported infection.
+
+Typical components:
+
+Movement simulator
+Client simulating realistic paths using walkable graph (office → meeting → lunch → office).
+Occupancy tracker
+Client simulating who was in which room at what time.
+Data pipeline
+Movement events → temporal graph database → exposure queries
+Exposure-risk model
+Graph-based risk propagation: shared room time × ventilation quality.
+Contact-tracing agent
+AI agent calculating "person X is sick at time T", compute exposure graph for all contacts.
+Visualisation dashboard
+Person paths on 3D map, exposure risk highlights, contact network visualization
+Propose your own project
+You may propose your own use case provided that it:
+
+Uses the BuildSim environment
+Must include sensors, data collection pipeline, and autonomous decision-making, and a dashboard.
+Contains a data-driven component
+Includes a clear evaluation methodology
+Is approved by the examiner

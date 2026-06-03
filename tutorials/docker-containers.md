@@ -1,4 +1,4 @@
-# Software Building Blocks: Containers and the Tools to Run Them
+# Docker Containers and the Tools to Run the System
 
 This tutorial introduces Docker containers, which are used to run sensors, actuators, and services as independent processes.
 
@@ -33,7 +33,7 @@ The lifecycle ties them together: a `Dockerfile` is *built* into an image, an im
 *run* as containers, and images are *pulled* from (or *pushed* to) a registry.
 
 <figure class="diagram">
-<img src="figures/software-building-blocks-fig01.svg" alt="Container lifecycle: a Dockerfile is built into an image, the image is pulled from or pushed to a registry, and the image is run as containers">
+<img src="figures/docker-containers-fig01.svg" alt="Container lifecycle: a Dockerfile is built into an image, the image is pulled from or pushed to a registry, and the image is run as containers">
 <figcaption><em>The container lifecycle: build a Dockerfile into an image, pull or push images via a registry, and run an image as one or more containers.</em></figcaption>
 </figure>
 

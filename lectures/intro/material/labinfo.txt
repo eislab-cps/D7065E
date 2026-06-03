@@ -1,0 +1,140 @@
+ntroduction
+You will build a distributed autonomous building control system. This means:
+
+A physical simulator that models the real-world behavior of the building, including temperature dynamics, smoke propagation, occupancy patterns, equipment degradation, and other relevant environmental processes. Sensor readings must be generated from realistic physical models rather than random values, ensuring that control agents receive meaningful and actionable data.
+Multiple independent processes (sensors, actuators, control agents, and supporting services) running as standalone services and communicating through REST APIs and/or WebSockets. Each sensor and actuator process should emulate a real IoT device, making the system behave like a real-world building automation deployment.
+A data pipeline that collects, stores, and processes sensor data, making it available for monitoring, analytics, prediction, and automated decision-making.
+Autonomous control agents that continuously monitor sensor data, reason about the current state of the building, and take actions through actuators. These agents may use rule-based logic, machine learning models, LLM-based reasoning, or a combination of approaches. The focus is on integrating autonomous decision-making into a distributed cyber-physical system rather than developing sophisticated AI models.
+A dashboard that visualizes the building in 3D and provides real-time insight into sensor readings, actuator states, environmental conditions, agent decisions, and overall system behavior.
+The building structure is provided by BuildSim, which includes the building model, REST APIs, and an interactive 3D web viewer. Your task is to develop the simulation and control layers that bring the building to life. This includes modeling how environmental conditions evolve within rooms, how sensors respond to those conditions, how actuators affect the environment, and how autonomous agents monitor and control the system.
+
+All components run locally on the student’s laptop. BuildSim is provided as a standalone executable, while your simulator, sensors, actuators, control agents, data storage, and dashboard services must run as separate containerized processes that communicate through well-defined interfaces.
+
+Why a simulated building?
+Developing and testing autonomous building-control systems directly on a real building would be expensive, slow, difficult to reproduce, and potentially unsafe. Instead, this project uses a system-level simulation Links to an external site. approach, where the physical environment, sensors, actuators, communication infrastructure, and control software are developed and evaluated as a complete cyber-physical system.
+
+The goal is not to generate artificial data, but to model the building realistically enough that the software architecture, communication patterns, data pipeline, and control logic would remain largely unchanged if connected to a real building. This allows you to test, validate, and iterate on the entire system under controlled and repeatable conditions while still interacting with realistic physical processes and device behaviour.
+
+System-level simulation is widely used in the development of cyber-physical systems because it enables engineers to evaluate system behaviour, identify design flaws, and validate architectural decisions before deployment to physical environments.
+
+Learning Objectives
+After completing this assignment, you will be able to:
+
+Design and justify a distributed cyber-physical system (CPS) architecture, including communication patterns, data flows, and system interactions.
+Develop containerized IoT device simulators that emulate sensors and actuators and communicate through REST APIs.
+Integrate AI agents that autonomously perceive, reason about, and act upon the physical environment within a cyber-physical system.
+Build end-to-end data pipelines that collect, store, process, and transform sensor data for machine learning and AI-driven decision-making.
+Evaluate the reliability and robustness of distributed systems through testing, fault injection, and stress testing.
+Communicate, present, and defend architectural and design decisions using diagrams, whiteboard discussions, and technical reasoning.
+What This Assignment Is (and Is Not)
+This is a systems engineering assignment. The architecture, communication patterns, data pipeline, and testing strategy are the core focus — not the machine learning model itself.
+
+Every component must run as its own process. The system must not be implemented as a single monolithic script. Sensors, actuators, AI agents, data services, and other components must run as separate containerized services.
+Every design choice must be justified. It is not enough to state, for example, “we used MQTT.” You must explain why it was chosen, such as: “We used MQTT because the publish/subscribe model decouples sensors from agents, allowing the agent to restart without disrupting sensor data publishing.”
+The system must be tested under failure conditions. A happy-path demo is not sufficient. You must evaluate what happens when a sensor crashes, when the AI makes an incorrect decision, when the network is slow, or when a service becomes unavailable.
+The oral exam tests system understanding. You must be able to draw your architecture on a whiteboard and explain it from memory. Both team members must understand and be able to explain the complete system, not only the parts they implemented.
+Group size
+Students work in pairs (2 persons). The oral examination is individual — individual students must be able to explain the full system independently.
+
+Workflow
+Choose a use case Links to an external site. (or propose your own).
+Write an architecture document and design specification.
+Write a test plan.
+Get your design approved (week 3 checkpoint).
+Implement the system.
+Demonstrate and present your results.
+System Setup
+Everything runs locally on the student’s laptop. BuildSim is provided as a single executable that embeds the building model, simulation interface, REST API, and 3D web viewer. Your responsibility is to develop the surrounding system components, including the physical simulator, sensor and actuator processes, AI agents, data storage services, and dashboards.
+
+Each components must run as separate services alongside BuildSim and communicate through the provided REST APIs and WebSocket interfaces. Together, they form a distributed cyber-physical system in which each service has a clearly defined responsibility and interacts with the rest of the system through well-defined interfaces.
+
+image.png
+
+How it works:
+Start BuildSim: ./buildsim start --port 9090.
+Start your containers: docker compose up.
+Your simulator models the physical behavior (temperature dynamics, smoke propagation, etc.) and drives the sensor data processes.
+Sensor/data processes push readings to BuildSim via REST and store them in your data storage.
+AI agent processes query sensor data, reason (locally or via GPU server LLM), and command actuator processes.
+Actuator processes update state in BuildSim, which feeds back into the simulator.
+Browser shows the 3D building with real-time updates via WebSocket.
+The GPU server provides LLM inference (Gemma 4 via OpenAI-compatible API) over the network.
+Key principles
+BuildSim is the shared state — it holds the current building state (sensors, actuators, sessions).
+Your components are independent processes that read from and write to BuildSim via REST.
+The simulator creates the closed feedback loop: actuator commands affect the physical model, which changes sensor readings.
+If a process crashes and restarts, it re-registers with BuildSim and continues.
+Requirements
+Architecture & Design
+Must be approved before implementation.
+
+Architecture Document — system overview with component diagrams, communication patterns (pub/sub, REST, event-driven), data flow and storage strategy, scalability and resilience considerations. Every design choice must be justified — explain why you chose this pattern over alternatives, what trade-offs you made, and what the implications are.
+
+Design Specification — data models, API contracts between components, ML/AI model selection with justification, sensor and actuator process design
+
+Test Plan — component-level verification, end-to-end integration tests, ML/AI validation strategy, fault injection tests
+
+Physical Simulator
+4. You must build a simulator that models the physical behavior of your use case. The simulator produces realistic sensor data that responds to actuator commands — creating a closed feedback loop. Examples:
+
+Fire scenario: smoke concentration increases over time, spreads to adjacent rooms through corridors, temperature rises with fire intensity, sprinkler activation reduces smoke/temperature
+HVAC scenario: room temperature is a function of outdoor temperature, occupancy (body heat), HVAC state, and thermal properties of the room. Turning on heating raises temperature gradually, not instantly.
+Air quality: CO2 concentration rises with occupancy (~40 ppm/person/hour in a typical room), decreases with ventilation rate. Opening a window or increasing fan speed drops CO2.
+Security: access events follow realistic patterns — employees arrive 7-9am, leave 16-18pm, with lunch patterns and meeting room usage
+Predictive maintenance: equipment vibration gradually increases over days/weeks, with occasional spikes indicating developing faults
+The simulator does not need to be physically perfect. The goal is to produce data that has enough structure for your AI to learn from — trends, patterns, correlations, and responses to actuator commands. A simple model that captures the basic behavior is sufficient. Don't spend weeks perfecting the physics — spend your time on the architecture, AI integration, and testing.
+
+Occupancy patterns: Your simulator should model realistic occupancy. A typical office building:
+
+Weekdays: employees arrive 7-9am, lunch break 11:30-13:00, leave 16-18pm
+Weekends: building is empty (security guards only)
+Meeting rooms: booked in 1-2 hour blocks, empty between meetings
+Corridors: brief transient occupancy as people move between rooms
+Seasonal: fewer people during holidays (midsommar, jul)
+Occupancy drives many other values — temperature (body heat), CO2, lighting demand, access events, WiFi load.
+
+Approaches:
+
+Physics-based model: implement simplified physical equations (heat transfer, gas diffusion, etc.)
+Data replay: use real-world datasets and replay them through your sensor processes
+Hybrid: replay real data with injected events (e.g., real temperature data + simulated fire event)
+Generative: train a model on real data and use it to generate realistic synthetic sensor streams
+Public datasets for simulation:
+Dataset	Description	Link
+ASHRAE Energy Prediction	Building energy consumption with weather, hourly	Kaggle Links to an external site.
+Building Data Genome Project 2	3,053 energy meters from 1,636 buildings, 2 years	GitHub Links to an external site.
+Environmental Sensor Data	132k readings: temperature, humidity, CO2, PM2.5 from IoT sensors	Kaggle Links to an external site.
+Occupancy Detection	Light, temperature, humidity, CO2 with occupancy labels	Kaggle Links to an external site.
+ECOBEE Thermostat	Residential thermostat data, indoor/outdoor temp, HVAC	BBD Links to an external site.
+Smart Building Dataset	Multi-sensor (temp, humidity, light, CO2) from smart offices	Kaggle Links to an external site.
+Pump Sensor Data	Sensor data from pumps for predictive maintenance	Kaggle Links to an external site.
+NASA Bearing Dataset	Vibration data for predictive maintenance	NASA Links to an external site.
+PRONOSTIA Bearings	Accelerometer data for remaining useful life prediction	IEEE PHM Links to an external site.
+Implementation
+
+5. Each sensor and actuator must run as its own Unix process, preferably containerized (Docker). Processes must be independently startable, stoppable, and restartable.
+
+6.  AI integration is mandatory. Include at least one AI agent or ML model that makes autonomous decisions. The AI can reason about:
+
+Sensor data — anomaly detection, prediction, pattern recognition
+Text documents — building regulations (BBR, AFS 2020:1), maintenance manuals, safety protocols, equipment datasheets
+Both — e.g., an LLM agent that reads sensor values AND checks compliance against regulatory text
+You are encouraged to combine multiple approaches (ML for real-time detection + LLM for reasoning about regulations and context).
+
+7. Data engineering . Your sensor data must flow through a proper architecture, not just direct REST calls. Choose and justify:
+
+Message broker (MQTT, Kafka, Redis) for decoupling sensors from consumers
+Data storage (InfluxDB, TimescaleDB, DuckDB, Parquet files) for historical sensor data
+Data pipeline for transforming raw sensor data into features for your AI/ML models
+Integration patterns — SOA framework (Arrowhead), event sourcing, stream processing
+Edge-cloud orchestration — ColonyOS Links to an external site. for orchestrating workloads across edge devices, local servers, and cloud/HPC — enabling compute continuum architectures where sensor processing runs at the edge and ML training runs on GPU servers
+8. Dashboard / Visualization — extend BuildSim using the session API or build a separate dashboard.
+
+9. Go (Golang) is the recommended language for this course. It produces single static binaries, has excellent concurrency support, and is well suited for building networked services and containerized processes. BuildSim itself is written in Go. Other languages (Python, Rust, Java) may be used if strongly motivated, but Go is preferred. Use of AI coding assistants is allowed and encouraged.
+
+Deliverables
+9. Written report — architecture, design, test plan, test results, implementation, evaluation, reflection.
+
+10. Oral presentation and demonstration — see oral examination page.
+
+11. Source code in a git repository.

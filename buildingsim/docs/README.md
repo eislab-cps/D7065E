@@ -4,6 +4,7 @@
 
 | Document | Description |
 |----------|-------------|
+| [Lab Quickstart](lab-quickstart.md) | **Start here for the D7065E lab:** maps the assignment onto BuildSim endpoints |
 | [Architecture](architecture.md) | System diagrams, data model, session flow, project structure |
 | [Equipment Icons](icons.md) | Gallery of all 49 SVG icons |
 

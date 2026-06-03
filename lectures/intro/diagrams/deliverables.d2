@@ -1,0 +1,15 @@
+direction: right
+arch: Architecture document\n(C4 context + container,\nrequirements, interfaces)
+test: Test plan\n+ results
+sys: Running system\n+ dashboard
+report: Written report
+code: Source code\n(git)
+oral: Oral defence {
+  shape: person
+}
+
+arch -> report
+test -> report
+sys -> report
+report -> code
+report -> oral
