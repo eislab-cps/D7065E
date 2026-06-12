@@ -18,7 +18,7 @@
         </mxCell>
         <mxCell id="a1" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="b1" target="b2"><mxGeometry relative="1" as="geometry"/></mxCell>
         <mxCell id="a2" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="b2" target="b3"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="a3" value="the physical world changes — and the next reading reflects it" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;dashed=1;fontColor=#FF8247;fontSize=14;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;curved=1;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="b3" target="b1">
+        <mxCell id="a3" value="the physical world changes — and the next reading reflects it" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;dashed=1;fontColor=#3D6280;fontSize=14;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;curved=1;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="b3" target="b1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="500" y="280"/></Array></mxGeometry>
         </mxCell>
         <mxCell id="cap" value="A thermometer + a heater + a brain: the simplest CPS. The cycle repeats forever." style="text;html=1;align=center;fontColor=#14334D;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">

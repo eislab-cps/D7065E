@@ -25,7 +25,7 @@
         <mxCell id="e4" value="no — try another command" style="endArrow=block;html=1;strokeColor=#C03A3A;strokeWidth=2;dashed=1;fontColor=#C03A3A;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;curved=1;exitX=0.5;exitY=0;entryX=0.5;entryY=0;" edge="1" parent="1" source="check" target="agent">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="480" y="58"/></Array><mxPoint x="0" y="14" as="offset"/></mxGeometry>
         </mxCell>
-        <mxCell id="e5" value="sensor feedback" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;dashed=1;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;curved=1;exitX=0;exitY=0.5;entryX=0.5;entryY=1;" edge="1" parent="1" source="real" target="agent">
+        <mxCell id="e5" value="sensor feedback" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;dashed=1;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;curved=1;exitX=0;exitY=0.5;entryX=0.5;entryY=1;" edge="1" parent="1" source="real" target="agent">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="180" y="330"/></Array></mxGeometry>
         </mxCell>
         <mxCell id="cap" value="The twin is a sandbox: a bad outcome costs a simulation run, not a frozen server room" style="text;html=1;align=center;fontColor=#14334D;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">

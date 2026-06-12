@@ -52,10 +52,10 @@
         <mxCell id="det3" value="aggregates · features · KPIs" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=12;fontFamily=Helvetica;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="695" y="270" width="220" height="40" as="geometry"/>
         </mxCell>
-        <mxCell id="r1" value="refine" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;labelBackgroundColor=none;fontFamily=Helvetica;exitX=1;exitY=0.5;entryX=0;entryY=0.5;verticalAlign=bottom;" edge="1" parent="1" source="card1" target="card2">
+        <mxCell id="r1" value="refine" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#3D6280;fontSize=13;fontStyle=2;labelBackgroundColor=none;fontFamily=Helvetica;exitX=1;exitY=0.5;entryX=0;entryY=0.5;verticalAlign=bottom;" edge="1" parent="1" source="card1" target="card2">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="r2" value="refine" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;labelBackgroundColor=none;fontFamily=Helvetica;exitX=1;exitY=0.5;entryX=0;entryY=0.5;verticalAlign=bottom;" edge="1" parent="1" source="card2" target="card3">
+        <mxCell id="r2" value="refine" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#3D6280;fontSize=13;fontStyle=2;labelBackgroundColor=none;fontFamily=Helvetica;exitX=1;exitY=0.5;entryX=0;entryY=0.5;verticalAlign=bottom;" edge="1" parent="1" source="card2" target="card3">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
       </root>

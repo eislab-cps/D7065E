@@ -16,12 +16,12 @@
         <mxCell id="server" value="Server" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="360" y="170" width="120" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="eReq" value="GET /temp" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;labelBackgroundColor=none;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="client" target="server">
+        <mxCell id="eReq" value="GET /temp" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#3D6280;fontSize=13;fontStyle=2;labelBackgroundColor=none;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="client" target="server">
           <mxGeometry relative="1" as="geometry">
             <mxPoint y="-12" as="offset"/>
           </mxGeometry>
         </mxCell>
-        <mxCell id="eResp" value="{ value: 22.4 }" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;dashed=1;fontColor=#FF8247;fontSize=13;fontStyle=2;labelBackgroundColor=none;exitX=0;exitY=0.7;entryX=1;entryY=0.7;" edge="1" parent="1" source="server" target="client">
+        <mxCell id="eResp" value="{ value: 22.4 }" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;dashed=1;fontColor=#3D6280;fontSize=13;fontStyle=2;labelBackgroundColor=none;exitX=0;exitY=0.7;entryX=1;entryY=0.7;" edge="1" parent="1" source="server" target="client">
           <mxGeometry relative="1" as="geometry">
             <mxPoint y="14" as="offset"/>
           </mxGeometry>
@@ -50,7 +50,7 @@
         <mxCell id="mSub3" value="Dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="905" y="280" width="115" height="45" as="geometry"/>
         </mxCell>
-        <mxCell id="mPub" value="publish" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="mSensor" target="mBroker">
+        <mxCell id="mPub" value="publish" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#3D6280;fontSize=13;fontStyle=2;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="mSensor" target="mBroker">
           <mxGeometry relative="1" as="geometry">
             <mxPoint y="-12" as="offset"/>
           </mxGeometry>

@@ -42,7 +42,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="looplabel" value="command sprinklers → smoke drops → next loop" style="text;html=1;align=center;fontColor=#FF8247;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="looplabel" value="command sprinklers → smoke drops → next loop" style="text;html=1;align=center;fontColor=#3D6280;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="320" y="290" width="500" height="24" as="geometry"/>
         </mxCell>
         <mxCell id="bottomnote" value="close the loop · the world responds · the sensor reads again" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">

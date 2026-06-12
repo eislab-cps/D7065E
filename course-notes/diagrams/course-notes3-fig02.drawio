@@ -10,7 +10,7 @@
         <mxCell id="card1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="70" y="60" width="240" height="290" as="geometry"/>
         </mxCell>
-        <mxCell id="v1tb" value="TB" style="text;html=1;align=center;fontColor=#FF8247;fontSize=15;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="v1tb" value="TB" style="text;html=1;align=center;fontColor=#3D6280;fontSize=15;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="130" y="82" width="120" height="24" as="geometry"/>
         </mxCell>
         <mxCell id="v1b1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;" vertex="1" parent="1">
@@ -31,7 +31,7 @@
         <mxCell id="card2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="380" y="60" width="240" height="290" as="geometry"/>
         </mxCell>
-        <mxCell id="v2clock" value="100 Hz" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#FF8247;strokeWidth=2;fontColor=#FF8247;fontStyle=1;fontFamily=Helvetica;fontSize=15;" vertex="1" parent="1">
+        <mxCell id="v2clock" value="100 Hz" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#FF8247;strokeWidth=2;fontColor=#3D6280;fontStyle=1;fontFamily=Helvetica;fontSize=15;" vertex="1" parent="1">
           <mxGeometry x="445" y="92" width="110" height="110" as="geometry"/>
         </mxCell>
         <mxCell id="v2sub" value="per sensor" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1">

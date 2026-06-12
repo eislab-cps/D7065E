@@ -24,7 +24,7 @@
         </mxCell>
         <mxCell id="e1" value="monitors" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.184;" edge="1" parent="1" source="mgr" target="sys"><mxGeometry relative="1" as="geometry"/></mxCell>
         <mxCell id="e2" value="presence, behaviour" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.816;" edge="1" parent="1" source="occ" target="sys"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e3" value="reads sensors / commands actuators" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=0.2;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="sys" target="bs">
+        <mxCell id="e3" value="reads sensors / commands actuators" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=0.2;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="sys" target="bs">
           <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-22" as="offset"/></mxGeometry>
         </mxCell>
         <mxCell id="e4" value="LLM inference" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;dashed=1;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=0.8;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="sys" target="gpu">

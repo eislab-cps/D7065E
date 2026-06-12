@@ -19,12 +19,12 @@
         <mxCell id="cloud" value="Cloud&#10;training · analytics" style="shape=cloud;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="750" y="125" width="210" height="130" as="geometry"/>
         </mxCell>
-        <mxCell id="sense" value="sense" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.375;entryX=0;entryY=0.3;" edge="1" parent="1" source="building" target="edge">
+        <mxCell id="sense" value="sense" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.375;entryX=0;entryY=0.3;" edge="1" parent="1" source="building" target="edge">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="0" y="-12" as="offset"/>
           </mxGeometry>
         </mxCell>
-        <mxCell id="act" value="act" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0;exitY=0.75;entryX=1;entryY=0.65625;" edge="1" parent="1" source="edge" target="building">
+        <mxCell id="act" value="act" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0;exitY=0.75;entryX=1;entryY=0.65625;" edge="1" parent="1" source="edge" target="building">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="0" y="14" as="offset"/>
           </mxGeometry>

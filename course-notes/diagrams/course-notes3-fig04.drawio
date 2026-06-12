@@ -64,10 +64,10 @@
         <mxCell id="d16" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;" vertex="1" parent="1">
           <mxGeometry x="868" y="156" width="10" height="10" as="geometry"/>
         </mxCell>
-        <mxCell id="window" value="rolling window — last 60 s" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#FF8247;dashed=1;strokeWidth=2;fontColor=#FF8247;fontFamily=Helvetica;fontSize=13;fontStyle=2;verticalAlign=top;arcSize=6;" vertex="1" parent="1">
+        <mxCell id="window" value="rolling window — last 60 s" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#FF8247;dashed=1;strokeWidth=2;fontColor=#3D6280;fontFamily=Helvetica;fontSize=13;fontStyle=2;verticalAlign=top;arcSize=6;" vertex="1" parent="1">
           <mxGeometry x="590" y="118" width="330" height="122" as="geometry"/>
         </mxCell>
-        <mxCell id="slide" value="slides" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;fontColor=#FF8247;fontSize=13;fontStyle=2;labelBackgroundColor=none;fontFamily=Helvetica;" edge="1" parent="1">
+        <mxCell id="slide" value="slides" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;fontColor=#3D6280;fontSize=13;fontStyle=2;labelBackgroundColor=none;fontFamily=Helvetica;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="840" y="92" as="sourcePoint"/>
             <mxPoint x="930" y="92" as="targetPoint"/>

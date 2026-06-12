@@ -9,7 +9,7 @@
         </mxCell>
         <mxCell id="p1" value="temp sensor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="50" y="120" width="170" height="60" as="geometry"/></mxCell>
         <mxCell id="p2" value="smoke sensor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="50" y="260" width="170" height="60" as="geometry"/></mxCell>
-        <mxCell id="broker" value="BROKER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#FF8247;strokeWidth=2;verticalAlign=top;fontColor=#FF8247;fontSize=14;fontStyle=1;fontFamily=Helvetica;spacingTop=8;arcSize=8;" vertex="1" parent="1">
+        <mxCell id="broker" value="BROKER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#FF8247;strokeWidth=2;verticalAlign=top;fontColor=#3D6280;fontSize=14;fontStyle=1;fontFamily=Helvetica;spacingTop=8;arcSize=8;" vertex="1" parent="1">
           <mxGeometry x="300" y="80" width="430" height="290" as="geometry"/>
         </mxCell>
         <mxCell id="t1" value="topic — sensors/floor1/temp" style="whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="330" y="120" width="370" height="60" as="geometry"/></mxCell>

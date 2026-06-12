@@ -19,7 +19,7 @@
           <mxGeometry x="60" y="225" width="960" height="44" as="geometry"/>
         </mxCell>
         <mxCell id="b1" value="readings" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;fontColor=#3D6280;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.2969;entryY=0;" edge="1" parent="1" source="p2" target="broker"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="b2" value="commands" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;fontColor=#FF8247;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=0.7031;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="broker" target="p4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="b2" value="commands" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;fontColor=#3D6280;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=0.7031;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="broker" target="p4"><mxGeometry relative="1" as="geometry"/></mxCell>
         <mxCell id="s1" value="Forecast service&#10;predicts next-hour temp (AI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="60" y="330" width="220" height="70" as="geometry"/>
         </mxCell>

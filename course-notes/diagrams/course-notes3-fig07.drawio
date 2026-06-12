@@ -13,8 +13,8 @@
         <mxCell id="r1" value="rows · keys · joins" style="text;html=1;align=center;fontColor=#14334D;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="90" y="130" width="300" height="26" as="geometry"/></mxCell>
         <mxCell id="r2" value="built for lookups and transactions,&#10;updates anywhere, any time" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="90" y="170" width="300" height="44" as="geometry"/></mxCell>
         <mxCell id="r3" value="general-purpose" style="text;html=1;align=center;fontColor=#3D6280;fontSize=14;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="90" y="250" width="300" height="26" as="geometry"/></mxCell>
-        <mxCell id="vs" value="vs" style="text;html=1;align=center;fontColor=#FF8247;fontSize=20;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="450" y="180" width="60" height="30" as="geometry"/></mxCell>
-        <mxCell id="ts" value="TIME-SERIES DB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#FF8247;strokeWidth=2;verticalAlign=top;fontColor=#FF8247;fontSize=15;fontStyle=1;fontFamily=Helvetica;spacingTop=10;arcSize=8;" vertex="1" parent="1">
+        <mxCell id="vs" value="vs" style="text;html=1;align=center;fontColor=#3D6280;fontSize=20;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="450" y="180" width="60" height="30" as="geometry"/></mxCell>
+        <mxCell id="ts" value="TIME-SERIES DB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#FF8247;strokeWidth=2;verticalAlign=top;fontColor=#3D6280;fontSize=15;fontStyle=1;fontFamily=Helvetica;spacingTop=10;arcSize=8;" vertex="1" parent="1">
           <mxGeometry x="550" y="70" width="390" height="250" as="geometry"/>
         </mxCell>
         <mxCell id="k1" value="09:00" style="whiteSpace=wrap;html=1;fillColor=#FFB088;strokeColor=none;fontColor=#032040;fontSize=12;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="575" y="130" width="55" height="60" as="geometry"/></mxCell>

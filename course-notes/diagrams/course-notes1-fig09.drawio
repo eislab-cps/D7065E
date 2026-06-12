@@ -34,7 +34,7 @@
         <mxCell id="a4" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="s4" target="s5"><mxGeometry relative="1" as="geometry"/></mxCell>
         <mxCell id="a5" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="s5" target="s6"><mxGeometry relative="1" as="geometry"/></mxCell>
         <mxCell id="a6" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="s6" target="s7"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="a7" value="8 — back to step 1: the loop never stops" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;dashed=1;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="s7" target="s1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a7" value="8 — back to step 1: the loop never stops" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;dashed=1;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="s7" target="s1"><mxGeometry relative="1" as="geometry"/></mxCell>
         <mxCell id="cap" value="Every component of the system sits somewhere on this cycle" style="text;html=1;align=center;fontColor=#14334D;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="230" y="430" width="600" height="28" as="geometry"/>
         </mxCell>

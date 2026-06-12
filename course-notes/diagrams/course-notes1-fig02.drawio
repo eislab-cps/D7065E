@@ -31,12 +31,12 @@
         <mxCell id="cybernote" value="obeys code" style="text;html=1;align=center;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="640" y="370" width="280" height="20" as="geometry"/>
         </mxCell>
-        <mxCell id="sense" value="sense — sensors report state" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="phys" target="cyber">
+        <mxCell id="sense" value="sense — sensors report state" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="phys" target="cyber">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="0" y="-14" as="offset"/>
           </mxGeometry>
         </mxCell>
-        <mxCell id="act" value="act — actuators change state" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0;exitY=0.78;entryX=1;entryY=0.78;" edge="1" parent="1" source="cyber" target="phys">
+        <mxCell id="act" value="act — actuators change state" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0;exitY=0.78;entryX=1;entryY=0.78;" edge="1" parent="1" source="cyber" target="phys">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="0" y="16" as="offset"/>
           </mxGeometry>

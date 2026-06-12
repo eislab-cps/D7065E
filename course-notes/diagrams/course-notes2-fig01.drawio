@@ -22,12 +22,12 @@
         <mxCell id="dash" value="&lt;b&gt;DASHBOARD&lt;/b&gt;&#10;&lt;font color=&quot;#5E7B94&quot;&gt;live charts for operators&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="670" y="350" width="230" height="90" as="geometry"/>
         </mxCell>
-        <mxCell id="eReadings" value="readings" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;labelBackgroundColor=none;exitX=0.4545;exitY=1;entryX=0.3333;entryY=0;" edge="1" parent="1" source="phys" target="broker">
+        <mxCell id="eReadings" value="readings" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#3D6280;fontSize=13;fontStyle=2;labelBackgroundColor=none;exitX=0.4545;exitY=1;entryX=0.3333;entryY=0;" edge="1" parent="1" source="phys" target="broker">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-20" as="offset"/>
           </mxGeometry>
         </mxCell>
-        <mxCell id="eCommands" value="commands" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;labelBackgroundColor=none;exitX=0.6667;exitY=0;entryX=0.5455;entryY=1;" edge="1" parent="1" source="broker" target="phys">
+        <mxCell id="eCommands" value="commands" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#3D6280;fontSize=13;fontStyle=2;labelBackgroundColor=none;exitX=0.6667;exitY=0;entryX=0.5455;entryY=1;" edge="1" parent="1" source="broker" target="phys">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="20" as="offset"/>
           </mxGeometry>

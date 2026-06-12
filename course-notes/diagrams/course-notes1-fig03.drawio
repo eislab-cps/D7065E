@@ -19,7 +19,7 @@
         <mxCell id="prose-cap" value="prose specification — ambiguous" style="text;html=1;align=center;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="40" y="345" width="280" height="20" as="geometry"/>
         </mxCell>
-        <mxCell id="mbse" value="MBSE" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=14;fontStyle=1;fontFamily=Helvetica;labelBackgroundColor=none;" edge="1" parent="1">
+        <mxCell id="mbse" value="MBSE" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#3D6280;fontSize=14;fontStyle=1;fontFamily=Helvetica;labelBackgroundColor=none;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="318" y="220" as="sourcePoint"/>
             <mxPoint x="404" y="220" as="targetPoint"/>
