@@ -17,16 +17,19 @@
           <mxGeometry x="760" y="80" width="180" height="90" as="geometry"/>
         </mxCell>
         <mxCell id="real" value="REAL BUILDING&#10;(the command is committed)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#1E8E5A;strokeWidth=2;fontColor=#14334D;fontSize=14;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="700" y="290" width="240" height="80" as="geometry"/>
+          <mxGeometry x="730" y="290" width="240" height="80" as="geometry"/>
         </mxCell>
-        <mxCell id="e1" value="proposed command" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=3;fontColor=#5E7B94;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="agent" target="twin"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e2" value="simulated outcome" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=3;fontColor=#5E7B94;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="twin" target="check"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e1" value="proposed command" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=3;fontColor=#5E7B94;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="agent" target="twin"><mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-15" as="offset"/></mxGeometry></mxCell>
+        <mxCell id="e2" value="simulated outcome" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=3;fontColor=#5E7B94;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="twin" target="check"><mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-15" as="offset"/></mxGeometry></mxCell>
         <mxCell id="e3" value="yes" style="endArrow=block;html=1;strokeColor=#1E8E5A;strokeWidth=3;fontColor=#1E8E5A;fontSize=14;fontStyle=1;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="check" target="real"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e4" value="no — try another command" style="endArrow=block;html=1;strokeColor=#C03A3A;strokeWidth=2;dashed=1;fontColor=#C03A3A;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;curved=1;exitX=0.5;exitY=0;entryX=0.5;entryY=0;" edge="1" parent="1" source="check" target="agent">
-          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="480" y="58"/></Array><mxPoint x="0" y="14" as="offset"/></mxGeometry>
+        <mxCell id="e4" value="" style="endArrow=block;html=1;strokeColor=#C03A3A;strokeWidth=2;dashed=1;exitX=0.5;exitY=0;entryX=0.5;entryY=0;" edge="1" parent="1" source="check" target="agent">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="850" y="58"/><mxPoint x="180" y="58"/></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e5" value="sensor feedback" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;dashed=1;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;curved=1;exitX=0;exitY=0.5;entryX=0.5;entryY=1;" edge="1" parent="1" source="real" target="agent">
-          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="180" y="330"/></Array></mxGeometry>
+        <mxCell id="e4lab" value="no — try another command" style="text;html=1;align=center;fontColor=#C03A3A;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="400" y="62" width="240" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" value="sensor feedback" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;dashed=1;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="real" target="agent">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="850" y="410"/><mxPoint x="180" y="410"/></Array><mxPoint x="0" y="-14" as="offset"/></mxGeometry>
         </mxCell>
         <mxCell id="cap" value="The twin is a sandbox: a bad outcome costs a simulation run, not a frozen server room" style="text;html=1;align=center;fontColor=#14334D;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="100" y="440" width="800" height="28" as="geometry"/>
