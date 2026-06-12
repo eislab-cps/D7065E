@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram id="edge-vs-cloud" name="edge-vs-cloud">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="460" math="0" shadow="0">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="460" math="0" shadow="0" background="#032040">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
@@ -14,7 +14,7 @@
           <mxGeometry x="300" y="130" width="190" height="80" as="geometry"/>
         </mxCell>
         <mxCell id="e1" value="~1 ms" style="endArrow=block;startArrow=block;html=1;strokeColor=#7FE3A1;strokeWidth=3;fontColor=#7FE3A1;fontSize=16;fontStyle=1;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="sens" target="edge">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-17" as="offset"/></mxGeometry>
         </mxCell>
         <mxCell id="off" value="keeps working when the internet does not&#10;data never has to leave the building (privacy)" style="text;html=1;align=center;fontColor=#7FE3A1;fontSize=14;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="90" y="250" width="390" height="50" as="geometry"/>
@@ -23,7 +23,7 @@
           <mxGeometry x="800" y="60" width="310" height="200" as="geometry"/>
         </mxCell>
         <mxCell id="e2" value="50–300 ms · hundreds of km" style="endArrow=block;startArrow=block;html=1;strokeColor=#E05252;strokeWidth=3;fontColor=#E05252;fontSize=16;fontStyle=1;fontFamily=Helvetica;labelBackgroundColor=none;dashed=1;exitX=1;exitY=0.5;entryX=0;entryY=0.55;" edge="1" parent="1" source="edge" target="cloud">
-          <mxGeometry relative="1" as="geometry"/>
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-17" as="offset"/></mxGeometry>
         </mxCell>
         <mxCell id="dep" value="depends on connectivity — and on someone else&#39;s datacenter" style="text;html=1;align=center;fontColor=#E05252;fontSize=14;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="700" y="290" width="420" height="30" as="geometry"/>

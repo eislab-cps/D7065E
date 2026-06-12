@@ -20,10 +20,10 @@ all: diagrams pdf
 
 diagrams: $(PNG_DIAGRAMS)
 
-# transparent background (-t), 2x scale (-s 2), 12px border (-b 12)
+# navy background from the .drawio files, 2x scale (-s 2), 12px border (-b 12)
 media/diagrams/%.png: diagrams/%.drawio
 	@mkdir -p media/diagrams
-	$(DRAWIO) -x -f png -t -s 2 -b 12 -o $@ $< >/dev/null 2>&1
+	$(DRAWIO) -x -f png -s 2 -b 12 -o $@ $< >/dev/null 2>&1
 	@echo "exported $@"
 
 pdf: $(DECK).pdf

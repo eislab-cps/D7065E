@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram id="automation-ladder" name="automation-ladder">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="460" math="0" shadow="0">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="460" math="0" shadow="0" background="#032040">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
@@ -13,11 +13,11 @@
         <mxCell id="s3" value="3 — AUTONOMOUS&#10;agentic AI&#10;&#10;perceives, reasons, plans, acts —&#10;and observes the result&#10;&#10;handles situations nobody scripted&#10;&#10;needs guardrails: autonomy&#10;without limits is a hazard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=8;" vertex="1" parent="1">
           <mxGeometry x="790" y="80" width="300" height="330" as="geometry"/>
         </mxCell>
-        <mxCell id="arrow" value="" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;curved=1;" edge="1" parent="1">
+        <mxCell id="arrow" value="" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="120" y="210" as="sourcePoint"/>
-            <mxPoint x="900" y="45" as="targetPoint"/>
-            <Array as="points"><mxPoint x="520" y="125"/></Array>
+            <mxPoint x="60" y="222" as="sourcePoint"/>
+            <mxPoint x="1075" y="60" as="targetPoint"/>
+            <Array as="points"><mxPoint x="385" y="222"/><mxPoint x="385" y="142"/><mxPoint x="755" y="142"/><mxPoint x="755" y="60"/></Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="cap" value="Oral-exam favourite: what makes a system autonomous rather than automated? Decide where on this ladder your project sits — and say why." style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">

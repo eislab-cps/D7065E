@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram id="mbse" name="mbse">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="440" math="0" shadow="0">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="440" math="0" shadow="0" background="#032040">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
@@ -19,8 +19,8 @@
         <mxCell id="e1" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="req" target="models"><mxGeometry relative="1" as="geometry"/></mxCell>
         <mxCell id="e2" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="models" target="ai"><mxGeometry relative="1" as="geometry"/></mxCell>
         <mxCell id="e3" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="ai" target="code"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="back" value="validate against the spec — and refine it: a living document, not a week-1 PDF" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;dashed=1;fontColor=#FF8247;fontSize=14;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;curved=1;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="code" target="models">
-          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="780" y="340"/></Array><mxPoint x="0" y="18" as="offset"/></mxGeometry>
+        <mxCell id="back" value="validate against the spec — and refine it: a living document, not a week-1 PDF" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;dashed=1;fontColor=#FF8247;fontSize=14;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="code" target="models">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1035" y="340"/><mxPoint x="465" y="340"/></Array><mxPoint x="0" y="-16" as="offset"/></mxGeometry>
         </mxCell>
         <mxCell id="tests" value="tests derive from the SPEC, not from whatever the code happens to do" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=14;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="370" y="30" width="600" height="28" as="geometry"/>

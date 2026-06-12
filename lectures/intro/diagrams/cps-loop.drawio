@@ -1,47 +1,41 @@
 <mxfile host="app.diagrams.net">
   <diagram id="cps-loop" name="cps-loop">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="440" math="0" shadow="0">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="440" math="0" shadow="0" background="#032040">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
         <mxCell id="phys" value="PHYSICAL WORLD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;strokeWidth=2;verticalAlign=top;fontColor=#89A5BE;fontSize=16;fontStyle=1;fontFamily=Helvetica;spacingTop=10;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="60" y="70" width="400" height="260" as="geometry"/>
+          <mxGeometry x="60" y="70" width="340" height="260" as="geometry"/>
         </mxCell>
         <mxCell id="phys1" value="temperature · smoke · people · machines" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=15;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="80" y="130" width="360" height="26" as="geometry"/>
+          <mxGeometry x="70" y="130" width="320" height="26" as="geometry"/>
         </mxCell>
         <mxCell id="phys2" value="governed by physics and human behaviour" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=14;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="80" y="170" width="360" height="26" as="geometry"/>
+          <mxGeometry x="70" y="170" width="320" height="26" as="geometry"/>
         </mxCell>
         <mxCell id="phys3" value="never pauses — even when no computer is watching" style="text;html=1;align=center;fontColor=#FF8247;fontSize=14;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="80" y="230" width="360" height="26" as="geometry"/>
+          <mxGeometry x="70" y="230" width="320" height="26" as="geometry"/>
         </mxCell>
         <mxCell id="cyber" value="CYBER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;verticalAlign=top;fontColor=#89A5BE;fontSize=16;fontStyle=1;fontFamily=Helvetica;spacingTop=10;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="680" y="70" width="400" height="260" as="geometry"/>
+          <mxGeometry x="740" y="70" width="340" height="260" as="geometry"/>
         </mxCell>
         <mxCell id="cyb1" value="software: monitor · model · decide" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=15;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="700" y="130" width="360" height="26" as="geometry"/>
+          <mxGeometry x="750" y="130" width="320" height="26" as="geometry"/>
         </mxCell>
         <mxCell id="cyb2" value="computation + networking" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=14;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="700" y="170" width="360" height="26" as="geometry"/>
+          <mxGeometry x="750" y="170" width="320" height="26" as="geometry"/>
         </mxCell>
         <mxCell id="cyb3" value="sees the world only through data" style="text;html=1;align=center;fontColor=#FF8247;fontSize=14;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="700" y="230" width="360" height="26" as="geometry"/>
+          <mxGeometry x="750" y="230" width="320" height="26" as="geometry"/>
         </mxCell>
-        <mxCell id="sense" value="SENSE — sensors turn physics into data" style="curved=1;endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=15;fontStyle=1;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.25;entryX=0;entryY=0.25;" edge="1" parent="1" source="phys" target="cyber">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points"><mxPoint x="570" y="95"/></Array>
-            <mxPoint x="0" y="-14" as="offset"/>
-          </mxGeometry>
+        <mxCell id="sense" value="SENSE — sensors turn physics into data" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=14;fontStyle=1;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.25;entryX=0;entryY=0.25;" edge="1" parent="1" source="phys" target="cyber">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-16" as="offset"/></mxGeometry>
         </mxCell>
-        <mxCell id="act" value="ACT — actuators turn decisions into physics" style="curved=1;endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=15;fontStyle=1;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0;exitY=0.75;entryX=1;entryY=0.75;" edge="1" parent="1" source="cyber" target="phys">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points"><mxPoint x="570" y="305"/></Array>
-            <mxPoint x="0" y="16" as="offset"/>
-          </mxGeometry>
+        <mxCell id="act" value="ACT — actuators turn decisions into physics" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=14;fontStyle=1;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0;exitY=0.75;entryX=1;entryY=0.75;" edge="1" parent="1" source="cyber" target="phys">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="18" as="offset"/></mxGeometry>
         </mxCell>
         <mxCell id="loop" value="a continuous loop" style="text;html=1;align=center;fontColor=#89A5BE;fontSize=14;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="480" y="186" width="180" height="26" as="geometry"/>
+          <mxGeometry x="435" y="186" width="270" height="26" as="geometry"/>
         </mxCell>
         <mxCell id="cap" value="A cyber-physical system = computation and physical processes locked in one feedback loop" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="170" y="375" width="800" height="30" as="geometry"/>
