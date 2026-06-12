@@ -1,42 +1,42 @@
 <mxfile host="app.diagrams.net">
   <diagram id="cn2-fig06" name="cn2-fig06">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1080" pageHeight="540" math="0" shadow="0" background="#032040">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1080" pageHeight="540" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="A full HVAC control system, placed" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="title" value="A full HVAC control system, placed" style="text;html=1;align=center;fontColor=#14334D;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="140" y="18" width="800" height="28" as="geometry"/>
         </mxCell>
-        <mxCell id="phys" value="SENSORS &amp; ACTUATORS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;dashed=1;strokeWidth=2;verticalAlign=top;fontColor=#89A5BE;fontSize=14;fontStyle=1;fontFamily=Helvetica;spacingTop=8;arcSize=6;" vertex="1" parent="1">
+        <mxCell id="phys" value="SENSORS &amp; ACTUATORS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#4A7298;dashed=1;strokeWidth=2;verticalAlign=top;fontColor=#3D6280;fontSize=14;fontStyle=1;fontFamily=Helvetica;spacingTop=8;arcSize=6;" vertex="1" parent="1">
           <mxGeometry x="60" y="60" width="960" height="110" as="geometry"/>
         </mxCell>
-        <mxCell id="p1" value="temp" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="110" y="100" width="110" height="50" as="geometry"/></mxCell>
-        <mxCell id="p2" value="CO₂" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="290" y="100" width="110" height="50" as="geometry"/></mxCell>
-        <mxCell id="p3" value="occupancy" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="470" y="100" width="110" height="50" as="geometry"/></mxCell>
-        <mxCell id="p4" value="fan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#FF8247;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="680" y="100" width="110" height="50" as="geometry"/></mxCell>
-        <mxCell id="p5" value="damper" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#FF8247;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="860" y="100" width="110" height="50" as="geometry"/></mxCell>
+        <mxCell id="p1" value="temp" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="110" y="100" width="110" height="50" as="geometry"/></mxCell>
+        <mxCell id="p2" value="CO₂" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="290" y="100" width="110" height="50" as="geometry"/></mxCell>
+        <mxCell id="p3" value="occupancy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="470" y="100" width="110" height="50" as="geometry"/></mxCell>
+        <mxCell id="p4" value="fan" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#FF8247;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="680" y="100" width="110" height="50" as="geometry"/></mxCell>
+        <mxCell id="p5" value="damper" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#FF8247;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="860" y="100" width="110" height="50" as="geometry"/></mxCell>
         <mxCell id="broker" value="MQTT BROKER — topics sensors/* and actuators/*" style="whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="60" y="225" width="960" height="44" as="geometry"/>
         </mxCell>
-        <mxCell id="b1" value="readings" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;fontColor=#89A5BE;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#032040;exitX=0.5;exitY=1;entryX=0.25;entryY=0;" edge="1" parent="1" source="p2" target="broker"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="b2" value="commands" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;fontColor=#FF8247;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#032040;exitX=0.78;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="broker" target="p4"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="s1" value="Forecast service&#10;predicts next-hour temp (AI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+        <mxCell id="b1" value="readings" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;fontColor=#3D6280;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.2969;entryY=0;" edge="1" parent="1" source="p2" target="broker"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="b2" value="commands" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;fontColor=#FF8247;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=0.7031;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="broker" target="p4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="s1" value="Forecast service&#10;predicts next-hour temp (AI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="60" y="330" width="220" height="70" as="geometry"/>
         </mxCell>
-        <mxCell id="s2" value="HVAC controller&#10;optimises comfort vs energy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#FF8247;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontStyle=1;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+        <mxCell id="s2" value="HVAC controller&#10;optimises comfort vs energy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#FF8247;strokeWidth=2;fontColor=#14334D;fontSize=13;fontStyle=1;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="310" y="330" width="220" height="70" as="geometry"/>
         </mxCell>
-        <mxCell id="s3" value="Schedule service&#10;occupancy rules" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+        <mxCell id="s3" value="Schedule service&#10;occupancy rules" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="560" y="330" width="200" height="70" as="geometry"/>
         </mxCell>
-        <mxCell id="s4" value="Time-series DB&#10;history — 6 months" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+        <mxCell id="s4" value="Time-series DB&#10;history — 6 months" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="790" y="330" width="230" height="70" as="geometry"/>
         </mxCell>
-        <mxCell id="c1" style="endArrow=block;startArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=0.5;exitY=0;entryX=0.12;entryY=1;" edge="1" parent="1" source="s1" target="broker"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="c2" style="endArrow=block;startArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=0.5;exitY=0;entryX=0.39;entryY=1;" edge="1" parent="1" source="s2" target="broker"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="c3" style="endArrow=block;startArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=0.5;exitY=0;entryX=0.62;entryY=1;" edge="1" parent="1" source="s3" target="broker"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="c4" style="endArrow=block;startArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=0.5;exitY=0;entryX=0.87;entryY=1;" edge="1" parent="1" source="s4" target="broker"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="cap" value="Each component placed, every flow through the broker: physical world → topics → services → commands → back to the world" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="c1" style="endArrow=block;startArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;exitX=0.5;exitY=0;entryX=0.1146;entryY=1;" edge="1" parent="1" source="s1" target="broker"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="c2" style="endArrow=block;startArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=0.5;exitY=0;entryX=0.375;entryY=1;" edge="1" parent="1" source="s2" target="broker"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="c3" style="endArrow=block;startArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;exitX=0.5;exitY=0;entryX=0.625;entryY=1;" edge="1" parent="1" source="s3" target="broker"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="c4" style="endArrow=block;startArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;exitX=0.5;exitY=0;entryX=0.8802;entryY=1;" edge="1" parent="1" source="s4" target="broker"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="cap" value="Each component placed, every flow through the broker: physical world → topics → services → commands → back to the world" style="text;html=1;align=center;fontColor=#14334D;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="90" y="460" width="900" height="28" as="geometry"/>
         </mxCell>
       </root>

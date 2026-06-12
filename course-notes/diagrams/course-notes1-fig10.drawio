@@ -1,31 +1,35 @@
 <mxfile host="app.diagrams.net">
   <diagram id="cn1-fig10" name="cn1-fig10">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="460" math="0" shadow="0" background="#032040">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="500" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="Context view (C4 Level 1) — who touches the system from outside" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="title" value="Context view (C4 Level 1) — who touches the system from outside" style="text;html=1;align=center;fontColor=#14334D;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="100" y="20" width="800" height="30" as="geometry"/>
         </mxCell>
-        <mxCell id="mgr" value="Building Manager&#10;(person)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;arcSize=14;" vertex="1" parent="1">
-          <mxGeometry x="60" y="90" width="210" height="70" as="geometry"/>
+        <mxCell id="mgr" value="Building Manager&#10;(person)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=14;fontFamily=Helvetica;arcSize=14;" vertex="1" parent="1">
+          <mxGeometry x="60" y="100" width="210" height="70" as="geometry"/>
         </mxCell>
-        <mxCell id="occ" value="Building Occupants&#10;(people)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;arcSize=14;" vertex="1" parent="1">
+        <mxCell id="occ" value="Building Occupants&#10;(people)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=14;fontFamily=Helvetica;arcSize=14;" vertex="1" parent="1">
           <mxGeometry x="60" y="220" width="210" height="70" as="geometry"/>
         </mxCell>
-        <mxCell id="sys" value="AUTONOMOUS&#10;BUILDING CONTROL&#10;SYSTEM&#10;&#10;(the whole project,&#10;one box — nothing&#10;internal shown)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=15;fontStyle=1;fontFamily=Helvetica;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="400" y="80" width="270" height="220" as="geometry"/>
+        <mxCell id="sys" value="AUTONOMOUS&#10;BUILDING CONTROL SYSTEM&#10;&#10;(the whole project, one box —&#10;nothing internal shown)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=15;fontStyle=1;fontFamily=Helvetica;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="400" y="100" width="420" height="190" as="geometry"/>
         </mxCell>
-        <mxCell id="bs" value="BuildSim Server&#10;(external system)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;arcSize=14;" vertex="1" parent="1">
-          <mxGeometry x="490" y="360" width="210" height="70" as="geometry"/>
+        <mxCell id="bs" value="BuildSim Server&#10;(external system)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=14;fontFamily=Helvetica;arcSize=14;" vertex="1" parent="1">
+          <mxGeometry x="379" y="390" width="210" height="70" as="geometry"/>
         </mxCell>
-        <mxCell id="gpu" value="GPU Server (LLM)&#10;(external system)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;arcSize=14;" vertex="1" parent="1">
-          <mxGeometry x="740" y="360" width="210" height="70" as="geometry"/>
+        <mxCell id="gpu" value="GPU Server (LLM)&#10;(external system)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=14;fontFamily=Helvetica;arcSize=14;" vertex="1" parent="1">
+          <mxGeometry x="631" y="390" width="210" height="70" as="geometry"/>
         </mxCell>
-        <mxCell id="e1" value="monitors" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0;entryY=0.25;" edge="1" parent="1" source="mgr" target="sys"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e2" value="presence, behaviour" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0;entryY=0.75;" edge="1" parent="1" source="occ" target="sys"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e3" value="reads sensors / commands actuators" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0.35;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="sys" target="bs"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e4" value="LLM inference" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;dashed=1;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.8;entryX=0.5;entryY=0;" edge="1" parent="1" source="sys" target="gpu"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e1" value="monitors" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.184;" edge="1" parent="1" source="mgr" target="sys"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" value="presence, behaviour" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.816;" edge="1" parent="1" source="occ" target="sys"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" value="reads sensors / commands actuators" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=0.2;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="sys" target="bs">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-22" as="offset"/></mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="LLM inference" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;dashed=1;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=0.8;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="sys" target="gpu">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-22" as="offset"/></mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>

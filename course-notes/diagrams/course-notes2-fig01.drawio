@@ -1,25 +1,25 @@
 <mxfile host="app.diagrams.net">
   <diagram id="course-notes2-fig01" name="course-notes2-fig01">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="480" math="0" shadow="0" background="#032040">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="480" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="The standard anatomy of a CPS" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="title" value="The standard anatomy of a CPS" style="text;html=1;align=center;fontColor=#14334D;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="30" y="16" width="940" height="30" as="geometry"/>
         </mxCell>
-        <mxCell id="phys" value="&lt;b&gt;PHYSICAL WORLD&lt;/b&gt;&#10;&lt;font color=&quot;#C9D6E2&quot;&gt;rooms · ducts · equipment · people&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="phys" value="&lt;b&gt;PHYSICAL WORLD&lt;/b&gt;&#10;&lt;font color=&quot;#5E7B94&quot;&gt;rooms · ducts · equipment · people&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="60" y="70" width="880" height="70" as="geometry"/>
         </mxCell>
-        <mxCell id="broker" value="&lt;b&gt;MESSAGE BROKER&lt;/b&gt;&#10;&lt;font color=&quot;#C9D6E2&quot;&gt;MQTT · publish / subscribe&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="broker" value="&lt;b&gt;MESSAGE BROKER&lt;/b&gt;&#10;&lt;font color=&quot;#5E7B94&quot;&gt;MQTT · publish / subscribe&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="380" y="215" width="240" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="tsdb" value="&lt;b&gt;TIME-SERIES DB&lt;/b&gt;&#10;&lt;font color=&quot;#C9D6E2&quot;&gt;stores every reading&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="tsdb" value="&lt;b&gt;TIME-SERIES DB&lt;/b&gt;&#10;&lt;font color=&quot;#5E7B94&quot;&gt;stores every reading&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="100" y="350" width="230" height="90" as="geometry"/>
         </mxCell>
         <mxCell id="agent" value="AI AGENT&#10;reason · choose · command" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontStyle=1;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="385" y="350" width="230" height="90" as="geometry"/>
         </mxCell>
-        <mxCell id="dash" value="&lt;b&gt;DASHBOARD&lt;/b&gt;&#10;&lt;font color=&quot;#C9D6E2&quot;&gt;live charts for operators&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="dash" value="&lt;b&gt;DASHBOARD&lt;/b&gt;&#10;&lt;font color=&quot;#5E7B94&quot;&gt;live charts for operators&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="670" y="350" width="230" height="90" as="geometry"/>
         </mxCell>
         <mxCell id="eReadings" value="readings" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;labelBackgroundColor=none;exitX=0.4545;exitY=1;entryX=0.3333;entryY=0;" edge="1" parent="1" source="phys" target="broker">
@@ -32,13 +32,13 @@
             <mxPoint x="20" as="offset"/>
           </mxGeometry>
         </mxCell>
-        <mxCell id="eTsdb" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=0.15;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="broker" target="tsdb">
+        <mxCell id="eTsdb" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0.15;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="broker" target="tsdb">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="eAgent" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="broker" target="agent">
+        <mxCell id="eAgent" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="broker" target="agent">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="eDash" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=0.85;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="broker" target="dash">
+        <mxCell id="eDash" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0.85;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="broker" target="dash">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
       </root>

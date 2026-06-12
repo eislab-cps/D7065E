@@ -1,34 +1,34 @@
 <mxfile host="app.diagrams.net">
   <diagram id="cn1-fig02" name="cn1-fig02">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="500" math="0" shadow="0" background="#032040">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="500" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="The two halves of a cyber-physical system" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="title" value="The two halves of a cyber-physical system" style="text;html=1;align=center;fontColor=#14334D;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="30" y="20" width="940" height="30" as="geometry"/>
         </mxCell>
-        <mxCell id="phys" value="PHYSICAL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;dashed=1;strokeWidth=2;verticalAlign=top;fontColor=#89A5BE;fontSize=16;fontStyle=1;fontFamily=Helvetica;spacingTop=10;arcSize=8;" vertex="1" parent="1">
+        <mxCell id="phys" value="PHYSICAL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#4A7298;dashed=1;strokeWidth=2;verticalAlign=top;fontColor=#3D6280;fontSize=16;fontStyle=1;fontFamily=Helvetica;spacingTop=10;arcSize=8;" vertex="1" parent="1">
           <mxGeometry x="60" y="80" width="320" height="340" as="geometry"/>
         </mxCell>
-        <mxCell id="physbox" value="Building" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="physbox" value="Building" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=15;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="120" y="150" width="200" height="110" as="geometry"/>
         </mxCell>
-        <mxCell id="phystxt" value="rooms · ducts · pipes&#10;temperature · smoke · people" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="phystxt" value="rooms · ducts · pipes&#10;temperature · smoke · people" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="80" y="290" width="280" height="50" as="geometry"/>
         </mxCell>
-        <mxCell id="physnote" value="obeys physics" style="text;html=1;align=center;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="physnote" value="obeys physics" style="text;html=1;align=center;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="80" y="370" width="280" height="20" as="geometry"/>
         </mxCell>
-        <mxCell id="cyber" value="CYBER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;dashed=1;strokeWidth=2;verticalAlign=top;fontColor=#89A5BE;fontSize=16;fontStyle=1;fontFamily=Helvetica;spacingTop=10;arcSize=8;" vertex="1" parent="1">
+        <mxCell id="cyber" value="CYBER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#4A7298;dashed=1;strokeWidth=2;verticalAlign=top;fontColor=#3D6280;fontSize=16;fontStyle=1;fontFamily=Helvetica;spacingTop=10;arcSize=8;" vertex="1" parent="1">
           <mxGeometry x="620" y="80" width="320" height="340" as="geometry"/>
         </mxCell>
         <mxCell id="cyberbox" value="AI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontStyle=1;fontFamily=Helvetica;arcSize=10;fontSize=18;" vertex="1" parent="1">
           <mxGeometry x="680" y="150" width="200" height="110" as="geometry"/>
         </mxCell>
-        <mxCell id="cybertxt" value="sensor processes · pipelines&#10;AI agents · actuator commands" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="cybertxt" value="sensor processes · pipelines&#10;AI agents · actuator commands" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="640" y="290" width="280" height="50" as="geometry"/>
         </mxCell>
-        <mxCell id="cybernote" value="obeys code" style="text;html=1;align=center;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="cybernote" value="obeys code" style="text;html=1;align=center;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="640" y="370" width="280" height="20" as="geometry"/>
         </mxCell>
         <mxCell id="sense" value="sense — sensors report state" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="phys" target="cyber">
@@ -41,10 +41,10 @@
             <mxPoint x="0" y="16" as="offset"/>
           </mxGeometry>
         </mxCell>
-        <mxCell id="repeat" value="repeats forever" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="repeat" value="repeats forever" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="400" y="245" width="200" height="20" as="geometry"/>
         </mxCell>
-        <mxCell id="bottomnote" value="Every component in a CPS sits somewhere on this loop." style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="bottomnote" value="Every component in a CPS sits somewhere on this loop." style="text;html=1;align=center;fontColor=#5E7B94;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="250" y="445" width="500" height="24" as="geometry"/>
         </mxCell>
       </root>

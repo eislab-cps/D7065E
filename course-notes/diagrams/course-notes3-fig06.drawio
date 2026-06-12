@@ -1,55 +1,55 @@
 <mxfile host="app.diagrams.net">
   <diagram id="course-notes3-fig06" name="course-notes3-fig06">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="440" math="0" shadow="0" background="#032040">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="440" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="Data refines through three tiers" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="title" value="Data refines through three tiers" style="text;html=1;align=center;fontColor=#14334D;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="0" y="14" width="1000" height="30" as="geometry"/>
         </mxCell>
-        <mxCell id="card1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+        <mxCell id="card1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="70" y="70" width="250" height="300" as="geometry"/>
         </mxCell>
         <mxCell id="m1" value="B" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFB088;strokeColor=none;fontColor=#032040;fontStyle=1;fontSize=20;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="160" y="95" width="70" height="70" as="geometry"/>
         </mxCell>
-        <mxCell id="n1" value="Bronze" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="n1" value="Bronze" style="text;html=1;align=center;fontColor=#14334D;fontSize=16;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="95" y="190" width="200" height="26" as="geometry"/>
         </mxCell>
-        <mxCell id="sub1" value="raw · unfiltered" style="text;html=1;align=center;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="sub1" value="raw · unfiltered" style="text;html=1;align=center;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="95" y="222" width="200" height="22" as="geometry"/>
         </mxCell>
-        <mxCell id="det1" value="every reading, exactly as it arrived" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=12;fontFamily=Helvetica;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="det1" value="every reading, exactly as it arrived" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=12;fontFamily=Helvetica;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="85" y="270" width="220" height="40" as="geometry"/>
         </mxCell>
-        <mxCell id="card2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+        <mxCell id="card2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="375" y="70" width="250" height="300" as="geometry"/>
         </mxCell>
         <mxCell id="m2" value="S" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FF9C66;strokeColor=none;fontColor=#032040;fontStyle=1;fontSize=20;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="465" y="95" width="70" height="70" as="geometry"/>
         </mxCell>
-        <mxCell id="n2" value="Silver" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="n2" value="Silver" style="text;html=1;align=center;fontColor=#14334D;fontSize=16;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="400" y="190" width="200" height="26" as="geometry"/>
         </mxCell>
-        <mxCell id="sub2" value="clean · validated" style="text;html=1;align=center;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="sub2" value="clean · validated" style="text;html=1;align=center;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="400" y="222" width="200" height="22" as="geometry"/>
         </mxCell>
-        <mxCell id="det2" value="deduplicated, typed, joined" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=12;fontFamily=Helvetica;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="det2" value="deduplicated, typed, joined" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=12;fontFamily=Helvetica;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="390" y="270" width="220" height="40" as="geometry"/>
         </mxCell>
-        <mxCell id="card3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+        <mxCell id="card3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="680" y="70" width="250" height="300" as="geometry"/>
         </mxCell>
         <mxCell id="m3" value="G" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontStyle=1;fontSize=20;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="770" y="95" width="70" height="70" as="geometry"/>
         </mxCell>
-        <mxCell id="n3" value="Gold" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="n3" value="Gold" style="text;html=1;align=center;fontColor=#14334D;fontSize=16;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="705" y="190" width="200" height="26" as="geometry"/>
         </mxCell>
-        <mxCell id="sub3" value="curated · business-ready" style="text;html=1;align=center;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="sub3" value="curated · business-ready" style="text;html=1;align=center;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="705" y="222" width="200" height="22" as="geometry"/>
         </mxCell>
-        <mxCell id="det3" value="aggregates · features · KPIs" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=12;fontFamily=Helvetica;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="det3" value="aggregates · features · KPIs" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=12;fontFamily=Helvetica;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="695" y="270" width="220" height="40" as="geometry"/>
         </mxCell>
         <mxCell id="r1" value="refine" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;labelBackgroundColor=none;fontFamily=Helvetica;exitX=1;exitY=0.5;entryX=0;entryY=0.5;verticalAlign=bottom;" edge="1" parent="1" source="card1" target="card2">

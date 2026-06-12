@@ -1,13 +1,13 @@
 <mxfile host="app.diagrams.net">
   <diagram id="course-notes3-fig05" name="course-notes3-fig05">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="440" math="0" shadow="0" background="#032040">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="440" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="Batch processing waits for data to settle" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="title" value="Batch processing waits for data to settle" style="text;html=1;align=center;fontColor=#14334D;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="0" y="14" width="1000" height="30" as="geometry"/>
         </mxCell>
-        <mxCell id="pile" value="readings collect over 24 h" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;dashed=1;strokeWidth=2;fontColor=#89A5BE;fontFamily=Helvetica;fontSize=13;verticalAlign=top;arcSize=6;" vertex="1" parent="1">
+        <mxCell id="pile" value="readings collect over 24 h" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#4A7298;dashed=1;strokeWidth=2;fontColor=#3D6280;fontFamily=Helvetica;fontSize=13;verticalAlign=top;arcSize=6;" vertex="1" parent="1">
           <mxGeometry x="60" y="80" width="250" height="240" as="geometry"/>
         </mxCell>
         <mxCell id="q11" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFB088;strokeColor=none;" vertex="1" parent="1">
@@ -73,19 +73,19 @@
         <mxCell id="batch" value="Batch job&#10;aggregate · ML training&#10;~30 minutes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontStyle=1;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="430" y="150" width="250" height="100" as="geometry"/>
         </mxCell>
-        <mxCell id="reports" value="Reports&#10;models" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="reports" value="Reports&#10;models" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="770" y="165" width="170" height="70" as="geometry"/>
         </mxCell>
         <mxCell id="e1" value="2 a.m." style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;labelBackgroundColor=none;fontFamily=Helvetica;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="pile" target="batch">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="e1note" value="scheduled run" style="text;html=1;align=center;fontColor=#89A5BE;fontSize=12;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="e1note" value="scheduled run" style="text;html=1;align=center;fontColor=#3D6280;fontSize=12;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="310" y="208" width="120" height="22" as="geometry"/>
         </mxCell>
         <mxCell id="e2" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="batch" target="reports">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="caption" value="latency: minutes to hours — for the answers that don't have to be live" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="caption" value="latency: minutes to hours — for the answers that don't have to be live" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="0" y="380" width="1000" height="26" as="geometry"/>
         </mxCell>
       </root>

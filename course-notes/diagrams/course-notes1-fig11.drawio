@@ -1,52 +1,52 @@
 <mxfile host="app.diagrams.net">
   <diagram id="cn1-fig11" name="cn1-fig11">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="540" math="0" shadow="0" background="#032040">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="540" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="Functional view (C4 Level 2) — the containers inside the fire-detection system" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="title" value="Functional view (C4 Level 2) — the containers inside the fire-detection system" style="text;html=1;align=center;fontColor=#14334D;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="120" y="18" width="900" height="30" as="geometry"/>
         </mxCell>
-        <mxCell id="bound" value="FIRE DETECTION SYSTEM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;dashed=1;strokeWidth=2;verticalAlign=top;align=left;fontColor=#89A5BE;fontSize=14;fontStyle=1;fontFamily=Helvetica;spacingTop=8;spacingLeft=12;arcSize=4;" vertex="1" parent="1">
+        <mxCell id="bound" value="FIRE DETECTION SYSTEM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#4A7298;dashed=1;strokeWidth=2;verticalAlign=top;align=left;fontColor=#3D6280;fontSize=14;fontStyle=1;fontFamily=Helvetica;spacingTop=8;spacingLeft=12;arcSize=4;" vertex="1" parent="1">
           <mxGeometry x="40" y="60" width="930" height="430" as="geometry"/>
         </mxCell>
-        <mxCell id="sim" value="Fire Simulator&#10;drives the physics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+        <mxCell id="sim" value="Fire Simulator&#10;drives the physics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="70" y="110" width="190" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="sens" value="Smoke + Temp Sensors&#10;one process per device" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+        <mxCell id="sens" value="Smoke + Temp Sensors&#10;one process per device" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="350" y="110" width="210" height="60" as="geometry"/>
         </mxCell>
         <mxCell id="bsapi" value="BuildSim API&#10;shared building state" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="660" y="110" width="190" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="db" value="InfluxDB&#10;time-series history" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+        <mxCell id="db" value="InfluxDB&#10;time-series history" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="350" y="240" width="210" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="anom" value="Anomaly Detector&#10;ML model on features" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+        <mxCell id="anom" value="Anomaly Detector&#10;ML model on features" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="70" y="240" width="190" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="agent" value="Safety Agent&#10;reasons, chooses actions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+        <mxCell id="agent" value="Safety Agent&#10;reasons, chooses actions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="70" y="390" width="190" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="spr" value="Sprinkler Actuator&#10;executes commands" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+        <mxCell id="spr" value="Sprinkler Actuator&#10;executes commands" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="350" y="390" width="210" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="gpu" value="GPU Server (LLM)&#10;external — outside the boundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;strokeWidth=2;dashed=1;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+        <mxCell id="gpu" value="GPU Server (LLM)&#10;external — outside the boundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#4A7298;strokeWidth=2;dashed=1;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="660" y="390" width="240" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="e1" value="drives" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="sim" target="sens"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e2" value="POST values" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="sens" target="bsapi"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e3" value="store" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="sens" target="db"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e4" value="query" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="anom" target="db"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e1" value="drives" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="sim" target="sens"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" value="POST values" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="sens" target="bsapi"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" value="store" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="sens" target="db"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e4" value="query" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="anom" target="db"><mxGeometry relative="1" as="geometry"/></mxCell>
         <mxCell id="e5" value="alerts" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="anom" target="agent"><mxGeometry relative="1" as="geometry"/></mxCell>
         <mxCell id="e6" value="commands" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="agent" target="spr"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e7" value="PUT state" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.25;entryX=1;entryY=1;curved=1;" edge="1" parent="1" source="spr" target="bsapi">
-          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="900" y="300"/></Array></mxGeometry>
+        <mxCell id="e7" value="PUT state" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0.75;exitY=0;entryX=0.5;entryY=1;edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" parent="1" source="spr" target="bsapi">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="507.5" y="330"/><mxPoint x="755" y="330"/></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e8" value="reasoning" style="endArrow=block;startArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;dashed=1;curved=1;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#032040;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="agent" target="gpu">
-          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="440" y="478"/></Array></mxGeometry>
+        <mxCell id="e8" value="reasoning" style="endArrow=block;startArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;dashed=1;edgeStyle=orthogonalEdgeStyle;rounded=0;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="agent" target="gpu">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="165" y="478"/><mxPoint x="780" y="478"/></Array></mxGeometry>
         </mxCell>
-        <mxCell id="cap" value="Each box is one Docker container; a different use case yields a different decomposition of the same building" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="cap" value="Each box is one Docker container; a different use case yields a different decomposition of the same building" style="text;html=1;align=center;fontColor=#14334D;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="140" y="500" width="860" height="28" as="geometry"/>
         </mxCell>
       </root>

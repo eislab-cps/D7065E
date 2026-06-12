@@ -1,47 +1,27 @@
 <mxfile host="app.diagrams.net">
   <diagram id="cn1-fig04" name="cn1-fig04">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="520" math="0" shadow="0" background="#032040">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="420" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="One system, many lenses" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="30" y="20" width="940" height="30" as="geometry"/>
+        <mxCell id="title" value="One system, many lenses" style="text;html=1;align=center;fontColor=#14334D;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="170" y="18" width="800" height="28" as="geometry"/>
         </mxCell>
-        <mxCell id="sys" value="The system" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontStyle=1;fontFamily=Helvetica;arcSize=10;fontSize=15;" vertex="1" parent="1">
-          <mxGeometry x="400" y="255" width="200" height="70" as="geometry"/>
+        <mxCell id="v1" value="Business&#10;goals · regulations" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=14;" vertex="1" parent="1"><mxGeometry x="30" y="80" width="200" height="80" as="geometry"/></mxCell>
+        <mxCell id="v2" value="Functional&#10;components" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=14;" vertex="1" parent="1"><mxGeometry x="250" y="80" width="200" height="80" as="geometry"/></mxCell>
+        <mxCell id="v3" value="Information&#10;data flow" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=14;" vertex="1" parent="1"><mxGeometry x="470" y="80" width="200" height="80" as="geometry"/></mxCell>
+        <mxCell id="v4" value="Behavioural&#10;sequences" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=14;" vertex="1" parent="1"><mxGeometry x="690" y="80" width="200" height="80" as="geometry"/></mxCell>
+        <mxCell id="v5" value="Deployment&#10;where it runs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=14;" vertex="1" parent="1"><mxGeometry x="910" y="80" width="200" height="80" as="geometry"/></mxCell>
+        <mxCell id="sys" value="THE SYSTEM — one system, five lenses" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=15;fontStyle=1;fontFamily=Helvetica;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="30" y="250" width="1080" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="biz" value="Business&#10;goals · regulations" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="80" y="110" width="190" height="85" as="geometry"/>
-        </mxCell>
-        <mxCell id="dep" value="Deployment&#10;where it runs" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="405" y="90" width="190" height="85" as="geometry"/>
-        </mxCell>
-        <mxCell id="fun" value="Functional&#10;components" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="730" y="110" width="190" height="85" as="geometry"/>
-        </mxCell>
-        <mxCell id="inf" value="Information&#10;data flow" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="110" y="390" width="190" height="85" as="geometry"/>
-        </mxCell>
-        <mxCell id="beh" value="Behavioural&#10;sequences" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="700" y="390" width="190" height="85" as="geometry"/>
-        </mxCell>
-        <mxCell id="e-biz" style="endArrow=none;html=1;strokeColor=#89A5BE;strokeWidth=2;dashed=1;exitX=0.85;exitY=0.85;entryX=0;entryY=0.25;" edge="1" parent="1" source="biz" target="sys">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="e-dep" style="endArrow=none;html=1;strokeColor=#89A5BE;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="dep" target="sys">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="e-fun" style="endArrow=none;html=1;strokeColor=#89A5BE;strokeWidth=2;dashed=1;exitX=0.15;exitY=0.85;entryX=1;entryY=0.25;" edge="1" parent="1" source="fun" target="sys">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="e-inf" style="endArrow=none;html=1;strokeColor=#89A5BE;strokeWidth=2;dashed=1;exitX=0.85;exitY=0.15;entryX=0;entryY=0.75;" edge="1" parent="1" source="inf" target="sys">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="e-beh" style="endArrow=none;html=1;strokeColor=#89A5BE;strokeWidth=2;dashed=1;exitX=0.15;exitY=0.15;entryX=1;entryY=0.75;" edge="1" parent="1" source="beh" target="sys">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="bottomnote" value="Each viewpoint filters out everything not relevant to one stakeholder concern." style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="330" y="450" width="340" height="40" as="geometry"/>
+        <mxCell id="l1" style="endArrow=none;dashed=1;html=1;strokeColor=#4A7298;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.0926;entryY=0;" edge="1" parent="1" source="v1" target="sys"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="l2" style="endArrow=none;dashed=1;html=1;strokeColor=#4A7298;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.2963;entryY=0;" edge="1" parent="1" source="v2" target="sys"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="l3" style="endArrow=none;dashed=1;html=1;strokeColor=#4A7298;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="v3" target="sys"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="l4" style="endArrow=none;dashed=1;html=1;strokeColor=#4A7298;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.7037;entryY=0;" edge="1" parent="1" source="v4" target="sys"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="l5" style="endArrow=none;dashed=1;html=1;strokeColor=#4A7298;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.9074;entryY=0;" edge="1" parent="1" source="v5" target="sys"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="cap" value="Each viewpoint filters out everything not relevant to one stakeholder concern." style="text;html=1;align=center;fontColor=#14334D;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="170" y="350" width="800" height="28" as="geometry"/>
         </mxCell>
       </root>
     </mxGraphModel>

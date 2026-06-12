@@ -13,6 +13,8 @@ Standalone notes for the fourth chapter of D7065E.
 
 The history of building automation is the history of decisions getting smarter. Three generations of automation describe where the field has been and where it is now.
 
+Before walking through the generations, it is worth fixing the central term. The word *agent* did not arrive with large language models; it has a four-decade history in artificial intelligence. The classical definition is a system situated in an environment that exhibits **autonomy** (it operates without direct intervention), **reactivity** (it perceives and responds to changes in its environment), **pro-activeness** (it takes initiative in pursuit of goals), and **social ability** (it interacts with other agents) ([Wooldridge & Jennings, 1995](#wooldridge1995)). This generalises into the notion of a *rational agent* — one that selects actions expected to maximise its performance measure given its percept history — specified with the **PEAS** framework (Performance measure, Environment, Actuators, Sensors) for describing an agent's task environment ([Russell & Norvig, 2021](#russell2021)). A building control agent maps onto PEAS directly: the performance measure combines energy cost, comfort, and safety; the environment is the building and its occupants; the actuators are HVAC units, dampers, and door locks; the sensors are the temperature, CO2, smoke, and occupancy instruments. What has changed recently is not the *definition* of an agent but the *reasoning engine* available to implement one. Keeping that distinction in mind prevents a common confusion: an LLM is not an agent; an LLM is one possible brain for an agent.
+
 ### Generation 1: Rule-based automation
 
 The oldest and simplest. A rule says: `if temperature > 25°C then turn on the AC`. A programmable logic controller (a small industrial computer) can evaluate thousands of these rules per millisecond. The behaviour is deterministic, predictable, and easy to verify. Engineers love rules because rules don't surprise them.
@@ -29,9 +31,13 @@ A useful image: a doctor who has seen ten thousand patients. The doctor doesn't 
 
 ML inference is much better than rules at handling situations the engineer didn't anticipate. But it is still, fundamentally, a function: input features in, prediction out. The model does not reason about *why*. It cannot explain itself in plain language. It cannot handle situations far outside its training data.
 
+This limitation has a precise name in the statistical learning literature: a trained model interpolates within the distribution of its training data, and its guarantees weaken sharply under *distribution shift* — when the deployed environment differs from the data the model was fitted on ([Russell & Norvig, 2021](#russell2021)). A model trained on a building's behaviour in winter may be confidently wrong in summer; a model trained before a renovation may be confidently wrong after it. The trade-off relative to rules is therefore symmetrical: rules are verifiable but brittle in the face of unanticipated cases, while learned models are flexible within their training distribution but opaque and unreliable outside it.
+
 ### Generation 3: Agentic AI
 
 Agentic AI goes one step further. An **agent** observes the current situation, reasons about its context in natural language, plans a sequence of actions, calls tools to execute the plan, observes the outcome, and adjusts its approach. The brain of the agent is typically a large language model (an LLM).
+
+The technical lineage behind this generation is short but worth knowing. The transformer architecture made it practical to train very large sequence models on text ([Vaswani et al., 2017](#vaswani2017)). Scaling those models up revealed an unexpected capability: **in-context learning**, the ability to perform a new task from a few examples or instructions placed in the prompt, without any retraining ([Brown et al., 2020](#brown2020)). Prompting a model to produce explicit intermediate reasoning steps — *chain-of-thought* prompting — then turned out to substantially improve performance on multi-step problems ([Wei et al., 2022](#wei2022)). Interleaving that reasoning with actions on an external environment closed the loop, producing the ReAct pattern that underlies most modern agents ([Yao et al., 2023](#yao2023)), and models can even learn *when and how* to call external tools ([Schick et al., 2023](#schick2023)). Each of these steps converts the LLM from a text generator into something that can participate in the perceive–reason–act cycle described long before LLMs existed ([Wooldridge & Jennings, 1995](#wooldridge1995)).
 
 Think of it this way: instead of a doctor following a flowchart, imagine a senior consultant. The consultant asks the patient questions, weighs trade-offs out loud, considers what would happen if they chose treatment A versus treatment B, runs a test to gather more information, and explains the reasoning to the patient in plain English. The consultant might encounter a case they have never seen before and still produce a sensible plan by reasoning from first principles.
 
@@ -40,6 +46,8 @@ An LLM-based agent can:
 - Explain its decisions in human language.
 - Ask for clarification when the input is ambiguous.
 - Adjust its plan after observing the result of an action.
+
+These capabilities come with a cost that must be stated just as clearly: an LLM agent is slower than either predecessor by several orders of magnitude, its behaviour is stochastic rather than deterministic, and its failure modes (Part 5) are qualitatively new. The flexibility–predictability trade-off in the figure above is not a slogan; it is the central engineering tension of this chapter.
 
 These three generations are not in competition. A real building uses all three: hard-wired rules for the most safety-critical functions (because rules are fast and verifiable), ML models for real-time inference (because models are smarter than rules), and LLM agents for higher-level reasoning that needs context and explanation (because agents can think). The art is knowing which to use where.
 
@@ -53,6 +61,8 @@ These three generations are not in competition. A real building uses all three: 
 </figure>
 
 Every agent, no matter the framework or the model, runs the same loop. Six steps, repeated forever.
+
+The loop is not an invention of the LLM era. It is a refinement of the classical *sense–plan–act* cycle from robotics and of the classical agent function, in which an agent maps a percept sequence to an action through some internal program ([Russell & Norvig, 2021](#russell2021)). What the six-step formulation adds is the explicit separation of *reasoning* from *planning* (useful when the reasoning is auditable natural language) and the explicit *update* step, which gives the agent state that persists across cycles. In the classical taxonomy, an agent without the update step is a *simple reflex agent* — it can only react to the current percept — while an agent that maintains and revises internal state is a *model-based* agent, and one that evaluates candidate actions against goals and utilities is a *goal-based* or *utility-based* agent ([Russell & Norvig, 2021](#russell2021)). The LLM agents in this course are, in those terms, utility-based agents whose internal model happens to be expressed in natural language.
 
 <figure class="diagram">
 <img src="figures/course-notes4-fig08.png" alt="The six-step agent loop">
@@ -99,6 +109,8 @@ An analogy: jotting in your notebook, "closed the door in room A2306 at 14:32, r
 
 The update step is the one that turns inference into learning. Many beginner agents skip it, and they become elaborate functions that don't actually get smarter over time. A well-designed agent always closes the loop with a structured note that the next perceive step can read.
 
+Two practical design questions follow from the loop. First, *how often should it run?* A loop that runs every second burns tokens and money on cycles where nothing has changed; a loop that runs every hour misses events. The usual answer is event-driven triggering: the loop sleeps until an anomaly detector, a schedule, or a human request wakes it. Second, *what bounds the loop?* An unbounded reasoning loop can call tools forever — a runaway agent is a real failure mode, not a hypothetical one. Production agents therefore cap the number of tool calls per cycle and the wall-clock time per cycle, and treat hitting either cap as an error worth logging. Both questions are instances of the same trade-off introduced in Part 1: more deliberation buys better decisions at the price of latency and cost.
+
 ---
 
 ## Part 3 — Choosing the Right Tool: Rules vs ML vs Agents
@@ -121,17 +133,38 @@ A well-designed building control system uses all three layers in the same way:
 - **ML models** for real-time inference, where the situation is well-defined enough to train on and the latency budget rules out anything slower.
 - **LLM agents** for higher-level reasoning, where context, trade-offs, and explanation matter more than raw speed.
 
+The table is a heuristic, not a law, and the boundaries move with technology: local models (Part 5) push LLM reasoning into the one-second band, and learned controllers trained with reinforcement learning can in principle move sophisticated control into the real-time band ([Sutton & Barto, 2018](#sutton2018)). But the *structure* of the argument is stable. Every decision in a cyber-physical system has a latency budget set by the physics of the process and a context requirement set by the ambiguity of the situation, and the engineering task is to place each decision in the cheapest layer that satisfies both. Placing a decision too high wastes money and adds latency; placing it too low produces a brittle rule that fails on the edge cases the higher layers exist to handle.
+
+### Pointers into the machine-learning toolbox
+
+The course project requires a data-driven component — typically anomaly detection on sensor streams or short-horizon prediction — and the right move is almost never to invent a method. The techniques below are the standard, well-understood starting points, all covered by the standard survey of the anomaly-detection field ([Chandola et al., 2009](#chandola2009)), and all available as mature library implementations through scikit-learn ([Pedregosa et al., 2011](#pedregosa2011)) or the PyTorch/Keras deep-learning stacks. Use the library implementation, cite the original paper for the method you chose, and spend your effort on feature design, evaluation, and integration with the agent — not on re-implementing algorithms from scratch.
+
+| Technique | Original paper | Library entry point | Typical building use |
+|---|---|---|---|
+| Isolation Forest | [Liu et al., 2008](#liu2008) | scikit-learn `IsolationForest` | Flagging anomalous sensor readings in multivariate streams |
+| Local Outlier Factor | [Breunig et al., 2000](#breunig2000) | scikit-learn `LocalOutlierFactor` | Detecting readings that are abnormal relative to their local neighbourhood |
+| One-class SVM | [Schölkopf et al., 2001](#scholkopf2001) | scikit-learn `OneClassSVM` | Learning the boundary of "normal" operation from fault-free data |
+| Autoencoder | [Goodfellow et al., 2016](#goodfellow2016), ch. 14 | PyTorch / Keras | Reconstruction-error anomaly detection on high-dimensional sensor vectors |
+| LSTM | [Hochreiter & Schmidhuber, 1997](#hochreiter1997) | PyTorch / Keras | Time-series prediction (load, temperature) and prediction-error anomaly detection |
+| RL / MPC control | [Sutton & Barto, 2018](#sutton2018) | Gymnasium-style environments, custom | Learning or optimising HVAC control policies in simulation |
+
+For most projects, an Isolation Forest scoring each sensor window is the right first model: it is fast, needs no labelled faults, and is exactly the pre-filter that the LLM-escalation pattern of Part 5 assumes.
+
 ---
 
 ## Part 4 — Why LLMs Make Good Controllers
 
 Large language models bring four capabilities to building control that neither rules nor traditional ML can match. Each is worth understanding because it shapes when an LLM is the right tool.
 
+All four capabilities trace back to the same underlying property: a sufficiently large transformer ([Vaswani et al., 2017](#vaswani2017)) trained on broad text acquires the ability to follow instructions and adapt to new tasks purely from its prompt — the few-shot, in-context learning behaviour ([Brown et al., 2020](#brown2020)). For a control engineer, in-context learning means the "training data" for a specific building can be supplied at inference time: the system prompt describes the building, its policies, and its quirks, and the model conditions its reasoning on that description without any retraining. That is a fundamentally different deployment model from Generation 2, where adapting to a new building means collecting data and refitting.
+
 ### Contextual reasoning
 
 An LLM can reason about trade-offs that involve many objectives at once. Consider this: "Energy cost is currently high because of peak pricing, but three occupants are complaining about the heat, and the outdoor temperature is forecast to drop in two hours. The optimal action is to tolerate the discomfort for 45 minutes, then pre-cool aggressively when the price drops." No rule system can express this kind of multi-dimensional weighing. No ML classifier can either, because the relevant facts are different every time.
 
 A useful image: a chess grandmaster commenting on a position. "I'd normally trade queens here, but my opponent has shown they prefer endgames, and I'm slightly down on time — so I'll keep the queens and look for a tactical opportunity instead." The reasoning weaves together many considerations that no fixed rule could capture.
+
+There is empirical substance behind the analogy. The quality of an LLM's multi-step reasoning improves markedly when the model is prompted to externalise its intermediate steps rather than jump to an answer ([Wei et al., 2022](#wei2022)) — which is precisely why the agent designs later in this chapter insist that every decision be preceded by an explicit, logged Thought. The intermediate reasoning is not decoration; it is both a performance mechanism and an audit artefact.
 
 ### Natural-language understanding
 
@@ -144,6 +177,8 @@ Think of it this way: a smart assistant who understands "the room that gets afte
 When an LLM makes a decision, it can explain it in a paragraph. "I turned off HVAC zone 4 because the CO2 sensor in that zone has been stuck at 450 ppm for the last 30 minutes despite three occupants being present according to the booking system, which suggests a sensor fault rather than genuine air quality. I have created a maintenance ticket." A traditional ML model cannot produce this. It outputs a number, not an explanation.
 
 A useful image: the difference between a thermometer that beeps and a thermometer that says, "I'm beeping because the patient's fever rose 0.8°C in the last hour, faster than the usual recovery curve, so we should check for infection."
+
+One caution belongs here, because it is a frequent source of over-trust: the explanation an LLM produces is a *plausible account* generated by the same process that produced the decision, not a guaranteed trace of an internal computation. It is enormously useful for operators and auditors, and far better than no explanation at all — but it should be read the way one reads a colleague's account of their own reasoning: informative, usually honest, occasionally a rationalisation. This is one more reason the architecture validates actions independently (Part 7) rather than trusting the story that accompanies them.
 
 ### Handling novel situations
 
@@ -160,6 +195,8 @@ LLMs are powerful but flawed. Four problems matter for building control, and eac
 ### Hallucination
 
 LLMs sometimes produce plausible-sounding but incorrect outputs. An LLM might suggest activating an actuator that doesn't exist, claim a sensor is showing a value it isn't, or invent a regulation. Hallucination is not malice — the LLM is doing exactly what it was trained to do, which is produce text that *looks* right.
+
+Hallucination is a studied phenomenon, not folklore, and the literature draws a distinction that matters for control systems: *intrinsic* hallucination, where the output contradicts the source information the model was given, and *extrinsic* hallucination, where the output asserts something that cannot be verified from the source at all ([Ji et al., 2023](#ji2023)). An agent that misreports a sensor value present in its context is hallucinating intrinsically; an agent that invents an actuator is hallucinating extrinsically. The conclusion of that literature is sobering and useful: hallucination is a property of how these models are trained and decoded, it cannot be fully eliminated by prompting, and robust systems must therefore be designed so that hallucinated outputs are *caught*, not merely made less likely ([Ji et al., 2023](#ji2023)).
 
 Picture this: a confident but unreliable witness in court. They speak with conviction. They're sometimes completely correct. They're sometimes completely wrong, and they don't know the difference.
 
@@ -197,7 +234,9 @@ Mitigations:
 
 A local model — running on the lab's GPU server or on a developer's laptop — solves both the latency and the cost problem. The model is slower and less capable than a frontier cloud model, but it's free and fast.
 
-**Ollama** is the standard tool for running open-source LLMs (Llama, Gemma, Mistral, Qwen) locally with a simple API. The course's lab GPU server runs Ollama. For routine reasoning in a building control system, a local model is entirely adequate.
+**Ollama** (https://ollama.com) is the standard tool for running open-source LLMs (Llama, Gemma, Mistral, Qwen) locally with a simple, OpenAI-compatible API. The course's lab GPU server runs Ollama. For routine reasoning in a building control system, a local model is entirely adequate.
+
+The trade-off is capability for control. A small local model reasons less reliably than a frontier model — it follows complex instructions less faithfully, makes more tool-call formatting errors, and handles fewer simultaneous considerations. But it has properties a cloud API can never offer: deterministic availability (no rate limits, no outages outside your control), data locality (sensor data never leaves the building's network, which matters for occupancy data under privacy regulation), and a fixed, sunk cost. A sensible production architecture uses a local model for the high-volume routine reasoning and reserves a frontier model for the rare, genuinely hard cases — the same escalation logic as the ML-filter pattern, applied one level up.
 
 A useful image: having a librarian in the office building. They don't know everything that the New York Public Library would know, but they're available immediately and free.
 
@@ -218,6 +257,8 @@ An analogy: asking a job applicant to fill in a form instead of writing a letter
 
 An LLM, on its own, can only read text and produce text. It can't read a sensor, write to a database, or command an actuator. **Tool calling** — also called function calling — is the mechanism that extends the LLM with the ability to invoke external functions.
 
+The idea that a language model can decide to call external functions was first demonstrated as a learned capability: a model can teach itself, from a handful of demonstrations, *when* a calculator, a search engine, or a calendar would improve its answer, and emit the call in-line ([Schick et al., 2023](#schick2023)). Modern APIs industrialise the same idea — instead of the model learning tool use implicitly, the developer declares a catalogue of typed functions, and the model is trained to emit well-formed calls against that catalogue. The conceptual point survives the engineering change: tool use turns a closed-book text generator into an open-book system that can defer to authoritative external sources, which is also one of the most effective structural defences against the extrinsic hallucination discussed in Part 5.
+
 Picture this: a brilliant consultant who is locked in a room with only a phone. They can think and talk. They can call you and ask you to do things. You go and do those things, then come back and report what happened.
 
 The protocol works in five steps:
@@ -228,7 +269,7 @@ The protocol works in five steps:
 4. The calling code executes that function and gets a result.
 5. The result is returned to the LLM as a **tool result** message. The LLM then either calls another tool or produces a final answer.
 
-This loop — Thought, Action, Observation, Thought, Action, Observation — is the foundation of the **ReAct pattern**, introduced by Yao et al. in 2022. ReAct stands for "Reasoning + Acting", and it is by far the most common pattern for LLM agents.
+This loop — Thought, Action, Observation, Thought, Action, Observation — is the foundation of the **ReAct pattern**, introduced in 2022 ([Yao et al., 2023](#yao2023)). ReAct stands for "Reasoning + Acting", and it is by far the most common pattern for LLM agents.
 
 A worked example:
 
@@ -262,6 +303,8 @@ A useful image: a detective's case notebook. Every observation, every deduction,
 ## Part 7 — Designing Good Tools
 
 Tool design is more important than agent design. A well-designed tool catalogue lets even a small LLM reason effectively. A badly-designed catalogue confuses even a frontier model. Four principles drive good tool design.
+
+The deeper reason is that the tool catalogue *is* the agent's action space. In the rational-agent framing, an agent can only be as good as the actions available to it and the percepts those actions return ([Russell & Norvig, 2021](#russell2021)); in a tool-calling agent, both are defined entirely by the tool schemas and their results. Every principle below is therefore a special case of a single idea: design the action space so that the right behaviour is easy to express, the wrong behaviour is hard to express, and every action's consequences are visible.
 
 ### One tool per concern
 
@@ -339,7 +382,7 @@ tools = [{
 
 A new agent project usually starts with the team defining their own tool format, their own way of registering tools, their own way of exposing them to the LLM. After a few projects, everyone has invented the same wheel a slightly different way.
 
-The **Model Context Protocol**, abbreviated MCP, was proposed by Anthropic in 2024 to standardise this. It defines a single protocol for connecting AI models to external data sources and tools, so that any MCP-compatible model can discover and use tools from any MCP-compatible server.
+The **Model Context Protocol**, abbreviated MCP, was proposed by Anthropic in 2024 to standardise this ([Anthropic, 2024](#anthropic2024); specification at https://modelcontextprotocol.io). It defines a single protocol for connecting AI models to external data sources and tools, so that any MCP-compatible model can discover and use tools from any MCP-compatible server. The economic argument is the classic one for any interface standard: without a standard, connecting *M* models to *N* tool providers requires on the order of M×N bespoke integrations; with a standard, it requires M+N implementations of one protocol. The trade-off, as with every standard, is a layer of indirection and protocol machinery that a single hard-wired integration would not need — which is why MCP pays off most when tools are shared across multiple agents and applications, and least for a one-off script.
 
 The architecture has three components:
 
@@ -361,6 +404,8 @@ The MCP Python SDK handles the protocol plumbing. Only the tool implementations 
 
 Agent frameworks provide scaffolding for building LLM agents: tool execution loops, memory management, state machines, multi-agent coordination, and integrations with many LLM providers. The right choice depends on the complexity of the use case.
 
+Two general observations before the catalogue. First, every framework embodies a trade-off between *abstraction* and *transparency*: the framework saves you from writing the agent loop, but it also hides the loop, and when an agent misbehaves the debugging happens inside someone else's control flow. For a safety-relevant system, being able to point at the exact line where a tool call is validated is worth a great deal. Second, this layer of the stack is young and moves quickly — APIs change between minor versions, and the right habit is to treat the framework as replaceable scaffolding around stable concepts (the agent loop, ReAct, tool schemas) rather than as the architecture itself. The concepts in this chapter will outlive any particular library listed below.
+
 ### No framework
 
 For simple agents that call one or two tools in a fixed sequence, plain Python with direct LLM API calls is often clearest. A 50-line Python script that reads sensors, constructs a prompt, calls the LLM, parses the tool call, executes the tool, and loops is simpler to understand, test, and debug than the same logic expressed in a framework's domain-specific language.
@@ -369,13 +414,13 @@ Think of it this way: cooking a single fried egg. You don't need a chef. You nee
 
 ### LangChain
 
-The most widely used LLM application framework. Provides chains (sequential tool calls), agents (LLM-driven tool selection), memory (conversation history), and a huge ecosystem of integrations. Best when many integrations are needed quickly — connectors to databases, vector stores, cloud LLM providers, and so on.
+The most widely used LLM application framework (https://python.langchain.com). Provides chains (sequential tool calls), agents (LLM-driven tool selection), memory (conversation history), and a huge ecosystem of integrations. Best when many integrations are needed quickly — connectors to databases, vector stores, cloud LLM providers, and so on. The cost of the breadth is well known in practice: many layers of abstraction for what is sometimes a single API call, and a fast-moving API surface.
 
 A useful image: a well-stocked kitchen. Many tools, many ingredients, many recipes already half-prepared. Great for many dishes; overkill if you only ever fry eggs.
 
 ### LangGraph
 
-A graph-based agent framework from the LangChain team. Agents are defined as nodes in a directed graph with cycles; the LLM decides which edge to follow at each step. Better than plain LangChain for complex workflows with branching, looping, and human-in-the-loop checkpoints.
+A graph-based agent framework from the LangChain team (https://langchain-ai.github.io/langgraph/). Agents are defined as nodes in a directed graph with cycles; the LLM decides which edge to follow at each step. Better than plain LangChain for complex workflows with branching, looping, and human-in-the-loop checkpoints, because the set of reachable states is explicit in the graph rather than implicit in the model's behaviour — a property that matters when you need to argue that an agent *cannot* reach a forbidden state.
 
 ```python
 from typing import TypedDict
@@ -406,21 +451,25 @@ An analogy: a board game with a movement map. Each square has rules for what mov
 
 ### CrewAI
 
-A framework for role-based multi-agent systems. Agents are defined with **roles** (architect, designer, builder), **goals**, and **backstories**. **Tasks** have descriptions and expected outputs. **Crews** assign tasks to agents, and agents can delegate to each other.
+A framework for role-based multi-agent systems (https://docs.crewai.com). Agents are defined with **roles** (architect, designer, builder), **goals**, and **backstories**. **Tasks** have descriptions and expected outputs. **Crews** assign tasks to agents, and agents can delegate to each other.
 
 Picture this: a film production team. The director, the cinematographer, the editor — each has a defined role, each can collaborate with the others, and the producer (the crew) coordinates them.
 
 ### AutoGen
 
-Microsoft's conversational multi-agent framework. Agents exchange messages in a structured conversation; a coordinator directs the flow. Good for tasks where multiple agents critique each other — code review, report writing, multi-step debugging.
+Microsoft's conversational multi-agent framework ([Wu et al., 2023](#wu2023); https://microsoft.github.io/autogen/). Agents exchange messages in a structured conversation; a coordinator directs the flow. The accompanying paper frames multi-agent conversation as a general programming model for LLM applications and is worth reading for its catalogue of conversation patterns. Good for tasks where multiple agents critique each other — code review, report writing, multi-step debugging.
 
 A useful image: a panel discussion. The moderator picks who speaks. Each panellist has a perspective. The conversation produces a richer answer than any single panellist alone.
 
 ### Pydantic AI
 
-A newer framework built around Pydantic for structured outputs and type safety. Good for agents that need reliable, typed tool-call arguments and responses. Less feature-rich than LangGraph but simpler to use for straightforward agents.
+A newer framework built around Pydantic for structured outputs and type safety (https://ai.pydantic.dev). Good for agents that need reliable, typed tool-call arguments and responses. Less feature-rich than LangGraph but simpler to use for straightforward agents.
 
 Think of it this way: building furniture with a precision template. Less flexible than freehand work, but every joint fits.
+
+### Choosing among them
+
+A reasonable default for this course: no framework or Pydantic AI for a single agent with a handful of tools; LangGraph when the workflow genuinely has branches, loops, and checkpoints that deserve to be explicit; CrewAI or AutoGen only when the design truly calls for multiple communicating agents. The common beginner mistake is to reach for the most powerful framework first — the equivalent of hiring a film crew to fry an egg — and then spend the project debugging the framework instead of the agent.
 
 ---
 
@@ -431,7 +480,7 @@ Think of it this way: building furniture with a precision template. Less flexibl
 <figcaption><em>In the ReAct pattern, the agent alternates between reasoning (Thought) and acting (Action), with each Observation feeding the next Thought. The trace is also the explanation.</em></figcaption>
 </figure>
 
-The ReAct pattern — Reasoning + Acting — was introduced by Yao et al. in their 2022 paper. It is short, clear, and has become the de facto template for LLM agents.
+The ReAct pattern — Reasoning + Acting — was introduced in 2022, building directly on the chain-of-thought result ([Wei et al., 2022](#wei2022); [Yao et al., 2023](#yao2023)). Chain-of-thought showed that explicit intermediate reasoning improves an LLM's answers; ReAct's contribution was to ground that reasoning in an external environment, so that each reasoning step can trigger an action and each action's result can correct the reasoning. Grounding of this kind reduces the hallucination that pure chain-of-thought suffers from — the model can *look things up* instead of confabulating them — while pure acting without reasoning fares worse on tasks requiring planning ([Yao et al., 2023](#yao2023)). The pattern is short, clear, and has become the de facto template for LLM agents.
 
 The pattern interleaves three step types:
 
@@ -447,6 +496,8 @@ A useful image: a pilot's flight log. Every decision is timestamped, with the re
 
 The interleaving also helps the LLM stay on track. A pure plan-then-execute pattern is fragile: the plan is made once, and if reality doesn't match the plan, the agent fails. ReAct adapts continuously — every Observation feeds back into the next Thought, and the plan evolves.
 
+The pattern has costs worth naming. Each Thought–Action–Observation cycle is a full model invocation, so a ten-step ReAct trace costs roughly ten times the latency and tokens of a single-shot answer, and the growing trace consumes context window. ReAct is therefore the right pattern for deliberative, tool-heavy tasks where adaptivity and auditability dominate — exactly the operational-reasoning band of the table in Part 3 — and the wrong pattern for the high-frequency, low-latency decisions that belong to rules and ML models.
+
 ---
 
 ## Part 11 — Multi-Agent Systems
@@ -457,6 +508,8 @@ The interleaving also helps the LLM stay on track. A pure plan-then-execute patt
 </figure>
 
 A single agent that controls every aspect of a building is fragile. It is hard to test, hard to update, and has a single point of failure. Multi-agent systems decompose the control problem into specialised agents that coordinate.
+
+Multi-agent systems are an established research field with a literature that predates LLMs by decades. The central problems — how agents should represent each other, communicate, negotiate, and coordinate without a central controller — were identified early, and *social ability* appears in the classical agent definition precisely because realistic agents share their environment with other agents ([Wooldridge & Jennings, 1995](#wooldridge1995)). The LLM era changes the implementation — agents can now negotiate in natural language, as systems like AutoGen demonstrate ([Wu et al., 2023](#wu2023)) — but not the problem structure: everything in this part and the next is a modern instance of questions that field has studied since the early 1990s.
 
 ### Why multiple agents
 
@@ -493,6 +546,8 @@ Think of it this way: a war-room briefing where every participant hears every re
 ## Part 12 — Conflict Resolution and the Pathologies Multi-Agent Brings
 
 The moment a system has multiple agents with different objectives, conflicts become possible. The energy agent wants the HVAC off. The comfort agent wants it on. Who wins?
+
+This is not an accident of bad design; it is structural. Decomposing one global objective (run the building well) into per-agent objectives (minimise energy, maximise comfort, guarantee safety) necessarily creates agents whose locally optimal actions disagree, and the coordination and negotiation mechanisms below are the classical answers from the multi-agent literature ([Wooldridge & Jennings, 1995](#wooldridge1995)). The choice among them is itself a trade-off between simplicity, flexibility, and the quality of the compromise reached.
 
 ### Conflict-resolution strategies
 
@@ -544,6 +599,8 @@ Prevention: rate-limit actuator commands; enforce a minimum time between state c
 </figure>
 
 An AI agent controlling a building can cause real harm. It can leave emergency doors locked during a fire, over-cool a server room, or cause energy spikes that trip a breaker. Safety in agentic AI is not abstract — it is an engineering requirement, and there are well-established techniques to enforce it.
+
+The research community anticipated these problems before LLM agents existed. The "concrete problems in AI safety" were catalogued for any learning system that acts in the world, and three of the categories map directly onto building control ([Amodei et al., 2016](#amodei2016)). **Negative side effects**: an agent optimising one objective damages something outside that objective — the energy agent that saves electricity by shutting down ventilation in an occupied room. **Reward hacking**: an agent satisfies the letter of its objective while defeating its purpose — an agent rewarded for keeping a temperature *reading* in range that learns the cheapest action is to influence the sensor rather than the room. **Safe exploration**: an agent that tries actions to learn their effects must not try them on systems where a bad experiment is irreversible — fire suppression is not a place to explore. Each mechanism in this part is best understood as a defence against one or more of these failure classes: guardrails bound side effects, ground-truth validation and audit trails make reward hacking detectable, and human-in-the-loop approval removes irreversible actions from the agent's exploration space.
 
 ### Guardrails
 
@@ -597,7 +654,7 @@ To make all of this concrete, walk a fire-detection agent through one complete c
 
 - Smoke sensors per room, publishing readings every 5 seconds to MQTT.
 - A consumer writing every reading to TimescaleDB.
-- An anomaly model (Isolation Forest) that scores each sensor every 30 seconds.
+- An anomaly model (Isolation Forest; [Liu et al., 2008](#liu2008)) that scores each sensor every 30 seconds.
 - The safety agent, a ReAct agent using Ollama (Llama 3.2 3B locally) for reasoning.
 - Six tools: `read_sensors`, `set_actuator`, `highlight_rooms`, `find_route`, `query_history`, `create_alert`.
 - Guardrails: known actuator IDs only; legal states only; a `reason` field of at least 5 characters is required.
@@ -712,3 +769,39 @@ Every term used in this chapter, defined.
 5. Multi-agent systems are stronger and more failure-resilient than single agents, but they require a conflict-resolution strategy (priority, auction, consensus, or hierarchy) and explicit mitigations for the pathologies they create (oscillation, deadlock, thrashing).
 
 These five ideas are the foundation for every agent in the rest of the course.
+
+---
+
+## Part 17 — References
+
+### Literature
+
+- <a id="amodei2016"></a>Amodei, D., Olah, C., Steinhardt, J., Christiano, P., Schulman, J., & Mané, D. (2016). Concrete Problems in AI Safety. *arXiv:1606.06565*.
+- <a id="breunig2000"></a>Breunig, M. M., Kriegel, H.-P., Ng, R. T., & Sander, J. (2000). LOF: Identifying Density-Based Local Outliers. *Proceedings of the ACM SIGMOD International Conference on Management of Data*.
+- <a id="brown2020"></a>Brown, T., et al. (2020). Language Models are Few-Shot Learners. *Advances in Neural Information Processing Systems (NeurIPS)*.
+- <a id="chandola2009"></a>Chandola, V., Banerjee, A., & Kumar, V. (2009). Anomaly Detection: A Survey. *ACM Computing Surveys*, 41(3).
+- <a id="goodfellow2016"></a>Goodfellow, I., Bengio, Y., & Courville, A. (2016). *Deep Learning*. MIT Press. https://www.deeplearningbook.org
+- <a id="hochreiter1997"></a>Hochreiter, S., & Schmidhuber, J. (1997). Long Short-Term Memory. *Neural Computation*, 9(8).
+- <a id="ji2023"></a>Ji, Z., et al. (2023). Survey of Hallucination in Natural Language Generation. *ACM Computing Surveys*, 55(12).
+- <a id="liu2008"></a>Liu, F. T., Ting, K. M., & Zhou, Z.-H. (2008). Isolation Forest. *Proceedings of the IEEE International Conference on Data Mining (ICDM)*.
+- <a id="pedregosa2011"></a>Pedregosa, F., et al. (2011). Scikit-learn: Machine Learning in Python. *Journal of Machine Learning Research*, 12.
+- <a id="russell2021"></a>Russell, S., & Norvig, P. (2021). *Artificial Intelligence: A Modern Approach* (4th ed.). Pearson.
+- <a id="schick2023"></a>Schick, T., Dwivedi-Yu, J., Dessì, R., Raileanu, R., Lomeli, M., Zettlemoyer, L., Cancedda, N., & Scialom, T. (2023). Toolformer: Language Models Can Teach Themselves to Use Tools. *Advances in Neural Information Processing Systems (NeurIPS)*.
+- <a id="scholkopf2001"></a>Schölkopf, B., Platt, J. C., Shawe-Taylor, J., Smola, A. J., & Williamson, R. C. (2001). Estimating the Support of a High-Dimensional Distribution. *Neural Computation*, 13(7).
+- <a id="sutton2018"></a>Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction* (2nd ed.). MIT Press.
+- <a id="vaswani2017"></a>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., & Polosukhin, I. (2017). Attention Is All You Need. *Advances in Neural Information Processing Systems (NeurIPS)*.
+- <a id="wei2022"></a>Wei, J., Wang, X., Schuurmans, D., Bosma, M., Ichter, B., Xia, F., Chi, E., Le, Q., & Zhou, D. (2022). Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. *Advances in Neural Information Processing Systems (NeurIPS)*.
+- <a id="wooldridge1995"></a>Wooldridge, M., & Jennings, N. R. (1995). Intelligent Agents: Theory and Practice. *The Knowledge Engineering Review*, 10(2).
+- <a id="wu2023"></a>Wu, Q., et al. (2023). AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation. *arXiv:2308.08155*.
+- <a id="yao2023"></a>Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., & Cao, Y. (2023). ReAct: Synergizing Reasoning and Acting in Language Models. *International Conference on Learning Representations (ICLR)*. (Preprint: arXiv:2210.03629, 2022.)
+
+### Software, frameworks, and online resources
+
+- <a id="anthropic2024"></a>Anthropic (2024). Introducing the Model Context Protocol. https://modelcontextprotocol.io
+- AutoGen — Microsoft's conversational multi-agent framework. https://microsoft.github.io/autogen/
+- CrewAI — role-based multi-agent framework. https://docs.crewai.com
+- LangChain — LLM application framework. https://python.langchain.com
+- LangGraph — graph-based agent framework. https://langchain-ai.github.io/langgraph/
+- Ollama — local LLM runtime with an OpenAI-compatible API. https://ollama.com
+- Pydantic AI — type-safe agent framework built on Pydantic. https://ai.pydantic.dev
+- scikit-learn — machine learning in Python ([Pedregosa et al., 2011](#pedregosa2011)). https://scikit-learn.org — `IsolationForest`: https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html

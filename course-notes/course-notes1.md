@@ -11,15 +11,15 @@ Standalone notes for the first chapter of D7065E.
 <figcaption><em>Local intelligence sits on the same network as the sensors and actuators it controls. The cloud helps with slow tasks, but the critical loop never depends on it.</em></figcaption>
 </figure>
 
-A modern building, a modern car, a modern factory — none of these are simple machines anymore. Each contains hundreds of sensors and actuators, and a continuous stream of small decisions is needed to keep it running safely, efficiently, and comfortably. The branch of computer science that deals with making those decisions on the same network as the physical system, rather than in a remote data centre far away, is called **embedded intelligence at the edge**.
+Contemporary buildings, vehicles, and industrial plants are operated by software. A mid-sized commercial building contains hundreds to thousands of sensors and actuators, and its safe and efficient operation depends on a continuous stream of control decisions: when to ventilate, how to pre-heat, which alarms to trust, which doors to release. Systems of this kind — in which computation, networking, and physical processes are tightly coupled — have been identified as a distinct engineering discipline since the mid-2000s ([Lee, 2008](#lee2008); [Rajkumar et al., 2010](#rajkumar2010)). This course is concerned with two questions about such systems: *where* the control decisions should be computed, and *how* the software that computes them should be engineered. Its subject, **embedded intelligence at the edge**, joins two ideas with separate research histories.
 
-The phrase has two halves worth unpacking.
+The first idea is **embedded computing**: software that is physically and logically part of the machine it controls. The control logic of a car's anti-lock braking system executes inside the vehicle; a pacemaker's timing loop executes inside the pacemaker. Such software cannot defer its decisions to a remote service, because its deadlines are imposed by the dynamics of the machine rather than by the patience of a user. An anti-lock braking controller that consulted a server before releasing brake pressure would not be a slower version of the same system; it would be a different and unacceptable system.
 
-**Embedded** means the software lives inside or right next to the physical system it controls. The control logic of a car's anti-lock brakes lives in the car. The thermostat's brain lives in the thermostat itself. There is no question of phoning home to ask permission. The software is part of the thing.
+The second idea is **edge computing**: placing computation at the edge of the network, close to the sources of data, rather than concentrating it in remote data centres. Four forces push computation out of the cloud: latency, bandwidth, energy, and data privacy ([Shi et al., 2016](#shi2016)). The bandwidth force alone is decisive for richly instrumented environments. A heavily sensed vehicle or building produces data at rates that make shipping the raw stream to a distant data centre both uneconomical and, for control purposes, too slow ([Satyanarayanan, 2017](#satyanarayanan2017)).
 
-**At the edge** means on the local network — close to the sensors and the actuators — not in the cloud. A useful image: the difference between a self-driving car that can stop itself when something runs into the road, and one that has to ask a server in another country whether to brake. The first one is safe. The second one is a horror film waiting to happen.
+Two engineering consequences follow from placing the intelligence at the edge. First, control decisions complete in milliseconds, because no decision on the critical path traverses the wide-area network. Second, the system degrades gracefully under network failure: a building whose broadband connection is severed during a storm continues to detect fires and regulate ventilation, because the software responsible for those functions runs inside the building. Both properties are requirements, not conveniences, for any system whose failure has physical consequences.
 
-Two ideas follow naturally. First, decisions happen fast and locally, in milliseconds, because the physical world cannot wait for a round trip across the internet. Second, the system keeps working when the wider network does not. If the building's broadband line is cut during a storm, the fire detector still detects fires.
+The trade-off is genuine, not one-sided. The cloud offers effectively unlimited compute, elastic scaling, and convenient central management. The edge offers low latency, independence from the wide-area network, and the privacy of data that never leaves the building. Good designs use both, and the dividing line is the critical path: anything the physical system needs within its reaction time runs at the edge, while everything else, such as model training, long-term analytics, and archival storage, may run wherever it is cheapest.
 
 The course's running project, autonomous building control, makes both points concrete. A simulated building called BuildSim provides rooms, sensors, and actuators. The job is to instrument that building with software that observes its state, decides what to do, and changes the state — all running on the same network as the building itself, without depending on any cloud service to make the decisions. Cloud services can help with slow tasks, like overnight model training, but they are never on the critical path.
 
@@ -38,6 +38,8 @@ Before any code is written, a discipline called Model-Based Systems Engineering 
 
 A **cyber-physical system**, abbreviated CPS, is a system where computation and physical processes are tightly intertwined. Two halves live side by side and communicate forever.
 
+The term emerged from the research community in the mid-2000s, and the reason a new word was needed is instructive. Mainstream computing abstractions deliberately hide timing: a program is treated as correct if it eventually produces the right answer. Physical processes, by contrast, are inherently concurrent and unfold in real time whether the software is ready or not. A CPS is therefore not simply an embedded system with networking attached. It is a system whose correctness depends on *when* things happen, not only on *what* happens — which is why timing and concurrency must appear in the specification itself rather than being discovered in the implementation ([Lee, 2008](#lee2008)). The field sits at the intersection of control theory, real-time computing, and networked sensing, and has been described, with some justification, as the next computing revolution ([Rajkumar et al., 2010](#rajkumar2010)).
+
 The **physical half** is everything you can touch. In a building, that means rooms, walls, doors, HVAC ducts, ventilation fans, smoke and air, temperature gradients, water pipes, electrical loads, and the people walking around inside. Physical state evolves according to the laws of physics and the patterns of human behaviour. The temperature in a room does not stop changing just because no computer is watching.
 
 The **cyber half** is the software. Sensor processes that read the physical state and report it. Data pipelines that store the readings. AI agents that reason about what should happen next. Actuator processes that issue commands. The cyber half is fast and flexible but has no direct access to physics — it only knows what sensors report, and it only acts through what actuators can do.
@@ -55,7 +57,7 @@ A CPS is defined by the loop that joins the two halves. The cycle runs forever, 
 
 Riding a bicycle is the simplest everyday version of this loop. You sense your balance (eyes and inner ear are the sensors). You decide whether you're leaning too far left or right (the brain is the reasoner). You correct (your muscles are the actuators). And your balance changes — the world responds. The loop runs many times per second, automatically, and if any part of it breaks, you fall over.
 
-A CPS is a bicycle for an entire building. The loop has to be fast enough that the physics can't run away (a fire-suppression loop in well under a second, a climate-control loop comfortable with one update every few minutes). It has to be reliable enough to keep working when a sensor crashes, a network drops, or a model gives the wrong answer. And it has to be correct enough that a wrong decision does not start a fire, lock people in during an emergency, or freeze a server room.
+A CPS is a bicycle for an entire building. The loop has to be fast enough that the physics can't run away (a fire-suppression loop in well under a second, a climate-control loop comfortable with one update every few minutes). It has to be reliable enough to keep working when a sensor crashes, a network drops, or a model gives the wrong answer. And it has to be correct enough that a wrong decision does not start a fire, lock people in during an emergency, or freeze a server room. The loop deadline is a requirement imposed by the physics, not a preference of the programmer, and it belongs in the specification alongside the functional behaviour ([Lee, 2008](#lee2008)).
 
 ### Automation versus autonomy
 
@@ -71,7 +73,9 @@ The difference is bigger than it sounds. Two ways to think about it:
 | One rule, fixed forever | Many models, adapting over time |
 | Predictable but brittle | Smarter but less predictable |
 
-Real-world autonomous building systems include Johnson Controls' OpenBlue, Siemens Desigo CC, and the cooling controller that DeepMind built for Google's data centres — which reduced cooling-energy consumption by about 40 percent by reasoning over far more variables than a rule-based controller can hold.
+The distinction maps directly onto the classical agent vocabulary of artificial intelligence. An agent is anything that perceives its environment through sensors and acts on it through actuators, and agents are graded by sophistication: a simple reflex agent that maps each percept to a fixed action is the grandfather clock, while a learning, utility-driven agent is the smart thermostat ([Russell & Norvig, 2021](#russell2021)). Autonomy, in this vocabulary, is the degree to which behaviour derives from the agent's own experience rather than from knowledge built in by the designer.
+
+Real-world autonomous building systems include Johnson Controls' OpenBlue and Siemens Desigo CC. The best-documented example at scale is data-centre cooling at Google, where a model-predictive controller learned the thermal dynamics of the building from historical telemetry and then selected cooling actions by reasoning over far more variables than a rule-based controller can hold, delivering substantial energy savings while respecting hard operational limits ([Lazic et al., 2018](#lazic2018)). The trade-off from the table above is visible in that deployment too: the learned controller is smarter than the fixed rules it replaced, but precisely because it is less predictable, it runs inside verified safety constraints that bound the worst case.
 
 The course's autonomous building control project asks for the autonomous version, not the automated one. Threshold rules ("if smoke > 0.7, alarm") are not sufficient. A real ML model or LLM reasoning step is required.
 
@@ -90,6 +94,8 @@ The default way to design software is to write a Word document describing what s
 
 This almost always fails. Prose is ambiguous, and the ambiguity is invisible until somebody tries to act on the document. Two engineers reading the same paragraph form different mental pictures. The product manager imagined a database; the developer built a spreadsheet. The architect assumed the broker held messages for a minute; the operations engineer configured it to drop them after a second. Three weeks into implementation, somebody discovers a contradiction. Six weeks in, the design and the code have parted ways completely.
 
+This problem has a classical formulation. The difficulties of software engineering divide into **essence**, the irreducible complexity of the problem being solved, and **accident**, the incidental difficulties of our tools and processes; the hard part of building a system is the specification, design, and testing of the conceptual construct, not the labour of typing it in, which is why no single tool or language has ever delivered an order-of-magnitude improvement on its own ([Brooks, 1987](#brooks1987)). Prose specifications fail because they attack the essence with an instrument too blunt to capture it: a vague document does not remove the complexity of the problem, it only postpones the moment when someone must confront it.
+
 Picture this: writing prose specifications is like cooking from a recipe that says "add a bit of salt and bake until done." Five cooks following this recipe produce five different dishes. The recipe didn't capture the actual instructions; it captured a vibe.
 
 A working recipe says: "1.5 teaspoons of salt, bake at 180°C for 35 minutes." Five cooks following this recipe produce the same dish. The difference between a vibe and a working recipe is precision.
@@ -97,6 +103,8 @@ A working recipe says: "1.5 teaspoons of salt, bake at 180°C for 35 minutes." F
 ### What MBSE is
 
 **Model-Based Systems Engineering**, abbreviated MBSE, replaces prose documents with structured, precise models of the system. A model is unambiguous — either it specifies a thing or it doesn't. Two engineers reading the same model build the same mental picture.
+
+MBSE is a family of methodologies rather than a single tool. Surveys of industrial practice find a shared commitment beneath the differences in notation: the model, not the document, is the primary engineering artefact, and the documents, code skeletons, and test plans are derived from it or checked against it ([Estefan, 2007](#estefan2007)). That shift is what makes the specification analysable. A prose document can only be read; a model can be queried, cross-checked for gaps, and traced requirement by requirement.
 
 The models are not single documents but a small collection of structured artefacts:
 
@@ -120,7 +128,7 @@ The work flows through six activities. They are not strictly sequential — work
 
 **Requirements analysis.** Write down what the system must do as testable statements, each with a unique ID. Three kinds appear: **functional** ("detect fire conditions within 30 seconds"), **non-functional** ("survive a sensor-process crash without losing data"), and **regulatory** ("comply with Swedish BBR fire protection requirements"). Think of it this way: requirements are the customer's wishlist, formalised so it cannot be misread. "Make the cake delicious" is not a requirement. "The cake must be 30 cm in diameter, contain no peanuts, and be ready by 6 p.m." is.
 
-**Functional decomposition.** Take each high-level requirement and break it into the smaller operations needed to satisfy it. "Detect fire" decomposes into collecting smoke and temperature readings, validating them, applying a detection model, raising an alert, commanding sprinklers, and notifying occupants. A useful image: decomposing a recipe. "Make a cake" decomposes into "measure flour, beat eggs, mix, pour into tin, bake at 180°C for 35 minutes, cool, frost." Each step is small enough to assign to a worker.
+**Functional decomposition.** Take each high-level requirement and break it into the smaller operations needed to satisfy it. "Detect fire" decomposes into collecting smoke and temperature readings, validating them, applying a detection model, raising an alert, commanding sprinklers, and notifying occupants. A useful image: decomposing a recipe. "Make a cake" decomposes into "measure flour, beat eggs, mix, pour into tin, bake at 180°C for 35 minutes, cool, frost." Each step is small enough to assign to a worker. The criteria for a good decomposition are older than MBSE itself. The obvious strategy — cutting the system along the steps of its processing flowchart — produces modules that all break together when a single design decision changes. The classical alternative, **information hiding**, cuts the system so that each module hides one difficult or volatile design decision behind a stable interface ([Parnas, 1972](#parnas1972)). Decomposing by what is likely to change, rather than by the order of operations, is the reason a sensor process, an anomaly detector, and an agent can each be rewritten without touching the others.
 
 **Architecture design.** Decide what software components exist, how they're organised, and where they run. A component diagram shows the parts. A deployment view shows which machine each part lives on. An analogy: the floor plan of a house. Walls, rooms, doors — but no furniture yet.
 
@@ -134,7 +142,7 @@ The work flows through six activities. They are not strictly sequential — work
 
 Errors discovered during design cost minutes. Errors discovered during implementation cost days. Errors discovered after deployment cost weeks, or — in safety-critical systems — lives.
 
-The cost curve is steep, and the MBSE process catches as many errors as possible while they are still cheap.
+This is not folklore; it is one of the oldest quantified results in software engineering. Data from large industrial projects show the cost of fixing an error growing roughly tenfold with each major life-cycle phase it survives: a requirements error that costs one unit to correct during requirements analysis can cost on the order of a hundred units to correct once the system is in operation ([Boehm, 1981](#boehm1981)). The exact multiplier varies between projects and has been debated ever since, but the shape of the curve has never been overturned. The MBSE process exists to catch as many errors as possible while they are still cheap.
 
 A second reason has emerged more recently. When code is generated with AI tools, the quality of the output is bounded by the quality of the input. A vague prompt produces clean-looking code that satisfies the prompt but not the underlying problem. A precise specification produces working code that solves the actual problem. The specification is also the test contract — the same artefact that describes the system also describes how to know whether it was built correctly.
 
@@ -157,7 +165,7 @@ If one diagram tries to show everything at once, it becomes unreadable — a bow
 
 A useful image: a house seen by different people. The future home-owner needs a floor plan to imagine living there. The electrician needs a wiring diagram. The plumber needs a pipe diagram. The structural engineer needs a load-bearing-walls diagram. All four describe the same house, but each one filters out everything that doesn't matter for that audience. Trying to draw all four on one sheet of paper produces a mess.
 
-The same idea applied to software systems is called **architecture viewpoints**. The concept is formalised in the international standard IEEE 42010, in Kruchten's influential 4+1 View Model (1995), and in enterprise frameworks like ArchiMate.
+The same idea applied to software systems is called **architecture viewpoints**, and it has a clear intellectual lineage. The 4+1 View Model introduced four views — logical, process, development, and physical — plus a fifth, the scenarios, which ties the others together and drives their validation ([Kruchten, 1995](#kruchten1995)). The insight that an architecture description is inherently multi-view was later codified in the international standard ISO/IEC/IEEE 42010 ([ISO/IEC/IEEE, 2011](#ieee42010)), which also supplies the vocabulary used in this chapter: a *stakeholder* holds *concerns*, a *viewpoint* frames those concerns, and a *view* is the result of applying a viewpoint to a particular system. Enterprise frameworks such as The Open Group's ArchiMate apply the same principle to whole organisations rather than single systems.
 
 ### What a viewpoint actually is
 
@@ -212,9 +220,9 @@ A useful image: a napkin sketch over coffee captures an idea. It does not surviv
 
 ### UML and SysML
 
-The **Unified Modeling Language**, abbreviated UML, has been the industry standard for modelling software systems since the late 1990s. It defines fourteen diagram types: class diagrams, sequence diagrams, state machine diagrams, activity diagrams, deployment diagrams, and many more.
+The **Unified Modeling Language**, abbreviated UML, has been the industry standard for modelling software systems since the late 1990s, when the Object Management Group (OMG) unified several competing object-oriented notations into a single specification (OMG UML Specification). It defines fourteen diagram types: class diagrams, sequence diagrams, state machine diagrams, activity diagrams, deployment diagrams, and many more.
 
-**SysML** extends UML with diagrams for systems engineering — requirements traceability, physical constraints, hardware-software integration. UML and SysML are used in aerospace, defence, and automotive industries with heavyweight tools like Cameo Systems Modeler and Eclipse Papyrus.
+**SysML**, also standardised by the OMG, extends UML with diagrams for systems engineering — requirements traceability, physical constraints, hardware-software integration. It is the notation most closely associated with industrial MBSE methodologies ([Estefan, 2007](#estefan2007)). UML and SysML are used in aerospace, defence, and automotive industries with heavyweight tools like Cameo Systems Modeler and Eclipse Papyrus.
 
 Both have a steep learning curve and heavy tooling. For a small team working over a few weeks, the formalism adds more overhead than value. The strengths of UML and SysML — strict typing, simulation, automated code generation — pay off for a 200-engineer Airbus programme, not for a course project.
 
@@ -222,7 +230,7 @@ Think of it this way: UML is an industrial CNC machine. SysML is a CNC machine w
 
 ### The C4 model
 
-The **C4 model** was proposed by Simon Brown specifically because UML felt too complex for most teams. C4 has exactly four levels of abstraction.
+The **C4 model** was created by Simon Brown specifically because UML felt too complex for most teams ([Brown, 2018](#brown2018)). The argument is that most teams need a shared map of the system far more than they need a complete formal notation, and that the map should offer a small number of well-defined zoom levels rather than fourteen diagram types. C4 has exactly four levels of abstraction.
 
 | Level | What it shows |
 |---|---|
@@ -306,7 +314,7 @@ A **sequence diagram** is a comic strip with software components as the characte
 <figcaption><em>The fire scenario, message by message: from a rising smoke reading, through detection and LLM reasoning, to the sprinkler command that closes the loop.</em></figcaption>
 </figure>
 
-Each message arrow is one frame of the comic. The order of the lines is the order of events. Sequence diagrams are the right tool when the question is "what happens, in what order, for this scenario?" They expose timing issues that no static component diagram can.
+Each message arrow is one frame of the comic. The order of the lines is the order of events. Sequence diagrams are the right tool when the question is "what happens, in what order, for this scenario?" They expose timing issues that no static component diagram can. Scenarios also play the role of the "+1" in the 4+1 model: they are the view that exercises and validates all the others ([Kruchten, 1995](#kruchten1995)).
 
 A useful image: a film strip. Each frame is one moment in time. Played in order, the strip tells a story.
 
@@ -349,7 +357,7 @@ Picture this: an invoice with line items. Each line is a deliverable. The total 
 <figcaption><em>The architecture document carries diagrams, specifications, a test plan, and a repository structure — each binding the design to the running system.</em></figcaption>
 </figure>
 
-The architecture document is the contract between design and implementation. It is reviewed and approved before any code is written. It contains the five viewpoints described above, plus the specifications below.
+The architecture document is the contract between design and implementation. In the terms of the architecture-description standard, it is an *architecture description*: the concrete artefact that records the views, the viewpoints they were produced from, and the stakeholders and concerns they serve ([ISO/IEC/IEEE, 2011](#ieee42010)). It is reviewed and approved before any code is written. It contains the five viewpoints described above, plus the specifications below.
 
 ### Diagrams and tables
 
@@ -426,7 +434,7 @@ The system must detect fire within 30 seconds, activate sprinklers in the affect
 
 "Detect fire" decomposes into eight operations: collect smoke, CO, and temperature readings continuously; validate the readings; compute features (rolling means, gradients); apply an anomaly model; escalate positive readings to a language-model agent for severity assessment; decide actions (sprinkler, fire-door, evacuation route); apply commands through actuator processes; log the decision and the outcome.
 
-Each operation maps to a software component.
+Each operation maps to a software component, and the mapping follows the information-hiding criterion ([Parnas, 1972](#parnas1972)): each component hides one volatile design decision, such as the sensor protocol, the choice of anomaly model, or the LLM prompt strategy, behind a stable interface.
 
 ### Step 3 — Architecture (Container diagram)
 
@@ -507,3 +515,35 @@ Every term used in this chapter, defined.
 5. A complete architecture description requires multiple viewpoints (context, functional, information, behavioural, deployment), because no single diagram can serve every stakeholder, and each viewpoint catches errors the others hide.
 
 These five ideas are the foundation for everything that follows.
+
+---
+
+## Part 11 — References
+
+### Literature
+
+- <a id="boehm1981"></a>Boehm, B. W. (1981). *Software Engineering Economics*. Englewood Cliffs, NJ: Prentice-Hall.
+- <a id="brooks1987"></a>Brooks, F. P. (1987). No Silver Bullet — Essence and Accident in Software Engineering. *IEEE Computer*, 20(4), 10–19.
+- <a id="brown2018"></a>Brown, S. (2018). *Software Architecture for Developers, Vol. 2: Visualise, document and explore your software architecture*. Leanpub.
+- <a id="estefan2007"></a>Estefan, J. A. (2007). *Survey of Model-Based Systems Engineering (MBSE) Methodologies*. INCOSE MBSE Initiative.
+- <a id="ieee42010"></a>ISO/IEC/IEEE (2011). *ISO/IEC/IEEE 42010:2011, Systems and software engineering — Architecture description*.
+- <a id="kruchten1995"></a>Kruchten, P. (1995). The 4+1 View Model of Architecture. *IEEE Software*, 12(6), 42–50.
+- <a id="lazic2018"></a>Lazic, N., Lu, T., Boutilier, C., Ryu, M., Wong, E., Roy, B., & Imwalle, G. (2018). Data center cooling using model-predictive control. *Advances in Neural Information Processing Systems (NeurIPS)*.
+- <a id="lee2008"></a>Lee, E. A. (2008). Cyber Physical Systems: Design Challenges. *IEEE International Symposium on Object/Component/Service-Oriented Real-Time Distributed Computing (ISORC)*.
+- <a id="parnas1972"></a>Parnas, D. L. (1972). On the Criteria To Be Used in Decomposing Systems into Modules. *Communications of the ACM*, 15(12), 1053–1058.
+- <a id="rajkumar2010"></a>Rajkumar, R., Lee, I., Sha, L., & Stankovic, J. (2010). Cyber-Physical Systems: The Next Computing Revolution. *Design Automation Conference (DAC)*.
+- <a id="russell2021"></a>Russell, S., & Norvig, P. (2021). *Artificial Intelligence: A Modern Approach* (4th ed.). Pearson.
+- <a id="satyanarayanan2017"></a>Satyanarayanan, M. (2017). The Emergence of Edge Computing. *IEEE Computer*, 50(1), 30–39.
+- <a id="shi2016"></a>Shi, W., Cao, J., Zhang, Q., Li, Y., & Xu, L. (2016). Edge Computing: Vision and Challenges. *IEEE Internet of Things Journal*, 3(5), 637–646.
+
+### Software, standards, and online resources
+
+- OMG, Unified Modeling Language (UML) Specification. https://www.omg.org/spec/UML
+- OMG, Systems Modeling Language (SysML). https://www.omg.org/spec/SysML
+- The Open Group, ArchiMate 3.2 Specification. https://pubs.opengroup.org/architecture/archimate32-doc/
+- The C4 model for visualising software architecture. https://c4model.com
+- Mermaid, text-based diagramming. https://mermaid.js.org
+- draw.io, visual diagram editor. https://www.drawio.com
+- Excalidraw, hand-drawn-style sketching. https://excalidraw.com
+- Docker documentation. https://docs.docker.com
+- Docker Compose documentation. https://docs.docker.com/compose/

@@ -1,19 +1,19 @@
 <mxfile host="app.diagrams.net">
   <diagram id="course-notes3-fig04" name="course-notes3-fig04">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="460" math="0" shadow="0" background="#032040">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="460" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="Stream processing acts on each reading as it arrives" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="title" value="Stream processing acts on each reading as it arrives" style="text;html=1;align=center;fontColor=#14334D;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="0" y="14" width="1000" height="30" as="geometry"/>
         </mxCell>
-        <mxCell id="timeline" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;" edge="1" parent="1">
+        <mxCell id="timeline" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="60" y="215" as="sourcePoint"/>
             <mxPoint x="945" y="215" as="targetPoint"/>
           </mxGeometry>
         </mxCell>
-        <mxCell id="tlabel" value="time" style="text;html=1;align=right;fontColor=#89A5BE;fontSize=12;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="tlabel" value="time" style="text;html=1;align=right;fontColor=#3D6280;fontSize=12;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="860" y="222" width="80" height="22" as="geometry"/>
         </mxCell>
         <mxCell id="d1" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;" vertex="1" parent="1">
@@ -73,13 +73,13 @@
             <mxPoint x="930" y="92" as="targetPoint"/>
           </mxGeometry>
         </mxCell>
-        <mxCell id="operator" value="Operator&#10;moving average · spike detection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="operator" value="Operator&#10;moving average · spike detection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="300" y="300" width="300" height="70" as="geometry"/>
         </mxCell>
         <mxCell id="ewo" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=0.25;exitY=1;entryX=1;entryY=0.3;" edge="1" parent="1" source="window" target="operator">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="caption" value="latency: milliseconds — answers appear before the data finishes arriving" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="caption" value="latency: milliseconds — answers appear before the data finishes arriving" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="0" y="410" width="1000" height="26" as="geometry"/>
         </mxCell>
       </root>

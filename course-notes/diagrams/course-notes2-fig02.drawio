@@ -1,22 +1,22 @@
 <mxfile host="app.diagrams.net">
   <diagram id="course-notes2-fig02" name="course-notes2-fig02">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1100" pageHeight="540" math="0" shadow="0" background="#032040">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1100" pageHeight="540" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="Same loop, two architectures" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="title" value="Same loop, two architectures" style="text;html=1;align=center;fontColor=#14334D;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="30" y="16" width="1040" height="30" as="geometry"/>
         </mxCell>
-        <mxCell id="edgePanel" value="EDGE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;dashed=1;strokeWidth=2;fontColor=#89A5BE;fontFamily=Helvetica;arcSize=6;verticalAlign=top;align=center;fontSize=14;fontStyle=1;spacingTop=8;" vertex="1" parent="1">
+        <mxCell id="edgePanel" value="EDGE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#4A7298;dashed=1;strokeWidth=2;fontColor=#3D6280;fontFamily=Helvetica;arcSize=6;verticalAlign=top;align=center;fontSize=14;fontStyle=1;spacingTop=8;" vertex="1" parent="1">
           <mxGeometry x="40" y="70" width="495" height="430" as="geometry"/>
         </mxCell>
-        <mxCell id="eSensor" value="Sensor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="eSensor" value="Sensor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="70" y="140" width="115" height="55" as="geometry"/>
         </mxCell>
         <mxCell id="eAI" value="AI&#10;edge server" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontStyle=1;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="230" y="140" width="120" height="55" as="geometry"/>
         </mxCell>
-        <mxCell id="eAct" value="Actuator" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="eAct" value="Actuator" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="395" y="140" width="115" height="55" as="geometry"/>
         </mxCell>
         <mxCell id="eE1" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="eSensor" target="eAI">
@@ -25,53 +25,53 @@
         <mxCell id="eE2" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="eAI" target="eAct">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="eBig" value="5 ms" style="text;html=1;align=center;fontColor=#7FE3A1;fontSize=36;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="eBig" value="5 ms" style="text;html=1;align=center;fontColor=#1E8E5A;fontSize=36;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="140" y="300" width="300" height="50" as="geometry"/>
         </mxCell>
-        <mxCell id="eSub" value="total round-trip" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="eSub" value="total round-trip" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="140" y="352" width="300" height="24" as="geometry"/>
         </mxCell>
-        <mxCell id="ePros" value="✓ fast&#160;&#160;&#160;&#160;&#160;&#160;&#160;✓ private&#10;✓ works offline&#160;&#160;&#160;&#160;&#160;&#160;&#160;✓ predictable" style="text;html=1;align=center;fontColor=#7FE3A1;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="ePros" value="✓ fast&#160;&#160;&#160;&#160;&#160;&#160;&#160;✓ private&#10;✓ works offline&#160;&#160;&#160;&#160;&#160;&#160;&#160;✓ predictable" style="text;html=1;align=center;fontColor=#1E8E5A;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="65" y="410" width="445" height="55" as="geometry"/>
         </mxCell>
-        <mxCell id="cloudPanel" value="CLOUD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;dashed=1;strokeWidth=2;fontColor=#89A5BE;fontFamily=Helvetica;arcSize=6;verticalAlign=top;align=center;fontSize=14;fontStyle=1;spacingTop=8;" vertex="1" parent="1">
+        <mxCell id="cloudPanel" value="CLOUD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#4A7298;dashed=1;strokeWidth=2;fontColor=#3D6280;fontFamily=Helvetica;arcSize=6;verticalAlign=top;align=center;fontSize=14;fontStyle=1;spacingTop=8;" vertex="1" parent="1">
           <mxGeometry x="565" y="70" width="495" height="430" as="geometry"/>
         </mxCell>
-        <mxCell id="cSensor" value="Sensor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="cSensor" value="Sensor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="590" y="140" width="100" height="55" as="geometry"/>
         </mxCell>
-        <mxCell id="cRouter" value="Router" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="cRouter" value="Router" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="725" y="140" width="100" height="55" as="geometry"/>
         </mxCell>
-        <mxCell id="cCloud" value="Cloud server&#10;AI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="cCloud" value="Cloud server&#10;AI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="870" y="140" width="160" height="55" as="geometry"/>
         </mxCell>
-        <mxCell id="cAct" value="Actuator" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="cAct" value="Actuator" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="590" y="235" width="100" height="55" as="geometry"/>
         </mxCell>
-        <mxCell id="cE1" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;dashed=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="cSensor" target="cRouter">
+        <mxCell id="cE1" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;dashed=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="cSensor" target="cRouter">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="cE2" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;dashed=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="cRouter" target="cCloud">
+        <mxCell id="cE2" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;dashed=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="cRouter" target="cCloud">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="cE3" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=1;entryY=0.5;rounded=1;" edge="1" parent="1" source="cCloud" target="cAct">
+        <mxCell id="cE3" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=1;entryY=0.5;rounded=1;" edge="1" parent="1" source="cCloud" target="cAct">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="950" y="262"/>
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="cBig" value="200+ ms" style="text;html=1;align=center;fontColor=#E05252;fontSize=36;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="cBig" value="200+ ms" style="text;html=1;align=center;fontColor=#C03A3A;fontSize=36;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="660" y="315" width="300" height="50" as="geometry"/>
         </mxCell>
-        <mxCell id="cSub" value="round-trip across the internet" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="cSub" value="round-trip across the internet" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="660" y="367" width="300" height="24" as="geometry"/>
         </mxCell>
-        <mxCell id="cCons" value="✗ slow&#160;&#160;&#160;&#160;&#160;✗ breaks offline&#160;&#160;&#160;&#160;&#160;✗ data leaves" style="text;html=1;align=center;fontColor=#E05252;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="cCons" value="✗ slow&#160;&#160;&#160;&#160;&#160;✗ breaks offline&#160;&#160;&#160;&#160;&#160;✗ data leaves" style="text;html=1;align=center;fontColor=#C03A3A;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="590" y="410" width="445" height="24" as="geometry"/>
         </mxCell>
-        <mxCell id="cPro" value="✓ scales easily" style="text;html=1;align=center;fontColor=#7FE3A1;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="cPro" value="✓ scales easily" style="text;html=1;align=center;fontColor=#1E8E5A;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="590" y="440" width="445" height="24" as="geometry"/>
         </mxCell>
       </root>

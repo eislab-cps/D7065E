@@ -1,58 +1,58 @@
 <mxfile host="app.diagrams.net">
   <diagram id="course-notes3-fig03" name="course-notes3-fig03">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="440" math="0" shadow="0" background="#032040">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="440" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="A broker lets producers and consumers evolve apart" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="title" value="A broker lets producers and consumers evolve apart" style="text;html=1;align=center;fontColor=#14334D;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="0" y="14" width="1000" height="30" as="geometry"/>
         </mxCell>
-        <mxCell id="s1" value="sensor 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="s1" value="sensor 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="60" y="90" width="130" height="40" as="geometry"/>
         </mxCell>
-        <mxCell id="s2" value="sensor 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="s2" value="sensor 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="60" y="160" width="130" height="40" as="geometry"/>
         </mxCell>
-        <mxCell id="s3" value="sensor 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="s3" value="sensor 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="60" y="230" width="130" height="40" as="geometry"/>
         </mxCell>
-        <mxCell id="s4" value="sensor 4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="s4" value="sensor 4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="60" y="300" width="130" height="40" as="geometry"/>
         </mxCell>
         <mxCell id="broker" value="BROKER&#10;&#10;topics&#10;sensors/temp/#&#10;sensors/co2/#&#10;sensors/smoke/#" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontStyle=1;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="380" y="120" width="230" height="190" as="geometry"/>
         </mxCell>
-        <mxCell id="c1" value="DB writer&#10;persist all" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="c1" value="DB writer&#10;persist all" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="740" y="95" width="200" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="c2" value="Anomaly model&#10;streaming" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="c2" value="Anomaly model&#10;streaming" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="740" y="190" width="200" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="c3" value="Dashboard&#10;live view" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="c3" value="Dashboard&#10;live view" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="740" y="285" width="200" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="e1" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.2;" edge="1" parent="1" source="s1" target="broker">
+        <mxCell id="e1" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.5;entryX=0;entryY=0.2;" edge="1" parent="1" source="s1" target="broker">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="e2" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.4;" edge="1" parent="1" source="s2" target="broker">
+        <mxCell id="e2" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.5;entryX=0;entryY=0.4;" edge="1" parent="1" source="s2" target="broker">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="e3" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.6;" edge="1" parent="1" source="s3" target="broker">
+        <mxCell id="e3" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.5;entryX=0;entryY=0.6;" edge="1" parent="1" source="s3" target="broker">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="e4" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.8;" edge="1" parent="1" source="s4" target="broker">
+        <mxCell id="e4" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.5;entryX=0;entryY=0.8;" edge="1" parent="1" source="s4" target="broker">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="o1" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.25;entryX=0;entryY=0.5;" edge="1" parent="1" source="broker" target="c1">
+        <mxCell id="o1" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.25;entryX=0;entryY=0.5;" edge="1" parent="1" source="broker" target="c1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="o2" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="broker" target="c2">
+        <mxCell id="o2" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;exitX=1;exitY=0.5263;entryX=0;entryY=0.5;" edge="1" parent="1" source="broker" target="c2">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="o3" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.75;entryX=0;entryY=0.5;" edge="1" parent="1" source="broker" target="c3">
+        <mxCell id="o3" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.75;entryX=0;entryY=0.5;" edge="1" parent="1" source="broker" target="c3">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="caption" value="one source · many independent consumers" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="caption" value="one source · many independent consumers" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="0" y="385" width="1000" height="26" as="geometry"/>
         </mxCell>
       </root>

@@ -1,32 +1,32 @@
 <mxfile host="app.diagrams.net">
   <diagram id="cn2-fig09" name="cn2-fig09">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1080" pageHeight="440" math="0" shadow="0" background="#032040">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1080" pageHeight="450" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="Publish–subscribe: publishers, topics, subscribers" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="title" value="Publish–subscribe: publishers, topics, subscribers" style="text;html=1;align=center;fontColor=#14334D;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="140" y="18" width="800" height="28" as="geometry"/>
         </mxCell>
-        <mxCell id="p1" value="temp sensor" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="50" y="110" width="150" height="60" as="geometry"/></mxCell>
-        <mxCell id="p2" value="smoke sensor" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="50" y="250" width="150" height="60" as="geometry"/></mxCell>
+        <mxCell id="p1" value="temp sensor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="50" y="120" width="170" height="60" as="geometry"/></mxCell>
+        <mxCell id="p2" value="smoke sensor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="50" y="260" width="170" height="60" as="geometry"/></mxCell>
         <mxCell id="broker" value="BROKER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#FF8247;strokeWidth=2;verticalAlign=top;fontColor=#FF8247;fontSize=14;fontStyle=1;fontFamily=Helvetica;spacingTop=8;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="300" y="80" width="430" height="280" as="geometry"/>
+          <mxGeometry x="300" y="80" width="430" height="290" as="geometry"/>
         </mxCell>
-        <mxCell id="t1" value="topic — sensors/floor1/temp" style="whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="330" y="125" width="370" height="40" as="geometry"/></mxCell>
-        <mxCell id="t2" value="topic — sensors/floor1/smoke" style="whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="330" y="265" width="370" height="40" as="geometry"/></mxCell>
-        <mxCell id="note" value="publishers don't know who is listening —&#10;subscribers don't know who is publishing" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=12;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="330" y="185" width="370" height="50" as="geometry"/></mxCell>
-        <mxCell id="s1" value="AI agent&#10;subscribes sensors/+/+" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="840" y="90" width="200" height="60" as="geometry"/></mxCell>
-        <mxCell id="s2" value="database&#10;subscribes sensors/#" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="840" y="190" width="200" height="60" as="geometry"/></mxCell>
-        <mxCell id="s3" value="dashboard&#10;subscribes sensors/#" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="840" y="290" width="200" height="60" as="geometry"/></mxCell>
-        <mxCell id="e1" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="p1" target="t1"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e2" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="p2" target="t2"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="o1" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="t1" target="s1"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="o2" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.4;" edge="1" parent="1" source="t1" target="s2"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="o3" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="t2" target="s1"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="o4" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.6;" edge="1" parent="1" source="t2" target="s2"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="o5" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="t1" target="s3"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="cap" value="One publisher, many consumers, none of them coupled — adding a consumer changes nothing upstream" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="140" y="390" width="800" height="28" as="geometry"/>
+        <mxCell id="t1" value="topic — sensors/floor1/temp" style="whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="330" y="120" width="370" height="60" as="geometry"/></mxCell>
+        <mxCell id="t2" value="topic — sensors/floor1/smoke" style="whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="330" y="260" width="370" height="60" as="geometry"/></mxCell>
+        <mxCell id="note" value="publishers don't know who is listening —&#10;subscribers don't know who is publishing" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=12;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="330" y="195" width="370" height="50" as="geometry"/></mxCell>
+        <mxCell id="s1" value="AI agent&#10;subscribes sensors/+/+" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="840" y="90" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="s2" value="database&#10;subscribes sensors/#" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="840" y="195" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="s3" value="dashboard&#10;subscribes sensors/#" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="840" y="300" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="e1" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="p1" target="t1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="p2" target="t2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="o1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;exitX=1;exitY=0.25;entryX=0;entryY=0.5;" edge="1" parent="1" source="t1" target="s1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="o2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;exitX=1;exitY=0.75;entryX=0;entryY=0.3;" edge="1" parent="1" source="t1" target="s2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="o3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;exitX=1;exitY=0.25;entryX=0;entryY=0.7;" edge="1" parent="1" source="t2" target="s2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="o4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;exitX=1;exitY=0.75;entryX=0;entryY=0.5;" edge="1" parent="1" source="t2" target="s3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="o5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="t1" target="s3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="cap" value="One publisher, many consumers, none of them coupled — adding a consumer changes nothing upstream" style="text;html=1;align=center;fontColor=#14334D;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="140" y="400" width="800" height="28" as="geometry"/>
         </mxCell>
       </root>
     </mxGraphModel>

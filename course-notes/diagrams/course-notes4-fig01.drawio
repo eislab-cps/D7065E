@@ -1,19 +1,19 @@
 <mxfile host="app.diagrams.net">
   <diagram id="course-notes4-fig01" name="course-notes4-fig01">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="360" math="0" shadow="0" background="#032040">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="360" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="From a switch to a thinker" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="title" value="From a switch to a thinker" style="text;html=1;align=center;fontColor=#14334D;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="30" y="20" width="940" height="30" as="geometry"/>
         </mxCell>
-        <mxCell id="rule" value="&lt;b&gt;Rule&lt;/b&gt;&#10;&lt;font color=&quot;#C9D6E2&quot; face=&quot;Courier New&quot; style=&quot;font-size:12px&quot;&gt;if temp &amp;lt; 20: heat on&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="rule" value="&lt;b&gt;Rule&lt;/b&gt;&#10;&lt;font color=&quot;#5E7B94&quot; face=&quot;Courier New&quot; style=&quot;font-size:12px&quot;&gt;if temp &amp;lt; 20: heat on&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="60" y="110" width="180" height="110" as="geometry"/>
         </mxCell>
-        <mxCell id="ml" value="&lt;b&gt;ML model&lt;/b&gt;&#10;&lt;font color=&quot;#C9D6E2&quot; style=&quot;font-size:12px&quot;&gt;learn the pattern&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="ml" value="&lt;b&gt;ML model&lt;/b&gt;&#10;&lt;font color=&quot;#5E7B94&quot; style=&quot;font-size:12px&quot;&gt;learn the pattern&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="290" y="110" width="180" height="110" as="geometry"/>
         </mxCell>
-        <mxCell id="llm" value="&lt;b&gt;LLM&lt;/b&gt;&#10;&lt;font color=&quot;#C9D6E2&quot; style=&quot;font-size:12px&quot;&gt;language reasoning&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="llm" value="&lt;b&gt;LLM&lt;/b&gt;&#10;&lt;font color=&quot;#5E7B94&quot; style=&quot;font-size:12px&quot;&gt;language reasoning&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="520" y="110" width="180" height="110" as="geometry"/>
         </mxCell>
         <mxCell id="agent" value="&lt;b&gt;Agent&lt;/b&gt;&#10;&lt;font style=&quot;font-size:12px&quot;&gt;perceive · think · act&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontStyle=1;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
@@ -28,13 +28,13 @@
         <mxCell id="e3" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="llm" target="agent">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="note" value="each one adapts to more situations than the one before" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="note" value="each one adapts to more situations than the one before" style="text;html=1;align=center;fontColor=#5E7B94;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="30" y="250" width="940" height="24" as="geometry"/>
         </mxCell>
-        <mxCell id="left-note" value="brittle, predictable" style="text;html=1;align=left;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="left-note" value="brittle, predictable" style="text;html=1;align=left;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="60" y="290" width="250" height="24" as="geometry"/>
         </mxCell>
-        <mxCell id="right-note" value="flexible, harder to verify" style="text;html=1;align=right;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="right-note" value="flexible, harder to verify" style="text;html=1;align=right;fontColor=#3D6280;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="680" y="290" width="250" height="24" as="geometry"/>
         </mxCell>
       </root>

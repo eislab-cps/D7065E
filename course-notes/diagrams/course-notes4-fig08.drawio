@@ -1,27 +1,27 @@
 <mxfile host="app.diagrams.net">
   <diagram id="cn4-fig08" name="cn4-fig08">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1120" pageHeight="330" math="0" shadow="0" background="#032040">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1120" pageHeight="330" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="Six steps, repeated forever" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="title" value="Six steps, repeated forever" style="text;html=1;align=center;fontColor=#14334D;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="160" y="18" width="800" height="28" as="geometry"/>
         </mxCell>
-        <mxCell id="s1" value="PERCEIVE&#10;gather fresh&#10;information" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1"><mxGeometry x="40" y="90" width="150" height="80" as="geometry"/></mxCell>
-        <mxCell id="s2" value="REASON&#10;what does&#10;it mean?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1"><mxGeometry x="220" y="90" width="150" height="80" as="geometry"/></mxCell>
-        <mxCell id="s3" value="PLAN&#10;choose a sequence&#10;of actions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1"><mxGeometry x="400" y="90" width="150" height="80" as="geometry"/></mxCell>
+        <mxCell id="s1" value="PERCEIVE&#10;gather fresh&#10;information" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1"><mxGeometry x="40" y="90" width="150" height="80" as="geometry"/></mxCell>
+        <mxCell id="s2" value="REASON&#10;what does&#10;it mean?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1"><mxGeometry x="220" y="90" width="150" height="80" as="geometry"/></mxCell>
+        <mxCell id="s3" value="PLAN&#10;choose a sequence&#10;of actions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1"><mxGeometry x="400" y="90" width="150" height="80" as="geometry"/></mxCell>
         <mxCell id="s4" value="ACT&#10;call tools,&#10;command actuators" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1"><mxGeometry x="580" y="90" width="150" height="80" as="geometry"/></mxCell>
-        <mxCell id="s5" value="OBSERVE&#10;did the world change&#10;as expected?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1"><mxGeometry x="760" y="90" width="150" height="80" as="geometry"/></mxCell>
-        <mxCell id="s6" value="UPDATE&#10;write what was&#10;learned to memory" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#7FE3A1;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1"><mxGeometry x="940" y="90" width="150" height="80" as="geometry"/></mxCell>
+        <mxCell id="s5" value="OBSERVE&#10;did the world change&#10;as expected?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1"><mxGeometry x="760" y="90" width="150" height="80" as="geometry"/></mxCell>
+        <mxCell id="s6" value="UPDATE&#10;write what was&#10;learned to memory" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#1E8E5A;strokeWidth=2;fontColor=#14334D;fontSize=13;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1"><mxGeometry x="940" y="90" width="150" height="80" as="geometry"/></mxCell>
         <mxCell id="a1" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="s1" target="s2"><mxGeometry relative="1" as="geometry"/></mxCell>
         <mxCell id="a2" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="s2" target="s3"><mxGeometry relative="1" as="geometry"/></mxCell>
         <mxCell id="a3" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="s3" target="s4"><mxGeometry relative="1" as="geometry"/></mxCell>
         <mxCell id="a4" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="s4" target="s5"><mxGeometry relative="1" as="geometry"/></mxCell>
         <mxCell id="a5" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="s5" target="s6"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="a6" value="the next loop starts with this experience available" style="endArrow=block;html=1;strokeColor=#7FE3A1;strokeWidth=2;dashed=1;curved=1;fontColor=#7FE3A1;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#032040;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="s6" target="s1">
+        <mxCell id="a6" value="the next loop starts with this experience available" style="endArrow=block;html=1;strokeColor=#1E8E5A;strokeWidth=2;dashed=1;curved=1;fontColor=#1E8E5A;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="s6" target="s1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="565" y="235"/></Array></mxGeometry>
         </mxCell>
-        <mxCell id="cap" value="Skip UPDATE and the agent is just an elaborate function — the update step is what turns inference into learning" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="cap" value="Skip UPDATE and the agent is just an elaborate function — the update step is what turns inference into learning" style="text;html=1;align=center;fontColor=#14334D;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="160" y="280" width="800" height="28" as="geometry"/>
         </mxCell>
       </root>

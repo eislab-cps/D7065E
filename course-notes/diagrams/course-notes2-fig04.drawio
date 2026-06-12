@@ -1,34 +1,34 @@
 <mxfile host="app.diagrams.net">
   <diagram id="course-notes2-fig04" name="course-notes2-fig04">
-    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1100" pageHeight="420" math="0" shadow="0" background="#032040">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1100" pageHeight="420" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="Each service owns one job" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="title" value="Each service owns one job" style="text;html=1;align=center;fontColor=#14334D;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
           <mxGeometry x="30" y="16" width="1040" height="30" as="geometry"/>
         </mxCell>
-        <mxCell id="svc1" value="&lt;b&gt;Sensor service&lt;/b&gt;&#10;&lt;font color=&quot;#C9D6E2&quot;&gt;reads BuildSim&lt;/font&gt;&#10;&lt;font color=&quot;#89A5BE&quot; face=&quot;Courier New&quot;&gt;docker&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="svc1" value="&lt;b&gt;Sensor service&lt;/b&gt;&#10;&lt;font color=&quot;#5E7B94&quot;&gt;reads BuildSim&lt;/font&gt;&#10;&lt;font color=&quot;#3D6280&quot; face=&quot;Courier New&quot;&gt;docker&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="45" y="90" width="230" height="95" as="geometry"/>
         </mxCell>
-        <mxCell id="svc2" value="&lt;b&gt;Ingestion service&lt;/b&gt;&#10;&lt;font color=&quot;#C9D6E2&quot;&gt;validates · stores&lt;/font&gt;&#10;&lt;font color=&quot;#89A5BE&quot; face=&quot;Courier New&quot;&gt;docker&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="svc2" value="&lt;b&gt;Ingestion service&lt;/b&gt;&#10;&lt;font color=&quot;#5E7B94&quot;&gt;validates · stores&lt;/font&gt;&#10;&lt;font color=&quot;#3D6280&quot; face=&quot;Courier New&quot;&gt;docker&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="305" y="90" width="230" height="95" as="geometry"/>
         </mxCell>
-        <mxCell id="svc3" value="&lt;b&gt;Detection service&lt;/b&gt;&#10;&lt;font color=&quot;#C9D6E2&quot;&gt;anomaly model&lt;/font&gt;&#10;&lt;font color=&quot;#89A5BE&quot; face=&quot;Courier New&quot;&gt;docker&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="svc3" value="&lt;b&gt;Detection service&lt;/b&gt;&#10;&lt;font color=&quot;#5E7B94&quot;&gt;anomaly model&lt;/font&gt;&#10;&lt;font color=&quot;#3D6280&quot; face=&quot;Courier New&quot;&gt;docker&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="565" y="90" width="230" height="95" as="geometry"/>
         </mxCell>
         <mxCell id="svc4" value="Safety service&#10;agent · decides&#10;docker" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontStyle=1;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="825" y="90" width="230" height="95" as="geometry"/>
         </mxCell>
-        <mxCell id="svc5" value="&lt;b&gt;Storage&lt;/b&gt;&#10;&lt;font color=&quot;#C9D6E2&quot;&gt;time-series DB&lt;/font&gt;&#10;&lt;font color=&quot;#89A5BE&quot; face=&quot;Courier New&quot;&gt;docker&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="svc5" value="&lt;b&gt;Storage&lt;/b&gt;&#10;&lt;font color=&quot;#5E7B94&quot;&gt;time-series DB&lt;/font&gt;&#10;&lt;font color=&quot;#3D6280&quot; face=&quot;Courier New&quot;&gt;docker&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="45" y="280" width="230" height="95" as="geometry"/>
         </mxCell>
-        <mxCell id="svc6" value="&lt;b&gt;Dashboard&lt;/b&gt;&#10;&lt;font color=&quot;#C9D6E2&quot;&gt;UI · operators&lt;/font&gt;&#10;&lt;font color=&quot;#89A5BE&quot; face=&quot;Courier New&quot;&gt;docker&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="svc6" value="&lt;b&gt;Dashboard&lt;/b&gt;&#10;&lt;font color=&quot;#5E7B94&quot;&gt;UI · operators&lt;/font&gt;&#10;&lt;font color=&quot;#3D6280&quot; face=&quot;Courier New&quot;&gt;docker&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="305" y="280" width="230" height="95" as="geometry"/>
         </mxCell>
-        <mxCell id="svc7" value="&lt;b&gt;Actuator service&lt;/b&gt;&#10;&lt;font color=&quot;#C9D6E2&quot;&gt;commands BuildSim&lt;/font&gt;&#10;&lt;font color=&quot;#89A5BE&quot; face=&quot;Courier New&quot;&gt;docker&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="svc7" value="&lt;b&gt;Actuator service&lt;/b&gt;&#10;&lt;font color=&quot;#5E7B94&quot;&gt;commands BuildSim&lt;/font&gt;&#10;&lt;font color=&quot;#3D6280&quot; face=&quot;Courier New&quot;&gt;docker&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="565" y="280" width="230" height="95" as="geometry"/>
         </mxCell>
-        <mxCell id="svc8" value="&lt;b&gt;Audit log&lt;/b&gt;&#10;&lt;font color=&quot;#C9D6E2&quot;&gt;every decision&lt;/font&gt;&#10;&lt;font color=&quot;#89A5BE&quot; face=&quot;Courier New&quot;&gt;docker&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="svc8" value="&lt;b&gt;Audit log&lt;/b&gt;&#10;&lt;font color=&quot;#5E7B94&quot;&gt;every decision&lt;/font&gt;&#10;&lt;font color=&quot;#3D6280&quot; face=&quot;Courier New&quot;&gt;docker&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F7;strokeColor=#4A7298;strokeWidth=2;fontColor=#14334D;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="825" y="280" width="230" height="95" as="geometry"/>
         </mxCell>
         <mxCell id="e12" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="svc1" target="svc2">
@@ -40,13 +40,13 @@
         <mxCell id="e34" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="svc3" target="svc4">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="e4act" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=0.25;exitY=1;entryX=0.75;entryY=0;" edge="1" parent="1" source="svc4" target="svc7">
+        <mxCell id="e4act" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0.25;exitY=1;entryX=0.75;entryY=0;" edge="1" parent="1" source="svc4" target="svc7">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="e2store" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=0.25;exitY=1;entryX=0.75;entryY=0;" edge="1" parent="1" source="svc2" target="svc5">
+        <mxCell id="e2store" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0.25;exitY=1;entryX=0.75;entryY=0;" edge="1" parent="1" source="svc2" target="svc5">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="e4audit" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=0.75;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="svc4" target="svc8">
+        <mxCell id="e4audit" style="endArrow=block;html=1;strokeColor=#4A7298;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="svc4" target="svc8">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
       </root>

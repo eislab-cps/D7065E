@@ -13,6 +13,8 @@ Standalone notes for the third chapter of D7065E.
 
 Before any AI agent can be smart, it needs data. Lots of it, well-organised, fresh enough to be useful, and clean enough to trust. The plumbing that gets raw sensor readings from the building into the agent's hands is called **data engineering**, and it is just as important as the agent itself. A brilliant model trained on bad data will produce bad predictions. A simple model trained on excellent data often beats a sophisticated model trained on garbage.
 
+This is not just folk wisdom. In production machine-learning systems the learning algorithm itself is a small box at the centre of a vastly larger system of data collection, verification, feature extraction, and serving infrastructure — and that surrounding mass is where *hidden technical debt* accumulates ([Sculley et al., 2015](#sculley2015)). Data dependencies cost more than code dependencies precisely because they are harder to see: when an upstream sensor is recalibrated, the meaning of every feature derived from it changes silently, and no compiler raises an error. Much of this chapter can be read as a catalogue of techniques for keeping that debt visible and regularly paid down.
+
 A useful analogy: think of the AI agent as a chef and the data pipeline as the kitchen staff who source ingredients, wash them, chop them, and lay them out on the counter. The chef gets the credit when the dish is good, but the dish was never going to be good if the ingredients arrived rotten, in the wrong portions, an hour late.
 
 This chapter is the kitchen.
@@ -50,6 +52,8 @@ A useful image: a smoothie maker that takes apples, ice, yoghurt, and spinach �
 
 The fundamental tension: real-time decisions need data within seconds, machine-learning training needs months of clean labelled data, and long-term analytics needs years of queryable history. These three goals require different storage systems, different processing patterns, and different data representations. A well-designed pipeline serves all three without compromise.
 
+Historically the industry answered this tension by building separate systems — operational databases for the fast path, data warehouses for curated analytics, data lakes for cheap raw storage — and copying data between them. Each copy step adds delay, cost, and a fresh opportunity for the copies to disagree, which is exactly the critique that motivates the lakehouse architecture discussed in Part 6 ([Armbrust et al., 2021](#armbrust2021)). Keep the three pressures in mind throughout the chapter: nearly every design decision that follows is a deliberate trade-off among them, and the honest engineering question is never "which option is best?" but "which pressure am I choosing to absorb, and at what cost to the other two?"
+
 ---
 
 ## Part 3 — Getting Sensor Data Into the System (Ingestion Patterns)
@@ -79,6 +83,8 @@ Analogy: handing every letter directly to the postman, who must be standing on y
 Each sensor publishes to a message broker. A separate consumer process reads from the broker and writes into the database.
 
 The broker acts as a shock absorber. If the database is briefly slow, messages accumulate in the broker, and the consumer catches up later. The sensor doesn't care whether the database is up.
+
+Two broker families dominate in practice, and they embody different design philosophies. MQTT is a lightweight publish/subscribe protocol designed for constrained devices and unreliable networks; the broker holds messages only transiently, and its three quality-of-service levels (at-most-once, at-least-once, and an exactly-once handshake) let each sensor choose its own point on the reliability-versus-overhead curve ([OASIS, 2019](#oasis2019)). Apache Kafka takes the opposite stance: the broker is a durable, partitioned, append-only commit log that retains messages on disk for days, and consumers track their own read offsets so they can rewind and replay history at will ([Kreps et al., 2011](#kreps2011)). The log abstraction is what lets Kafka double as a short-term system of record — a crashed consumer simply resumes from its last committed offset, and a brand-new consumer can bootstrap itself from everything the log still retains. The price of decoupling, in either family, is operational: the broker becomes a critical component that must itself be monitored and, in production, replicated, and at-least-once delivery shifts the burden of deduplication onto the consumer (Part 11 returns to this).
 
 This is the recommended pattern for the course: MQTT (using Mosquitto as the broker) plus a Python consumer that writes into TimescaleDB or DuckDB.
 
@@ -113,7 +119,7 @@ Think of it this way: a river flowing past a water-quality station. The station 
 
 A single sensor reading is rarely useful by itself. It is noisy, missing context, and easily misleading. The fix is to compute statistics over a **window** of recent readings.
 
-Three common window types:
+Three common window types, following the taxonomy given its canonical treatment in the Dataflow Model ([Akidau et al., 2015](#akidau2015)):
 
 <figure class="diagram">
 <img src="figures/course-notes3-fig10.png" alt="Three kinds of windows over the same stream">
@@ -131,6 +137,16 @@ A natural image: imagine watching a movie versus watching the news.
 - Sliding windows are like a live ticker that always shows "the last 5 minutes."
 - Session windows are like a phone call — they start when you pick up, end when you hang up, and have no fixed length.
 
+### Event time, processing time, and out-of-order data
+
+Windowing looks simple in the figures above because the figures quietly assume that events arrive in order. Real streams do not behave. Every reading in a CPS carries two distinct notions of time: **event time**, when the measurement was actually taken (stamped at the sensor), and **processing time**, when the stream processor finally gets around to handling it. The two diverge whenever the network hiccups, a device buffers readings while offline, or a sensor's clock drifts (Part 11 returns to clocks). The unavoidable consequence is **out-of-order data**: a reading taken at 13:42:00 can arrive after one taken at 13:42:05, and a "complete" 5-minute window may receive a straggler long after it supposedly closed.
+
+The canonical treatment of this problem is the Dataflow Model, distilled from Google's experience with massive unbounded streams ([Akidau et al., 2015](#akidau2015)). The core argument: for unbounded, out-of-order data, completeness can never be guaranteed — there might always be one more late event in flight — so a system must make the trade-off between correctness, latency, and cost explicit rather than pretend it away. The central mechanism is the **watermark**: a moving estimate of event-time progress that says "we believe all readings up to 13:42:00 have now arrived." When the watermark passes the end of a window, the window fires. A conservative watermark waits longer, catches more stragglers, and delays every answer; an aggressive one answers quickly but must either discard late readings or retract and amend results it has already emitted. No single setting is right for all consumers: a sprinkler decision wants low latency and can tolerate a slightly incomplete window, while a monthly energy report wants completeness and can wait. Apache Flink implements this model directly — event-time windows, watermarks, and consistent state snapshots in one engine that treats batch processing as a special case of streaming ([Carbone et al., 2015](#carbone2015)).
+
+A familiar image: election night. The running totals shown at 22:00 are processing-time results — correct for the ballots counted so far. The official result declared days later is the event-time result, after the postal votes (the stragglers) have arrived. News channels do not refuse to show numbers until every ballot is in; they show provisional totals and revise them. Watermarks let a stream processor do the same thing, deliberately and with a tunable policy.
+
+For the course-scale system the pragmatic policy is: window on event time using the sensor's timestamp, fall back to the server's arrival timestamp when device clocks are suspect, and configure a small allowed lateness instead of chasing perfect completeness.
+
 ### Complex event processing
 
 Some patterns need to span multiple events over time. A fire detection rule might say: smoke above 0.7 for ten consecutive readings, combined with temperature rising at more than 2°C per minute, combined with a door opening in the same zone recently. No single reading triggers the rule; only the pattern across many readings does.
@@ -143,9 +159,9 @@ Analogy: a single yawn doesn't mean someone is bored. A yawn, followed by checki
 
 The right tool depends on scale.
 
-**Apache Flink** is a distributed stream processing engine. Production-grade and feature-rich, but heavy to operate. Right when handling millions of events per second.
+**Apache Flink** is a distributed stream processing engine ([Carbone et al., 2015](#carbone2015)). Its distinguishing claim is unifying stream and batch processing in a single runtime, with event-time windowing, watermarks, and exactly-once state guarantees built in. Production-grade and feature-rich, but heavy to operate. Right when handling millions of events per second.
 
-**Kafka Streams** is a stream processing library built directly on top of Apache Kafka. If Kafka is already in the architecture, Kafka Streams is the natural choice.
+**Kafka Streams** is a stream processing library built directly on top of Apache Kafka's durable log ([Kreps et al., 2011](#kreps2011)). If Kafka is already in the architecture, Kafka Streams is the natural choice.
 
 **Redis Streams** is a lightweight stream storage feature inside Redis. Built-in consumer groups, in-memory speed, easy to run.
 
@@ -164,11 +180,13 @@ Batch processing operates on large volumes of stored data all at once. A daily j
 
 A useful image: streaming is fishing with a line — one fish at a time, you react as each one bites. Batch is fishing with a net — you collect a lot at once and process them together.
 
+The streaming/batch split is a genuine trade-off, not a ranking. Streaming buys latency and pays for it with complexity: state must be kept across events, failures must be recovered mid-stream, and out-of-order data must be handled (Part 4). Batch buys throughput and simplicity — the data is complete and at rest, so a job can simply be re-run from scratch whenever its logic changes — but its freshest answer is hours old. Many architectures therefore run both modes over the same data, and modern engines increasingly blur the line from opposite directions: Flink treats a batch as a bounded stream ([Carbone et al., 2015](#carbone2015)), while Spark historically approached from the other side, treating a stream as a sequence of small batches.
+
 For building control, the critical batch job is **training data preparation**: pulling ninety days of sensor readings out of the data lake, computing the features the ML model needs (rolling averages, occupancy patterns, time-of-day encodings), and producing a clean Parquet or CSV file for training. This job may take minutes to hours, which is fine because real-time isn't required.
 
 ### Tools for batch processing
 
-**DuckDB** is the recommended tool for the course. It is an in-process SQL engine that queries Parquet files directly without a server. Fast, zero-configuration, full SQL. It treats a folder of Parquet files like a database table.
+**DuckDB** is the recommended tool for the course. It is an in-process SQL engine that queries Parquet files directly without a server. Fast, zero-configuration, full SQL. It treats a folder of Parquet files like a database table. The design point is deliberate: instead of a client–server database that data must be shipped to and from, DuckDB runs *inside* the analyst's process — the same way SQLite does for transactional workloads — which eliminates connection management and data-transfer overhead for analytical work ([Raasveldt & Mühleisen, 2019](#raasveldt2019)).
 
 ```sql
 -- DuckDB reading directly from a folder of Parquet files
@@ -178,9 +196,9 @@ WHERE ts > now() - INTERVAL '24 hours'
 GROUP BY room;
 ```
 
-**pandas** is a Python DataFrame library. Flexible, interactive, great for prototyping. Limited to a single machine and single thread, so it doesn't scale to industrial volumes, but for a building it is more than enough.
+**pandas** is a Python DataFrame library ([McKinney, 2010](#mckinney2010)). Flexible, interactive, great for prototyping. Limited to a single machine and single thread, so it doesn't scale to industrial volumes, but for a building it is more than enough.
 
-**Apache Spark** is a distributed batch processing engine. The right tool when one machine isn't enough — multi-building analytics at industrial scale.
+**Apache Spark** is a distributed batch processing engine built around resilient distributed datasets — immutable, partitioned collections that record the lineage of operations that produced them, so a lost partition can be recomputed rather than restored from replicas ([Zaharia et al., 2012](#zaharia2012)). The right tool when one machine isn't enough — multi-building analytics at industrial scale.
 
 ---
 
@@ -206,6 +224,8 @@ The three core principles:
 3. **Schema on read.** Define the data's shape when querying, not when storing. This accommodates evolving schemas without painful migrations.
 
 Picture this: a data lake is like a pantry that stores raw ingredients — flour, eggs, vegetables — exactly as they arrived from the grocery store. A data warehouse is like a freezer full of pre-cooked meals: faster to serve, but if you decide tomorrow that you want to make a salad instead of lasagna, you're out of luck.
+
+The pantry has a known failure mode, though. Unstructured "store first" lakes tend to degenerate into data swamps — terabytes that nobody can find, trust, or govern — which is why enterprises long kept a separate warehouse holding curated, schema-enforced copies for the queries that mattered. The two-tier lake-plus-warehouse architecture is itself the deeper problem: every important dataset exists twice, the warehouse copy is perpetually stale, and each copy step is an opportunity for the two to disagree ([Armbrust et al., 2021](#armbrust2021)). The proposed convergence, the **lakehouse**, keeps the data in open formats such as Parquet on cheap object storage and adds a transactional metadata layer on top, so that warehouse-grade management — enforced schemas, ACID updates, versioned history, competitive query performance — runs directly against the lake ([Armbrust et al., 2021](#armbrust2021)). The medallion architecture below is best understood as the organisational discipline that makes a lake behave like a lakehouse: the raw zone stays cheap and complete, while the curated tiers supply the trust a warehouse used to provide.
 
 ### The medallion architecture
 
@@ -258,6 +278,10 @@ Parquet files are typically 4 to 10 times smaller than equivalent CSV files, and
 
 Analogy: a CSV is a stack of paper forms. Each form has multiple fields, and if you want to compute the average of one field across a thousand forms, you have to flip through every form. Parquet is a spreadsheet with one column per variable; computing the average of a column is one operation on one column.
 
+The row/column divide runs deeper than file layout. Column-store performance cannot be had simply by partitioning a row-store vertically: the real gains come from execution techniques that the columnar layout enables — compression schemes the engine can operate on without decompressing, late materialisation (delaying the reconstruction of full rows until the final result), and processing values in vectorised batches ([Abadi et al., 2008](#abadi2008)). The trade-off points the other way for writes: assembling a single new record means touching every column, so columnar formats suit data that is written once in large batches and read many times — exactly the access pattern of the silver and gold zones — and suit transactional, update-in-place workloads poorly. This is also why the hot path in Part 9 uses a row-oriented store: a stream of single-row inserts is the columnar format's worst case.
+
+Parquet's design descends from Dremel, Google's engine for interactive analysis of web-scale datasets ([Melnik et al., 2010](#melnik2010)). From Dremel it inherits the record-shredding-and-assembly scheme — the repetition and definition levels — that lets even nested, repeated records be stored strictly column by column and reassembled losslessly on read. The practical consequence for this course: a structured JSON reading does not have to be flattened by hand before it can benefit from columnar storage.
+
 ### JSON Lines (JSONL)
 
 One JSON object per line.
@@ -293,7 +317,7 @@ For the course, an entire data lake fits on a developer's laptop using two Docke
    └── gold/
 ```
 
-**DuckDB** queries this directly using the `httpfs` extension. No ETL server, no cluster, no managed service.
+**DuckDB** queries this directly using the `httpfs` extension. No ETL server, no cluster, no managed service. This is the in-process design point doing its work ([Raasveldt & Mühleisen, 2019](#raasveldt2019)): because DuckDB is a library embedded in the querying program rather than a server to be deployed, the "analytics cluster" for a single building collapses into a Python script and a bucket of Parquet files.
 
 ```sql
 -- Query: peak smoke per sensor in the last 7 days
@@ -363,7 +387,7 @@ GROUP BY bucket
 ORDER BY bucket;
 ```
 
-**ClickHouse** is a column-oriented analytical database, extremely fast for read-heavy analytical queries. Used in production at Cloudflare and Uber. Appropriate when analytics push beyond what TimescaleDB can comfortably handle.
+**ClickHouse** is a column-oriented analytical database, extremely fast for read-heavy analytical queries for exactly the column-store reasons discussed in Part 7 ([Abadi et al., 2008](#abadi2008)). Used in production at Cloudflare and Uber. Appropriate when analytics push beyond what TimescaleDB can comfortably handle.
 
 **DuckDB on Parquet** is the lightest option for historical analytics. No server, runs in-process, full SQL, reads Parquet files directly. Right for the cold path; less suited to high-frequency ingestion.
 
@@ -395,6 +419,8 @@ Raw sensor readings — a float every five seconds — are not informative on th
 | HVAC + temperature | Residual (actual − expected) | Detects HVAC failure |
 
 An analogy: feature engineering is what a chef does to crude ingredients before serving. The raw potato is not edible. Wash, peel, slice, and bake it, and now you have something useful.
+
+Feature pipelines are also where machine-learning systems accumulate technical debt fastest. The recurring failure modes have names: *pipeline jungles*, where data preparation grows into a tangle of ad-hoc joins and scraping steps that nobody can reproduce; *glue code*, the mass of throwaway scripts written to fit data into and out of general-purpose packages; and undeclared data dependencies, where a model silently consumes a signal whose producer does not even know it has a consumer ([Sculley et al., 2015](#sculley2015)). The prescription is the one this chapter keeps making: treat every transformation as versioned, tested code with explicit inputs and outputs — which is precisely the discipline that dbt (below) imposes on SQL transformations. When the smoke-detection pipeline in Part 12 materialises its named, reproducible feature computations into the gold zone, that is debt prevention, not bureaucracy.
 
 ### Temporal features
 
@@ -435,7 +461,7 @@ Writing the computed features to a feature store — a database or Parquet file 
 
 **dbt (data build tool)** is a popular open-source tool that lets transformations be expressed as SQL queries. Dbt runs queries in the correct order, tests their outputs, and generates documentation. Free, well-supported, with a free 4-hour fundamentals course.
 
-**pandas** is the standard Python DataFrame library. Flexible and interactive, ideal for exploratory work. Single-threaded and in-memory, so it doesn't scale to industrial volumes; production pipelines are usually rewritten in SQL (using dbt and DuckDB) once the transformations are stable.
+**pandas** is the standard Python DataFrame library ([McKinney, 2010](#mckinney2010)). Flexible and interactive, ideal for exploratory work. Single-threaded and in-memory, so it doesn't scale to industrial volumes; production pipelines are usually rewritten in SQL (using dbt and DuckDB) once the transformations are stable.
 
 **Apache Airflow** is a workflow orchestration platform. ETL jobs are defined as directed acyclic graphs of tasks, scheduled, retried on failure, and alerted on errors. Production-grade. For a course-scale system, a Python script scheduled with cron is sufficient; Airflow is the heavy-machinery version.
 
@@ -462,7 +488,7 @@ Analogy: imagine if every time the postman wasn't sure whether a letter was deli
 
 **Stale data.** The sensor process is alive, the network is fine, but the value never changes. A frozen sensor reads the same value indefinitely. Detection: compute the standard deviation of readings over a 5-minute window — if it's exactly zero, the sensor is probably stuck. Monitoring: track each sensor's last-updated timestamp and alert if nothing has changed for N seconds.
 
-**Clock drift.** Each sensor has its own clock, and clocks drift. A reading from sensor A timestamped 14:32:00 and one from sensor B timestamped 14:31:58 may have happened in the opposite order from what the timestamps suggest. Mitigations: run NTP (Network Time Protocol) on every device, store both the device timestamp and the time when the server received the message, and prefer the server timestamp for ordering.
+**Clock drift.** Each sensor has its own clock, and clocks drift. A reading from sensor A timestamped 14:32:00 and one from sensor B timestamped 14:31:58 may have happened in the opposite order from what the timestamps suggest. Mitigations: run NTP (Network Time Protocol) on every device, store both the device timestamp and the time when the server received the message, and prefer the server timestamp for ordering. NTP version 4 disciplines each device's clock against a hierarchy of reference servers and, on a typical local network, holds devices within roughly a millisecond of one another ([IETF RFC 5905, 2010](#rfc5905)) — easily good enough to order readings taken seconds apart, though not good enough for sub-millisecond event correlation. Synchronised clocks are also what makes the event-time windowing of Part 4 trustworthy: a watermark is only as honest as the timestamps beneath it.
 
 Picture this: imagine a courtroom where every witness uses a different clock. Their statements about timing can't be compared without first synchronising the clocks.
 
@@ -478,6 +504,8 @@ Four metrics worth tracking:
 - **Value range.** A temperature below -50°C or above 100°C inside a Swedish office building is impossible. Alert when readings violate physical bounds.
 - **Volume.** Number of readings per minute. A sudden drop signals offline sensors or a broken consumer.
 - **Error rate.** Number of readings rejected by validation. A spike suggests a schema change or a faulty sensor.
+
+Note the division of labour: these checks catch *faulty data* with simple physical rules, while the anomaly model in Part 12 catches *anomalous reality* with statistics. The boundary is genuinely blurry — a stuck sensor and a real fire can look alike from a single channel — and the research literature on anomaly detection treats sensor faults and real events within the same formal framework ([Chandola et al., 2009](#chandola2009)). The practical consequence is an ordering rule: validate data quality *before* the anomaly model, so the model spends its statistical power on the building rather than on the plumbing.
 
 The standard stack for this is **Prometheus** (a metrics database that scrapes endpoints periodically) plus **Grafana** (a dashboard tool that visualises the metrics and triggers alerts). Both are free, both run in Docker, both are industry standard.
 
@@ -514,6 +542,8 @@ Published to MQTT topic `sensors/level1/A2306/smoke` at QoS 1.
 
 **Step 4: Anomaly model (real-time).** The safety agent subscribes to `alerts/anomaly/+`. When an alert arrives, it queries TimescaleDB for the last 60 seconds of smoke, temperature, and CO2 in that room, computes a feature vector, and runs the Isolation Forest model. If the score is above 0.8, it issues a sprinkler command.
 
+A note on the model. Isolation Forest is an unsupervised ensemble method that isolates anomalies through random recursive partitioning: anomalous points are few and different, so they separate from the rest in fewer splits and sit closer to the roots of the trees ([Liu et al., 2008](#liu2008)). Within the standard taxonomy of anomaly-detection techniques it is an unsupervised point-anomaly detector — a sensible default when labelled examples of real fires are, thankfully, scarce ([Chandola et al., 2009](#chandola2009)). Do not implement the algorithm yourself: use the scikit-learn implementation ([Pedregosa et al., 2011](#pedregosa2011)), documented at https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html. The engineering effort in this course belongs in the feature vector that goes *into* the model — the rolling statistics and cross-sensor features of Part 10 — not in re-deriving the algorithm.
+
 **Step 5: Batch training (nightly).** A scheduled job runs at 3 a.m. each night. It reads the previous 24 hours of bronze data with DuckDB, cleans it (silver), computes ML features (gold), and writes the result to `s3://building-data/gold/smoke-features/date=2026-04-27/`. The training script reads the gold file, trains an updated anomaly model, and writes the new model to a model store. The safety agent picks up the new model on its next restart.
 
 **Step 6: Monitoring.** A dashboard in Grafana shows per-sensor freshness, the readings-per-minute rate, the false-positive rate of the anomaly model over the last week, and the percentage of readings rejected by validation. An alert fires when any sensor's freshness exceeds 30 seconds or when the false-positive rate exceeds 5 percent.
@@ -536,8 +566,12 @@ Every term used in this chapter, defined.
 | **Tumbling window** | A non-overlapping window of fixed size |
 | **Sliding window** | An overlapping window of fixed size that updates continuously |
 | **Session window** | A dynamic window that closes when events stop arriving for a gap |
+| **Event time** | The time at which a reading was actually taken, stamped at the source |
+| **Processing time** | The time at which the stream processor handles a reading |
+| **Watermark** | A stream processor's moving estimate of event-time progress, used to decide when a window is complete |
 | **Complex event processing (CEP)** | Detecting temporal patterns across multiple events |
 | **Data lake** | A storage system that keeps raw data in its native format until it is needed |
+| **Lakehouse** | An architecture that adds warehouse-grade management (schemas, transactions, governance) directly on open data-lake storage |
 | **Medallion architecture** | A pattern that organises a data lake into bronze (raw), silver (cleaned), gold (features), and model zones |
 | **Bronze layer** | The raw, immutable copy of incoming data |
 | **Silver layer** | Cleaned, deduplicated, validated data with a unified schema |
@@ -560,6 +594,7 @@ Every term used in this chapter, defined.
 | **Rolling average** | The average of a value over a recent window of time |
 | **Cyclical encoding** | Representing periodic variables (hour, day-of-week) using sine and cosine to preserve their adjacency |
 | **Feature store** | A database that holds ML-ready features ready to be consumed by training and inference |
+| **Isolation Forest** | An unsupervised anomaly-detection algorithm that isolates outliers through random recursive partitioning |
 | **dbt** | A tool for expressing data transformations as SQL queries with built-in testing |
 | **Apache Airflow** | A workflow orchestration platform that runs ETL pipelines as scheduled DAGs |
 | **NTP (Network Time Protocol)** | A protocol for synchronising clocks across networked devices |
@@ -578,3 +613,40 @@ Every term used in this chapter, defined.
 5. Data quality is a safety concern, not just an analytics concern; pipelines must detect missing, duplicate, stale, and clock-drifted data, and they must instrument themselves with metrics that signal when something is going wrong.
 
 These five ideas are the foundation for every downstream use of data in this course — for AI agents, dashboards, training runs, and audit trails.
+
+---
+
+## Part 15 — References
+
+### Literature
+
+- <a id="abadi2008"></a>Abadi, D. J., Madden, S. R., & Hachem, N. (2008). Column-stores vs. row-stores: How different are they really? In *Proceedings of the ACM SIGMOD International Conference on Management of Data*.
+- <a id="akidau2015"></a>Akidau, T., Bradshaw, R., Chambers, C., Chernyak, S., Fernández-Moctezuma, R. J., Lax, R., McVeety, S., Mills, D., Perry, F., Schmidt, E., & Whittle, S. (2015). The Dataflow Model: A practical approach to balancing correctness, latency, and cost in massive-scale, unbounded, out-of-order data processing. *Proceedings of the VLDB Endowment*, 8(12).
+- <a id="armbrust2021"></a>Armbrust, M., Ghodsi, A., Xin, R., & Zaharia, M. (2021). Lakehouse: A new generation of open platforms that unify data warehousing and advanced analytics. In *Proceedings of the Conference on Innovative Data Systems Research (CIDR)*.
+- <a id="carbone2015"></a>Carbone, P., Katsifodimos, A., Ewen, S., Markl, V., Haridi, S., & Tzoumas, K. (2015). Apache Flink: Stream and batch processing in a single engine. *IEEE Data Engineering Bulletin*, 38(4).
+- <a id="chandola2009"></a>Chandola, V., Banerjee, A., & Kumar, V. (2009). Anomaly detection: A survey. *ACM Computing Surveys*, 41(3).
+- <a id="kreps2011"></a>Kreps, J., Narkhede, N., & Rao, J. (2011). Kafka: A distributed messaging system for log processing. In *Proceedings of the NetDB Workshop*.
+- <a id="liu2008"></a>Liu, F. T., Ting, K. M., & Zhou, Z.-H. (2008). Isolation Forest. In *Proceedings of the IEEE International Conference on Data Mining (ICDM)*.
+- <a id="mckinney2010"></a>McKinney, W. (2010). Data structures for statistical computing in Python. In *Proceedings of the 9th Python in Science Conference (SciPy)*.
+- <a id="melnik2010"></a>Melnik, S., Gubarev, A., Long, J. J., Romer, G., Shivakumar, S., Tolton, M., & Vassilakis, T. (2010). Dremel: Interactive analysis of web-scale datasets. *Proceedings of the VLDB Endowment*, 3(1).
+- <a id="pedregosa2011"></a>Pedregosa, F., et al. (2011). Scikit-learn: Machine learning in Python. *Journal of Machine Learning Research*, 12.
+- <a id="raasveldt2019"></a>Raasveldt, M., & Mühleisen, H. (2019). DuckDB: An embeddable analytical database. In *Proceedings of the ACM SIGMOD International Conference on Management of Data* (demonstration).
+- <a id="sculley2015"></a>Sculley, D., Holt, G., Golovin, D., Davydov, E., Phillips, T., Ebner, D., Chaudhary, V., Young, M., Crespo, J.-F., & Dennison, D. (2015). Hidden technical debt in machine learning systems. In *Advances in Neural Information Processing Systems (NeurIPS)*.
+- <a id="zaharia2012"></a>Zaharia, M., Chowdhury, M., Das, T., Dave, A., Ma, J., McCauley, M., Franklin, M. J., Shenker, S., & Stoica, I. (2012). Resilient distributed datasets: A fault-tolerant abstraction for in-memory cluster computing. In *Proceedings of the USENIX Symposium on Networked Systems Design and Implementation (NSDI)*.
+
+### Software, standards, and online resources
+
+- Apache Airflow, workflow orchestration platform. https://airflow.apache.org
+- Apache Parquet, columnar storage format. https://parquet.apache.org
+- ClickHouse, column-oriented analytical database. https://clickhouse.com
+- dbt (data build tool), SQL transformation framework. https://www.getdbt.com
+- DuckDB, in-process analytical database. https://duckdb.org
+- Eclipse Mosquitto, open-source MQTT broker. https://mosquitto.org
+- Grafana, dashboards and alerting. https://grafana.com
+- <a id="rfc5905"></a>IETF RFC 5905 (2010). Network Time Protocol Version 4: Protocol and Algorithms Specification.
+- InfluxDB, time-series database. https://www.influxdata.com
+- MinIO, S3-compatible object storage. https://min.io
+- <a id="oasis2019"></a>OASIS (2019). MQTT Version 5.0, OASIS Standard. https://mqtt.org
+- Prometheus, metrics database and monitoring system. https://prometheus.io
+- scikit-learn, IsolationForest documentation. https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html
+- TimescaleDB, time-series extension for PostgreSQL. https://www.timescale.com
