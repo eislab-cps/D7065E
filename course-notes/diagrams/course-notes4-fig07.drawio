@@ -1,0 +1,44 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="course-notes4-fig07" name="course-notes4-fig07">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="450" math="0" shadow="0" background="#032040">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="The fire-detection agent in action" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="30" y="20" width="940" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="sensor" value="&lt;font color=&quot;#FFB088&quot;&gt;&lt;b&gt;SENSOR INPUT&lt;/b&gt;&lt;/font&gt;&#10;&lt;font face=&quot;Courier New&quot; style=&quot;font-size:13px&quot;&gt;smoke: 0.82&#10;temp: 41 °C&#10;room: A2306&lt;/font&gt;&#10;&lt;font color=&quot;#C9D6E2&quot; style=&quot;font-size:12px&quot;&gt;&lt;i&gt;spike detected&lt;/i&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="40" y="105" width="210" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="agent" value="&lt;b&gt;Safety agent&lt;/b&gt;&#10;&lt;font face=&quot;Courier New&quot; style=&quot;font-size:12px&quot;&gt;T: smoke + temp consistent&#10;with active fire.&#10;A: sprinkler_on(A2306)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontStyle=1;fontFamily=Helvetica;arcSize=10;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="340" y="95" width="280" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="actions" value="&lt;font color=&quot;#FFB088&quot;&gt;&lt;b&gt;ACTIONS&lt;/b&gt;&lt;/font&gt;&#10;&lt;font style=&quot;font-size:13px&quot;&gt;sprinkler ON&#10;doors close&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="720" y="95" width="210" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="notify" value="&lt;font color=&quot;#7FE3A1&quot;&gt;&lt;b&gt;NOTIFY&lt;/b&gt;&lt;/font&gt;&#10;&lt;font style=&quot;font-size:13px&quot;&gt;building manager&#10;fire brigade&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="720" y="215" width="210" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="sensor" target="agent">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.3;entryX=0;entryY=0.5;" edge="1" parent="1" source="agent" target="actions">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.75;entryX=0;entryY=0.5;" edge="1" parent="1" source="agent" target="notify">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="feedback" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;dashed=1;rounded=1;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="notify" target="sensor">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="485" y="360"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fb-note" value="sprinkler reduces smoke → next reading reflects it" style="text;html=1;align=center;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="200" y="380" width="600" height="24" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

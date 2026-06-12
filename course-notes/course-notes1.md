@@ -7,7 +7,7 @@ Standalone notes for the first chapter of D7065E.
 ## Part 1 — Embedded Intelligence at the Edge
 
 <figure class="diagram">
-<img src="figures/course-notes1-fig01.svg" alt="Edge intelligence vs cloud">
+<img src="figures/course-notes1-fig01.png" alt="Edge intelligence vs cloud">
 <figcaption><em>Local intelligence sits on the same network as the sensors and actuators it controls. The cloud helps with slow tasks, but the critical loop never depends on it.</em></figcaption>
 </figure>
 
@@ -30,7 +30,7 @@ Before any code is written, a discipline called Model-Based Systems Engineering 
 ## Part 2 — A Building as a Cyber-Physical System
 
 <figure class="diagram">
-<img src="figures/course-notes1-fig02.svg" alt="CPS feedback loop">
+<img src="figures/course-notes1-fig02.png" alt="CPS feedback loop">
 <figcaption><em>A continuous feedback loop joins the world the system lives in to the software that observes and changes it. Every component in a CPS sits somewhere on this loop.</em></figcaption>
 </figure>
 
@@ -42,36 +42,16 @@ The **physical half** is everything you can touch. In a building, that means roo
 
 The **cyber half** is the software. Sensor processes that read the physical state and report it. Data pipelines that store the readings. AI agents that reason about what should happen next. Actuator processes that issue commands. The cyber half is fast and flexible but has no direct access to physics — it only knows what sensors report, and it only acts through what actuators can do.
 
-A useful image: the physical half is the room, the cyber half is the brain. The brain cannot feel the temperature directly. It can only ask the thermometer (a sensor) what the temperature is, and it can only warm the room by telling the heater (an actuator) to turn on. Everything in between is just words and electricity.
+An analogy: the physical half is the room, the cyber half is the brain. The brain cannot feel the temperature directly. It can only ask the thermometer (a sensor) what the temperature is, and it can only warm the room by telling the heater (an actuator) to turn on. Everything in between is just words and electricity.
 
 ### The continuous feedback loop
 
 A CPS is defined by the loop that joins the two halves. The cycle runs forever, and every component sits somewhere on it.
 
-```
-   1. Physical world produces a state         (smoke level rises)
-                  │
-                  ▼
-   2. Sensor measures the state              (smoke = 0.82)
-                  │
-                  ▼
-   3. Software reasons about the measurement (this looks like a fire)
-                  │
-                  ▼
-   4. Actuator changes the world             (sprinkler on)
-                  │
-                  ▼
-   5. World responds to the change           (smoke level drops)
-                  │
-                  ▼
-   6. Sensor measures the new state          (smoke = 0.4)
-                  │
-                  ▼
-   7. Software notices and adapts            (working; consider easing off)
-                  │
-                  ▼
-   8. (Back to step 1.)
-```
+<figure class="diagram">
+<img src="figures/course-notes1-fig09.png" alt="The continuous feedback loop — one full cycle">
+<figcaption><em>One full cycle of a fire-suppression CPS: the world produces a state, a sensor measures it, software reasons and acts, and the world responds — then the loop starts again.</em></figcaption>
+</figure>
 
 Riding a bicycle is the simplest everyday version of this loop. You sense your balance (eyes and inner ear are the sensors). You decide whether you're leaning too far left or right (the brain is the reasoner). You correct (your muscles are the actuators). And your balance changes — the world responds. The loop runs many times per second, automatically, and if any part of it breaks, you fall over.
 
@@ -100,7 +80,7 @@ The course's autonomous building control project asks for the autonomous version
 ## Part 3 — Specification Before Code: Model-Based Systems Engineering
 
 <figure class="diagram">
-<img src="figures/course-notes1-fig03.svg" alt="MBSE: prose vs structured specification">
+<img src="figures/course-notes1-fig03.png" alt="MBSE: prose vs structured specification">
 <figcaption><em>MBSE replaces ambiguous documents with structured, precise models. Two engineers reading the same model build the same mental picture.</em></figcaption>
 </figure>
 
@@ -110,7 +90,7 @@ The default way to design software is to write a Word document describing what s
 
 This almost always fails. Prose is ambiguous, and the ambiguity is invisible until somebody tries to act on the document. Two engineers reading the same paragraph form different mental pictures. The product manager imagined a database; the developer built a spreadsheet. The architect assumed the broker held messages for a minute; the operations engineer configured it to drop them after a second. Three weeks into implementation, somebody discovers a contradiction. Six weeks in, the design and the code have parted ways completely.
 
-A useful image: writing prose specifications is like cooking from a recipe that says "add a bit of salt and bake until done." Five cooks following this recipe produce five different dishes. The recipe didn't capture the actual instructions; it captured a vibe.
+Picture this: writing prose specifications is like cooking from a recipe that says "add a bit of salt and bake until done." Five cooks following this recipe produce five different dishes. The recipe didn't capture the actual instructions; it captured a vibe.
 
 A working recipe says: "1.5 teaspoons of salt, bake at 180°C for 35 minutes." Five cooks following this recipe produce the same dish. The difference between a vibe and a working recipe is precision.
 
@@ -138,13 +118,13 @@ A cyber-physical system is different. The interactions between physical processe
 
 The work flows through six activities. They are not strictly sequential — work loops back as understanding deepens — but they are ordered in importance and dependence.
 
-**Requirements analysis.** Write down what the system must do as testable statements, each with a unique ID. Three kinds appear: **functional** ("detect fire conditions within 30 seconds"), **non-functional** ("survive a sensor-process crash without losing data"), and **regulatory** ("comply with Swedish BBR fire protection requirements"). A useful image: requirements are the customer's wishlist, formalised so it cannot be misread. "Make the cake delicious" is not a requirement. "The cake must be 30 cm in diameter, contain no peanuts, and be ready by 6 p.m." is.
+**Requirements analysis.** Write down what the system must do as testable statements, each with a unique ID. Three kinds appear: **functional** ("detect fire conditions within 30 seconds"), **non-functional** ("survive a sensor-process crash without losing data"), and **regulatory** ("comply with Swedish BBR fire protection requirements"). Think of it this way: requirements are the customer's wishlist, formalised so it cannot be misread. "Make the cake delicious" is not a requirement. "The cake must be 30 cm in diameter, contain no peanuts, and be ready by 6 p.m." is.
 
 **Functional decomposition.** Take each high-level requirement and break it into the smaller operations needed to satisfy it. "Detect fire" decomposes into collecting smoke and temperature readings, validating them, applying a detection model, raising an alert, commanding sprinklers, and notifying occupants. A useful image: decomposing a recipe. "Make a cake" decomposes into "measure flour, beat eggs, mix, pour into tin, bake at 180°C for 35 minutes, cool, frost." Each step is small enough to assign to a worker.
 
-**Architecture design.** Decide what software components exist, how they're organised, and where they run. A component diagram shows the parts. A deployment view shows which machine each part lives on. A useful image: the floor plan of a house. Walls, rooms, doors — but no furniture yet.
+**Architecture design.** Decide what software components exist, how they're organised, and where they run. A component diagram shows the parts. A deployment view shows which machine each part lives on. An analogy: the floor plan of a house. Walls, rooms, doors — but no furniture yet.
 
-**Interface design.** Specify exactly how components talk to each other. The REST endpoint URL and the request and response shapes. The MQTT topic name and the payload format. The protocol, the message size, the rate. Ambiguity here is the most expensive kind. Two components that look connected on the diagram but disagree about the message format will work in isolation and fail when they meet. A useful image: a power plug and a wall socket. If the prongs don't match the holes, the lamp doesn't light. Better to discover that mismatch on paper than on the day the lamp is supposed to ship.
+**Interface design.** Specify exactly how components talk to each other. The REST endpoint URL and the request and response shapes. The MQTT topic name and the payload format. The protocol, the message size, the rate. Ambiguity here is the most expensive kind. Two components that look connected on the diagram but disagree about the message format will work in isolation and fail when they meet. Picture this: a power plug and a wall socket. If the prongs don't match the holes, the lamp doesn't light. Better to discover that mismatch on paper than on the day the lamp is supposed to ship.
 
 **Behaviour modeling.** Capture how the system acts over time. A **sequence diagram** is a comic strip with software components as the characters — it shows one specific scenario, with messages going back and forth in order. A **state machine** is a map of the moods a component can be in — `Starting`, `Running`, `Reconnecting`, `Stopped` — and the events that flip it between them. Both are precise; both expose timing bugs that static diagrams hide.
 
@@ -158,14 +138,14 @@ The cost curve is steep, and the MBSE process catches as many errors as possible
 
 A second reason has emerged more recently. When code is generated with AI tools, the quality of the output is bounded by the quality of the input. A vague prompt produces clean-looking code that satisfies the prompt but not the underlying problem. A precise specification produces working code that solves the actual problem. The specification is also the test contract — the same artefact that describes the system also describes how to know whether it was built correctly.
 
-A useful image: imagine asking a contractor to "build me a house." You will get a house, technically. It will not be the house you wanted. Now imagine handing the contractor a complete set of blueprints with measurements, materials, and electrical layout. You will get the house you wanted. The contractor is talented in both cases. The difference is the contract.
+Think of it this way: imagine asking a contractor to "build me a house." You will get a house, technically. It will not be the house you wanted. Now imagine handing the contractor a complete set of blueprints with measurements, materials, and electrical layout. You will get the house you wanted. The contractor is talented in both cases. The difference is the contract.
 
 ---
 
 ## Part 4 — Architecture Viewpoints
 
 <figure class="diagram">
-<img src="figures/course-notes1-fig04.svg" alt="Architecture viewpoints — one system, many lenses">
+<img src="figures/course-notes1-fig04.png" alt="Architecture viewpoints — one system, many lenses">
 <figcaption><em>Different stakeholders need different views — no single diagram serves them all. Each viewpoint filters out everything not relevant to one specific concern.</em></figcaption>
 </figure>
 
@@ -183,7 +163,7 @@ The same idea applied to software systems is called **architecture viewpoints**.
 
 A **viewpoint** is a way of looking at the system that filters out everything not relevant to one stakeholder concern. Each viewpoint is a lens. Each catches design errors the others miss.
 
-A useful image: a subway map and a street map of the same city. The subway map shows lines and stops — everything else is suppressed. The street map shows streets and addresses — the subway is barely visible. Both are correct. Neither one is enough on its own. A tourist needs both.
+An analogy: a subway map and a street map of the same city. The subway map shows lines and stops — everything else is suppressed. The street map shows streets and addresses — the subway is barely visible. Both are correct. Neither one is enough on its own. A tourist needs both.
 
 ### ArchiMate's three layers
 
@@ -211,14 +191,14 @@ A complete architecture description for a building control system contains five 
 
 Each viewpoint is the lens that catches a different kind of mistake. A correct functional view can hide a broken deployment view — two components that look connected on paper might actually require a network link that does not exist. A clean data flow can mask a behavioural problem — a sequence diagram of a specific scenario can reveal a timing issue that no static diagram exposes. A complete business view can expose a compliance requirement that no component has been assigned to satisfy.
 
-A useful image: five different home inspections of the same house. The structural inspector checks the foundation. The electrical inspector checks the wiring. The plumbing inspector checks the pipes. The roof inspector checks for leaks. The pest inspector checks for termites. Each one is looking for something different. Skipping any of them means certain defects will only be discovered after you move in.
+Picture this: five different home inspections of the same house. The structural inspector checks the foundation. The electrical inspector checks the wiring. The plumbing inspector checks the pipes. The roof inspector checks for leaks. The pest inspector checks for termites. Each one is looking for something different. Skipping any of them means certain defects will only be discovered after you move in.
 
 ---
 
 ## Part 5 — Modeling Notations
 
 <figure class="diagram">
-<img src="figures/course-notes1-fig05.svg" alt="Modeling notations spectrum">
+<img src="figures/course-notes1-fig05.png" alt="Modeling notations spectrum">
 <figcaption><em>Three notations along a spectrum from informal to industrial. C4 with Mermaid is the chosen middle ground — enough precision to be useful, light enough to stay in version control.</em></figcaption>
 </figure>
 
@@ -238,7 +218,7 @@ The **Unified Modeling Language**, abbreviated UML, has been the industry standa
 
 Both have a steep learning curve and heavy tooling. For a small team working over a few weeks, the formalism adds more overhead than value. The strengths of UML and SysML — strict typing, simulation, automated code generation — pay off for a 200-engineer Airbus programme, not for a course project.
 
-A useful image: UML is an industrial CNC machine. SysML is a CNC machine with extra accessories. Both are remarkable. Neither is what you want for a weekend furniture project, where a screwdriver and a level get the job done.
+Think of it this way: UML is an industrial CNC machine. SysML is a CNC machine with extra accessories. Both are remarkable. Neither is what you want for a weekend furniture project, where a screwdriver and a level get the job done.
 
 ### The C4 model
 
@@ -261,7 +241,7 @@ The recommended diagramming tool for this course is **Mermaid**. Diagrams are wr
 
 The biggest advantage of Mermaid is that the diagrams live in the same repository as the code, get reviewed in the same pull requests, and stay synchronised with the system. A diagram pasted as a PNG into a Word document drifts out of sync within a week.
 
-A useful image: a recipe taped to the inside of the kitchen cupboard, edited as the cook refines the recipe. The dish stays the recipe. The recipe stays the dish.
+An analogy: a recipe taped to the inside of the kitchen cupboard, edited as the cook refines the recipe. The dish stays the recipe. The recipe stays the dish.
 
 Other tools have specific niches. **draw.io** is open and free for more complex visual layouts. **Excalidraw** produces hand-drawn-looking diagrams useful for sketches and brainstorming. Neither matches Mermaid's advantage of living inside the repository as text.
 
@@ -281,7 +261,7 @@ For this course, C4 with Mermaid is the chosen middle ground.
 ## Part 6 — The Five Viewpoints in Practice
 
 <figure class="diagram">
-<img src="figures/course-notes1-fig06.svg" alt="The five viewpoints in practice">
+<img src="figures/course-notes1-fig06.png" alt="The five viewpoints in practice">
 <figcaption><em>Each viewpoint asks a different question — and each catches a kind of design error the others would hide.</em></figcaption>
 </figure>
 
@@ -291,51 +271,21 @@ Each viewpoint introduced in Part 4 looks like something specific when drawn. Th
 
 The context diagram shows the entire system as a single box, surrounded by every person and every external system it interacts with. Nothing internal is shown.
 
-```
-   ┌───────────────────┐                ┌──────────────────┐
-   │ Building Manager  │── monitors ──► │                  │
-   └───────────────────┘                │  AUTONOMOUS      │
-                                        │  BUILDING        │
-   ┌───────────────────┐                │  CONTROL         │
-   │ Building Occupants│── presence ──► │  SYSTEM          │
-   └───────────────────┘                │                  │
-                                        └────┬─────────────┘
-                                             │
-                              reads / commands│   LLM
-                                             │   inference
-                                             ▼
-                                    ┌─────────────┐    ┌─────────────┐
-                                    │   BuildSim  │    │ GPU Server  │
-                                    │   Server    │    │ (LLM)       │
-                                    └─────────────┘    └─────────────┘
-```
+<figure class="diagram">
+<img src="figures/course-notes1-fig10.png" alt="Context view (C4 Level 1)">
+<figcaption><em>The whole project is one box. Only the people and external systems that touch it appear — nothing internal is shown yet.</em></figcaption>
+</figure>
 
-The diagram answers one question only — who or what touches the system from outside. A useful image: a country on a globe, with arrows showing where its trade goes. Nothing about cities is shown yet.
+The diagram answers one question only — who or what touches the system from outside. Picture this: a country on a globe, with arrows showing where its trade goes. Nothing about cities is shown yet.
 
 ### Functional view (C4 Level 2)
 
 The container diagram opens up the single box from the context view. Inside are the deployable units — each box typically maps to one Docker container.
 
-```
-   ┌───────────────────────────────────────────────────────────┐
-   │ FIRE DETECTION SYSTEM                                     │
-   │                                                           │
-   │   Fire Simulator ──drives──► Smoke Sensors, Temp Sensors  │
-   │                                       │                   │
-   │                                  POST │ values            │
-   │                                       ▼                   │
-   │   BuildSim API                                            │
-   │                                       │ store             │
-   │                                       ▼                   │
-   │                              InfluxDB ◄──── query ───  Anomaly Detector
-   │                                                              │ alerts
-   │                                                              ▼
-   │                                                          Safety Agent ──reasoning──► GPU
-   │                                                              │ commands
-   │                                                              ▼
-   │                                                      Sprinkler Actuator ──PUT──► BuildSim
-   └───────────────────────────────────────────────────────────┘
-```
+<figure class="diagram">
+<img src="figures/course-notes1-fig11.png" alt="Functional view (C4 Level 2) — fire-detection containers">
+<figcaption><em>Inside the boundary, every deployable unit and every connection: simulator drives sensors, readings flow to BuildSim and storage, the anomaly detector alerts the agent, and the agent's commands close the loop.</em></figcaption>
+</figure>
 
 Two different use cases lead to two different container diagrams. A fire-detection system needs sensors, an anomaly detector, a safety agent, sprinkler actuators, and an LLM. An HVAC optimisation system needs temperature and occupancy sensors, an MQTT broker, a time-series database, a forecasting model, an HVAC controller, and HVAC actuators. The same physical building, the same BuildSim, but two different functional decompositions.
 
@@ -345,27 +295,18 @@ A useful image: zooming into the country on the globe and seeing its cities. Eac
 
 When one container is complex enough, it gets its own diagram showing its internal structure. A safety agent might contain a BuildSim API client, a set of tool definitions, an agent memory, a reasoning chain implementing the ReAct pattern, and a safety guardrail module. Each is internal to the agent and invisible from the outside.
 
-A useful image: zooming further into one city and seeing its streets. The streets are not visible at the city-level view, but they exist.
+Think of it this way: zooming further into one city and seeing its streets. The streets are not visible at the city-level view, but they exist.
 
 ### Behavioral view (sequence diagram)
 
 A **sequence diagram** is a comic strip with software components as the characters. It shows one specific scenario as a series of messages, in order.
 
-```
-   Fire simulator    ►  Smoke sensor:        smoke = 0.3 (rising)
-   Smoke sensor      ►  BuildSim:            PUT sensor value
-   Smoke sensor      ►  InfluxDB:            INSERT reading
-   Anomaly detector  ►  InfluxDB:            SELECT recent readings
-   Anomaly detector                          autoencoder flags anomaly
-   Anomaly detector  ►  Safety agent:        alert in A2306
-   Safety agent      ►  GPU (LLM):           "smoke anomaly, what action?"
-   GPU (LLM)         ►  Safety agent:        "activate sprinkler, unlock fire doors"
-   Safety agent      ►  Sprinkler actuator:  Sprinklers ON
-   Sprinkler actuator►  BuildSim:            PUT actuator state = on
-   Fire simulator                            sprinkler ON, smoke decreasing
-```
+<figure class="diagram">
+<img src="figures/course-notes1-fig12.png" alt="Sequence diagram — the fire scenario">
+<figcaption><em>The fire scenario, message by message: from a rising smoke reading, through detection and LLM reasoning, to the sprinkler command that closes the loop.</em></figcaption>
+</figure>
 
-Each line is one frame of the comic. The order of the lines is the order of events. Sequence diagrams are the right tool when the question is "what happens, in what order, for this scenario?" They expose timing issues that no static component diagram can.
+Each message arrow is one frame of the comic. The order of the lines is the order of events. Sequence diagrams are the right tool when the question is "what happens, in what order, for this scenario?" They expose timing issues that no static component diagram can.
 
 A useful image: a film strip. Each frame is one moment in time. Played in order, the strip tells a story.
 
@@ -373,27 +314,12 @@ A useful image: a film strip. Each frame is one moment in time. Played in order,
 
 A **state machine** shows every state a component can be in and every event that moves it between states. The lifecycle of a sensor process might look like this:
 
-```
-   [start]
-      │
-      ▼
-   Starting ────process starts────► Registering
-                                         │
-                                         ├──registered──► Running
-                                         │                  │
-                                         │                  ├──push reading every 5s──► (Running)
-                                         │                  │
-                                         │                  ├──connection lost────────► Reconnecting
-                                         │                  │
-                                         │                  └──SIGTERM────────────────► Stopped
-                                         │
-                                         └──BuildSim unavailable──► RetryRegister
-                                                                          │
-                                                                          └──wait 5s──► Registering
-   Stopped ──► [end]
-```
+<figure class="diagram">
+<img src="figures/course-notes1-fig13.png" alt="State machine — sensor process lifecycle">
+<figcaption><em>The sensor process lifecycle: registration, normal operation, and — most importantly — what happens when BuildSim is unavailable or the connection drops.</em></figcaption>
+</figure>
 
-A useful image: a traffic light. It has states (red, yellow, green) and events that flip it (timer expires, pedestrian button pressed). The state machine is the rulebook for the lamp.
+An analogy: a traffic light. It has states (red, yellow, green) and events that flip it (timer expires, pedestrian button pressed). The state machine is the rulebook for the lamp.
 
 Every transition in the diagram is a piece of code that handles a specific event. If the diagram is complete, the implementation can be written almost mechanically from it.
 
@@ -412,14 +338,14 @@ The information viewpoint is sometimes a table rather than a diagram. The requir
 
 Every requirement traces to a test case. FR-01 maps to a test called `test_fire_detection_latency`.
 
-A useful image: an invoice with line items. Each line is a deliverable. The total at the bottom is the contract.
+Picture this: an invoice with line items. Each line is a deliverable. The total at the bottom is the contract.
 
 ---
 
 ## Part 7 — The Architecture Document
 
 <figure class="diagram">
-<img src="figures/course-notes1-fig07.svg" alt="Contents of the architecture document">
+<img src="figures/course-notes1-fig07.png" alt="Contents of the architecture document">
 <figcaption><em>The architecture document carries diagrams, specifications, a test plan, and a repository structure — each binding the design to the running system.</em></figcaption>
 </figure>
 
@@ -452,7 +378,7 @@ Beyond the diagrams, the design specification covers four additional artefacts.
 
 The test plan is written **before** implementation, not after. It links each requirement to one or more test cases. Each test case describes the initial state of the system, the stimulus that drives the test, the expected response, and the pass-or-fail criteria.
 
-A useful image: a wedding-planner's checklist. Every item on the wishlist has a corresponding "yes/no — was it delivered?" tick. The wedding cannot be declared successful until every box is ticked.
+Think of it this way: a wedding-planner's checklist. Every item on the wishlist has a corresponding "yes/no — was it delivered?" tick. The wedding cannot be declared successful until every box is ticked.
 
 ### Repository structure
 
@@ -486,7 +412,7 @@ A useful image: the kitchen of a restaurant. Each station (grill, salad, dessert
 ## Part 8 — A Worked Example: Fire Detection End-to-End
 
 <figure class="diagram">
-<img src="figures/course-notes1-fig08.svg" alt="Fire detection — end-to-end pipeline">
+<img src="figures/course-notes1-fig08.png" alt="Fire detection — end-to-end pipeline">
 <figcaption><em>Every component of the fire-detection scenario, in the order they participate. The dashed arrow closes the loop — the sprinkler changes the world, the next sensor reading reflects it.</em></figcaption>
 </figure>
 

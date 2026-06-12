@@ -1,0 +1,50 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="cn3-fig08" name="cn3-fig08">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1120" pageHeight="520" math="0" shadow="0" background="#032040">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="End-to-end pipeline for smoke detection" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="160" y="18" width="800" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="n1" value="Smoke sensor&#10;reading every 5 s" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="90" width="180" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="n2" value="Broker&#10;MQTT topic" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="270" y="90" width="160" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="n3" value="Stream processor&#10;5-min sliding window" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="480" y="90" width="190" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="n4" value="Anomaly model&#10;scores the spike" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="720" y="90" width="170" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="n5" value="Safety agent&#10;alert + action + log" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="940" y="90" width="160" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="MQTT" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#032040;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="n1" target="n2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="n2" target="n3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="n3" target="n4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e4" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="n4" target="n5"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="store" value="STORAGE TIER — everything is persisted for replay, audit, and training" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;dashed=1;strokeWidth=2;verticalAlign=top;fontColor=#89A5BE;fontSize=14;fontStyle=1;fontFamily=Helvetica;spacingTop=10;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="120" y="270" width="880 " height="150" as="geometry"/>
+        </mxCell>
+        <mxCell id="st1" value="time-series DB&#10;(hot path)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="170" y="320" width="220" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="st2" value="data lake&#10;(Parquet, cold path)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="450" y="320" width="220" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="st3" value="model registry&#10;(model artifacts)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="730" y="320" width="220" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="d1" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="n2" target="st1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="d2" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="n3" target="st2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="d3" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="n4" target="st3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="cap" value="Hot path across the top in real time; every stage also writes down into storage" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="160" y="460" width="800" height="28" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

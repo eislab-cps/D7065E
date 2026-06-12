@@ -1,0 +1,56 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="cn1-fig13" name="cn1-fig13">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1080" pageHeight="470" math="0" shadow="0" background="#032040">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="State machine — the lifecycle of a sensor process" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="140" y="18" width="800" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="start" value="" style="ellipse;fillColor=#FFFFFF;strokeColor=none;" vertex="1" parent="1"><mxGeometry x="62" y="116" width="16" height="16" as="geometry"/></mxCell>
+        <mxCell id="st" value="Starting" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="130" y="95" width="150" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="reg" value="Registering" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="380" y="95" width="160" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="run" value="Running" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="680" y="95" width="160" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="retry" value="RetryRegister" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#E05252;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="380" y="260" width="160" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="rec" value="Reconnecting" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#E05252;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="680" y="260" width="160" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="stop" value="Stopped" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;strokeWidth=2;dashed=1;fontColor=#C9D6E2;fontSize=14;fontFamily=Helvetica;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="930" y="260" width="120" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="t0" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="start" target="st"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="t1" value="process starts" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;fontColor=#C9D6E2;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#032040;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="st" target="reg"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="t2" value="registered" style="endArrow=block;html=1;strokeColor=#7FE3A1;strokeWidth=2;fontColor=#7FE3A1;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#032040;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="reg" target="run"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="t3" value="push reading every 5 s" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;fontColor=#C9D6E2;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#032040;curved=1;exitX=0.5;exitY=0;entryX=0.85;entryY=0;" edge="1" parent="1" source="run" target="run">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="760" y="45"/><mxPoint x="850" y="45"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="t4" value="BuildSim unavailable" style="endArrow=block;html=1;strokeColor=#E05252;strokeWidth=2;fontColor=#E05252;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#032040;exitX=0.35;exitY=1;entryX=0.35;entryY=0;" edge="1" parent="1" source="reg" target="retry">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="-72" y="0" as="offset"/></mxGeometry>
+        </mxCell>
+        <mxCell id="t5" value="wait 5 s" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;fontColor=#C9D6E2;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#032040;exitX=0.65;exitY=0;entryX=0.65;entryY=1;" edge="1" parent="1" source="retry" target="reg">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="42" y="0" as="offset"/></mxGeometry>
+        </mxCell>
+        <mxCell id="t6" value="connection lost" style="endArrow=block;html=1;strokeColor=#E05252;strokeWidth=2;fontColor=#E05252;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#032040;exitX=0.35;exitY=1;entryX=0.35;entryY=0;" edge="1" parent="1" source="run" target="rec">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="-62" y="0" as="offset"/></mxGeometry>
+        </mxCell>
+        <mxCell id="t7" value="reconnected" style="endArrow=block;html=1;strokeColor=#7FE3A1;strokeWidth=2;fontColor=#7FE3A1;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#032040;exitX=0.65;exitY=0;entryX=0.65;entryY=1;" edge="1" parent="1" source="rec" target="run">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="55" y="0" as="offset"/></mxGeometry>
+        </mxCell>
+        <mxCell id="t8" value="SIGTERM" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;fontColor=#C9D6E2;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#032040;curved=1;exitX=1;exitY=0.8;entryX=0.5;entryY=0;" edge="1" parent="1" source="run" target="stop">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="990" y="180"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="cap" value="Every transition is a piece of code that handles a specific event — error handling is designed, not improvised" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="120" y="400" width="840" height="28" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

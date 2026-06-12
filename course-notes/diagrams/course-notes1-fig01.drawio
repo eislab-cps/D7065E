@@ -1,0 +1,46 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="cn1-fig01" name="cn1-fig01">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="420" math="0" shadow="0" background="#032040">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="The brain lives where the action is" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="30" y="20" width="940" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="building" value="Building&#10;&#10;sensors · actuators&#10;rooms · smoke · people" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="60" y="110" width="220" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge" value="AI&#10;Edge server" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontStyle=1;fontFamily=Helvetica;arcSize=10;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="390" y="140" width="160" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="edgenote" value="~5 ms decision loop" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="380" y="248" width="180" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="cloud" value="Cloud&#10;training · analytics" style="shape=cloud;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="750" y="125" width="210" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="sense" value="sense" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="building" target="edge">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="0" y="-12" as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="act" value="act" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0;exitY=0.75;entryX=1;entryY=0.7;" edge="1" parent="1" source="edge" target="building">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="0" y="14" as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cloudlink" value="~200 ms across the internet" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;dashed=1;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="edge" target="cloud">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="0" y="-14" as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cloudnote" value="optional · never on the critical path" style="text;html=1;align=center;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="540" y="212" width="240" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="bottomnote" value="Local intelligence sits on the same network as the things it controls." style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="200" y="340" width="600" height="24" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

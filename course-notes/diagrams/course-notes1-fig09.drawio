@@ -1,0 +1,44 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="cn1-fig09" name="cn1-fig09">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1060" pageHeight="500" math="0" shadow="0" background="#032040">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="The continuous feedback loop — one full cycle of a fire-suppression CPS" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="130" y="20" width="800" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="s1" value="1 — WORLD PRODUCES A STATE&#10;smoke level rises" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;strokeWidth=2;fontColor=#C9D6E2;fontSize=13;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="280" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="s2" value="2 — SENSOR MEASURES&#10;smoke = 0.82" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="400" y="80" width="280" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="s3" value="3 — SOFTWARE REASONS&#10;&quot;this looks like a fire&quot;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="740" y="80" width="280" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="s4" value="4 — ACTUATOR CHANGES THE WORLD&#10;sprinkler on" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="740" y="200" width="280" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="s5" value="5 — WORLD RESPONDS&#10;smoke level drops" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;strokeWidth=2;fontColor=#C9D6E2;fontSize=13;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="740" y="320" width="280" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="s6" value="6 — SENSOR MEASURES AGAIN&#10;smoke = 0.4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="400" y="320" width="280" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="s7" value="7 — SOFTWARE NOTICES AND ADAPTS&#10;&quot;working — consider easing off&quot;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="60" y="320" width="280" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="a1" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="s1" target="s2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a2" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="s2" target="s3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a3" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="s3" target="s4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a4" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="s4" target="s5"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a5" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="s5" target="s6"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a6" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="s6" target="s7"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a7" value="8 — back to step 1: the loop never stops" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;dashed=1;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="s7" target="s1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="cap" value="Every component of the system sits somewhere on this cycle" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="230" y="430" width="600" height="28" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

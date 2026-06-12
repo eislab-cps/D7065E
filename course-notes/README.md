@@ -12,3 +12,10 @@
 Practical, hands-on guides live separately in [`../tutorials`](../tutorials/).
 
 Chapters 1-4 provide the foundation before the architecture approval checkpoint (week 3).
+
+## Figures
+
+All figures are draw.io sources in [`diagrams/`](diagrams/), exported to `figures/*.png` with the
+[Makefile](Makefile) (`make` — requires the draw.io desktop app). They share the visual style of the
+Lecture 1 deck: navy `#032040` background, node fill `#0B3B66`, stroke `#89A5BE`, accent `#FF8247`.
+Edit the `.drawio` file, run `make`, and the PNG referenced by the chapter updates.

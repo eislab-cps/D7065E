@@ -1,0 +1,25 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="cn3-fig10" name="cn3-fig10">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1050" pageHeight="520" math="0" shadow="0" background="#032040">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Three kinds of windows over the same stream" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="125" y="16" width="800" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="lt" value="TUMBLING — fixed buckets, no overlap (a 5-min average that resets every 5 min)" style="text;html=1;align=left;fontColor=#89A5BE;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="60" y="60" width="900" height="26" as="geometry"/></mxCell>
+        <mxCell id="t1" value="00:00 – 00:05" style="whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="60" y="95" width="300" height="50" as="geometry"/></mxCell>
+        <mxCell id="t2" value="00:05 – 00:10" style="whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="360" y="95" width="300" height="50" as="geometry"/></mxCell>
+        <mxCell id="t3" value="00:10 – 00:15" style="whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="660" y="95" width="300" height="50" as="geometry"/></mxCell>
+        <mxCell id="ls" value="SLIDING — overlapping, updated continuously (&quot;the rolling last 5 minutes&quot;)" style="text;html=1;align=left;fontColor=#89A5BE;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="60" y="185" width="900" height="26" as="geometry"/></mxCell>
+        <mxCell id="s1" value="last 5 min — at now" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;opacity=90;arcSize=20;" vertex="1" parent="1"><mxGeometry x="60" y="220" width="420" height="42" as="geometry"/></mxCell>
+        <mxCell id="s2" value="last 5 min — a moment later" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9C66;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;opacity=80;arcSize=20;" vertex="1" parent="1"><mxGeometry x="240" y="272" width="420" height="42" as="geometry"/></mxCell>
+        <mxCell id="s3" value="last 5 min — later still" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB088;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;opacity=70;arcSize=20;" vertex="1" parent="1"><mxGeometry x="420" y="324" width="420" height="42" as="geometry"/></mxCell>
+        <mxCell id="lse" value="SESSION — grows while events arrive, closes on a gap (one person's trip through the building)" style="text;html=1;align=left;fontColor=#89A5BE;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="60" y="395" width="900" height="26" as="geometry"/></mxCell>
+        <mxCell id="se1" value="event  event  event  event" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#7FE3A1;strokeWidth=2;fontColor=#7FE3A1;fontSize=13;fontFamily=Helvetica;arcSize=24;" vertex="1" parent="1"><mxGeometry x="60" y="430" width="330" height="46" as="geometry"/></mxCell>
+        <mxCell id="gap" value="— gap: window closes —" style="text;html=1;align=center;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="410" y="440" width="220" height="26" as="geometry"/></mxCell>
+        <mxCell id="se2" value="event  event" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#7FE3A1;strokeWidth=2;fontColor=#7FE3A1;fontSize=13;fontFamily=Helvetica;arcSize=24;" vertex="1" parent="1"><mxGeometry x="650" y="430" width="200" height="46" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

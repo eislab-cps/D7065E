@@ -7,8 +7,8 @@ Standalone notes for the fourth chapter of D7065E.
 ## Part 1 — From a Switch to a Thinker: Three Generations of Automation
 
 <figure class="diagram">
-<img src="figures/course-notes4-fig01.svg" alt="Three generations of automation">
-<figcaption><em>Four generations of automation, each adapting to more situations than the one before. The trade-off is always: more flexible behaviour, harder to predict.</em></figcaption>
+<img src="figures/course-notes4-fig01.png" alt="Three generations of automation">
+<figcaption><em>From fixed rules to ML models to LLM-driven agents — each step on the ladder adapts to more situations than the one before. The trade-off is always the same: more flexible behaviour, harder to predict.</em></figcaption>
 </figure>
 
 The history of building automation is the history of decisions getting smarter. Three generations of automation describe where the field has been and where it is now.
@@ -17,7 +17,7 @@ The history of building automation is the history of decisions getting smarter. 
 
 The oldest and simplest. A rule says: `if temperature > 25°C then turn on the AC`. A programmable logic controller (a small industrial computer) can evaluate thousands of these rules per millisecond. The behaviour is deterministic, predictable, and easy to verify. Engineers love rules because rules don't surprise them.
 
-A useful image: a thermostat with a dial. You set the dial, the thermostat compares the room temperature against the dial, and the heater clicks on or off. There is no thinking happening. There is no context. The thermostat doesn't know it's three in the morning, or that the building is empty, or that today is a public holiday. It only knows the number.
+Picture this: a thermostat with a dial. You set the dial, the thermostat compares the room temperature against the dial, and the heater clicks on or off. There is no thinking happening. There is no context. The thermostat doesn't know it's three in the morning, or that the building is empty, or that today is a public holiday. It only knows the number.
 
 Rules work beautifully until reality stops fitting into the rules. A rule that turns on the AC at 25°C is correct on most days. It is wrong at 3 a.m. when nobody is in the building. It is wrong on a holiday when the office is closed. It is wrong when a faulty ventilation duct is causing the heat — running the AC will only make the duct fault worse. Real buildings have hundreds of interacting rules, each trying to cover an edge case, and the interactions between them become impossible to maintain.
 
@@ -33,7 +33,7 @@ ML inference is much better than rules at handling situations the engineer didn'
 
 Agentic AI goes one step further. An **agent** observes the current situation, reasons about its context in natural language, plans a sequence of actions, calls tools to execute the plan, observes the outcome, and adjusts its approach. The brain of the agent is typically a large language model (an LLM).
 
-A useful image: instead of a doctor following a flowchart, imagine a senior consultant. The consultant asks the patient questions, weighs trade-offs out loud, considers what would happen if they chose treatment A versus treatment B, runs a test to gather more information, and explains the reasoning to the patient in plain English. The consultant might encounter a case they have never seen before and still produce a sensible plan by reasoning from first principles.
+Think of it this way: instead of a doctor following a flowchart, imagine a senior consultant. The consultant asks the patient questions, weighs trade-offs out loud, considers what would happen if they chose treatment A versus treatment B, runs a test to gather more information, and explains the reasoning to the patient in plain English. The consultant might encounter a case they have never seen before and still produce a sensible plan by reasoning from first principles.
 
 An LLM-based agent can:
 - Handle a situation it has never encountered in training.
@@ -48,17 +48,16 @@ These three generations are not in competition. A real building uses all three: 
 ## Part 2 — The Agent Loop
 
 <figure class="diagram">
-<img src="figures/course-notes4-fig02.svg" alt="The agent loop">
+<img src="figures/course-notes4-fig02.png" alt="The agent loop">
 <figcaption><em>The agent loop is the engine that turns a model into a behaviour. Perceive, think, act, observe — and round again.</em></figcaption>
 </figure>
 
 Every agent, no matter the framework or the model, runs the same loop. Six steps, repeated forever.
 
-```
-   ┌──► PERCEIVE ──► REASON ──► PLAN ──► ACT ──► OBSERVE ──► UPDATE ──┐
-   │                                                                   │
-   └───────────────────────────────────────────────────────────────────┘
-```
+<figure class="diagram">
+<img src="figures/course-notes4-fig08.png" alt="The six-step agent loop">
+<figcaption><em>Perceive, reason, plan, act, observe, update — and the update step is what makes the next cycle smarter than this one.</em></figcaption>
+</figure>
 
 A useful image: a chess player thinking through a move. They look at the board (perceive). They reason about what's threatening and what's possible. They plan a sequence — capture the knight, then move the rook. They make the first move (act). They watch what the opponent does (observe). They update their mental notes about the opponent's style (update). Then the loop starts again with the new board state.
 
@@ -66,13 +65,13 @@ A useful image: a chess player thinking through a move. They look at the board (
 
 The agent gathers fresh information about its environment. For a building agent, this means querying the time-series database for recent sensor readings, checking the dashboard's pending alerts, looking at what other agents have done recently.
 
-A useful image: walking into a room and noticing the temperature, the people present, the open door, the smell of food. You're not deciding anything yet — you're just taking it in.
+An analogy: walking into a room and noticing the temperature, the people present, the open door, the smell of food. You're not deciding anything yet — you're just taking it in.
 
 ### Reason
 
 The agent thinks through what the perceptions mean. With an LLM-based agent, this is literally the LLM generating a "Thought" — a short natural-language sentence explaining its interpretation.
 
-A useful image: muttering to yourself as you walk through the room. "Hot in here. Three people. Door's open to the hot corridor — that's probably why. They're working, not just passing through — I don't want to interrupt them."
+Picture this: muttering to yourself as you walk through the room. "Hot in here. Three people. Door's open to the hot corridor — that's probably why. They're working, not just passing through — I don't want to interrupt them."
 
 ### Plan
 
@@ -84,7 +83,7 @@ A useful image: drawing up a small to-do list. "Step one: close the door. Step t
 
 The agent executes the plan by calling tools — functions that affect the world. A tool might command an actuator, query a database, send an alert, or compute a route.
 
-A useful image: actually walking over and closing the door. Up until now everything has been in your head. Now you put your hand on the handle.
+Think of it this way: actually walking over and closing the door. Up until now everything has been in your head. Now you put your hand on the handle.
 
 ### Observe
 
@@ -96,7 +95,7 @@ A useful image: stepping back and watching the temperature display for a minute.
 
 The agent writes the result of this loop into its memory or audit log, so the next loop has the benefit of this experience. Without the update step, every loop starts from a blank slate.
 
-A useful image: jotting in your notebook, "closed the door in room A2306 at 14:32, room temperature dropped 1.2°C in five minutes, conclude that the corridor was indeed the heat source." Tomorrow, you'll skip the diagnostic and close the door faster.
+An analogy: jotting in your notebook, "closed the door in room A2306 at 14:32, room temperature dropped 1.2°C in five minutes, conclude that the corridor was indeed the heat source." Tomorrow, you'll skip the diagnostic and close the door faster.
 
 The update step is the one that turns inference into learning. Many beginner agents skip it, and they become elaborate functions that don't actually get smarter over time. A well-designed agent always closes the loop with a structured note that the next perceive step can read.
 
@@ -114,7 +113,7 @@ A useful question to ask before any decision is "how fast must this be, and how 
 | Strategic planning | Minutes | Plan tomorrow's energy schedule | LLM agent + optimiser |
 | Human-facing explanation | Interactive | Explain why heating changed | LLM |
 
-A useful image: a hospital emergency department. The triage nurse follows a strict rule ("airway, breathing, circulation") because seconds count. The resident on call uses pattern recognition from training. The senior consultant reasons through complex cases. Three layers, three levels of cost and speed, each used where it fits.
+Picture this: a hospital emergency department. The triage nurse follows a strict rule ("airway, breathing, circulation") because seconds count. The resident on call uses pattern recognition from training. The senior consultant reasons through complex cases. Three layers, three levels of cost and speed, each used where it fits.
 
 A well-designed building control system uses all three layers in the same way:
 
@@ -138,7 +137,7 @@ A useful image: a chess grandmaster commenting on a position. "I'd normally trad
 
 A building manager doesn't think in terms of CO2 sensor IDs. They think in terms of "the meeting room on the third floor feels stuffy." An LLM agent can take that sentence, translate it into a sensor query, diagnose the issue, and act — without anyone having to look up the sensor's ID.
 
-A useful image: a smart assistant who understands "the room that gets afternoon sun" without being told which compass direction that is.
+Think of it this way: a smart assistant who understands "the room that gets afternoon sun" without being told which compass direction that is.
 
 ### Explainability
 
@@ -150,7 +149,7 @@ A useful image: the difference between a thermometer that beeps and a thermomete
 
 A fire alarm in a building hosting a film shoot that uses artificial smoke. A CO2 sensor that has been painted over by accident. A building manager who manually overrode the HVAC last week and forgot. LLMs handle these because they reason from common sense. Rule systems and ML models fail because none of these are in the rules or the training data.
 
-A useful image: a new employee on their first day, facing a situation nobody trained them for. They reason from first principles: "this seems unusual; let me check with someone before acting." That kind of cautious common sense is exactly what an LLM brings.
+An analogy: a new employee on their first day, facing a situation nobody trained them for. They reason from first principles: "this seems unusual; let me check with someone before acting." That kind of cautious common sense is exactly what an LLM brings.
 
 ---
 
@@ -162,7 +161,7 @@ LLMs are powerful but flawed. Four problems matter for building control, and eac
 
 LLMs sometimes produce plausible-sounding but incorrect outputs. An LLM might suggest activating an actuator that doesn't exist, claim a sensor is showing a value it isn't, or invent a regulation. Hallucination is not malice — the LLM is doing exactly what it was trained to do, which is produce text that *looks* right.
 
-A useful image: a confident but unreliable witness in court. They speak with conviction. They're sometimes completely correct. They're sometimes completely wrong, and they don't know the difference.
+Picture this: a confident but unreliable witness in court. They speak with conviction. They're sometimes completely correct. They're sometimes completely wrong, and they don't know the difference.
 
 Three mitigations:
 
@@ -187,7 +186,7 @@ Mitigations:
 
 Calling a cloud LLM API for every sensor reading is economically unsustainable. A building with 100 sensors reading every five seconds would make 1.7 million LLM calls per day. Even at one cent per call, that's $17,000 a day.
 
-A useful image: you would not call a senior lawyer to review every email you send. You'd ask the lawyer about the hard ones and handle the rest yourself.
+Think of it this way: you would not call a senior lawyer to review every email you send. You'd ask the lawyer about the hard ones and handle the rest yourself.
 
 Mitigations:
 
@@ -206,20 +205,20 @@ A useful image: having a librarian in the office building. They don't know every
 
 The single most useful trick for working with LLMs reliably is to ask for JSON instead of free text. With OpenAI-compatible APIs (including Ollama), `response_format={"type": "json_object"}` forces the model to produce JSON. With Anthropic's API, `tool_choice="required"` forces a tool call that has a defined schema.
 
-A useful image: asking a job applicant to fill in a form instead of writing a letter. The form has named fields and types. Even a poor candidate produces something parseable. A letter, by contrast, can be free-form and impossible to process automatically.
+An analogy: asking a job applicant to fill in a form instead of writing a letter. The form has named fields and types. Even a poor candidate produces something parseable. A letter, by contrast, can be free-form and impossible to process automatically.
 
 ---
 
 ## Part 6 — Giving the Agent Hands: Tool Use and Function Calling
 
 <figure class="diagram">
-<img src="figures/course-notes4-fig03.svg" alt="Tool use — giving the agent hands">
+<img src="figures/course-notes4-fig03.png" alt="Tool use — giving the agent hands">
 <figcaption><em>Tools let the agent reach into systems it can't operate by itself. Each tool is a typed function the model can call when it needs to act.</em></figcaption>
 </figure>
 
 An LLM, on its own, can only read text and produce text. It can't read a sensor, write to a database, or command an actuator. **Tool calling** — also called function calling — is the mechanism that extends the LLM with the ability to invoke external functions.
 
-A useful image: a brilliant consultant who is locked in a room with only a phone. They can think and talk. They can call you and ask you to do things. You go and do those things, then come back and report what happened.
+Picture this: a brilliant consultant who is locked in a room with only a phone. They can think and talk. They can call you and ask you to do things. You go and do those things, then come back and report what happened.
 
 The protocol works in five steps:
 
@@ -268,7 +267,7 @@ Tool design is more important than agent design. A well-designed tool catalogue 
 
 Don't write one big `control_building()` tool that does everything. Write narrow tools, each with a single job: `read_sensors`, `set_actuator`, `find_route`, `highlight_rooms`, `query_history`, `create_alert`. Each is small, validated, and easy to test.
 
-A useful image: a Swiss Army knife with named tools versus a single blob marked "do something useful." When the LLM needs to cut wire, it picks the wire cutter. When it needs to open a bottle, it picks the bottle opener. Each tool's purpose is obvious from its name.
+Think of it this way: a Swiss Army knife with named tools versus a single blob marked "do something useful." When the LLM needs to cut wire, it picks the wire cutter. When it needs to open a bottle, it picks the bottle opener. Each tool's purpose is obvious from its name.
 
 ### Descriptive names and docstrings
 
@@ -280,7 +279,7 @@ A useful image: jars in a kitchen pantry. If they're all labelled "stuff," the c
 
 Never trust tool-call arguments unconditionally. Check that the room exists, that the sensor type is valid, that numeric arguments are within sensible ranges. If validation fails, return an error message — the LLM can read it and try again with corrected arguments.
 
-A useful image: a bouncer at a club door. The bouncer doesn't care that the person is wearing a tuxedo. They check the guest list. If the name isn't on the list, the person doesn't get in, regardless of how confident they appear.
+An analogy: a bouncer at a club door. The bouncer doesn't care that the person is wearing a tuxedo. They check the guest list. If the name isn't on the list, the person doesn't get in, regardless of how confident they appear.
 
 ### Return rich, informative results
 
@@ -298,7 +297,7 @@ When a tool returns a result, the LLM uses that result to reason about what to d
 
 The LLM can now reason about how recently the actuator changed, who else has commanded it, and whether the response time was normal.
 
-A useful image: a good waiter doesn't just bring you the dish. They tell you what's in it and what it goes well with. The extra context lets you order better the next time.
+Picture this: a good waiter doesn't just bring you the dish. They tell you what's in it and what it goes well with. The extra context lets you order better the next time.
 
 ### A complete example
 
@@ -366,7 +365,7 @@ Agent frameworks provide scaffolding for building LLM agents: tool execution loo
 
 For simple agents that call one or two tools in a fixed sequence, plain Python with direct LLM API calls is often clearest. A 50-line Python script that reads sensors, constructs a prompt, calls the LLM, parses the tool call, executes the tool, and loops is simpler to understand, test, and debug than the same logic expressed in a framework's domain-specific language.
 
-A useful image: cooking a single fried egg. You don't need a chef. You need a frying pan and basic technique.
+Think of it this way: cooking a single fried egg. You don't need a chef. You need a frying pan and basic technique.
 
 ### LangChain
 
@@ -379,6 +378,8 @@ A useful image: a well-stocked kitchen. Many tools, many ingredients, many recip
 A graph-based agent framework from the LangChain team. Agents are defined as nodes in a directed graph with cycles; the LLM decides which edge to follow at each step. Better than plain LangChain for complex workflows with branching, looping, and human-in-the-loop checkpoints.
 
 ```python
+from typing import TypedDict
+
 from langgraph.graph import StateGraph, END
 from langgraph.prebuilt import ToolNode
 
@@ -401,13 +402,13 @@ workflow.add_edge("act", "reason")
 agent = workflow.compile()
 ```
 
-A useful image: a board game with a movement map. Each square has rules for what moves are legal. The agent rolls the dice and moves; the framework enforces the rules of the board.
+An analogy: a board game with a movement map. Each square has rules for what moves are legal. The agent rolls the dice and moves; the framework enforces the rules of the board.
 
 ### CrewAI
 
 A framework for role-based multi-agent systems. Agents are defined with **roles** (architect, designer, builder), **goals**, and **backstories**. **Tasks** have descriptions and expected outputs. **Crews** assign tasks to agents, and agents can delegate to each other.
 
-A useful image: a film production team. The director, the cinematographer, the editor — each has a defined role, each can collaborate with the others, and the producer (the crew) coordinates them.
+Picture this: a film production team. The director, the cinematographer, the editor — each has a defined role, each can collaborate with the others, and the producer (the crew) coordinates them.
 
 ### AutoGen
 
@@ -419,14 +420,14 @@ A useful image: a panel discussion. The moderator picks who speaks. Each panelli
 
 A newer framework built around Pydantic for structured outputs and type safety. Good for agents that need reliable, typed tool-call arguments and responses. Less feature-rich than LangGraph but simpler to use for straightforward agents.
 
-A useful image: building furniture with a precision template. Less flexible than freehand work, but every joint fits.
+Think of it this way: building furniture with a precision template. Less flexible than freehand work, but every joint fits.
 
 ---
 
 ## Part 10 — The ReAct Pattern in Detail
 
 <figure class="diagram">
-<img src="figures/course-notes4-fig04.svg" alt="ReAct pattern — Thought · Action · Observation">
+<img src="figures/course-notes4-fig04.png" alt="ReAct pattern — Thought · Action · Observation">
 <figcaption><em>In the ReAct pattern, the agent alternates between reasoning (Thought) and acting (Action), with each Observation feeding the next Thought. The trace is also the explanation.</em></figcaption>
 </figure>
 
@@ -451,7 +452,7 @@ The interleaving also helps the LLM stay on track. A pure plan-then-execute patt
 ## Part 11 — Multi-Agent Systems
 
 <figure class="diagram">
-<img src="figures/course-notes4-fig05.svg" alt="Multi-agent collaboration">
+<img src="figures/course-notes4-fig05.png" alt="Multi-agent collaboration">
 <figcaption><em>Specialised agents own a slice of the problem and communicate through a shared bus. A coordinator resolves conflicts; an auditor records every decision.</em></figcaption>
 </figure>
 
@@ -469,7 +470,7 @@ Four reasons.
 
 **Specialisation.** A small, fast model may be sufficient for routine energy optimisation, while a larger model is used only for complex safety decisions. Different agents use different models, optimising cost and latency.
 
-A useful image: a hospital. The cardiologist handles hearts. The nephrologist handles kidneys. The emergency physician handles whatever walks in. Each specialist is excellent at their narrow domain. The patient benefits from all of them.
+An analogy: a hospital. The cardiologist handles hearts. The nephrologist handles kidneys. The emergency physician handles whatever walks in. Each specialist is excellent at their narrow domain. The patient benefits from all of them.
 
 ### How agents talk to each other
 
@@ -477,7 +478,7 @@ Three communication patterns.
 
 **Shared state (the blackboard pattern).** All agents read and write to a shared data store (the time-series database, a Redis instance, the BuildSim API). Agents observe each other's actions through state changes.
 
-A useful image: detectives in a precinct office sharing a whiteboard. Each adds clues; each sees what the others have added. Simple and decoupled, but with the risk that two detectives independently chase the same lead.
+Picture this: detectives in a precinct office sharing a whiteboard. Each adds clues; each sees what the others have added. Simple and decoupled, but with the risk that two detectives independently chase the same lead.
 
 **Message passing.** Agents send structured messages to each other through a message queue (MQTT, Redis Streams). Explicit, auditable, decoupled.
 
@@ -485,7 +486,7 @@ A useful image: a customer-service team where every escalation is a ticket. The 
 
 **Shared context in the LLM.** For LLM-based agents, the entire conversation history (including other agents' decisions) is included in each agent's context. Each agent sees what the others have decided. Expensive in tokens but produces well-informed decisions.
 
-A useful image: a war-room briefing where every participant hears every report. Slow but coherent.
+Think of it this way: a war-room briefing where every participant hears every report. Slow but coherent.
 
 ---
 
@@ -501,11 +502,11 @@ A useful image: emergency services priority. When the fire alarm rings, the fire
 
 **Auction-based.** Agents bid for actuator control with a numeric priority. The agent with the highest bid wins. Bids can be dynamic — the safety agent bids 1000 only when smoke is detected, 0 otherwise. This gives flexibility based on context.
 
-A useful image: an auction house. The dynamic bid lets a normally-quiet bidder suddenly out-shout everyone when something special comes up.
+An analogy: an auction house. The dynamic bid lets a normally-quiet bidder suddenly out-shout everyone when something special comes up.
 
 **Consensus.** Agents negotiate a compromise. The energy agent proposes a temperature setpoint; the comfort agent counter-proposes; they converge. More complex but produces better outcomes when neither agent needs to win completely.
 
-A useful image: two negotiators meeting in the middle. Each starts from their preferred outcome and walks halfway. Both leave slightly unhappy and entirely satisfied.
+Picture this: two negotiators meeting in the middle. Each starts from their preferred outcome and walks halfway. Both leave slightly unhappy and entirely satisfied.
 
 **Hierarchical (supervisor pattern).** A supervisor agent receives all proposed actions from subordinate agents, reasons about conflicts, and produces a final unified action set. The supervisor has the most context but is a bottleneck.
 
@@ -517,7 +518,7 @@ Multi-agent systems can fail in ways that single-agent systems cannot.
 
 **Oscillation.** Agent A turns on the HVAC, which raises the temperature; Agent B turns it off to save energy; temperature drops; Agent A turns it on again. The loop repeats indefinitely.
 
-A useful image: two thermostats with different setpoints, wired into the same room. Each fights the other forever. Neither room nor energy bill ever stabilise.
+Think of it this way: two thermostats with different setpoints, wired into the same room. Each fights the other forever. Neither room nor energy bill ever stabilise.
 
 The prevention is **hysteresis** — refusing to change state unless the trigger condition has been true for at least N seconds. A shared decision log so each agent knows what the others recently decided also helps.
 
@@ -529,7 +530,7 @@ Prevention: avoid circular dependencies in actuator ownership; use timeout-based
 
 **Thrashing.** Multiple agents issue conflicting commands in rapid succession, causing actuators to change state faster than the physical system can respond.
 
-A useful image: flipping a light switch ten times a second. The bulb never has time to warm up; it just flickers.
+An analogy: flipping a light switch ten times a second. The bulb never has time to warm up; it just flickers.
 
 Prevention: rate-limit actuator commands; enforce a minimum time between state changes for any actuator.
 
@@ -538,7 +539,7 @@ Prevention: rate-limit actuator commands; enforce a minimum time between state c
 ## Part 13 — Safety and Trust in Agentic AI
 
 <figure class="diagram">
-<img src="figures/course-notes4-fig06.svg" alt="Safety guardrails — concentric layers">
+<img src="figures/course-notes4-fig06.png" alt="Safety guardrails — concentric layers">
 <figcaption><em>An autonomous agent is wrapped in concentric layers of policy. Authority limits what it can touch; policy says what it must never do; humans approve the rest; an audit log records everything.</em></figcaption>
 </figure>
 
@@ -553,7 +554,7 @@ An AI agent controlling a building can cause real harm. It can leave emergency d
 - Actuator commands above a certain rate are rejected.
 - If any action would result in all HVAC units being off in winter, human confirmation is required.
 
-A useful image: bumpers on a bowling lane. The LLM is the ball. The bumpers don't change the ball's spin or speed, but they catch a wild throw before it ends up in the gutter.
+Picture this: bumpers on a bowling lane. The LLM is the ball. The bumpers don't change the ball's spin or speed, but they catch a wild throw before it ends up in the gutter.
 
 ### Human-in-the-loop (HITL)
 
@@ -565,7 +566,7 @@ A useful image: a customer-service rep needing manager approval to issue a refun
 
 Every agent decision, tool call, and reasoning step must be logged immutably. When something goes wrong, reconstructing exactly what the agent decided and why is essential. The ReAct pattern is naturally audit-friendly: every Thought, every Action, every Observation is already a structured record.
 
-A useful image: a bank ledger. Every transaction has a timestamp, an account, an amount, and a reference. If a discrepancy is found, the ledger is the source of truth.
+Think of it this way: a bank ledger. Every transaction has a timestamp, an account, an amount, and a reference. If a discrepancy is found, the ledger is the source of truth.
 
 ### Graceful degradation
 
@@ -577,7 +578,7 @@ A useful image: a hospital's manual procedures when the IT system goes down. Pap
 
 Adversarial testing is essential. Inject sensor faults: what does the agent do when the smoke sensor reads 0 for ten minutes? Simulate network outages: what happens when the LLM API returns an error? Send conflicting commands: what does the coordinator do? Test with novel situations: what if a sensor reports a value the agent has never seen before?
 
-A useful image: a fire drill in an office. You don't wait for a real fire to find out whether the evacuation plan works.
+An analogy: a fire drill in an office. You don't wait for a real fire to find out whether the evacuation plan works.
 
 Tests for these scenarios are written **before** deployment, not after. They are part of the validation step of MBSE.
 
@@ -586,7 +587,7 @@ Tests for these scenarios are written **before** deployment, not after. They are
 ## Part 14 — A Worked Example: Fire-Detection Agent
 
 <figure class="diagram">
-<img src="figures/course-notes4-fig07.svg" alt="Fire-detection agent in action">
+<img src="figures/course-notes4-fig07.png" alt="Fire-detection agent in action">
 <figcaption><em>The fire-detection agent in action: a sensor spike triggers reasoning, the agent calls actuator and notification tools, and the next sensor reading closes the loop.</em></figcaption>
 </figure>
 

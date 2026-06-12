@@ -1,0 +1,70 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="course-notes3-fig02" name="course-notes3-fig02">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="420" math="0" shadow="0" background="#032040">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Three pressures every data system feels" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="0" y="14" width="1000" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="card1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="70" y="60" width="240" height="290" as="geometry"/>
+        </mxCell>
+        <mxCell id="v1tb" value="TB" style="text;html=1;align=center;fontColor=#FF8247;fontSize=15;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="130" y="82" width="120" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="v1b1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="130" y="118" width="120" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="v1b2" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FF9C66;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="130" y="144" width="120" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="v1b3" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFB088;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="130" y="170" width="120" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="v1name" value="Volume" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="90" y="252" width="200" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="v1q" value="how much?" style="text;html=1;align=center;fontColor=#89A5BE;fontSize=12;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="90" y="282" width="200" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="card2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="380" y="60" width="240" height="290" as="geometry"/>
+        </mxCell>
+        <mxCell id="v2clock" value="100 Hz" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#FF8247;strokeWidth=2;fontColor=#FF8247;fontStyle=1;fontFamily=Helvetica;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="445" y="92" width="110" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="v2sub" value="per sensor" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="400" y="212" width="200" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="v2name" value="Velocity" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="400" y="252" width="200" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="v2q" value="how fast?" style="text;html=1;align=center;fontColor=#89A5BE;fontSize=12;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="400" y="282" width="200" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="card3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="690" y="60" width="240" height="290" as="geometry"/>
+        </mxCell>
+        <mxCell id="v3sq" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFB088;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="732" y="120" width="40" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="v3ci" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FF9C66;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="790" y="120" width="40" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="v3tr" value="" style="triangle;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;direction=north;" vertex="1" parent="1">
+          <mxGeometry x="848" y="120" width="40" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="v3sub" value="JSON · CSV · binary" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="710" y="186" width="200" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="v3name" value="Variety" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="710" y="252" width="200" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="v3q" value="how many shapes?" style="text;html=1;align=center;fontColor=#89A5BE;fontSize=12;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="710" y="282" width="200" height="22" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,46 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="cn1-fig05" name="cn1-fig05">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1040" pageHeight="440" math="0" shadow="0" background="#032040">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Three notations along a spectrum of formality" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="30" y="20" width="980" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="wb" value="Whiteboard&#10;&#10;brainstorming&#10;nothing is versioned" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="60" y="90" width="260" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="c4" value="C4 + Mermaid&#10;&#10;project documentation&#10;lives in the repo as text" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontStyle=1;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="390" y="90" width="260" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="uml" value="UML / SysML&#10;&#10;safety-critical,&#10;large teams" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="720" y="90" width="260" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="axis" value="" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="300" as="sourcePoint"/>
+            <mxPoint x="960" y="300" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m1" value="" style="ellipse;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="182" y="292" width="16" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="m2" value="" style="ellipse;html=1;fillColor=#FF8247;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="508" y="288" width="24" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="m3" value="" style="ellipse;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="842" y="292" width="16" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="axleft" value="lower overhead" style="text;html=1;align=left;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="80" y="318" width="200" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="axright" value="higher precision" style="text;html=1;align=right;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="760" y="318" width="200" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="bottomnote" value="The middle option earns its keep by living in the repository as text, beside the code." style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="170" y="370" width="700" height="24" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

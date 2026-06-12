@@ -1,0 +1,28 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="cn2-fig08" name="cn2-fig08">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="430" math="0" shadow="0" background="#032040">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="The hybrid pattern: train in the cloud, run at the edge" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="100" y="18" width="800" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge" value="EDGE&#10;&#10;ingest sensor readings&#10;&#10;real-time ML inference (&lt; 50 ms)&#10;&#10;AI agent decisions (&lt; 1 s)&#10;&#10;local store (30-day window)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#FF8247;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=12;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="70" y="70" width="340" height="240" as="geometry"/>
+        </mxCell>
+        <mxCell id="cloud" value="CLOUD&#10;&#10;long-term storage&#10;&#10;model training (hours)&#10;&#10;fleet analytics&#10;&#10;dashboards" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=12;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="590" y="70" width="340" height="240" as="geometry"/>
+        </mxCell>
+        <mxCell id="f1" value="fresh data, shipped periodically" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=3;fontColor=#C9D6E2;fontSize=14;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="edge" target="cloud">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-16" as="offset"/></mxGeometry>
+        </mxCell>
+        <mxCell id="f2" value="updated model, pushed back down" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;dashed=1;fontColor=#FF8247;fontSize=14;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0;exitY=0.7;entryX=1;entryY=0.7;" edge="1" parent="1" source="cloud" target="edge">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="18" as="offset"/></mxGeometry>
+        </mxCell>
+        <mxCell id="cap" value="TensorFlow Lite and ONNX Runtime exist exactly for this: train big, convert, deploy small and fast" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="100" y="360" width="800" height="28" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

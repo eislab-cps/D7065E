@@ -7,7 +7,7 @@ Standalone notes for the second chapter of D7065E.
 ## Part 1 — What a Cyber-Physical System Actually Is
 
 <figure class="diagram">
-<img src="figures/course-notes2-fig01.svg" alt="Anatomy of a CPS">
+<img src="figures/course-notes2-fig01.png" alt="Anatomy of a CPS">
 <figcaption><em>Every CPS has the same anatomy: a physical layer at the top, sensors pushing readings down, a message broker fanning them out, storage and intelligence on the side, actuators pushing decisions back up.</em></figcaption>
 </figure>
 
@@ -15,19 +15,10 @@ Standalone notes for the second chapter of D7065E.
 
 A cyber-physical system, or CPS for short, is software that reads the physical world, decides something, and changes the physical world. Then it reads the physical world again to see what changed. That cycle repeats forever.
 
-```
-   ┌──────────────┐         ┌──────────────┐         ┌──────────────┐
-   │   SENSE      │  ────►  │   COMPUTE    │  ────►  │     ACT      │
-   │              │         │              │         │              │
-   │ A sensor     │         │ Software     │         │ An actuator  │
-   │ measures     │         │ decides      │         │ changes the  │
-   │ something    │         │ what to do   │         │ physical     │
-   │ in the world │         │              │         │ world        │
-   └──────────────┘         └──────────────┘         └──────┬───────┘
-          ▲                                                 │
-          │                                                 │
-          └───────────  physical world changes  ────────────┘
-```
+<figure class="diagram">
+<img src="figures/course-notes2-fig07.png" alt="The sense–compute–act loop">
+<figcaption><em>Sense, compute, act — and the physical world's response becomes the next reading.</em></figcaption>
+</figure>
 
 A thermometer plus a heater plus a brain that says "turn on the heater when cold." That is the simplest CPS.
 
@@ -54,7 +45,7 @@ The two layers meet at one specific seam: the **API of the building control syst
 ## Part 2 — Where the Brain Should Live: Edge vs Cloud
 
 <figure class="diagram">
-<img src="figures/course-notes2-fig02.svg" alt="Edge vs cloud latency comparison">
+<img src="figures/course-notes2-fig02.png" alt="Edge vs cloud latency comparison">
 <figcaption><em>Putting the same control loop in two places gives wildly different latency. For anything safety-critical, the brain belongs on the edge.</em></figcaption>
 </figure>
 
@@ -91,16 +82,10 @@ A natural distribution in production looks like this. Simple threshold alarms an
 
 The dominant real-world architecture is hybrid. Training a machine-learning model requires lots of data and significant compute time. That work is too slow to do at the edge and benefits from cheap cloud GPUs. Once trained, the model is downloaded to edge servers where it makes predictions in tens of milliseconds. Periodically, fresh data is shipped back to the cloud, models are retrained, and the new model is pushed down to the edge.
 
-```
-   EDGE                                       CLOUD
-   ────                                       ─────
-   ingest sensor readings              ────►  long-term storage
-   real-time ML inference (<50ms)             model training (hours)
-   AI agent decisions (<1s)                   fleet analytics
-   local store (30-day window)                dashboards
-                                       ◄────  updated model
-
-```
+<figure class="diagram">
+<img src="figures/course-notes2-fig08.png" alt="The hybrid pattern — train in the cloud, run at the edge">
+<figcaption><em>The edge owns the real-time loop; the cloud owns storage, training, and analytics. Data flows up, models flow back down.</em></figcaption>
+</figure>
 
 Tools like TensorFlow Lite and ONNX Runtime exist specifically to make this pattern smooth: train in the cloud with full TensorFlow or PyTorch, convert the model to a smaller, faster format, deploy to the edge.
 
@@ -141,7 +126,7 @@ A common mistake is to over-edge — running everything on a single device becau
 ## Part 3 — How Components Talk to Each Other
 
 <figure class="diagram">
-<img src="figures/course-notes2-fig03.svg" alt="REST vs MQTT communication">
+<img src="figures/course-notes2-fig03.png" alt="REST vs MQTT communication">
 <figcaption><em>REST is a phone call: synchronous, one-to-one. MQTT is a notice board: one publisher, many subscribers, none of them blocking each other.</em></figcaption>
 </figure>
 
@@ -161,15 +146,10 @@ The crucial property of request–response is **tight coupling**: the client mus
 
 A different model entirely. Publishers send messages to a **topic** without knowing who is listening. Subscribers register interest in topics and receive all matching messages. A **broker** sits in the middle, routing messages from publishers to subscribers.
 
-```
-   publishers                broker                 subscribers
-   ──────────                ──────                 ───────────
-   temp sensor  ──►   topic "sensors/floor1/temp"  ──►  AI agent
-                                                  ──►  database
-                                                  ──►  dashboard
-   smoke sensor ──►   topic "sensors/floor1/smoke" ──►  AI agent
-                                                  ──►  database
-```
+<figure class="diagram">
+<img src="figures/course-notes2-fig09.png" alt="Publish–subscribe: publishers, topics, subscribers">
+<figcaption><em>Publishers write to topics; subscribers read from them. Neither side knows the other exists — the broker does the routing.</em></figcaption>
+</figure>
 
 The temperature sensor does not know whether one, ten, or zero consumers are listening. An AI agent can subscribe to a wildcard pattern, `sensors/+/smoke`, and receive all smoke readings from all floors without those sensors knowing the agent exists.
 
@@ -211,16 +191,14 @@ gRPC fits internal service-to-service communication where performance matters an
 
 ### The pattern comparison table
 
-```
-Pattern          Coupling   Latency      Scalability   Durability   Building use
-────────────     ────────   ──────────   ───────────   ──────────   ──────────────────────
-REST             Tight      Low          Medium        No           Control commands, queries
-MQTT pub/sub     Loose      Low          High          Optional     Sensor distribution
-RabbitMQ         Loose      Low          High          Yes          Complex routing
-Kafka            Loose      Medium       Very high     Yes          Multi-building log
-WebSocket        Medium     Very low     Medium        No           Real-time streams
-gRPC             Tight      Very low     High          No           Internal services
-```
+| Pattern | Coupling | Latency | Scalability | Durability | Building use |
+|---|---|---|---|---|---|
+| REST | Tight | Low | Medium | No | Control commands, queries |
+| MQTT pub/sub | Loose | Low | High | Optional | Sensor distribution |
+| RabbitMQ | Loose | Low | High | Yes | Complex routing |
+| Kafka | Loose | Medium | Very high | Yes | Multi-building log |
+| WebSocket | Medium | Very low | Medium | No | Real-time streams |
+| gRPC | Tight | Very low | High | No | Internal services |
 
 The most useful rule of thumb: REST when one component asks another a specific question and waits; pub/sub when one source feeds many consumers; WebSocket when the server needs to push to a client. Kafka enters the picture only when the system needs durable event history at high throughput.
 
@@ -229,7 +207,7 @@ The most useful rule of thumb: REST when one component asks another a specific q
 ## Part 4 — How Components are Organised: Service-Oriented Architecture
 
 <figure class="diagram">
-<img src="figures/course-notes2-fig04.svg" alt="Service-oriented architecture">
+<img src="figures/course-notes2-fig04.png" alt="Service-oriented architecture">
 <figcaption><em>Each service is independently deployable, owns one job, and talks through stable interfaces. Replace one without touching the others.</em></figcaption>
 </figure>
 
@@ -282,7 +260,7 @@ Arrowhead is used in Swedish industrial automation and is worth knowing as the p
 ## Part 5 — Higher-Level Architectural Patterns
 
 <figure class="diagram">
-<img src="figures/course-notes2-fig05.svg" alt="Three higher-level architectural patterns">
+<img src="figures/course-notes2-fig05.png" alt="Three higher-level architectural patterns">
 <figcaption><em>Different shapes optimise for different things: layered for simplicity, microservices for scale, event-driven for loose coupling between components that come and go.</em></figcaption>
 </figure>
 
@@ -300,7 +278,7 @@ The Lambda architecture splits data processing into two parallel paths. The **sp
 
 For building control, the speed layer handles real-time ML inference and safety responses, while the batch layer trains models, generates reports, and populates the feature store for the next training run.
 
-Lambda has been criticised because the same business logic ends up implemented twice — once in the streaming path and once in the batch path — which is hard to keep in sync. The **Kappa architecture**, proposed by Nathan Marz, simplifies this by using a single stream-processing layer for both real-time and historical processing, replaying historical data through the same code. Apache Flink supports both patterns.
+Lambda has been criticised because the same business logic ends up implemented twice — once in the streaming path and once in the batch path — which is hard to keep in sync. The **Kappa architecture**, proposed by Jay Kreps, simplifies this by using a single stream-processing layer for both real-time and historical processing, replaying historical data through the same code. (Lambda itself was proposed by Nathan Marz.) Apache Flink supports both patterns.
 
 ### Multi-agent architecture
 
@@ -319,28 +297,10 @@ A **digital twin** is a real-time simulation of the physical system that runs in
 
 BuildSim is itself a digital twin of a building. The agent can ask it questions like "if I turn HVAC zone 3 on, what will the temperature be in ten minutes?" The agent uses the answer to choose better actions before committing them to the real building. For higher-fidelity simulation, tools like the Building Controls Virtual Test Bed and EnergyPlus exist in research labs.
 
-```
-        ┌──────────┐
-        │ AI Agent │
-        └────┬─────┘
-             │ proposed command
-             ▼
-        ┌──────────────────┐    simulated outcome     ┌─────────────────┐
-        │ Digital Twin      │ ──────────────────────► │ outcome OK?     │
-        │ (BuildSim)        │                          └────────┬────────┘
-        └──────────────────┘                                    │
-                                                  ┌─────────────┴────────┐
-                                              yes │                      │ no
-                                                  ▼                      ▼
-                                          ┌─────────────┐         (try another
-                                          │ Real        │          command)
-                                          │ Building    │
-                                          └─────────────┘
-                                                 │
-                                                 │ sensor feedback
-                                                 ▼
-                                            back to agent
-```
+<figure class="diagram">
+<img src="figures/course-notes2-fig10.png" alt="Digital twin feedback loop">
+<figcaption><em>Commands are rehearsed against the twin first. Only an outcome that looks good is committed to the real building, whose sensor feedback flows back to the agent.</em></figcaption>
+</figure>
 
 ### Choosing a pattern
 
@@ -359,11 +319,11 @@ No single pattern fits every use case. A few rules of thumb help:
 ## Part 6 — A Worked Example
 
 <figure class="diagram">
-<img src="figures/course-notes2-fig06.svg" alt="A worked HVAC control system">
+<img src="figures/course-notes2-fig06.png" alt="A worked HVAC control system">
 <figcaption><em>A full HVAC control system, with each component placed and the data flowing top to bottom: physical world → broker → services → back to the world.</em></figcaption>
 </figure>
 
-To make all of the above concrete, consider a fire detection system and walk through the architectural choices.
+To make all of the above concrete, walk through the architectural choices for a concrete use case. The figure above shows the result of this exercise for an HVAC system; the walkthrough below makes the same decisions for a fire detection system.
 
 The use case: smoke sensors and temperature sensors are deployed in every room. When smoke is detected, the system must activate sprinklers in the affected room within one second, unlock fire doors on the evacuation path, and notify the building manager. False positives must be kept under 5 percent.
 

@@ -7,7 +7,7 @@ Standalone notes for the third chapter of D7065E.
 ## Part 1 — Why a Whole Chapter About Data
 
 <figure class="diagram">
-<img src="figures/course-notes3-fig01.svg" alt="Why data engineering matters">
+<img src="figures/course-notes3-fig01.png" alt="Why data engineering matters">
 <figcaption><em>A modern building generates millions of readings a day. Data engineering is the discipline that turns that flood into a trustworthy substrate an AI can act on.</em></figcaption>
 </figure>
 
@@ -22,7 +22,7 @@ This chapter is the kitchen.
 ## Part 2 — The Three Pressures: Volume, Velocity, Variety
 
 <figure class="diagram">
-<img src="figures/course-notes3-fig02.svg" alt="The three V\u2019s — volume, velocity, variety">
+<img src="figures/course-notes3-fig02.png" alt="The three V's — volume, velocity, variety">
 <figcaption><em>Volume, velocity and variety are the three pressures every data system has to absorb. They shape every choice that follows.</em></figcaption>
 </figure>
 
@@ -34,13 +34,13 @@ The volume itself is not the hard part. The hard part is that data engineering f
 
 How much data, total, accumulated over time. A weather station for one room is small. A building with thousands of sensors over several years is large. The architecture must store this without running out of disk space and without slowing down to a crawl.
 
-A useful image: a single garden hose versus a fire hose versus a river. The amount of water you can collect determines whether you need a bucket, a tank, or a reservoir.
+An analogy: a single garden hose versus a fire hose versus a river. The amount of water you can collect determines whether you need a bucket, a tank, or a reservoir.
 
 ### Velocity
 
 How fast new data arrives, and how fast decisions need to be made on it. A safety system that detects fire must process incoming readings in milliseconds. A weekly energy report can take its time. Both are valid, but they need different infrastructure.
 
-A useful image: drinking a glass of water versus drinking from a fire hose. Same liquid, very different consequences.
+Picture this: drinking a glass of water versus drinking from a fire hose. Same liquid, very different consequences.
 
 ### Variety
 
@@ -55,19 +55,20 @@ The fundamental tension: real-time decisions need data within seconds, machine-l
 ## Part 3 — Getting Sensor Data Into the System (Ingestion Patterns)
 
 <figure class="diagram">
-<img src="figures/course-notes3-fig03.svg" alt="Ingestion patterns">
+<img src="figures/course-notes3-fig03.png" alt="Ingestion patterns">
 <figcaption><em>A broker in the middle decouples sensor producers from the consumers downstream. New consumers can subscribe without anyone changing the sensors.</em></figcaption>
 </figure>
 
 The first step in any pipeline is **ingestion**: getting data from sensors into a durable store. Three patterns dominate, each fitting a different scale.
 
+<figure class="diagram">
+<img src="figures/course-notes3-fig09.png" alt="Three ingestion patterns">
+<figcaption><em>Direct REST, broker-buffered, and batch upload — the same readings, three very different sets of failure modes.</em></figcaption>
+</figure>
+
 ### Pattern A: Direct REST POST
 
 Each sensor sends every reading directly to an HTTP endpoint that writes it into a database immediately.
-
-```
-   sensor  ───POST /readings───►  database
-```
 
 Easy to set up. Works fine at low volume. Breaks at scale: 100 sensors at 10 Hz means a thousand HTTP requests per second, which overwhelms most databases. There is also no buffer — if the database is slow or temporarily down, readings are lost.
 
@@ -77,29 +78,19 @@ Analogy: handing every letter directly to the postman, who must be standing on y
 
 Each sensor publishes to a message broker. A separate consumer process reads from the broker and writes into the database.
 
-```
-   sensor 1 ──┐                                     ┌──► database
-   sensor 2 ──┼──►   broker (MQTT/Kafka)   ──►  consumer
-   sensor 3 ──┘                                     └──► (other consumers)
-```
-
 The broker acts as a shock absorber. If the database is briefly slow, messages accumulate in the broker, and the consumer catches up later. The sensor doesn't care whether the database is up.
 
 This is the recommended pattern for the course: MQTT (using Mosquitto as the broker) plus a Python consumer that writes into TimescaleDB or DuckDB.
 
-Analogy: the postman is replaced by a mailbox in the village square. You drop your letter in any time, the postman collects them on a schedule, the receiving end opens its mailbox when ready. Three actors, each independent.
+Picture this: the postman is replaced by a mailbox in the village square. You drop your letter in any time, the postman collects them on a schedule, the receiving end opens its mailbox when ready. Three actors, each independent.
 
 ### Pattern C: Batch file upload
 
 The sensor accumulates readings in memory and writes them to a file (typically a Parquet file) once a minute or once an hour. A separate process reads those files into a database.
 
-```
-   sensor accumulates 60 s in memory  ──►  writes one file per minute  ──►  batch loader
-```
-
 Highest throughput, lowest network overhead. Bad for real-time decisions because of the latency, excellent for historical training data.
 
-Analogy: instead of sending one letter at a time, you wait until end-of-day and send a single envelope containing all your letters from that day. Cheap and efficient when nothing is urgent. Hopeless when something is.
+An analogy: instead of sending one letter at a time, you wait until end-of-day and send a single envelope containing all your letters from that day. Cheap and efficient when nothing is urgent. Hopeless when something is.
 
 Most real systems use **two patterns at once**: the broker for the real-time path, batch files for the historical path. The same reading is written into both places, and each place serves a different audience.
 
@@ -108,7 +99,7 @@ Most real systems use **two patterns at once**: the broker for the real-time pat
 ## Part 4 — Stream Processing: Working on Data as It Flows
 
 <figure class="diagram">
-<img src="figures/course-notes3-fig04.svg" alt="Stream processing — rolling window">
+<img src="figures/course-notes3-fig04.png" alt="Stream processing — rolling window">
 <figcaption><em>Stream processing keeps a sliding window of recent readings in memory and produces answers continuously, with millisecond latency.</em></figcaption>
 </figure>
 
@@ -116,7 +107,7 @@ Once data is flowing in, the next question is how to process it. Two main modes 
 
 A **stream** is an unbounded, time-ordered sequence of events. New events keep arriving forever. Stream processors apply operations to streams and produce either new streams or side effects (database writes, alerts, dashboard updates).
 
-A useful image: a river flowing past a water-quality station. The station measures every drop as it goes past — there is no way to stop the river and inspect it all at once.
+Think of it this way: a river flowing past a water-quality station. The station measures every drop as it goes past — there is no way to stop the river and inspect it all at once.
 
 ### Windowed aggregation
 
@@ -124,36 +115,16 @@ A single sensor reading is rarely useful by itself. It is noisy, missing context
 
 Three common window types:
 
-**Tumbling windows** are non-overlapping, fixed-size buckets. Each reading falls into exactly one window.
+<figure class="diagram">
+<img src="figures/course-notes3-fig10.png" alt="Three kinds of windows over the same stream">
+<figcaption><em>Tumbling windows are fixed buckets, sliding windows overlap and update continuously, session windows grow until the events stop.</em></figcaption>
+</figure>
 
-```
-   |----window 1----|----window 2----|----window 3----|
-   |   00:00–00:05  |   00:05–00:10  |   00:10–00:15  |
-   |                |                |                |
-   readings...      readings...      readings...
-```
+**Tumbling windows** are non-overlapping, fixed-size buckets. Each reading falls into exactly one window. Useful for periodic reports: a 5-minute average that resets every 5 minutes.
 
-Tumbling windows are useful for periodic reports: a 5-minute average that resets every 5 minutes.
+**Sliding windows** are overlapping; each new reading falls into multiple windows. Useful for continuous tracking: "the rolling 5-minute average, updated every second."
 
-**Sliding windows** are overlapping. Each new reading falls into multiple windows.
-
-```
-   |---window covers last 5 min---|
-                |---window covers last 5 min---|
-                          |---window covers last 5 min---|
-   ...now                  ...now+1                ...now+2
-```
-
-Sliding windows are useful for continuous tracking: "the rolling 5-minute average, updated every second."
-
-**Session windows** are dynamic. They grow as long as events keep arriving and close when there's a gap.
-
-```
-   |---session---|       gap        |---session---|
-   read read read                   read read
-```
-
-Session windows are useful for grouping bursts of activity: "all access events for one person in one trip through the building."
+**Session windows** are dynamic. They grow as long as events keep arriving and close when there's a gap. Useful for grouping bursts of activity: "all access events for one person in one trip through the building."
 
 A natural image: imagine watching a movie versus watching the news.
 - Tumbling windows are like episodes — each one starts at a fixed time and runs a fixed length.
@@ -185,7 +156,7 @@ The right tool depends on scale.
 ## Part 5 — Batch Processing: Working on Data After It Settles
 
 <figure class="diagram">
-<img src="figures/course-notes3-fig05.svg" alt="Batch processing — accumulate, then process">
+<img src="figures/course-notes3-fig05.png" alt="Batch processing — accumulate, then process">
 <figcaption><em>Batch processing waits for data to settle, then processes large windows at once. Cheaper, simpler, but the freshest answer is from yesterday.</em></figcaption>
 </figure>
 
@@ -216,7 +187,7 @@ GROUP BY room;
 ## Part 6 — The Data Lake (with the Medallion Architecture)
 
 <figure class="diagram">
-<img src="figures/course-notes3-fig06.svg" alt="Medallion architecture — bronze, silver, gold">
+<img src="figures/course-notes3-fig06.png" alt="Medallion architecture — bronze, silver, gold">
 <figcaption><em>Bronze, silver, gold. Data gets more refined and more trustworthy at each tier — and the rules that produce each tier are versioned in code.</em></figcaption>
 </figure>
 
@@ -234,22 +205,11 @@ The three core principles:
 2. **Transform on read.** Apply cleaning, feature engineering, and aggregation at query time, not at write time. This way, if you find a bug in your transformation logic, you can fix it without re-collecting the data.
 3. **Schema on read.** Define the data's shape when querying, not when storing. This accommodates evolving schemas without painful migrations.
 
-Analogy: a data lake is like a pantry that stores raw ingredients — flour, eggs, vegetables — exactly as they arrived from the grocery store. A data warehouse is like a freezer full of pre-cooked meals: faster to serve, but if you decide tomorrow that you want to make a salad instead of lasagna, you're out of luck.
+Picture this: a data lake is like a pantry that stores raw ingredients — flour, eggs, vegetables — exactly as they arrived from the grocery store. A data warehouse is like a freezer full of pre-cooked meals: faster to serve, but if you decide tomorrow that you want to make a salad instead of lasagna, you're out of luck.
 
 ### The medallion architecture
 
-Storing everything raw is helpful, but querying everything raw every time is expensive. The compromise is the **medallion architecture**, popularised by Databricks: organise the data lake into layers, each transformed a bit more than the previous one.
-
-```
-   BRONZE LAYER  ──►  SILVER LAYER  ──►  GOLD LAYER  ──►  MODEL ZONE
-   ───────────       ────────────       ─────────       ───────────
-   raw sensor        cleaned,            ML-ready        train/val/test
-   readings,         deduplicated,       features:       datasets,
-   exactly as        unified schema,     rolling avgs,   labelled,
-   received,         missing values      time encodings, split
-   IMMUTABLE         handled             cross-sensor
-                                         relationships
-```
+Storing everything raw is helpful, but querying everything raw every time is expensive. The compromise is the **medallion architecture**, popularised by Databricks: organise the data lake into layers, each transformed a bit more than the previous one (see the figure above). A fourth zone, the **model zone**, sits after gold.
 
 **Bronze** is the raw zone. Each reading is stored exactly as it came off the wire, timestamped on arrival, and never modified. If a bug is found in a downstream pipeline, reprocessing from bronze is always possible.
 
@@ -259,7 +219,7 @@ Storing everything raw is helpful, but querying everything raw every time is exp
 
 **Model zone** holds ready-to-train datasets with labels and train/validation/test splits.
 
-Analogy: bronze is your shopping receipts in a shoebox. Silver is the same receipts entered into a spreadsheet with consistent columns. Gold is a monthly summary showing categories, totals, and trends. Each is more useful than the last, but each was derived from the original receipts. If you discover an error in the gold report, you can always go back to the shoebox and reprocess.
+An analogy: bronze is your shopping receipts in a shoebox. Silver is the same receipts entered into a spreadsheet with consistent columns. Gold is a monthly summary showing categories, totals, and trends. Each is more useful than the last, but each was derived from the original receipts. If you discover an error in the gold report, you can always go back to the shoebox and reprocess.
 
 ---
 
@@ -285,22 +245,12 @@ Good for small exports and manual inspection. Bad for production pipelines.
 
 The standard format for data lakes. Columnar binary, compressed, schema-enforced.
 
-The key insight is **columnar storage**. CSV stores data row by row:
+The key insight is **columnar storage**. CSV stores data row by row; Parquet stores it column by column:
 
-```
-   row 1: ts=…, sensor_id=…, room=…, value=…
-   row 2: ts=…, sensor_id=…, room=…, value=…
-   row 3: ts=…, sensor_id=…, room=…, value=…
-```
-
-Parquet stores it column by column:
-
-```
-   column ts:        [ts1, ts2, ts3, ts4, ts5, ts6, ts7, ts8, ...]
-   column sensor_id: [s1,  s1,  s1,  s2,  s2,  s2,  s3,  s3,  ...]
-   column room:      [r1,  r1,  r1,  r1,  r1,  r1,  r2,  r2,  ...]
-   column value:     [v1,  v2,  v3,  v4,  v5,  v6,  v7,  v8,  ...]
-```
+<figure class="diagram">
+<img src="figures/course-notes3-fig11.png" alt="Row storage vs columnar storage">
+<figcaption><em>Row-by-row versus column-by-column layout of the same readings. The column layout is what makes Parquet small and fast.</em></figcaption>
+</figure>
 
 This matters for two reasons. First, queries that need only the `value` column don't have to read the rest. Second, columnar data compresses much better than row-based data, because consecutive values are similar (e.g., the `room` column has just a few distinct strings repeated millions of times).
 
@@ -362,7 +312,7 @@ The recommended pattern for the course is to combine MinIO (the data lake) with 
 ## Part 9 — Time-Series Databases
 
 <figure class="diagram">
-<img src="figures/course-notes3-fig07.svg" alt="Time-series database">
+<img src="figures/course-notes3-fig07.png" alt="Time-series database">
 <figcaption><em>Time-series databases store rows indexed by time, compressed per chunk, and discarded automatically after a retention period. Far faster than a general-purpose database for this shape of data.</em></figcaption>
 </figure>
 
@@ -378,7 +328,7 @@ Three properties of sensor data that don't fit a general database:
 
 A **time-series database**, abbreviated TSDB, is built for exactly this shape. Data is stored in time-ordered chunks. New data appends to the latest chunk. Time-range predicates immediately prune entire chunks outside the range. Retention policies automatically downsample or delete old data.
 
-Analogy: a general-purpose database is like a filing cabinet where every paper is filed by topic. Finding "all papers about Project X" is fast; finding "all papers from last March" requires walking through every folder. A time-series database is like a diary, where every page is dated and finding "what happened in March" is just opening to March.
+Picture this: a general-purpose database is like a filing cabinet where every paper is filed by topic. Finding "all papers about Project X" is fast; finding "all papers from last March" requires walking through every folder. A time-series database is like a diary, where every page is dated and finding "what happened in March" is just opening to March.
 
 ### TSDB options
 
@@ -444,7 +394,7 @@ Raw sensor readings — a float every five seconds — are not informative on th
 | Door events | Time between events | Detects unusual access patterns |
 | HVAC + temperature | Residual (actual − expected) | Detects HVAC failure |
 
-A useful image: feature engineering is what a chef does to crude ingredients before serving. The raw potato is not edible. Wash, peel, slice, and bake it, and now you have something useful.
+An analogy: feature engineering is what a chef does to crude ingredients before serving. The raw potato is not edible. Wash, peel, slice, and bake it, and now you have something useful.
 
 ### Temporal features
 
@@ -467,7 +417,7 @@ def add_time_features(df):
 
 The sine and cosine pair together place every hour on a unit circle. 23:59 and 00:01 end up close together on the circle, as they should.
 
-Analogy: imagine writing the hours on a clock face. The model that uses the *clock face position* (which is what sin/cos gives it) understands that 11 o'clock and 1 o'clock are nearby. The model that uses *just the number* sees 11 and 1 as nine hours apart.
+An analogy: imagine writing the hours on a clock face. The model that uses the *clock face position* (which is what sin/cos gives it) understands that 11 o'clock and 1 o'clock are nearby. The model that uses *just the number* sees 11 and 1 as nine hours apart.
 
 ### Cross-sensor features
 
@@ -514,7 +464,7 @@ Analogy: imagine if every time the postman wasn't sure whether a letter was deli
 
 **Clock drift.** Each sensor has its own clock, and clocks drift. A reading from sensor A timestamped 14:32:00 and one from sensor B timestamped 14:31:58 may have happened in the opposite order from what the timestamps suggest. Mitigations: run NTP (Network Time Protocol) on every device, store both the device timestamp and the time when the server received the message, and prefer the server timestamp for ordering.
 
-Analogy: imagine a courtroom where every witness uses a different clock. Their statements about timing can't be compared without first synchronising the clocks.
+Picture this: imagine a courtroom where every witness uses a different clock. Their statements about timing can't be compared without first synchronising the clocks.
 
 **Schema evolution.** A new sensor type is added with an extra field. The existing pipeline doesn't know what to do with that field. Schema-on-read (typical for data lakes) handles this gracefully — old code ignores new fields. Schema-on-write (typical for relational databases) requires a migration to add the column.
 
@@ -536,7 +486,7 @@ The standard stack for this is **Prometheus** (a metrics database that scrapes e
 ## Part 12 — A Worked Example: Smoke Detection Data Pipeline
 
 <figure class="diagram">
-<img src="figures/course-notes3-fig08.svg" alt="Smoke detection data pipeline">
+<img src="figures/course-notes3-fig08.png" alt="Smoke detection data pipeline">
 <figcaption><em>Every component of the smoke-detection data pipeline: sensors at the top push readings down through ingestion, processing, modelling, and alerting — and everything is persisted to storage for replay and training.</em></figcaption>
 </figure>
 

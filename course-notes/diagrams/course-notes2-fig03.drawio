@@ -1,0 +1,76 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="course-notes2-fig03" name="course-notes2-fig03">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1080" pageHeight="500" math="0" shadow="0" background="#032040">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Two ways for components to talk" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="30" y="16" width="1020" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="restPanel" value="REST · request / response" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;dashed=1;strokeWidth=2;fontColor=#89A5BE;fontFamily=Helvetica;arcSize=6;verticalAlign=top;align=center;fontSize=14;fontStyle=1;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="70" width="480" height="390" as="geometry"/>
+        </mxCell>
+        <mxCell id="client" value="Client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="80" y="170" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="server" value="Server" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="360" y="170" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="eReq" value="GET /temp" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;labelBackgroundColor=none;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" edge="1" parent="1" source="client" target="server">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-12" as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eResp" value="{ value: 22.4 }" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;dashed=1;fontColor=#FF8247;fontSize=13;fontStyle=2;labelBackgroundColor=none;exitX=0;exitY=0.7;entryX=1;entryY=0.7;" edge="1" parent="1" source="server" target="client">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="14" as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="restQuote" value="&quot;Like a phone call.&quot;" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=14;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="90" y="310" width="380" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="restProps" value="synchronous · 1-to-1 · request must wait" style="text;html=1;align=center;fontColor=#89A5BE;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="90" y="348" width="380" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="mqttPanel" value="MQTT · publish / subscribe" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;dashed=1;strokeWidth=2;fontColor=#89A5BE;fontFamily=Helvetica;arcSize=6;verticalAlign=top;align=center;fontSize=14;fontStyle=1;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="560" y="70" width="480" height="390" as="geometry"/>
+        </mxCell>
+        <mxCell id="mSensor" value="Sensor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="585" y="200" width="105" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="mBroker" value="&lt;b&gt;BROKER&lt;/b&gt;&#10;&#10;&lt;font color=&quot;#C9D6E2&quot;&gt;topic:&#10;sensors/#&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="735" y="150" width="120" height="155" as="geometry"/>
+        </mxCell>
+        <mxCell id="mSub1" value="DB writer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="905" y="130" width="115" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="mSub2" value="Detector" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="905" y="205" width="115" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="mSub3" value="Dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontFamily=Helvetica;arcSize=10;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="905" y="280" width="115" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="mPub" value="publish" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;fontColor=#FF8247;fontSize=13;fontStyle=2;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="mSensor" target="mBroker">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-12" as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mE1" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.2;entryX=0;entryY=0.5;" edge="1" parent="1" source="mBroker" target="mSub1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="mE2" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="mBroker" target="mSub2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="mE3" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.8;entryX=0;entryY=0.5;" edge="1" parent="1" source="mBroker" target="mSub3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="mqttQuote" value="&quot;Like a notice board.&quot;" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=14;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="610" y="360" width="380" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="mqttProps" value="asynchronous · 1-to-many · nobody blocks" style="text;html=1;align=center;fontColor=#89A5BE;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="610" y="398" width="380" height="26" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

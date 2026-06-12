@@ -1,0 +1,31 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="cn3-fig11" name="cn3-fig11">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1060" pageHeight="460" math="0" shadow="0" background="#032040">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Row storage (CSV) vs columnar storage (Parquet)" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="130" y="16" width="800" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="csv" value="CSV — row by row" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;strokeWidth=2;verticalAlign=top;fontColor=#89A5BE;fontSize=14;fontStyle=1;fontFamily=Helvetica;spacingTop=10;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="50" y="60" width="460" height="270" as="geometry"/>
+        </mxCell>
+        <mxCell id="r1" value="row 1:   ts · sensor_id · room · value" style="whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=1;fontColor=#FFFFFF;fontSize=13;fontFamily=Courier New;" vertex="1" parent="1"><mxGeometry x="80" y="105" width="400" height="42" as="geometry"/></mxCell>
+        <mxCell id="r2" value="row 2:   ts · sensor_id · room · value" style="whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=1;fontColor=#FFFFFF;fontSize=13;fontFamily=Courier New;" vertex="1" parent="1"><mxGeometry x="80" y="155" width="400" height="42" as="geometry"/></mxCell>
+        <mxCell id="r3" value="row 3:   ts · sensor_id · room · value" style="whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=1;fontColor=#FFFFFF;fontSize=13;fontFamily=Courier New;" vertex="1" parent="1"><mxGeometry x="80" y="205" width="400" height="42" as="geometry"/></mxCell>
+        <mxCell id="rn" value="reading one field means flipping through every form" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="80" y="265" width="400" height="40" as="geometry"/></mxCell>
+        <mxCell id="pq" value="PARQUET — column by column" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#FF8247;strokeWidth=2;verticalAlign=top;fontColor=#FF8247;fontSize=14;fontStyle=1;fontFamily=Helvetica;spacingTop=10;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="550" y="60" width="460" height="270" as="geometry"/>
+        </mxCell>
+        <mxCell id="c1" value="ts:         [t1, t2, t3, t4, t5, …]" style="whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=1;fontColor=#FFFFFF;fontSize=13;fontFamily=Courier New;align=left;spacingLeft=10;" vertex="1" parent="1"><mxGeometry x="580" y="105" width="400" height="38" as="geometry"/></mxCell>
+        <mxCell id="c2" value="sensor_id:  [s1, s1, s1, s2, s2, …]" style="whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=1;fontColor=#FFFFFF;fontSize=13;fontFamily=Courier New;align=left;spacingLeft=10;" vertex="1" parent="1"><mxGeometry x="580" y="150" width="400" height="38" as="geometry"/></mxCell>
+        <mxCell id="c3" value="room:       [r1, r1, r1, r1, r1, …]" style="whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=1;fontColor=#FFFFFF;fontSize=13;fontFamily=Courier New;align=left;spacingLeft=10;" vertex="1" parent="1"><mxGeometry x="580" y="195" width="400" height="38" as="geometry"/></mxCell>
+        <mxCell id="c4" value="value:      [v1, v2, v3, v4, v5, …]" style="whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Courier New;align=left;spacingLeft=10;" vertex="1" parent="1"><mxGeometry x="580" y="240" width="400" height="38" as="geometry"/></mxCell>
+        <mxCell id="pn" value="a query touching only `value` reads only that column" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="580" y="288" width="400" height="30" as="geometry"/></mxCell>
+        <mxCell id="cap" value="Similar values sit together, so they compress 4–10× — and column-only queries run an order of magnitude faster" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="130" y="370" width="800" height="28" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

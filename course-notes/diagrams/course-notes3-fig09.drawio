@@ -1,0 +1,44 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="cn3-fig09" name="cn3-fig09">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1080" pageHeight="560" math="0" shadow="0" background="#032040">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Three ingestion patterns — same readings, different machinery" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=17;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="140" y="16" width="800" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="la" value="A — DIRECT REST POST" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;dashed=1;strokeWidth=2;verticalAlign=top;align=left;fontColor=#89A5BE;fontSize=13;fontStyle=1;fontFamily=Helvetica;spacingTop=8;spacingLeft=12;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="50" y="55" width="980" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="a1" value="sensor" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="90" y="100" width="130" height="55" as="geometry"/></mxCell>
+        <mxCell id="a2" value="database" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="420" y="100" width="150" height="55" as="geometry"/></mxCell>
+        <mxCell id="ae" value="POST /readings — every single reading" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;fontColor=#C9D6E2;fontSize=12;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#032040;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a1" target="a2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="an" value="no buffer: a slow or down database loses readings&#10;breaks at scale — 100 sensors × 10 Hz = 1000 req/s" style="text;html=1;align=left;fontColor=#E05252;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="630" y="95" width="380" height="60" as="geometry"/></mxCell>
+        <mxCell id="lb" value="B — MESSAGE BROKER AS BUFFER (recommended for the course)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#7FE3A1;strokeWidth=2;verticalAlign=top;align=left;fontColor=#7FE3A1;fontSize=13;fontStyle=1;fontFamily=Helvetica;spacingTop=8;spacingLeft=12;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="50" y="205" width="980" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="b1" value="sensor 1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="80" y="240" width="110" height="42" as="geometry"/></mxCell>
+        <mxCell id="b2" value="sensor 2" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="80" y="297" width="110" height="42" as="geometry"/></mxCell>
+        <mxCell id="bb" value="BROKER&#10;(MQTT / Kafka)&#10;the shock absorber" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="330" y="250" width="190" height="80" as="geometry"/></mxCell>
+        <mxCell id="bc" value="consumer&#10;catches up at its own pace" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=12;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="610" y="250" width="180" height="80" as="geometry"/></mxCell>
+        <mxCell id="bd" value="database" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=12;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="880" y="250" width="130" height="80" as="geometry"/></mxCell>
+        <mxCell id="be1" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.3;" edge="1" parent="1" source="b1" target="bb"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="be2" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.7;" edge="1" parent="1" source="b2" target="bb"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="be3" style="endArrow=block;html=1;strokeColor=#7FE3A1;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="bb" target="bc"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="be4" style="endArrow=block;html=1;strokeColor=#7FE3A1;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="bc" target="bd"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="lc" value="C — BATCH FILE UPLOAD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;dashed=1;strokeWidth=2;verticalAlign=top;align=left;fontColor=#89A5BE;fontSize=13;fontStyle=1;fontFamily=Helvetica;spacingTop=8;spacingLeft=12;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="50" y="385" width="980" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="c1" value="sensor accumulates&#10;60 s in memory" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=12;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="90" y="425" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="c2" value="one Parquet file&#10;per minute" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=12;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="420" y="425" width="180" height="60" as="geometry"/></mxCell>
+        <mxCell id="c3" value="batch loader" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=12;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1"><mxGeometry x="700" y="425" width="160" height="60" as="geometry"/></mxCell>
+        <mxCell id="ce1" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="c1" target="c2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ce2" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="c2" target="c3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="cn" value="highest throughput,&#10;highest latency — for history,&#10;not for decisions" style="text;html=1;align=left;fontColor=#C9D6E2;fontSize=12;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="890" y="420" width="135" height="70" as="geometry"/></mxCell>
+        <mxCell id="cap" value="Real systems run B and C at once: the broker feeds the real-time path, batch files feed the historical path" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=15;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="140" y="525" width="800" height="28" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
