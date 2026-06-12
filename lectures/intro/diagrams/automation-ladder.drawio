@@ -1,0 +1,29 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="automation-ladder" name="automation-ladder">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="460" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="s1" value="1 — AUTOMATED&#10;fixed rules&#10;&#10;if T &lt; 20°C → heat&#10;&#10;predictable, cheap, proven —&#10;but blind to context&#10;(thermostat: 1883)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;strokeWidth=2;fontColor=#C9D6E2;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=8;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="240" width="300" height="170" as="geometry"/>
+        </mxCell>
+        <mxCell id="s2" value="2 — ADAPTIVE&#10;machine learning&#10;&#10;learns occupancy patterns,&#10;predicts demand, spots anomalies&#10;&#10;smarter — but still one narrow,&#10;pre-defined task" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="420" y="160" width="300" height="250" as="geometry"/>
+        </mxCell>
+        <mxCell id="s3" value="3 — AUTONOMOUS&#10;agentic AI&#10;&#10;perceives, reasons, plans, acts —&#10;and observes the result&#10;&#10;handles situations nobody scripted&#10;&#10;needs guardrails: autonomy&#10;without limits is a hazard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="790" y="80" width="300" height="330" as="geometry"/>
+        </mxCell>
+        <mxCell id="arrow" value="" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;curved=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="120" y="210" as="sourcePoint"/>
+            <mxPoint x="900" y="45" as="targetPoint"/>
+            <Array as="points"><mxPoint x="520" y="125"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cap" value="Oral-exam favourite: what makes a system autonomous rather than automated? Decide where on this ladder your project sits — and say why." style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="90" y="425" width="960" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

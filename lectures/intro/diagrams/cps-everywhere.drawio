@@ -1,0 +1,37 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="cps-everywhere" name="cps-everywhere">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="420" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="c1" value="Self-driving cars&#10;&#10;cameras and lidar in, steering out — at 110 km/h" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="30" y="40" width="255" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="c2" value="Smart factories&#10;&#10;robots, conveyors, quality control — Industry 4.0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="315" y="40" width="255" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="c3" value="Power grids&#10;&#10;supply must equal demand — rebalanced every second" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="600" y="40" width="255" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="c4" value="Medical devices&#10;&#10;pacemakers, insulin pumps — code that keeps you alive" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="885" y="40" width="255" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="c5" value="Aircraft &amp; drones&#10;&#10;fly-by-wire: software sits between pilot and physics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="30" y="190" width="255" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="c6" value="Autonomous mining&#10;&#10;driverless trucks and drills — LKAB, right up the road" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="315" y="190" width="255" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="c7" value="Smart agriculture&#10;&#10;greenhouses, irrigation, livestock monitoring" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="600" y="190" width="255" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="c8" value="Smart buildings&#10;&#10;HVAC, fire safety, security, energy — THIS COURSE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="885" y="190" width="255" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="cap" value="Every card is an industry hiring CPS engineers. Same loop everywhere: sensors → decisions → actuators. We use the building." style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="120" y="350" width="900" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

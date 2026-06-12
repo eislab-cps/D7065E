@@ -1,0 +1,59 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="data-pipeline" name="data-pipeline">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="460" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="s1" value="temp" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="40" y="90" width="90" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="s2" value="CO₂" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="40" y="160" width="90" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="s3" value="motion" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="40" y="230" width="90" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="slab" value="sensors&#10;volume · velocity · variety" style="text;html=1;align=center;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="15" y="290" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="broker" value="MESSAGE BROKER&#10;&#10;MQTT · Kafka · Redis&#10;&#10;decouples producers&#10;from consumers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="200" y="110" width="170" height="150" as="geometry"/>
+        </mxCell>
+        <mxCell id="b1" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.25;" edge="1" parent="1" source="s1" target="broker"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="b2" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="s2" target="broker"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="b3" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.75;" edge="1" parent="1" source="s3" target="broker"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="lake" value="DATA LAKE — the medallion pattern" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;dashed=1;strokeWidth=2;verticalAlign=top;fontColor=#89A5BE;fontSize=14;fontStyle=1;fontFamily=Helvetica;spacingTop=8;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="430" y="80" width="380" height="210" as="geometry"/>
+        </mxCell>
+        <mxCell id="bronze" value="BRONZE&#10;raw readings,&#10;as they arrived" style="whiteSpace=wrap;html=1;fillColor=#FFB088;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="450" y="130" width="105" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="silver" value="SILVER&#10;cleaned, validated,&#10;de-duplicated" style="whiteSpace=wrap;html=1;fillColor=#FF9C66;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="567" y="130" width="105" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="gold" value="GOLD&#10;features ready&#10;for decisions" style="whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="684" y="130" width="105" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="lb" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="broker" target="lake"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="con1" value="AGENT&#10;decides in real time" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="900" y="80" width="200" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="con2" value="DASHBOARD&#10;live state, history" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="900" y="155" width="200" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="con3" value="TRAINING&#10;models learn from history" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="900" y="230" width="200" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="c1" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.25;entryX=0;entryY=0.5;" edge="1" parent="1" source="lake" target="con1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="c2" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="lake" target="con2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="c3" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.75;entryX=0;entryY=0.5;" edge="1" parent="1" source="lake" target="con3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="tsdb" value="served from a time-series database (InfluxDB · TimescaleDB · DuckDB) for fast queries over time" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=14;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="240" y="320" width="660" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="cap" value="A real pipeline, not ad-hoc REST calls — raw readings become features an autonomous component can trust" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="120" y="395" width="900" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

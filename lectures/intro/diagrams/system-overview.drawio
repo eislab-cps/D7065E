@@ -1,0 +1,53 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="system-overview" name="system-overview">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="520" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="bs" value="BUILDSIM&#10;&#10;the shared state&#10;building model · sensor &amp; actuator registry&#10;REST API · WebSocket · 3D viewer&#10;(one Go binary — provided)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=15;fontStyle=1;fontFamily=Helvetica;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="400" y="170" width="340" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="sim" value="PHYSICAL SIMULATOR&#10;your physics: heat, smoke, CO₂, people" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="60" y="50" width="270" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="sen" value="SENSOR PROCESSES&#10;each one emulates an IoT device" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="60" y="215" width="270" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="act" value="ACTUATOR PROCESSES&#10;HVAC, sprinklers, doors, lights" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="60" y="380" width="270" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="pipe" value="DATA PIPELINE&#10;broker + time-series storage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="810" y="50" width="270" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="ag" value="AUTONOMOUS AGENT&#10;reads data, reasons, commands actuators" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="810" y="215" width="270" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="dash" value="DASHBOARD + 3D BROWSER VIEW&#10;live state via WebSocket" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="810" y="380" width="270" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0.15;entryY=0;" edge="1" parent="1" source="sim" target="bs"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" value="REST" style="endArrow=block;startArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="sen" target="bs"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" value="REST" style="endArrow=block;startArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0.15;entryY=1;" edge="1" parent="1" source="act" target="bs"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e4" value="" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=0.85;exitY=0;entryX=0;entryY=0.5;" edge="1" parent="1" source="bs" target="pipe"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e5" value="REST" style="endArrow=block;startArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="ag" target="bs"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e6" value="WebSocket" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0.85;exitY=1;entryX=0;entryY=0.5;" edge="1" parent="1" source="bs" target="dash"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f1" value="drives" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;dashed=1;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="sim" target="sen"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f2" value="commands change the physics" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;dashed=1;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0;exitY=0.5;entryX=0;entryY=0.5;curved=1;" edge="1" parent="1" source="act" target="sim">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="25" y="250"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="f3" value="" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;dashed=1;curved=1;exitX=1;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="pipe" target="ag">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1120" y="167"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="f4" value="commands" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;dashed=1;fontColor=#FF8247;fontSize=13;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;exitX=0.5;exitY=1;entryX=0.5;entryY=1;curved=1;" edge="1" parent="1" source="ag" target="act">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="570" y="500"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="gpu" value="GPU server — optional LLM (OpenAI-compatible API)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;strokeWidth=2;dashed=1;fontColor=#89A5BE;fontSize=13;fontStyle=2;fontFamily=Helvetica;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="810" y="130" width="270" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="cap" value="BuildSim is provided. Everything in blue is yours to design and build — each as its own process, talking REST." style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="170" y="487" width="800" height="28" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

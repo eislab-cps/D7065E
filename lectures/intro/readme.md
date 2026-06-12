@@ -1,16 +1,35 @@
-# LTU Theamed Beamer Template
-## Usage
-1. Clone the directory to your machine
-2. You can rename the directory and ltu-example.tex to match the presentation's purpose (if you want that)
+# D7065E — Lecture 1: Course Introduction
 
-## License
-### Everything but the media
-Copyright (c) 2024 Malte Kerl
+LTU-themed Beamer deck with draw.io diagrams, following the same structure and
+pedagogy as the D7024E course-introduction lecture.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+## Layout
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+- `intro.tex` — the deck
+- `diagrams/*.drawio` — diagram sources (draw.io)
+- `media/diagrams/*.png` — generated diagram exports (via `make diagrams`)
+- `media/buildsim.png` — BuildSim screenshot (static asset)
+- `media/template/` — LTU theme art
+- `material/` — source notes for course facts (grading, lab, oral exam, use cases)
+- `beamer*LTU.sty` — LTU Beamer theme
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-### media
-The copyright to any content of the media directory is owned by LTU.
+## Build
+
+```
+make            # export changed diagrams + compile intro.pdf
+make diagrams   # only re-export .drawio -> media/diagrams/*.png
+make watch      # build and open the PDF
+```
+
+Requires `pdflatex` and the draw.io desktop app
+(`/Applications/draw.io.app`) for diagram export.
+
+## Diagram style
+
+Dark-slide palette (transparent PNG export on the navy `mainColor #032040`):
+node fill `#0B3B66`, stroke/subtle `#89A5BE`, accent `#FF8247`,
+light text `#C9D6E2`/white, ok `#7FE3A1`, bad `#E05252`, Helvetica.
+
+## Theme license
+
+Beamer theme (c) 2024 Malte Kerl, MIT license. Media directory content is owned by LTU.

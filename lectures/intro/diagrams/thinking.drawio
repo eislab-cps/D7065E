@@ -1,0 +1,25 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="thinking" name="thinking">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="430" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="roof" value="YOUR GRADE" style="whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=18;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="120" y="40" width="900" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="t1" value="ARCHITECTURAL&#10;THINKING&#10;&#10;design before you build&#10;&#10;make decisions explicit&#10;&#10;justify each one against&#10;a real alternative" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=12;spacing=6;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="120" y="115" width="280" height="230" as="geometry"/>
+        </mxCell>
+        <mxCell id="t2" value="SYSTEMS&#10;THINKING&#10;&#10;reason about the whole&#10;loop, not the parts&#10;&#10;how do failures and delays&#10;in one component ripple&#10;through the rest?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=12;spacing=6;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="430" y="115" width="280" height="230" as="geometry"/>
+        </mxCell>
+        <mxCell id="t3" value="CRITICAL&#10;THINKING&#10;&#10;evidence, not vibes&#10;&#10;find the limits and the&#10;failure modes&#10;&#10;be honest about what&#10;does not work — and why" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=12;spacing=6;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="740" y="115" width="280" height="230" as="geometry"/>
+        </mxCell>
+        <mxCell id="cap" value="Graded on thinking, not feature count: simple + well-justified + honestly evaluated beats complex + unexplained. Every time." style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="120" y="375" width="900" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,40 +1,43 @@
-# Build the Lecture 1 slides (LTU beamer theme + D2 diagrams).
+# D7065E Lecture 1 — build the diagrams and the presentation
 #
-#   make            # render diagrams, then compile intro.pdf
-#   make diagrams   # only (re)render the D2 diagrams to figures/*.pdf
-#   make clean      # remove LaTeX intermediates
-#   make distclean  # also remove intro.pdf and rendered diagrams
+#   make            build everything (diagrams that changed + PDF)
+#   make diagrams   re-export changed .drawio files to media/diagrams/*.png
+#   make pdf        compile the Beamer deck
+#   make watch      open the PDF
+#   make clean      remove LaTeX aux files
+#   make distclean  also remove generated PNGs and the PDF
 
-DOC      := intro
-PDFLATEX := pdflatex -interaction=nonstopmode -halt-on-error
-D2       := d2
-# theme 200 (Dark Mauve): light lines on a dark panel, reads on the navy slides
-D2FLAGS  := --theme 200 --pad 20
+DRAWIO   := /Applications/draw.io.app/Contents/MacOS/draw.io
+LATEX    := pdflatex -interaction=nonstopmode
+DECK     := intro
 
-# one figures/<name>.pdf per diagrams/<name>.d2
-SRC  := $(wildcard diagrams/*.d2)
-FIGS := $(patsubst diagrams/%.d2,figures/%.pdf,$(SRC))
+SRC_DIAGRAMS := $(wildcard diagrams/*.drawio)
+PNG_DIAGRAMS := $(patsubst diagrams/%.drawio,media/diagrams/%.png,$(SRC_DIAGRAMS))
 
-.PHONY: all diagrams clean distclean
-all: $(DOC).pdf
-	@echo "==> $(DOC).pdf ready"
+.PHONY: all diagrams pdf watch clean distclean
 
-diagrams: $(FIGS)
+all: diagrams pdf
 
-figures/%.pdf: diagrams/%.d2
-	@mkdir -p figures
-	$(D2) $(D2FLAGS) $< $@
+diagrams: $(PNG_DIAGRAMS)
 
-# The screenshot figures/buildsim.png is a static asset, not generated here.
-# Run pdflatex twice so \cite labels settle.
-$(DOC).pdf: $(DOC).tex $(FIGS) $(wildcard *.sty)
-	$(PDFLATEX) $(DOC).tex
-	$(PDFLATEX) $(DOC).tex
-	@rm -f $(DOC).aux $(DOC).log $(DOC).nav $(DOC).out $(DOC).snm $(DOC).toc $(DOC).vrb
+# transparent background (-t), 2x scale (-s 2), 12px border (-b 12)
+media/diagrams/%.png: diagrams/%.drawio
+	@mkdir -p media/diagrams
+	$(DRAWIO) -x -f png -t -s 2 -b 12 -o $@ $< >/dev/null 2>&1
+	@echo "exported $@"
+
+pdf: $(DECK).pdf
+
+$(DECK).pdf: $(DECK).tex $(PNG_DIAGRAMS) $(wildcard beamer*LTU.sty)
+	$(LATEX) $(DECK).tex >/dev/null || ($(LATEX) $(DECK).tex | grep -A2 "^!"; exit 1)
+	@$(MAKE) --no-print-directory clean
+	@echo "built $(DECK).pdf"
+
+watch: pdf
+	open $(DECK).pdf
 
 clean:
-	rm -f $(DOC).aux $(DOC).log $(DOC).nav $(DOC).out $(DOC).snm $(DOC).toc $(DOC).vrb \
-	      $(DOC).bbl $(DOC).bcf $(DOC).blg $(DOC).run.xml
+	rm -f $(DECK).aux $(DECK).log $(DECK).nav $(DECK).out $(DECK).snm $(DECK).toc $(DECK).vrb
 
 distclean: clean
-	rm -f $(DOC).pdf $(FIGS)
+	rm -f $(DECK).pdf $(PNG_DIAGRAMS)

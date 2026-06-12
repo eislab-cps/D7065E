@@ -1,0 +1,31 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="deliverables" name="deliverables">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="400" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="d1" value="ARCHITECTURE DOCUMENT&#10;&#10;C4 context + container diagrams,&#10;requirements table, interface contracts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="45" width="330" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="d2" value="TEST PLAN + RESULTS&#10;&#10;unit tests, at least one end-to-end test,&#10;fault injection — executed, not promised" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="405" y="45" width="330" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="d3" value="THE RUNNING SYSTEM&#10;&#10;your services around BuildSim,&#10;plus a dashboard — demoed live" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="770" y="45" width="330" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="d4" value="WRITTEN REPORT&#10;&#10;architecture, implementation,&#10;evaluation, honest reflection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="200" width="330" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="d5" value="SOURCE CODE&#10;&#10;in a git repository,&#10;with history that shows the journey" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="405" y="200" width="330" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="d6" value="INDIVIDUAL ORAL DEFENCE&#10;&#10;your architecture, drawn from memory&#10;on a whiteboard — no slides, no notes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="770" y="200" width="330" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="cap" value="Six deliverables — five you hand in, one you ARE. Start the document and the tests on day one; they grow with the system." style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="120" y="355" width="900" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

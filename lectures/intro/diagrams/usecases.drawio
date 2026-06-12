@@ -1,0 +1,46 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="usecases" name="usecases">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="450" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="u1" value="Fire detection &amp; response&#10;tell real fires from burnt toast; route the evacuation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="30" y="40" width="255" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="u2" value="Smart HVAC&#10;predict thermal demand; comfort vs. energy cost" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="315" y="40" width="255" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="u3" value="Indoor air quality&#10;predict CO₂ 30 min ahead; ventilate before it is bad" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="600" y="40" width="255" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="u4" value="Intrusion detection&#10;learn normal access; flag the 03:00 badge-in" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="885" y="40" width="255" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="u5" value="Predictive maintenance&#10;hear a pump failing weeks before it does" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="30" y="155" width="255" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="u6" value="Intelligent lighting&#10;daylight + occupancy + energy price" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="315" y="155" width="255" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="u7" value="Regulation compliance&#10;predict violations before they happen" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="600" y="155" width="255" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="u8" value="Infection risk&#10;CO₂ + occupancy → airborne risk per room" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="885" y="155" width="255" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="u9" value="Mold prevention&#10;keep every surface above the dew point" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="30" y="270" width="255" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="u10" value="WiFi optimisation&#10;tune access points from occupancy patterns" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=13;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="315" y="270" width="255" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="u11" value="…or propose your own&#10;sensors + pipeline + autonomy + dashboard, approved by the examiner" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=13;fontStyle=1;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;spacing=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="600" y="270" width="540" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="cap" value="Whatever you pick: a data-driven component is mandatory — plain threshold rules alone are not enough" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="120" y="400" width="900" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

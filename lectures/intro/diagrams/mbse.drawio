@@ -1,0 +1,34 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="mbse" name="mbse">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="440" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="req" value="USE CASE +&#10;REQUIREMENTS&#10;&#10;what must the&#10;system do, and&#10;how well?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="190" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="models" value="THE MODELS — your specification&#10;&#10;C4 context + container diagrams&#10;sequence &amp; data-flow diagrams&#10;requirements table · interface contracts&#10;&#10;lightweight artefacts, not SysML —&#10;the thinking is the point" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;spacing=8;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="300" y="80" width="330" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="ai" value="AI CODING TOOLS&#10;&#10;Claude Code · Codex&#10;Cursor · Cline · Aider&#10;&#10;the models are&#10;the prompt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=10;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="700" y="80" width="200" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="code" value="CODE&#10;+&#10;TESTS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=15;fontStyle=1;fontFamily=Helvetica;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="970" y="110" width="130" height="140" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="req" target="models"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="models" target="ai"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="ai" target="code"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="back" value="validate against the spec — and refine it: a living document, not a week-1 PDF" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;dashed=1;fontColor=#FF8247;fontSize=14;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;curved=1;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="code" target="models">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="780" y="340"/></Array><mxPoint x="0" y="18" as="offset"/></mxGeometry>
+        </mxCell>
+        <mxCell id="tests" value="tests derive from the SPEC, not from whatever the code happens to do" style="text;html=1;align=center;fontColor=#C9D6E2;fontSize=14;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="370" y="30" width="600" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="cap" value="Code first and the AI satisfies your prompt; model first and it satisfies your requirements. Design approval (week 3) reviews the models." style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="90" y="390" width="960" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

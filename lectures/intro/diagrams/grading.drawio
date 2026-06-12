@@ -1,0 +1,43 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="grading" name="grading">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="480" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="s1" value="STAGE 1 — THE GATE&#10;&#10;all mandatory requirements present?&#10;&#10;separate processes · closed loop&#10;autonomous component · data pipeline&#10;architecture doc · executed test plan&#10;dashboard · report" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;strokeWidth=2;dashed=1;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=12;spacing=8;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="40" y="50" width="290" height="230" as="geometry"/>
+        </mxCell>
+        <mxCell id="s1warn" value="missing any one → U (Fail)&#10;until it is fixed" style="text;html=1;align=center;fontColor=#E05252;fontSize=15;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="60" y="290" width="250" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="s2" value="STAGE 2 — FOUR DIMENSIONS, JUDGED HOLISTICALLY" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;strokeWidth=2;verticalAlign=top;fontColor=#89A5BE;fontSize=14;fontStyle=1;fontFamily=Helvetica;spacingTop=10;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="390" y="50" width="450" height="290" as="geometry"/>
+        </mxCell>
+        <mxCell id="ra" value="A — Architecture &amp; design" style="text;html=1;align=left;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="410" y="95" width="220" height="30" as="geometry"/></mxCell>
+        <mxCell id="ra3" value="3" style="whiteSpace=wrap;html=1;fillColor=#FFB088;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="640" y="95" width="60" height="30" as="geometry"/></mxCell>
+        <mxCell id="ra4" value="4" style="whiteSpace=wrap;html=1;fillColor=#FF9C66;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="700" y="95" width="60" height="30" as="geometry"/></mxCell>
+        <mxCell id="ra5" value="5" style="whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="760" y="95" width="60" height="30" as="geometry"/></mxCell>
+        <mxCell id="rb" value="B — Integration &amp; the CPS loop" style="text;html=1;align=left;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="410" y="150" width="220" height="30" as="geometry"/></mxCell>
+        <mxCell id="rb3" value="3" style="whiteSpace=wrap;html=1;fillColor=#FFB088;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="640" y="150" width="60" height="30" as="geometry"/></mxCell>
+        <mxCell id="rb4" value="4" style="whiteSpace=wrap;html=1;fillColor=#FF9C66;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="700" y="150" width="60" height="30" as="geometry"/></mxCell>
+        <mxCell id="rb5" value="5" style="whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="760" y="150" width="60" height="30" as="geometry"/></mxCell>
+        <mxCell id="rc" value="C — Autonomy &amp; data engineering" style="text;html=1;align=left;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="410" y="205" width="220" height="30" as="geometry"/></mxCell>
+        <mxCell id="rc3" value="3" style="whiteSpace=wrap;html=1;fillColor=#FFB088;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="640" y="205" width="60" height="30" as="geometry"/></mxCell>
+        <mxCell id="rc4" value="4" style="whiteSpace=wrap;html=1;fillColor=#FF9C66;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="700" y="205" width="60" height="30" as="geometry"/></mxCell>
+        <mxCell id="rc5" value="5" style="whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="760" y="205" width="60" height="30" as="geometry"/></mxCell>
+        <mxCell id="rd" value="D — Critical evaluation" style="text;html=1;align=left;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="410" y="260" width="220" height="30" as="geometry"/></mxCell>
+        <mxCell id="rd3" value="3" style="whiteSpace=wrap;html=1;fillColor=#FFB088;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="640" y="260" width="60" height="30" as="geometry"/></mxCell>
+        <mxCell id="rd4" value="4" style="whiteSpace=wrap;html=1;fillColor=#FF9C66;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="700" y="260" width="60" height="30" as="geometry"/></mxCell>
+        <mxCell id="rd5" value="5" style="whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="760" y="260" width="60" height="30" as="geometry"/></mxCell>
+        <mxCell id="oral" value="ORAL EXAM&#10;(individual)&#10;&#10;a gate, not a modifier:&#10;confirms your level,&#10;never raises it&#10;&#10;teammates may end up&#10;with different grades&#10;&#10;cannot defend it → U" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#FF8247;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=12;spacing=8;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="900" y="50" width="210" height="290" as="geometry"/>
+        </mxCell>
+        <mxCell id="ar1" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="s1" target="s2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ar2" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="s2" target="oral"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="cap" value="Holistic: a serious weakness in one dimension limits the grade — balanced competence beats brilliance in one corner" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="120" y="395" width="900" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

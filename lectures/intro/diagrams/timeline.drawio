@@ -1,0 +1,36 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="timeline" name="timeline">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="400" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="line" value="" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="40" y="200" as="sourcePoint"/>
+            <mxPoint x="1110" y="200" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m1" value="" style="ellipse;fillColor=#FF8247;strokeColor=none;" vertex="1" parent="1"><mxGeometry x="70" y="191" width="18" height="18" as="geometry"/></mxCell>
+        <mxCell id="l1" value="Mon 31 Aug — TODAY&#10;L1: introduction" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="0" y="130" width="160" height="50" as="geometry"/></mxCell>
+        <mxCell id="m2" value="" style="ellipse;fillColor=#FF8247;strokeColor=none;" vertex="1" parent="1"><mxGeometry x="200" y="191" width="18" height="18" as="geometry"/></mxCell>
+        <mxCell id="l2" value="Wed 2 Sep&#10;form pairs&#10;(deadline!)" style="text;html=1;align=center;fontColor=#FF8247;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="139" y="225" width="140" height="65" as="geometry"/></mxCell>
+        <mxCell id="m3" value="" style="ellipse;fillColor=#89A5BE;strokeColor=none;" vertex="1" parent="1"><mxGeometry x="330" y="191" width="18" height="18" as="geometry"/></mxCell>
+        <mxCell id="l3" value="Fri 4 Sep&#10;L2: BuildSim&#10;workshop" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="269" y="115" width="140" height="65" as="geometry"/></mxCell>
+        <mxCell id="m4" value="" style="ellipse;fillColor=#FF8247;strokeColor=none;" vertex="1" parent="1"><mxGeometry x="460" y="191" width="18" height="18" as="geometry"/></mxCell>
+        <mxCell id="l4" value="Fri 11 Sep&#10;proposal due" style="text;html=1;align=center;fontColor=#FF8247;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="399" y="230" width="140" height="50" as="geometry"/></mxCell>
+        <mxCell id="m5" value="" style="ellipse;fillColor=none;strokeColor=#7FE3A1;strokeWidth=3;" vertex="1" parent="1"><mxGeometry x="570" y="191" width="18" height="18" as="geometry"/></mxCell>
+        <mxCell id="l5" value="week 3&#10;design approved&#10;— then build" style="text;html=1;align=center;fontColor=#7FE3A1;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="509" y="115" width="140" height="65" as="geometry"/></mxCell>
+        <mxCell id="span" value="build · integrate · test · evaluate (≈ 4 weeks — they go fast)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#89A5BE;dashed=1;strokeWidth=2;fontColor=#C9D6E2;fontSize=13;fontStyle=2;fontFamily=Helvetica;arcSize=18;" vertex="1" parent="1">
+          <mxGeometry x="610" y="235" width="280" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="m6" value="" style="ellipse;fillColor=#FF8247;strokeColor=none;" vertex="1" parent="1"><mxGeometry x="920" y="191" width="18" height="18" as="geometry"/></mxCell>
+        <mxCell id="l6" value="Mon 12 Oct&#10;final submission" style="text;html=1;align=center;fontColor=#FF8247;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="859" y="125" width="140" height="55" as="geometry"/></mxCell>
+        <mxCell id="m7" value="" style="ellipse;fillColor=#FF8247;strokeColor=none;" vertex="1" parent="1"><mxGeometry x="1040" y="191" width="18" height="18" as="geometry"/></mxCell>
+        <mxCell id="l7" value="14–19 Oct&#10;demo + oral&#10;examination" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=14;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="985" y="225" width="140" height="65" as="geometry"/></mxCell>
+        <mxCell id="cap" value="Seven weeks from hello to defended system — the proposal and the approved design are what keep this realistic" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="120" y="340" width="900" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

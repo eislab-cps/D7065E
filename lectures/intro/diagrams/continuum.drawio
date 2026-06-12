@@ -1,0 +1,46 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="continuum" name="continuum">
+    <mxGraphModel dx="1000" dy="600" grid="0" page="1" pageScale="1" pageWidth="1140" pageHeight="440" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="d1" value="DEVICES&#10;&#10;sensors &amp; actuators&#10;sample, filter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="130" width="180" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="d2" value="EDGE&#10;&#10;gateway in the building&#10;real-time inference (ms)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF8247;strokeColor=none;fontColor=#032040;fontSize=14;fontStyle=1;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="270" y="130" width="180" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="d3" value="FOG&#10;&#10;local server / on-prem&#10;aggregate, pre-process" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="500" y="130" width="180" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="d4" value="CLOUD&#10;&#10;fleet data, dashboards&#10;model training" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="730" y="130" width="180" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="d5" value="HPC&#10;&#10;large-scale training&#10;heavy simulation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0B3B66;strokeColor=#89A5BE;strokeWidth=2;fontColor=#FFFFFF;fontSize=14;fontFamily=Helvetica;verticalAlign=top;spacingTop=8;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="960" y="130" width="150" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="a1" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="d1" target="d2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a2" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="d2" target="d3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a3" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="d3" target="d4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a4" style="endArrow=block;html=1;strokeColor=#89A5BE;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="d4" target="d5"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="data" value="raw data flows out — and shrinks at every hop (readings → features → summaries)" style="endArrow=block;html=1;strokeColor=#C9D6E2;strokeWidth=2;fontColor=#C9D6E2;fontSize=14;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="60" y="80" as="sourcePoint"/>
+            <mxPoint x="1090" y="80" as="targetPoint"/>
+            <mxPoint x="0" y="-14" as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="models" value="trained models flow back in, to run where the latency demands it" style="endArrow=block;html=1;strokeColor=#FF8247;strokeWidth=2;dashed=1;fontColor=#FF8247;fontSize=14;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=none;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1090" y="305" as="sourcePoint"/>
+            <mxPoint x="60" y="305" as="targetPoint"/>
+            <mxPoint x="0" y="16" as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cap" value="Not edge OR cloud — one application spread across a continuum, each piece where it fits best (Learning Outcome 1)" style="text;html=1;align=center;fontColor=#FFFFFF;fontSize=16;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="120" y="380" width="900" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
