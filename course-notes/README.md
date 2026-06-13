@@ -9,7 +9,7 @@
 | 3 | [Data Engineering for Cyber-Physical Systems](course-notes3.md) | Sensor data pipelines, ingestion, stream/batch processing, medallion architecture, time-series |
 | 4 | [Agentic AI for Autonomous Systems](course-notes4.md) | AI agents, the agent loop, tool use, ReAct, multi-agent coordination, safety guardrails |
 
-Practical, hands-on guides live separately in [`../tutorials`](../tutorials/).
+Practical, hands-on guides live separately in [`../tutorials`](../tutorials/), and curated external resources are collected in the [reading list](reading-list.md).
 
 Chapters 1-4 provide the foundation before the architecture approval checkpoint (week 3).
 
